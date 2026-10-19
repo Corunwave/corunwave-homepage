@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+import LinkButton from "../buttons/LinkButton";
+
 const navigation = [
   "회사소개",
   "솔루션",
@@ -29,13 +31,19 @@ export default function HeaderNavbar({
 
   useEffect(() => {
     const styles = getComputedStyle(document.documentElement);
-    const threshold = parseFloat(styles.getPropertyValue("--header-scroll-threshold"));
-    const breakpoint = styles.getPropertyValue("--header-mobile-breakpoint").trim();
+    const threshold = parseFloat(
+      styles.getPropertyValue("--header-scroll-threshold"),
+    );
+    const breakpoint = styles
+      .getPropertyValue("--header-mobile-breakpoint")
+      .trim();
     const desktop = window.matchMedia(`(width > ${breakpoint})`);
     let frame = 0;
     const synchronizeScroll = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => setScrolled(window.scrollY > threshold));
+      frame = requestAnimationFrame(() =>
+        setScrolled(window.scrollY > threshold),
+      );
     };
     const synchronizeViewport = () => {
       if (desktop.matches) setMenuOpen(false);
@@ -58,7 +66,10 @@ export default function HeaderNavbar({
   useEffect(() => {
     if (!menuOpen) return;
     const onPointerDown = (event: PointerEvent) => {
-      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+      if (
+        event.target instanceof Node &&
+        !headerRef.current?.contains(event.target)
+      ) {
         setMenuOpen(false);
       }
     };
@@ -79,26 +90,93 @@ export default function HeaderNavbar({
   return (
     <header ref={headerRef} className="site-header" data-light={light}>
       <div className="site-header__bar">
-        <a href="#" className="site-header__logo" aria-label="코런웨이브 홈" onClick={() => setMenuOpen(false)}>
-          <Image className="site-header__logo-white" src="/images/logos/corunwave-symbol-white.png" alt="" width={1432} height={660} priority />
-          <Image className="site-header__logo-color" src="/images/logos/corunwave-symbol-color.svg" alt="" width={1432} height={660} />
+        <a
+          href="#"
+          className="site-header__logo"
+          aria-label="코런웨이브 홈"
+          onClick={() => setMenuOpen(false)}
+        >
+          <Image
+            className="site-header__logo-white"
+            src="/images/logos/corunwave-symbol-white.png"
+            alt=""
+            width={1432}
+            height={660}
+            priority
+          />
+          <Image
+            className="site-header__logo-color"
+            src="/images/logos/corunwave-symbol-color.svg"
+            alt=""
+            width={1432}
+            height={660}
+          />
         </a>
         <nav className="site-header__desktop" aria-label="주 내비게이션">
           <ul>
-            {navigation.map((label) => <li key={label}><a href="#">{label}</a></li>)}
+            {navigation.map((label) => (
+              <li key={label}>
+                <a href="#">{label}</a>
+              </li>
+            ))}
           </ul>
         </nav>
-        <a className="site-header__contact site-header__desktop-contact" href="#">문의하기</a>
-        <button ref={buttonRef} className="site-header__toggle" type="button" aria-expanded={menuOpen} aria-controls="header-mobile-navigation" aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"} onClick={() => setMenuOpen((open) => !open)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            {menuOpen ? <path d="m6 6 12 12M6 18 18 6" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+        <a
+          className="site-header__contact site-header__desktop-contact"
+          href="#"
+        >
+          문의하기
+        </a>
+        <button
+          ref={buttonRef}
+          className="site-header__toggle"
+          type="button"
+          aria-expanded={menuOpen}
+          aria-controls="header-mobile-navigation"
+          aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            {menuOpen ? (
+              <path d="m6 6 12 12M6 18 18 6" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
           </svg>
         </button>
       </div>
-      <nav id="header-mobile-navigation" className="site-header__panel" aria-label="모바일 주 내비게이션" hidden={!menuOpen}>
+      <nav
+        id="header-mobile-navigation"
+        className="site-header__panel"
+        aria-label="모바일 주 내비게이션"
+        hidden={!menuOpen}
+      >
         <ul>
-          {navigation.map((label) => <li key={label}><a href="#" onClick={() => setMenuOpen(false)}>{label}</a></li>)}
-          <li><a className="site-header__contact" href="#" onClick={() => setMenuOpen(false)}>문의하기</a></li>
+          {navigation.map((label) => (
+            <li key={label}>
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                {label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <LinkButton
+              href={"#"}
+              className="site-header__contact"
+              onClick={() => setMenuOpen(false)}
+            >
+              문의하기
+            </LinkButton>
+          </li>
         </ul>
       </nav>
     </header>

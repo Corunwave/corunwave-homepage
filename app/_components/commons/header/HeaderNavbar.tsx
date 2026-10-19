@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, FC } from "react";
 
 import LinkButton from "../buttons/LinkButton";
 
@@ -19,10 +19,10 @@ type HeaderNavbarProps = {
   scrolledOverride?: boolean;
 };
 
-export default function HeaderNavbar({
+const HeaderNavbar: FC<HeaderNavbarProps> = ({
   appearance = "auto",
   scrolledOverride,
-}: HeaderNavbarProps) {
+}: HeaderNavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -181,4 +181,6 @@ export default function HeaderNavbar({
       </nav>
     </header>
   );
-}
+};
+
+export default HeaderNavbar;

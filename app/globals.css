@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
+/* Figma 189:2 — Design Systems / Foundations.
+ * Numeric spacing/radius names represent pixels, not Tailwind's 4px scale.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Existing application aliases */
+  --background: var(--color-bg-page);
+  --foreground: var(--color-text-primary);
+
+  /* Local font variables are registered on <html> in app/layout.tsx.
+   * Use font-emphasis for A2Z accents; body and font-sans use Pretendard.
+   */
+  --font-family-body: var(--font-pretendard), sans-serif;
+  --font-family-emphasis: var(--font-a2z-regular), var(--font-family-body);
+
+  /* Layout and scrolled-header surface */
+  --section-gutter-desktop: var(--spacing-96);
+  --section-gutter-mobile: var(--spacing-24);
+  --header-border-width: 1px;
+  --header-radius: var(--radius-0);
+  --header-shadow: none;
 }
 
+/* Explicit opt-in: preserve the project's choice not to auto-enable dark mode.
+ * Figma specifies a transparent header and lighter navigation in Dark.
+ */
+[data-theme="dark"] {
+  --color-bg-page: var(--color-brand-navy);
+  --color-bg-header: transparent;
+  --color-text-navigation: var(--color-border);
+}
+
+/* Static foundations: CSS variables and Tailwind utilities.
+ * e.g. gap-space-24, rounded-20, text-header-navigation.
+ * Prefix spacing with `space-` to preserve existing p-4 / gap-6 meanings.
+ */
+@theme static {
+  /* Primitive colors */
+  --color-brand-primary: #0d6ee5;
+  --color-brand-primary-hover: #0d6bf2;
+  --color-brand-primary-pressed: #0a73f2;
+  --color-brand-navy: #0f1729;
+  --color-brand-cyan: #7ac9ff;
+  --color-surface-subtle: #f2f7ff;
+  --color-text-primary: #1f2e47;
+  --color-white: #ffffff;
+  --color-border: #d6e3f7;
+  --color-success: #65a30d;
+  --color-success-surface: #ecfccb;
+  --color-error: #dc2626;
+  --color-error-surface: #fee2e2;
+
+  /* Semantic colors — Light (default) */
+  --color-bg-page: var(--color-white);
+  --color-bg-header: var(--color-white);
+  --color-bg-subtle: var(--color-surface-subtle);
+  --color-text-navigation: var(--color-text-primary);
+  --color-text-on-dark: var(--color-white);
+  --color-action-primary: var(--color-brand-primary);
+  --color-action-primary-hover: var(--color-brand-primary-hover);
+  --color-action-primary-pressed: var(--color-brand-primary-pressed);
+  --color-focus-ring: var(--color-brand-cyan);
+  --color-border-default: var(--color-border);
+  --color-border-header: var(--color-border);
+  --color-status-success: var(--color-success);
+  --color-status-success-surface: var(--color-success-surface);
+  --color-status-error: var(--color-error);
+  --color-status-error-surface: var(--color-error-surface);
+
+
+  --spacing-4: 4px;
+  --spacing-space-4: var(--spacing-4);
+  --spacing-8: 8px;
+  --spacing-space-8: var(--spacing-8);
+  --spacing-12: 12px;
+  --spacing-space-12: var(--spacing-12);
+  --spacing-16: 16px;
+  --spacing-space-16: var(--spacing-16);
+  --spacing-20: 20px;
+  --spacing-space-20: var(--spacing-20);
+  --spacing-24: 24px;
+  --spacing-space-24: var(--spacing-24);
+  --spacing-28: 28px;
+  --spacing-space-28: var(--spacing-28);
+  --spacing-32: 32px;
+  --spacing-space-32: var(--spacing-32);
+  --spacing-48: 48px;
+  --spacing-space-48: var(--spacing-48);
+  --spacing-96: 96px;
+  --spacing-space-96: var(--spacing-96);
+
+  --radius-0: 0px;
+  --radius-12: 12px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-999: 999px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --text-header-navigation: 1rem;
+  --text-header-navigation--line-height: 1.5rem;
+  --text-header-navigation--font-weight: 500;
+  --text-header-navigation--letter-spacing: 0;
+
+  --text-header-cta: 0.875rem;
+  --text-header-cta--line-height: 1.25rem;
+  --text-header-cta--font-weight: 700;
+  --text-header-cta--letter-spacing: 0;
+
+  --text-header-mobile-navigation: 1.1875rem;
+  --text-header-mobile-navigation--line-height: 1.75rem;
+  --text-header-mobile-navigation--font-weight: 500;
+  --text-header-mobile-navigation--letter-spacing: 0;
+
+  --text-solutions-title-mobile: 2.25rem;
+  --text-solutions-title-mobile--line-height: 2.875rem;
+  --text-solutions-title-mobile--font-weight: 700;
+  --text-solutions-title-mobile--letter-spacing: 0;
+
+  --text-solutions-eyebrow: 0.875rem;
+  --text-solutions-eyebrow--line-height: 1.25rem;
+  --text-solutions-eyebrow--font-weight: 700;
+  --text-solutions-eyebrow--letter-spacing: 0;
+
+  --text-solutions-title-desktop: 3rem;
+  --text-solutions-title-desktop--line-height: 3.75rem;
+  --text-solutions-title-desktop--font-weight: 700;
+  --text-solutions-title-desktop--letter-spacing: 0;
+
+  --text-section-description-desktop: 1.125rem;
+  --text-section-description-desktop--line-height: 1.875rem;
+  --text-section-description-desktop--font-weight: 400;
+  --text-section-description-desktop--letter-spacing: 0;
+
+  --text-solutions-meta: 0.875rem;
+  --text-solutions-meta--line-height: 1.375rem;
+  --text-solutions-meta--font-weight: 500;
+  --text-solutions-meta--letter-spacing: 0;
+}
+
+/* Application aliases: bg-background, text-foreground, font-sans.
+ * Semantic colors: bg-bg-page, text-text-navigation, hover:bg-action-primary-hover.
+ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-family-body);
+  --font-emphasis: var(--font-family-emphasis);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-body);
 }

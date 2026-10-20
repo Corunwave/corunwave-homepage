@@ -14,6 +14,10 @@
   --font-family-body: var(--font-pretendard), sans-serif;
   --font-family-emphasis: var(--font-a2z-regular), var(--font-family-body);
 
+  /* Hero */
+  --color-hero-overlay: rgba(0, 10, 41, 0.12);
+  --font-family-slogan: var(--font-a2z-black), var(--font-family-body);
+
   /* Layout and scrolled-header surface */
   --section-gutter-desktop: var(--spacing-96);
   --section-gutter-mobile: var(--spacing-24);
@@ -146,6 +150,39 @@
   --text-footer-company-information--letter-spacing: 0;
 
   --text-footer-company-information-title--font-weight: 700;
+
+  /* Hero typography */
+  --text-hero-title-desktop: 4.5rem;
+  --text-hero-title-desktop--line-height: 4.875rem;
+  --text-hero-title-desktop--font-weight: 900;
+  --text-hero-title-desktop--letter-spacing: -0.2025rem;
+
+  --text-hero-title-mobile: 2.5rem;
+  --text-hero-title-mobile--line-height: 2.6875rem;
+  --text-hero-title-mobile--font-weight: 900;
+  --text-hero-title-mobile--letter-spacing: -0.1125rem;
+
+  --text-hero-description-desktop: 1.25rem;
+  --text-hero-description-desktop--line-height: 2.0625rem;
+  --text-hero-description-desktop--font-weight: 400;
+  --text-hero-description-desktop--letter-spacing: 0;
+
+  --text-hero-description-mobile: 1rem;
+  --text-hero-description-mobile--line-height: 1.625rem;
+  --text-hero-description-mobile--font-weight: 400;
+  --text-hero-description-mobile--letter-spacing: 0;
+
+  --text-hero-cta: 1rem;
+  --text-hero-cta--line-height: 1.5rem;
+  --text-hero-cta--font-weight: 700;
+  --text-hero-cta--letter-spacing: 0;
+
+  --hero-cta-width-desktop: 214px;
+  --hero-cta-height-desktop: 52px;
+  --hero-cta-width-mobile: 190px;
+  --hero-cta-height-mobile: 48px;
+
+  --hero-description-max-width: 760px;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -515,5 +552,149 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-8) var(--spacing-20);
+  }
+}
+
+/* Hero (Figma 294:13872 desktop / 294:13878 mobile). */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  color: var(--color-text-on-dark);
+  background: var(--color-brand-navy);
+  isolation: isolate;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+}
+
+.hero__media img,
+.hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-hero-overlay);
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--section-gutter-desktop);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-28);
+  text-align: center;
+}
+
+.hero__title {
+  margin: 0;
+  font-family: var(--font-family-slogan);
+  font-size: var(--text-hero-title-desktop);
+  line-height: var(--text-hero-title-desktop--line-height);
+  font-weight: var(--text-hero-title-desktop--font-weight);
+  letter-spacing: var(--text-hero-title-desktop--letter-spacing);
+  max-width: 960px;
+}
+
+.hero__description {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-hero-description-desktop);
+  line-height: var(--text-hero-description-desktop--line-height);
+  font-weight: var(--text-hero-description-desktop--font-weight);
+  letter-spacing: var(--text-hero-description-desktop--letter-spacing);
+  max-width: var(--hero-description-max-width);
+}
+
+/* Dark background pill CTA. Uses currentColor for reuse on other surfaces. */
+.bordered-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  width: var(--hero-cta-width-desktop);
+  height: var(--hero-cta-height-desktop);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-999);
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-family-body);
+  font-size: var(--text-hero-cta);
+  line-height: var(--text-hero-cta--line-height);
+  font-weight: var(--text-hero-cta--font-weight);
+  letter-spacing: var(--text-hero-cta--letter-spacing);
+  text-decoration: none;
+  transition: background-color var(--header-motion-duration)
+    var(--header-motion-easing);
+}
+
+.bordered-button:hover,
+.bordered-button:active {
+  background: color-mix(in srgb, var(--color-white) 10%, transparent);
+}
+
+.bordered-button:focus-visible {
+  outline: var(--spacing-4) solid var(--color-focus-ring);
+  outline-offset: var(--spacing-4);
+}
+
+.bordered-button__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+@media (width <= 1024px) {
+  .hero__content {
+    padding-inline: var(--spacing-48);
+  }
+}
+
+@media (width <= 760px) {
+  .hero__content {
+    gap: var(--spacing-24);
+    padding-inline: var(--section-gutter-mobile);
+  }
+  .hero__title {
+    font-size: var(--text-hero-title-mobile);
+    line-height: var(--text-hero-title-mobile--line-height);
+    font-weight: var(--text-hero-title-mobile--font-weight);
+    letter-spacing: var(--text-hero-title-mobile--letter-spacing);
+    max-width: 100%;
+  }
+  .hero__description {
+    font-size: var(--text-hero-description-mobile);
+    line-height: var(--text-hero-description-mobile--line-height);
+    font-weight: var(--text-hero-description-mobile--font-weight);
+    letter-spacing: var(--text-hero-description-mobile--letter-spacing);
+  }
+  .bordered-button {
+    width: var(--hero-cta-width-mobile);
+    height: var(--hero-cta-height-mobile);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bordered-button {
+    transition: none;
   }
 }

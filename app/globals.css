@@ -105,7 +105,7 @@
 
   --text-header-navigation: 1rem;
   --text-header-navigation--line-height: 1.5rem;
-  --text-header-navigation--font-weight: 500;
+  --text-header-navigation--font-weight: 400;
   --text-header-navigation--letter-spacing: 0;
 
   --text-header-cta: 0.875rem;
@@ -154,7 +154,7 @@
   /* Hero typography */
   --text-hero-title-desktop: 4.5rem;
   --text-hero-title-desktop--line-height: 4.875rem;
-  --text-hero-title-desktop--font-weight: 900;
+  --text-hero-title-desktop--font-weight: 700;
   --text-hero-title-desktop--letter-spacing: -0.2025rem;
 
   --text-hero-title-mobile: 2.5rem;
@@ -208,10 +208,10 @@ body {
   --header-height-desktop-scrolled: 72px;
   --header-height-mobile: 72px;
   --header-height-mobile-scrolled: 64px;
-  --header-logo-width-desktop: 112px;
-  --header-logo-height-desktop: 52px;
-  --header-logo-width-mobile: 84px;
-  --header-logo-height-mobile: 40px;
+  --header-logo-width-desktop: 88px;
+  --header-logo-height-desktop: 42px;
+  --header-logo-width-mobile: 72px;
+  --header-logo-height-mobile: 34px;
   --header-contact-width: var(--spacing-96);
   --header-contact-height: 40px;
   --header-toggle-size: 44px;
@@ -299,9 +299,22 @@ body {
 .site-header__desktop a {
   display: block;
   padding-block: var(--spacing-12);
+  color: rgb(255 255 255 / 82%);
   font-size: var(--text-header-navigation);
   line-height: var(--text-header-navigation--line-height);
   font-weight: var(--text-header-navigation--font-weight);
+  transition: color var(--header-motion-duration) var(--header-motion-easing);
+}
+.site-header__desktop a:hover,
+.site-header__desktop a:focus-visible {
+  color: var(--color-brand-cyan);
+}
+.site-header[data-light="true"] .site-header__desktop a {
+  color: var(--color-text-primary);
+}
+.site-header[data-light="true"] .site-header__desktop a:hover,
+.site-header[data-light="true"] .site-header__desktop a:focus-visible {
+  color: var(--color-action-primary);
 }
 .site-header__contact {
   display: flex;
@@ -555,15 +568,37 @@ body {
   }
 }
 
-/* Hero (Figma 294:13872 desktop / 294:13878 mobile). */
+/* Used by box-shadow calc on .hero__card; JS sets the value via style.setProperty. */
+@property --hero-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Hero (preview-first; scroll states ref: Figma 310:8030). */
 .hero {
+  /* Scroll track: JS sets style.height = max(innerHeight, range+top+targetH+gap). */
   position: relative;
   width: 100%;
   height: 100dvh;
-  overflow: hidden;
   color: var(--color-text-on-dark);
+}
+
+.hero__card {
+  position: sticky;
+  top: var(--hero-top, 0px);
+  width: var(--hero-width, 100%);
+  height: var(--hero-height, 100dvh);
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--hero-radius, 0px);
   background: var(--color-brand-navy);
   isolation: isolate;
+  box-shadow:
+    0 calc(28px * var(--hero-progress, 0))
+    calc(72px * var(--hero-progress, 0))
+    rgb(15 23 41 / calc(0.18 * var(--hero-progress, 0)));
+  will-change: width, height, top, border-radius;
 }
 
 .hero__media {
@@ -590,16 +625,15 @@ body {
 }
 
 .hero__content {
-  position: relative;
+  position: absolute;
   z-index: 2;
-  height: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: var(--section-gutter-desktop);
+  top: 50%;
+  left: 50%;
+  width: min(1180px, calc(100% - 72px));
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: var(--spacing-28);
   text-align: center;
 }
@@ -607,11 +641,12 @@ body {
 .hero__title {
   margin: 0;
   font-family: var(--font-family-slogan);
-  font-size: var(--text-hero-title-desktop);
-  line-height: var(--text-hero-title-desktop--line-height);
+  font-size: clamp(56px, 5vw, 72px);
+  line-height: 1.04;
   font-weight: var(--text-hero-title-desktop--font-weight);
   letter-spacing: var(--text-hero-title-desktop--letter-spacing);
-  max-width: 960px;
+  max-width: 1100px;
+  text-shadow: 0 8px 36px rgb(15 23 41 / 25%);
 }
 
 .hero__description {
@@ -622,9 +657,11 @@ body {
   font-weight: var(--text-hero-description-desktop--font-weight);
   letter-spacing: var(--text-hero-description-desktop--letter-spacing);
   max-width: var(--hero-description-max-width);
+  color: rgb(255 255 255 / 92%);
+  text-shadow: 0 3px 18px rgb(15 23 41 / 24%);
 }
 
-/* Dark background pill CTA. Uses currentColor for reuse on other surfaces. */
+/* Dark background pill CTA for Hero section. */
 .bordered-button {
   display: inline-flex;
   align-items: center;
@@ -632,23 +669,28 @@ body {
   gap: var(--spacing-16);
   width: var(--hero-cta-width-desktop);
   height: var(--hero-cta-height-desktop);
-  border: 1px solid currentColor;
+  border: 1px solid rgb(255 255 255 / 74%);
   border-radius: var(--radius-999);
-  background: transparent;
-  color: inherit;
+  background: rgb(4 39 105 / 24%);
+  backdrop-filter: blur(8px);
+  color: var(--color-white);
   font-family: var(--font-family-body);
   font-size: var(--text-hero-cta);
   line-height: var(--text-hero-cta--line-height);
   font-weight: var(--text-hero-cta--font-weight);
   letter-spacing: var(--text-hero-cta--letter-spacing);
   text-decoration: none;
-  transition: background-color var(--header-motion-duration)
-    var(--header-motion-easing);
+  transition:
+    background-color var(--header-motion-duration) var(--header-motion-easing),
+    border-color var(--header-motion-duration) var(--header-motion-easing),
+    transform var(--header-motion-duration) var(--header-motion-easing);
 }
 
 .bordered-button:hover,
 .bordered-button:active {
-  background: color-mix(in srgb, var(--color-white) 10%, transparent);
+  border-color: var(--color-white);
+  background: rgb(13 110 229 / 66%);
+  transform: translateY(-2px);
 }
 
 .bordered-button:focus-visible {
@@ -663,16 +705,9 @@ body {
   line-height: 1;
 }
 
-@media (width <= 1024px) {
-  .hero__content {
-    padding-inline: var(--spacing-48);
-  }
-}
-
 @media (width <= 760px) {
   .hero__content {
     gap: var(--spacing-24);
-    padding-inline: var(--section-gutter-mobile);
   }
   .hero__title {
     font-size: var(--text-hero-title-mobile);
@@ -694,6 +729,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero__card {
+    will-change: auto;
+  }
   .bordered-button {
     transition: none;
   }

@@ -8,6 +8,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+## Styling Rules
+
+- 모든 스타일 정의는 반드시 `app/globals.css`에만 작성한다. 색상, 간격, 타이포그래피 등의 토큰과 컴포넌트 스타일, 반응형 미디어 쿼리, 상태 및 애니메이션 스타일도 이 파일에서 관리한다.
+- 컴포넌트별 CSS 파일, CSS Modules, Sass 파일을 새로 만들거나 스타일을 별도 파일로 분리하지 않는다.
+- TSX/JSX의 `style` prop, `<style>` 태그, styled-jsx, CSS-in-JS로 스타일을 정의하지 않는다. 컴포넌트에서는 `className`으로 `app/globals.css`에 정의한 클래스를 적용한다.
+- Tailwind의 토큰과 커스텀 유틸리티도 `app/globals.css`에서 정의한다. 기존 폰트 규칙의 `font-sans`, `font-emphasis`는 사용할 수 있지만, 새로운 스타일 값을 TSX/JSX의 임의값 유틸리티로 작성하지 않는다.
+- 개발 서버나 캐시 문제를 우회하기 위해 스타일 파일을 분리하지 않는다. 요청받지 않은 기존 스타일 구조 변경이나 리팩터링은 하지 않는다.
+
 ## Font Usage Rules
 
 - Use **Pretendard** as the default font for body text, navigation, buttons, and general UI. Inherit the global body font or use Tailwind's `font-sans` utility.

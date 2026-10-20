@@ -3,6 +3,7 @@ import { Geist_Mono } from "next/font/google";
 import { a2zRegular, pretendard } from "../public/fonts/fonts";
 import "./globals.css";
 import HeaderNavbar from "./_components/commons/header/HeaderNavbar";
+import Footer from "./_components/commons/footer/Footer";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <HeaderNavbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

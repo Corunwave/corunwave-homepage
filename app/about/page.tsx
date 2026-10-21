@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import BusinessDirectionSection from "../_components/about/BusinessDirectionSection";
 import CeoMessageSection from "../_components/about/CeoMessageSection";
+import CompanyValuesSection from "../_components/about/CompanyValuesSection";
+import CoreChallengesSection from "../_components/about/CoreChallengesSection";
 import PageHero from "../_components/commons/hero/PageHero";
 
 const description = "코런웨이브는 “기술과 사람을 연결하는 서비스”를 제공합니다.";
@@ -16,6 +18,8 @@ export default function AboutPage() {
       <PageHero title="회사 소개" description={description} />
       <CeoMessageSection />
       <BusinessDirectionSection />
+      <CoreChallengesSection />
+      <CompanyValuesSection />
     </main>
   );
 }

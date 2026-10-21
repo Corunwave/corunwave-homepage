@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BusinessDirectionSection from "../_components/about/BusinessDirectionSection";
 import CeoMessageSection from "../_components/about/CeoMessageSection";
 import PageHero from "../_components/commons/hero/PageHero";
 
@@ -14,6 +15,7 @@ export default function AboutPage() {
     <main>
       <PageHero title="회사 소개" description={description} />
       <CeoMessageSection />
+      <BusinessDirectionSection />
     </main>
   );
 }

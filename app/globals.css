@@ -34,6 +34,14 @@
   --ceo-inner-max: 1248px;
   --ceo-letter-max: 840px;
 
+  /* Business direction */
+  --direction-inner-max: 1248px;
+  --direction-description-max: 900px;
+  --direction-visual-width: 400px;
+  --direction-visual-width-mobile: 358px;
+  --direction-connector-height: 48px;
+  --direction-values-gap: 32px;
+
   /* Proposal targets */
   --proposal-inner-max: 1248px;
   --proposal-card-size: 300px;
@@ -317,6 +325,37 @@
   --text-ceo-name-mobile--line-height: 1.875rem;
   --text-ceo-name-mobile--font-weight: 700;
   --text-ceo-name-mobile--letter-spacing: 0;
+
+  /* Business direction typography (description reuses section-description / ceo-letter-mobile) */
+  --text-direction-title-desktop: 2.25rem;
+  --text-direction-title-desktop--line-height: 3rem;
+  --text-direction-title-desktop--font-weight: 700;
+  --text-direction-title-desktop--letter-spacing: 0;
+
+  --text-direction-title-mobile: 1.5rem;
+  --text-direction-title-mobile--line-height: 2.125rem;
+  --text-direction-title-mobile--font-weight: 700;
+  --text-direction-title-mobile--letter-spacing: 0;
+
+  --text-direction-heading-desktop: 1.375rem;
+  --text-direction-heading-desktop--line-height: 2rem;
+  --text-direction-heading-desktop--font-weight: 700;
+  --text-direction-heading-desktop--letter-spacing: 0;
+
+  --text-direction-heading-mobile: 1.25rem;
+  --text-direction-heading-mobile--line-height: 1.875rem;
+  --text-direction-heading-mobile--font-weight: 700;
+  --text-direction-heading-mobile--letter-spacing: 0;
+
+  --text-direction-body-desktop: 1rem;
+  --text-direction-body-desktop--line-height: 1.6875rem;
+  --text-direction-body-desktop--font-weight: 400;
+  --text-direction-body-desktop--letter-spacing: 0;
+
+  --text-direction-body-mobile: 0.9375rem;
+  --text-direction-body-mobile--line-height: 1.5625rem;
+  --text-direction-body-mobile--font-weight: 400;
+  --text-direction-body-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -1052,6 +1091,267 @@ body {
     line-height: var(--text-ceo-name-mobile--line-height);
     font-weight: var(--text-ceo-name-mobile--font-weight);
     letter-spacing: var(--text-ceo-name-mobile--letter-spacing);
+  }
+}
+
+/* Business direction — 사업 방향성 (preview .business-direction; Figma 653:20134 / 653:20160).
+ * Static layout: hub artwork is the existing SVG, the label is overlaid as text.
+ */
+.direction-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.direction-inner {
+  width: min(
+    var(--direction-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.direction-composition {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-24);
+}
+
+.direction-copy {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.direction-title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-title-desktop);
+  line-height: var(--text-direction-title-desktop--line-height);
+  font-weight: var(--text-direction-title-desktop--font-weight);
+  letter-spacing: var(--text-direction-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.direction-title-line {
+  display: block;
+}
+
+.direction-phrase,
+.direction-keep {
+  white-space: nowrap;
+}
+
+.direction-description {
+  max-width: var(--direction-description-max);
+  margin: var(--spacing-24) auto 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.direction-description strong {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+
+.direction-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(var(--direction-visual-width), 100%);
+  aspect-ratio: 704 / 420;
+  isolation: isolate;
+}
+
+.direction-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.direction-hub {
+  position: relative;
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-heading-desktop);
+  line-height: var(--text-direction-heading-desktop--line-height);
+  font-weight: var(--text-direction-heading-desktop--font-weight);
+  letter-spacing: var(--text-direction-heading-desktop--letter-spacing);
+}
+
+.direction-connectors {
+  position: relative;
+  width: 100%;
+  height: var(--direction-connector-height);
+}
+
+.direction-trunk {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 25px;
+  background: var(--color-border);
+}
+
+.direction-branch {
+  position: absolute;
+  top: 24px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.direction-branch::after {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 24px;
+  content: "";
+  background: inherit;
+}
+
+.direction-branch--0 {
+  left: calc((100% - var(--direction-values-gap) * 2) / 6);
+  right: 50%;
+}
+
+.direction-branch--0::after {
+  left: 0;
+}
+
+.direction-branch--1 {
+  left: 50%;
+  width: 1px;
+  height: 24px;
+}
+
+.direction-branch--1::after {
+  display: none;
+}
+
+.direction-branch--2 {
+  left: 50%;
+  right: calc((100% - var(--direction-values-gap) * 2) / 6);
+}
+
+.direction-branch--2::after {
+  right: 0;
+}
+
+.direction-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--direction-values-gap);
+  margin-top: var(--spacing-16);
+}
+
+.direction-value {
+  min-width: 0;
+}
+
+.direction-value h3 {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-heading-desktop);
+  line-height: var(--text-direction-heading-desktop--line-height);
+  font-weight: var(--text-direction-heading-desktop--font-weight);
+  letter-spacing: var(--text-direction-heading-desktop--letter-spacing);
+  word-break: keep-all;
+}
+
+.direction-value p {
+  margin: var(--spacing-16) 0 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-direction-body-desktop);
+  line-height: var(--text-direction-body-desktop--line-height);
+  font-weight: var(--text-direction-body-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (width <= 1024px) {
+  .direction-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+  .direction-connectors {
+    display: none;
+  }
+  .direction-values {
+    grid-template-columns: 1fr;
+    margin-top: var(--spacing-32);
+  }
+  .direction-value h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+  }
+  .direction-value h3::before {
+    flex: none;
+    width: 24px;
+    height: 1px;
+    content: "";
+    background: var(--color-border);
+  }
+  .direction-value p {
+    padding-left: 36px;
+  }
+}
+
+@media (width <= 760px) {
+  .direction-section {
+    padding: 64px 0;
+  }
+  .direction-inner {
+    width: calc(100% - var(--spacing-32));
+  }
+  .direction-title {
+    font-size: var(--text-direction-title-mobile);
+    line-height: var(--text-direction-title-mobile--line-height);
+    font-weight: var(--text-direction-title-mobile--font-weight);
+    letter-spacing: var(--text-direction-title-mobile--letter-spacing);
+  }
+  .direction-title-line--first .direction-phrase {
+    display: block;
+  }
+  .direction-title-line--last {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 0.28em;
+  }
+  .direction-description {
+    font-size: var(--text-ceo-letter-mobile);
+    line-height: var(--text-ceo-letter-mobile--line-height);
+    font-weight: var(--text-ceo-letter-mobile--font-weight);
+  }
+  .direction-visual {
+    width: min(var(--direction-visual-width-mobile), 100%);
+  }
+  .direction-hub,
+  .direction-value h3 {
+    font-size: var(--text-direction-heading-mobile);
+    line-height: var(--text-direction-heading-mobile--line-height);
+    font-weight: var(--text-direction-heading-mobile--font-weight);
+    letter-spacing: var(--text-direction-heading-mobile--letter-spacing);
+  }
+  .direction-value p {
+    margin-top: var(--spacing-12);
+    font-size: var(--text-direction-body-mobile);
+    line-height: var(--text-direction-body-mobile--line-height);
+    font-weight: var(--text-direction-body-mobile--font-weight);
+    letter-spacing: var(--text-direction-body-mobile--letter-spacing);
   }
 }
 

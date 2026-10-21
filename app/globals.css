@@ -39,6 +39,20 @@
   --color-process-divider: #d9e0e9;
   --color-process-divider-soft: #e7ebf0;
 
+  /* Service values */
+  --service-values-inner-max: 1248px;
+  --service-values-track-height: 320svh;
+  --service-values-sticky-top: var(--header-height-desktop-scrolled);
+  --service-values-stage-height: 720px;
+  --service-values-stage-min-height: 600px;
+  --service-values-body-offset: 150px;
+  --service-values-body-height: 570px;
+  --service-values-mobile-max: 560px;
+  --service-values-motion: 640ms cubic-bezier(0.22, 1, 0.36, 1);
+  --service-values-shift: 24px;
+  --service-values-word-size: clamp(120px, 18vw, 259px);
+  --color-service-values-word: #eef4ff;
+
   /* Layout and scrolled-header surface */
   --section-gutter-desktop: var(--spacing-96);
   --section-gutter-mobile: var(--spacing-24);
@@ -169,6 +183,26 @@
   --text-solutions-meta--line-height: 1.375rem;
   --text-solutions-meta--font-weight: 500;
   --text-solutions-meta--letter-spacing: 0;
+
+  --text-service-value-title-desktop: 2rem;
+  --text-service-value-title-desktop--line-height: 2.5rem;
+  --text-service-value-title-desktop--font-weight: 700;
+  --text-service-value-title-desktop--letter-spacing: 0;
+
+  --text-service-value-title-mobile: 1.75rem;
+  --text-service-value-title-mobile--line-height: 2.25rem;
+  --text-service-value-title-mobile--font-weight: 700;
+  --text-service-value-title-mobile--letter-spacing: 0;
+
+  --text-service-value-description-desktop: 1.0625rem;
+  --text-service-value-description-desktop--line-height: 1.875rem;
+  --text-service-value-description-desktop--font-weight: 400;
+  --text-service-value-description-desktop--letter-spacing: 0;
+
+  --text-service-value-description-mobile: 0.875rem;
+  --text-service-value-description-mobile--line-height: 1.5rem;
+  --text-service-value-description-mobile--font-weight: 400;
+  --text-service-value-description-mobile--letter-spacing: 0;
 
   /*Footer*/
   --text-footer-company-information: 0.875rem;
@@ -1576,6 +1610,296 @@ body {
   .solutions-header[data-reveal] > *,
   .solutions-process[data-reveal] .solutions-process__desktop > *,
   .solutions-list[data-reveal] .solution-card {
+    transition: none;
+  }
+}
+
+/* Service values — 서비스 가치 (preview-first; Figma 397:22234 / 397:22270 / 536:20155 / 536:20177).
+ * Default is the stacked static layout; data-mode="pinned" (set by ServiceValueSection) pins the stage
+ * and swaps the three values by scroll progress.
+ */
+.service-values-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-page);
+}
+
+.service-values-stage {
+  position: relative;
+  width: min(
+    var(--service-values-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+  overflow: clip;
+}
+
+.service-values-header {
+  display: grid;
+  justify-items: start;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-48);
+}
+
+.service-values-title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-solutions-title-desktop);
+  line-height: var(--text-solutions-title-desktop--line-height);
+  font-weight: var(--text-solutions-title-desktop--font-weight);
+  letter-spacing: var(--text-solutions-title-desktop--letter-spacing);
+}
+
+.service-values-intro {
+  max-width: 680px;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+}
+
+.service-values-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-value {
+  position: relative;
+  height: var(--service-values-body-height);
+  overflow: clip;
+}
+
+.service-value__word {
+  position: absolute;
+  z-index: 0;
+  top: 60px;
+  left: 23.7%;
+  color: var(--color-service-values-word);
+  font-family: var(--font-family-heading);
+  font-size: var(--service-values-word-size);
+  line-height: 0.734;
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.service-value__visual {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 51.5%;
+  width: 49.4%;
+  height: 446px;
+}
+
+.service-value__image {
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.service-value__copy {
+  position: absolute;
+  z-index: 2;
+  top: 94px;
+  left: 8.4%;
+  width: min(420px, 35%);
+}
+
+.service-value__title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-service-value-title-desktop);
+  line-height: var(--text-service-value-title-desktop--line-height);
+  font-weight: var(--text-service-value-title-desktop--font-weight);
+  letter-spacing: var(--text-service-value-title-desktop--letter-spacing);
+}
+
+.service-value__description {
+  margin: var(--spacing-24) 0 0;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-service-value-description-desktop);
+  line-height: var(--text-service-value-description-desktop--line-height);
+  font-weight: var(--text-service-value-description-desktop--font-weight);
+  word-break: keep-all;
+}
+
+.service-values-dots {
+  display: none;
+}
+
+/* Pinned: the track is tall, the stage sticks, and the three values overlap. */
+.service-values-section[data-mode="pinned"] {
+  height: var(--service-values-track-height);
+  padding: 0;
+}
+
+.service-values-section[data-mode="pinned"] .service-values-sticky {
+  position: sticky;
+  top: var(--service-values-sticky-top);
+  display: grid;
+  align-items: center;
+  align-items: safe center;
+  height: calc(100svh - var(--service-values-sticky-top));
+}
+
+.service-values-section[data-mode="pinned"] .service-values-stage {
+  height: clamp(
+    var(--service-values-stage-min-height),
+    calc(100svh - var(--service-values-sticky-top) - var(--spacing-48)),
+    var(--service-values-stage-height)
+  );
+}
+
+.service-values-section[data-mode="pinned"] .service-values-header {
+  margin-bottom: 0;
+}
+
+.service-values-section[data-mode="pinned"] .service-values-list {
+  position: absolute;
+  inset: var(--service-values-body-offset) 0 0;
+}
+
+.service-values-section[data-mode="pinned"] .service-value {
+  position: absolute;
+  inset: 0;
+  height: auto;
+}
+
+.service-values-section[data-mode="pinned"] .service-value > * {
+  opacity: 0;
+  transform: translateY(var(--service-values-shift));
+  transition:
+    opacity var(--service-values-motion),
+    transform var(--service-values-motion);
+}
+
+.service-values-section[data-mode="pinned"]
+  .service-value[data-state="before"]
+  > * {
+  transform: translateY(calc(var(--service-values-shift) * -1));
+}
+
+.service-values-section[data-mode="pinned"]
+  .service-value[data-state="active"]
+  > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger on entry only: word, then image, then copy. */
+.service-values-section[data-mode="pinned"]
+  .service-value[data-state="active"]
+  .service-value__visual {
+  transition-delay: 60ms;
+}
+
+.service-values-section[data-mode="pinned"]
+  .service-value[data-state="active"]
+  .service-value__copy {
+  transition-delay: 120ms;
+}
+
+.service-values-section[data-mode="pinned"] .service-value:not([data-state="active"]) {
+  pointer-events: none;
+}
+
+.service-values-section[data-mode="pinned"] .service-values-dots {
+  position: absolute;
+  z-index: 3;
+  bottom: var(--spacing-16);
+  left: 8.4%;
+  display: flex;
+  gap: var(--spacing-8);
+}
+
+.service-values-dots span {
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  border-radius: var(--radius-999);
+  background: var(--color-border);
+  transition:
+    width 360ms ease,
+    background-color 360ms ease;
+}
+
+.service-values-dots span[data-active="true"] {
+  width: var(--spacing-32);
+  background: var(--color-action-primary);
+}
+
+/* ≤1024px: tablet shares the mobile (vertical) composition. */
+@media (width <= 1024px) {
+  .service-values-section {
+    --service-values-stage-height: 720px;
+    --service-values-stage-min-height: 640px;
+    --service-values-body-height: 490px;
+    --service-values-word-size: clamp(84px, 24vw, 150px);
+  }
+  .service-values-stage {
+    width: min(
+      var(--service-values-mobile-max),
+      calc(100% - var(--spacing-48) * 2)
+    );
+  }
+  .service-values-title {
+    font-size: var(--text-solutions-title-mobile);
+    line-height: var(--text-solutions-title-mobile--line-height);
+    font-weight: var(--text-solutions-title-mobile--font-weight);
+  }
+  .service-values-intro {
+    font-size: 1rem;
+    line-height: 1.625rem;
+  }
+  .service-value__word {
+    top: 5px;
+    left: -4%;
+    line-height: 1.17;
+  }
+  .service-value__visual {
+    top: 91px;
+    left: auto;
+    right: 0;
+    width: 76%;
+    height: auto;
+    aspect-ratio: 260 / 162;
+  }
+  .service-value__copy {
+    top: 266px;
+    left: 33.3%;
+    width: 62%;
+  }
+  .service-value__title {
+    font-size: var(--text-service-value-title-mobile);
+    line-height: var(--text-service-value-title-mobile--line-height);
+  }
+  .service-value__description {
+    margin-top: var(--spacing-12);
+    font-size: var(--text-service-value-description-mobile);
+    line-height: var(--text-service-value-description-mobile--line-height);
+  }
+  .service-values-section[data-mode="pinned"] .service-values-dots {
+    left: 0;
+  }
+}
+
+@media (width <= 760px) {
+  .service-values-section {
+    --service-values-sticky-top: var(--header-height-mobile-scrolled);
+  }
+  .service-values-stage {
+    width: calc(100% - var(--spacing-48));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-values-section[data-mode] .service-value > *,
+  .service-values-dots span {
     transition: none;
   }
 }

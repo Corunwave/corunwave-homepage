@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const navigation = ["회사소개", "솔루션", "파트너 전략"];
+const navigation = [
+  { label: "회사소개", href: "/about" },
+  { label: "솔루션", href: "#" },
+  { label: "파트너 전략", href: "#" },
+];
 const legal = ["이용약관", "개인정보처리방침", "이메일무단수집거부"];
 
 export default function Footer() {
@@ -44,12 +48,16 @@ export default function Footer() {
         {/* Add links when the corresponding pages are available. */}
         <nav className="site-footer__navigation" aria-label="하단 메뉴">
           <ul>
-            {navigation.map((label) => (
+            {navigation.map(({ label, href }) => (
               <li key={label}>
-                <Link href="#">
-                  <span aria-disabled="true" title="페이지 준비 중">
-                    {label}
-                  </span>
+                <Link href={href}>
+                  {href === "#" ? (
+                    <span aria-disabled="true" title="페이지 준비 중">
+                      {label}
+                    </span>
+                  ) : (
+                    label
+                  )}
                 </Link>
               </li>
             ))}

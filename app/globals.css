@@ -19,6 +19,17 @@
   --font-family-slogan: var(--font-a2z-black), var(--font-family-body);
   --font-family-heading: var(--font-a2z-bold), var(--font-family-body);
 
+  /* Page hero (shared subpage hero) */
+  --page-hero-height: 530px;
+  --page-hero-inner-max: 1248px;
+  --page-hero-content-bottom: 80px;
+  --page-hero-content-bottom-mobile: 60px;
+  --page-hero-mask: linear-gradient(
+    90deg,
+    rgb(15 23 41 / 94%),
+    rgb(15 23 41 / 55%)
+  );
+
   /* Proposal targets */
   --proposal-inner-max: 1248px;
   --proposal-card-size: 300px;
@@ -255,6 +266,27 @@
   --hero-cta-height-mobile: 48px;
 
   --hero-description-max-width: 760px;
+
+  /* Page hero typography */
+  --text-page-hero-title-desktop: 3.5rem;
+  --text-page-hero-title-desktop--line-height: 4.5rem;
+  --text-page-hero-title-desktop--font-weight: 700;
+  --text-page-hero-title-desktop--letter-spacing: 0;
+
+  --text-page-hero-title-mobile: 2rem;
+  --text-page-hero-title-mobile--line-height: 2.75rem;
+  --text-page-hero-title-mobile--font-weight: 700;
+  --text-page-hero-title-mobile--letter-spacing: 0;
+
+  --text-page-hero-description-desktop: 1.5rem;
+  --text-page-hero-description-desktop--line-height: 2.25rem;
+  --text-page-hero-description-desktop--font-weight: 400;
+  --text-page-hero-description-desktop--letter-spacing: 0;
+
+  --text-page-hero-description-mobile: 1rem;
+  --text-page-hero-description-mobile--line-height: 1.625rem;
+  --text-page-hero-description-mobile--font-weight: 400;
+  --text-page-hero-description-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -389,6 +421,14 @@ body {
 .site-header[data-light="true"] .site-header__desktop a:focus-visible {
   color: var(--color-action-primary);
 }
+/* Current page (usePathname → aria-current): blue + bold. Cyan on the dark transparent surface for contrast. */
+.site-header__desktop a[aria-current="page"] {
+  color: var(--color-brand-cyan);
+  font-weight: var(--font-weight-bold);
+}
+.site-header[data-light="true"] .site-header__desktop a[aria-current="page"] {
+  color: var(--color-action-primary);
+}
 .site-header__contact {
   display: flex;
   align-items: center;
@@ -477,6 +517,10 @@ body {
     font-size: var(--text-header-mobile-navigation);
     line-height: var(--text-header-mobile-navigation--line-height);
     font-weight: var(--text-header-mobile-navigation--font-weight);
+  }
+  .site-header__panel a[aria-current="page"] {
+    color: var(--color-action-primary);
+    font-weight: var(--font-weight-bold);
   }
   .site-header__panel .site-header__contact {
     width: 100%;
@@ -806,6 +850,75 @@ body {
   }
   .bordered-button {
     transition: none;
+  }
+}
+
+/* Page hero — 서브페이지 공용 Hero (preview company-hero; Figma 710:20386 / 710:21383).
+ * Background and mask are one background declaration, so the section has no decorative nodes.
+ */
+.page-hero {
+  position: relative;
+  width: 100%;
+  height: var(--page-hero-height);
+  overflow: hidden;
+  color: var(--color-text-on-dark);
+  background:
+    var(--page-hero-mask),
+    url("/images/company/hero-wave.svg") right center / cover no-repeat,
+    var(--color-brand-navy);
+}
+
+.page-hero__content {
+  position: absolute;
+  left: 50%;
+  bottom: var(--page-hero-content-bottom);
+  width: min(
+    var(--page-hero-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.page-hero__title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-page-hero-title-desktop);
+  line-height: var(--text-page-hero-title-desktop--line-height);
+  font-weight: var(--text-page-hero-title-desktop--font-weight);
+  letter-spacing: var(--text-page-hero-title-desktop--letter-spacing);
+}
+
+.page-hero__description {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-page-hero-description-desktop);
+  line-height: var(--text-page-hero-description-desktop--line-height);
+  font-weight: var(--text-page-hero-description-desktop--font-weight);
+  letter-spacing: var(--text-page-hero-description-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (width <= 760px) {
+  .page-hero__content {
+    bottom: var(--page-hero-content-bottom-mobile);
+    width: calc(100% - var(--spacing-32));
+    gap: var(--spacing-16);
+  }
+  .page-hero__title {
+    font-size: var(--text-page-hero-title-mobile);
+    line-height: var(--text-page-hero-title-mobile--line-height);
+    font-weight: var(--text-page-hero-title-mobile--font-weight);
+    letter-spacing: var(--text-page-hero-title-mobile--letter-spacing);
+  }
+  .page-hero__description {
+    font-size: var(--text-page-hero-description-mobile);
+    line-height: var(--text-page-hero-description-mobile--line-height);
+    font-weight: var(--text-page-hero-description-mobile--font-weight);
+    letter-spacing: var(--text-page-hero-description-mobile--letter-spacing);
   }
 }
 

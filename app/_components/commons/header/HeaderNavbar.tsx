@@ -1,16 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, FC } from "react";
 
 import LinkButton from "../buttons/LinkButton";
 
 const navigation = [
-  "회사소개",
-  "솔루션",
-  "파트너 전략",
-  // "소식",
+  { label: "회사소개", href: "/about" },
+  { label: "솔루션", href: "#" },
+  { label: "파트너 전략", href: "#" },
+  // { label: "소식", href: "#" },
 ];
+
+const isActive = (pathname: string, href: string) =>
+  href !== "#" && (pathname === href || pathname.startsWith(`${href}/`));
 
 type HeaderNavbarProps = {
   /** Page extension: contact pages can keep the light surface at all times. */
@@ -23,6 +28,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
   appearance = "auto",
   scrolledOverride,
 }: HeaderNavbarProps) => {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -90,7 +96,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
   return (
     <header ref={headerRef} className="site-header" data-light={light}>
       <div className="site-header__bar">
-        <a
+        <Link
           href="#"
           className="site-header__logo"
           aria-label="코런웨이브 홈"
@@ -111,22 +117,27 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
             width={1432}
             height={660}
           />
-        </a>
+        </Link>
         <nav className="site-header__desktop" aria-label="주 내비게이션">
           <ul>
-            {navigation.map((label) => (
+            {navigation.map(({ label, href }) => (
               <li key={label}>
-                <a href="#">{label}</a>
+                <Link
+                  href={href}
+                  aria-current={isActive(pathname, href) ? "page" : undefined}
+                >
+                  {label}
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <a
+        <Link
           className="site-header__contact site-header__desktop-contact"
           href="#"
         >
           문의하기
-        </a>
+        </Link>
         <button
           ref={buttonRef}
           className="site-header__toggle"
@@ -161,11 +172,15 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
         hidden={!menuOpen}
       >
         <ul>
-          {navigation.map((label) => (
+          {navigation.map(({ label, href }) => (
             <li key={label}>
-              <a href="#" onClick={() => setMenuOpen(false)}>
+              <Link
+                href={href}
+                aria-current={isActive(pathname, href) ? "page" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
           <li>

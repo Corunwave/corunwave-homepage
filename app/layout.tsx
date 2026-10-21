@@ -11,14 +11,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "코런웨이브(주)",
+  title: {
+    default: "코런웨이브(주)",
+    template: "%s · 코런웨이브",
+  },
   description: "Innovation Together, Creating Waves.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="ko"
       className={`${pretendard.variable} ${a2zRegular.variable} ${a2zBold.variable} ${a2zBlack.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

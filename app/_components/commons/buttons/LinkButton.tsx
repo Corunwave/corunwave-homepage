@@ -6,6 +6,7 @@ interface LinkButtonProps extends LinkProps {
   className?: string;
   target?: string;
   rel?: string;
+  download?: boolean | string;
 }
 
 const LinkButton: FC<LinkButtonProps> = ({

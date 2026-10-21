@@ -1,11 +1,17 @@
-import Image from "next/image";
+import HeroSection from "./_components/home/HeroSection";
+import ProposalTargetsSection from "./_components/home/ProposalTargetsSection";
+import SolutionsSection from "./_components/home/SolutionsSection";
+import ServiceValueSection from "./_components/home/ServiceValueSection";
+import DownloadsSection from "./_components/home/DownloadsSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-black">
-      <main className="">
-        <h1>코런웨이브 홈페이지</h1>
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <ProposalTargetsSection />
+      <SolutionsSection />
+      <ServiceValueSection />
+      <DownloadsSection />
+    </>
   );
 }

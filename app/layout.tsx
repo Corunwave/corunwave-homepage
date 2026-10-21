@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
-import { a2zRegular, pretendard } from "../public/fonts/fonts";
+import { a2zBlack, a2zBold, a2zRegular, pretendard } from "../public/fonts/fonts";
 import "./globals.css";
 import HeaderNavbar from "./_components/commons/header/HeaderNavbar";
 import Footer from "./_components/commons/footer/Footer";
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${pretendard.variable} ${a2zRegular.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${pretendard.variable} ${a2zRegular.variable} ${a2zBold.variable} ${a2zBlack.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <HeaderNavbar />

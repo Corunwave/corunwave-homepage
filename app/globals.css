@@ -30,6 +30,10 @@
     rgb(15 23 41 / 55%)
   );
 
+  /* CEO message */
+  --ceo-inner-max: 1248px;
+  --ceo-letter-max: 840px;
+
   /* Proposal targets */
   --proposal-inner-max: 1248px;
   --proposal-card-size: 300px;
@@ -287,6 +291,32 @@
   --text-page-hero-description-mobile--line-height: 1.625rem;
   --text-page-hero-description-mobile--font-weight: 400;
   --text-page-hero-description-mobile--letter-spacing: 0;
+
+  /* CEO message typography (letter body desktop reuses --text-section-description-desktop) */
+  --text-ceo-title-desktop: 2.25rem;
+  --text-ceo-title-desktop--line-height: 3rem;
+  --text-ceo-title-desktop--font-weight: 700;
+  --text-ceo-title-desktop--letter-spacing: 0;
+
+  --text-ceo-title-mobile: 1.75rem;
+  --text-ceo-title-mobile--line-height: 2.375rem;
+  --text-ceo-title-mobile--font-weight: 700;
+  --text-ceo-title-mobile--letter-spacing: 0;
+
+  --text-ceo-letter-mobile: 1rem;
+  --text-ceo-letter-mobile--line-height: 1.625rem;
+  --text-ceo-letter-mobile--font-weight: 400;
+  --text-ceo-letter-mobile--letter-spacing: 0;
+
+  --text-ceo-name-desktop: 1.5rem;
+  --text-ceo-name-desktop--line-height: 2rem;
+  --text-ceo-name-desktop--font-weight: 700;
+  --text-ceo-name-desktop--letter-spacing: 0;
+
+  --text-ceo-name-mobile: 1.375rem;
+  --text-ceo-name-mobile--line-height: 1.875rem;
+  --text-ceo-name-mobile--font-weight: 700;
+  --text-ceo-name-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -919,6 +949,109 @@ body {
     line-height: var(--text-page-hero-description-mobile--line-height);
     font-weight: var(--text-page-hero-description-mobile--font-weight);
     letter-spacing: var(--text-page-hero-description-mobile--letter-spacing);
+  }
+}
+
+/* CEO message — 드리는 말씀 (preview .ceo-section; Figma 640:20145 / 640:22153).
+ * Title is A2Z; the letter is Pretendard with word-level (keep-all) line breaks.
+ */
+.ceo-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.ceo-inner {
+  width: min(
+    var(--ceo-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.ceo-title {
+  margin: 0 0 var(--spacing-48);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-ceo-title-desktop);
+  line-height: var(--text-ceo-title-desktop--line-height);
+  font-weight: var(--text-ceo-title-desktop--font-weight);
+  letter-spacing: var(--text-ceo-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ceo-message {
+  max-width: var(--ceo-letter-max);
+  margin-inline: auto;
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ceo-letter {
+  display: grid;
+  gap: var(--spacing-24);
+}
+
+.ceo-letter p,
+.ceo-signoff p {
+  margin: 0;
+}
+
+.ceo-keep {
+  white-space: nowrap;
+}
+
+.ceo-signoff {
+  display: grid;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-32);
+  text-align: right;
+}
+
+.ceo-name {
+  color: var(--color-brand-navy);
+  font-size: var(--text-ceo-name-desktop);
+  line-height: var(--text-ceo-name-desktop--line-height);
+  font-weight: var(--text-ceo-name-desktop--font-weight);
+  letter-spacing: var(--text-ceo-name-desktop--letter-spacing);
+}
+
+@media (width <= 1024px) {
+  .ceo-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+}
+
+@media (width <= 760px) {
+  .ceo-section {
+    padding: 64px 0;
+  }
+  .ceo-inner {
+    width: calc(100% - var(--spacing-32));
+  }
+  .ceo-title {
+    margin-bottom: var(--spacing-32);
+    font-size: var(--text-ceo-title-mobile);
+    line-height: var(--text-ceo-title-mobile--line-height);
+    font-weight: var(--text-ceo-title-mobile--font-weight);
+    letter-spacing: var(--text-ceo-title-mobile--letter-spacing);
+  }
+  .ceo-message {
+    font-size: var(--text-ceo-letter-mobile);
+    line-height: var(--text-ceo-letter-mobile--line-height);
+    font-weight: var(--text-ceo-letter-mobile--font-weight);
+    letter-spacing: var(--text-ceo-letter-mobile--letter-spacing);
+  }
+  .ceo-name {
+    font-size: var(--text-ceo-name-mobile);
+    line-height: var(--text-ceo-name-mobile--line-height);
+    font-weight: var(--text-ceo-name-mobile--font-weight);
+    letter-spacing: var(--text-ceo-name-mobile--letter-spacing);
   }
 }
 

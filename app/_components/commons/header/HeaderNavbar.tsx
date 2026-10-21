@@ -97,7 +97,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
     <header ref={headerRef} className="site-header" data-light={light}>
       <div className="site-header__bar">
         <Link
-          href="#"
+          href="/"
           className="site-header__logo"
           aria-label="코런웨이브 홈"
           onClick={() => setMenuOpen(false)}

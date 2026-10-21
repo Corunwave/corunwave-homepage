@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useRef } from "react";
 import LinkButton from "../commons/buttons/LinkButton";
+import Image from "next/image";
 
 interface ProposalCard {
   modifier: "enterprise" | "public" | "university" | "startup";
@@ -124,13 +125,14 @@ const ProposalTargetsSection = () => {
                 <p className="proposal-card__description">{description}</p>
               </div>
               {graphic && (
-                <img
+                <Image
                   className="proposal-graphic"
                   src={graphic}
                   alt=""
                   aria-hidden="true"
-                  loading="lazy"
                   decoding="async"
+                  width={150}
+                  height={150}
                 />
               )}
             </article>
@@ -145,7 +147,10 @@ const ProposalTargetsSection = () => {
               고객의 복잡한 난제를 해결하기 위한 가장 적합한 전문가와 솔루션을
               연결하고 상생협력을 조율하는 비즈니스 허브
             </p>
-            <LinkButton href="/partner-strategy" className="proposal-detail-link">
+            <LinkButton
+              href="/partner-strategy"
+              className="proposal-detail-link"
+            >
               자세히보기
               <span aria-hidden="true">→</span>
             </LinkButton>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import PageHero from "../_components/commons/hero/PageHero";
-import SolutionContactSection from "../_components/solutions/SolutionContactSection";
+import ContactCta from "../_components/commons/cta/ContactCta";
 import SolutionOverviewSection from "../_components/solutions/SolutionOverviewSection";
 import SolutionServicesSection, {
   SolutionServicesFallback,
@@ -23,7 +23,7 @@ export default function SolutionsPage() {
       <Suspense fallback={<SolutionServicesFallback />}>
         <SolutionServicesSection />
       </Suspense>
-      <SolutionContactSection />
+      <ContactCta />
     </main>
   );
 }

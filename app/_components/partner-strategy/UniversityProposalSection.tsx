@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const DESCRIPTION =
-  "AX 인프라 및 Leaning 기업 “코런웨이브(CORUNWAVE)”가 국산 Arm서버, AI컴퓨팅 솔루션 기업인 “엑세스랩(XSLAB)”과 손잡고 대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.";
+  "AX 인프라 및 Leaning 기업 “코런웨이브(CORUNWAVE)”가 국산 서버, AI컴퓨팅 솔루션 기업인 “엑세스랩(XSLAB)”과 손잡고 대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.";
 
 /* University proposal "대학 맞춤형 AI Platform" (preview .partner-university; Figma 876:28845 / 876:30043). Static server component. */
 const UniversityProposalSection = () => {

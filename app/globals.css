@@ -202,6 +202,9 @@
   --partner-reveal-shift: 14px;
   --partner-reveal-step: 80ms;
 
+  --color-partner-label-surface: #edf4ff;
+  --color-partner-section-rule: #e7edf5;
+
   /* Layout and scrolled-header surface */
   --section-gutter-desktop: var(--spacing-96);
   --section-gutter-mobile: var(--spacing-24);
@@ -794,6 +797,26 @@
   --text-partner-strategy-term--line-height: 1.375rem;
   --text-partner-strategy-term--font-weight: 500;
   --text-partner-strategy-term--letter-spacing: 0.04em;
+
+  --text-partner-label: 0.875rem;
+  --text-partner-label--line-height: 1.375rem;
+  --text-partner-label--font-weight: 600;
+  --text-partner-label--letter-spacing: 0;
+
+  --text-partner-link: 1.0625rem;
+  --text-partner-link--line-height: 1.75rem;
+  --text-partner-link--font-weight: 600;
+  --text-partner-link--letter-spacing: 0;
+
+  --text-partner-university-desktop: 1.3125rem;
+  --text-partner-university-desktop--line-height: 2.375rem;
+  --text-partner-university-desktop--font-weight: 400;
+  --text-partner-university-desktop--letter-spacing: 0;
+
+  --text-partner-university-mobile: 1.0625rem;
+  --text-partner-university-mobile--line-height: 1.875rem;
+  --text-partner-university-mobile--font-weight: 400;
+  --text-partner-university-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -3948,6 +3971,81 @@ body {
   }
   .partner-strategy__description {
     padding-top: var(--spacing-12);
+  }
+}
+
+/* University proposal — 대학 맞춤형 AI Platform (Figma 876:28845 / 876:30043). */
+.partner-section--ruled {
+  border-bottom: 1px solid var(--color-partner-section-rule);
+}
+
+.partner-university {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--spacing-64);
+  align-items: center;
+}
+
+.partner-university__label {
+  display: inline-block;
+  margin-bottom: var(--spacing-20);
+  padding: var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-999);
+  background: var(--color-partner-label-surface);
+  color: var(--color-solution-accent-deep);
+  font-size: var(--text-partner-label);
+  line-height: var(--text-partner-label--line-height);
+  font-weight: var(--text-partner-label--font-weight);
+  letter-spacing: var(--text-partner-label--letter-spacing);
+}
+
+.partner-university__title {
+  margin-bottom: var(--spacing-24);
+}
+
+.partner-university__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-32);
+  min-height: 44px;
+  color: var(--color-solution-accent-deep);
+  font-size: var(--text-partner-link);
+  line-height: var(--text-partner-link--line-height);
+  font-weight: var(--text-partner-link--font-weight);
+  letter-spacing: var(--text-partner-link--letter-spacing);
+  text-decoration: none;
+}
+
+.partner-university__link:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+  outline-offset: 5px;
+}
+
+.partner-university__description {
+  margin: 0;
+  color: var(--color-partner-body);
+  font-size: var(--text-partner-university-desktop);
+  line-height: var(--text-partner-university-desktop--line-height);
+  font-weight: var(--text-partner-university-desktop--font-weight);
+  letter-spacing: var(--text-partner-university-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* ≤1024px: tablet shares the mobile composition (single column). */
+@media (width <= 1024px) {
+  .partner-university {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-28);
+  }
+  .partner-university__label {
+    margin-bottom: var(--spacing-16);
+  }
+  .partner-university__description {
+    font-size: var(--text-partner-university-mobile);
+    line-height: var(--text-partner-university-mobile--line-height);
+    font-weight: var(--text-partner-university-mobile--font-weight);
+    letter-spacing: var(--text-partner-university-mobile--letter-spacing);
   }
 }
 

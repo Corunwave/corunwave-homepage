@@ -87,7 +87,6 @@ const PROCESS_STAGES: ProcessStage[] = [
   },
 ];
 
-/* Backlog (#3): the solutions page must read `?tab=` to select the matching tab. */
 const SOLUTIONS: Solution[] = [
   {
     id: "ax-infra",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import PageHero from "../_components/commons/hero/PageHero";
+import CollaborationProcessSection from "../_components/partner-strategy/CollaborationProcessSection";
 import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
 import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
@@ -35,6 +36,7 @@ export default function PartnerStrategyPage() {
       <PartnerFieldsSection />
       <CooperationModelsSection />
       <CustomerProposalsSection />
+      <CollaborationProcessSection />
       <ContactCta />
     </main>
   );

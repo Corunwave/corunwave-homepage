@@ -12,6 +12,9 @@ import UniversityProposalSection from "../_components/partner-strategy/Universit
 const description =
   "코런웨이브는 각 분야의 Specialist들이 자신의 전문성을 가장 가치있게 발휘할 수 있는 솔루션 허브를 목표로 협업을 제안합니다.";
 
+/** 파트너사 로고 섹션 노출 여부. false면 섹션을 렌더링하지 않는다. */
+const SHOW_PARTNER_LOGOS = true;
+
 export const metadata: Metadata = {
   title: "파트너 전략",
   description,
@@ -42,7 +45,7 @@ export default function PartnerStrategyPage() {
       <CollaborationProcessSection />
       <PartnershipBenefitsSection />
       <UniversityProposalSection />
-      <PartnerLogosSection />
+      {SHOW_PARTNER_LOGOS && <PartnerLogosSection />}
       <ContactCta />
     </main>
   );

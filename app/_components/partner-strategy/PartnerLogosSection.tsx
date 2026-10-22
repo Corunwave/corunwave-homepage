@@ -3,22 +3,55 @@ import Image from "next/image";
 type PartnerLogo = {
   name: string;
   src: string;
+  /** Intrinsic size, so next/image keeps the file's aspect ratio. */
+  width: number;
+  height: number;
 };
 
 const PARTNER_LOGOS: PartnerLogo[] = [
-  { name: "Palo Alto Networks", src: "/images/partner/logos/paloalto.svg" },
-  { name: "HeyGen", src: "/images/partner/logos/heygen.svg" },
-  { name: "XSLAB(엑세스랩)", src: "/images/partner/logos/xslab.png" },
-  { name: "Odoo", src: "/images/partner/logos/odoo.svg" },
-  { name: "IBM", src: "/images/partner/logos/ibm.svg" },
+  {
+    name: "Palo Alto Networks",
+    src: "/images/partner/logos/paloalto.svg",
+    width: 348,
+    height: 65,
+  },
+  {
+    name: "HeyGen",
+    src: "/images/partner/logos/heygen.svg",
+    width: 241,
+    height: 143,
+  },
+  {
+    name: "XSLAB(엑세스랩)",
+    src: "/images/partner/logos/xslab.png",
+    width: 1780,
+    height: 303,
+  },
+  {
+    name: "Odoo",
+    src: "/images/partner/logos/odoo.svg",
+    width: 919,
+    height: 495,
+  },
+  {
+    name: "IBM",
+    src: "/images/partner/logos/ibm.svg",
+    width: 1306,
+    height: 734,
+  },
 ];
 
 /* The track repeats the group twice and slides by -50%, so the second copy is hidden from assistive tech. */
 const LogoGroup = ({ hidden = false }: { hidden?: boolean }) => (
   <div className="partner-logo-group" aria-hidden={hidden || undefined}>
-    {PARTNER_LOGOS.map(({ name, src }) => (
+    {PARTNER_LOGOS.map(({ name, src, width, height }) => (
       <div key={name} className="partner-logo">
-        <Image src={src} alt={hidden ? "" : name} width={180} height={64} />
+        <Image
+          src={src}
+          alt={hidden ? "" : name}
+          width={width}
+          height={height}
+        />
       </div>
     ))}
   </div>

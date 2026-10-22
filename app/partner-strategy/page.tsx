@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import PageHero from "../_components/commons/hero/PageHero";
+import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
 
 const description =
   "코런웨이브는 각 분야의 Specialist들이 자신의 전문성을 가장 가치있게 발휘할 수 있는 솔루션 허브를 목표로 협업을 제안합니다.";
@@ -29,6 +30,7 @@ export default function PartnerStrategyPage() {
   return (
     <main>
       <PageHero title="파트너 전략" description={description} />
+      <PartnerFieldsSection />
       <ContactCta />
     </main>
   );

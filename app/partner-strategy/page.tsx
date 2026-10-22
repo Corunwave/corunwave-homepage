@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import PageHero from "../_components/commons/hero/PageHero";
+import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
 import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
 
 const description =
@@ -31,6 +32,7 @@ export default function PartnerStrategyPage() {
     <main>
       <PageHero title="파트너 전략" description={description} />
       <PartnerFieldsSection />
+      <CooperationModelsSection />
       <ContactCta />
     </main>
   );

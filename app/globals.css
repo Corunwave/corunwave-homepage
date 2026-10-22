@@ -651,6 +651,26 @@
   --text-partner-field-item--line-height: 1.75rem;
   --text-partner-field-item--font-weight: 400;
   --text-partner-field-item--letter-spacing: 0;
+
+  --text-partner-model-title-desktop: 1.6875rem;
+  --text-partner-model-title-desktop--line-height: 2.25rem;
+  --text-partner-model-title-desktop--font-weight: 700;
+  --text-partner-model-title-desktop--letter-spacing: -0.035em;
+
+  --text-partner-model-title-mobile: 1.5rem;
+  --text-partner-model-title-mobile--line-height: 2.125rem;
+  --text-partner-model-title-mobile--font-weight: 700;
+  --text-partner-model-title-mobile--letter-spacing: -0.035em;
+
+  --text-partner-model-body-desktop: 1.0625rem;
+  --text-partner-model-body-desktop--line-height: 1.8125rem;
+  --text-partner-model-body-desktop--font-weight: 400;
+  --text-partner-model-body-desktop--letter-spacing: 0;
+
+  --text-partner-model-body-mobile: 1rem;
+  --text-partner-model-body-mobile--line-height: 1.75rem;
+  --text-partner-model-body-mobile--font-weight: 400;
+  --text-partner-model-body-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -3101,6 +3121,55 @@ body {
   background: var(--color-brand-cyan);
 }
 
+/* Cooperation models — 우리가 제안하는 협력모델 (Figma 876:28713 / 876:29907). */
+.partner-section--subtle {
+  background: var(--color-partner-subtle);
+}
+
+.partner-models {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-48);
+}
+
+.partner-model {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.partner-model__icon {
+  display: block;
+  width: 192px;
+  height: 192px;
+  margin: 0 0 var(--spacing-28);
+  object-fit: contain;
+}
+
+.partner-model__title {
+  margin: 0 0 var(--spacing-20);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-model-title-desktop);
+  line-height: var(--text-partner-model-title-desktop--line-height);
+  font-weight: var(--text-partner-model-title-desktop--font-weight);
+  letter-spacing: var(--text-partner-model-title-desktop--letter-spacing);
+}
+
+.partner-model__description {
+  width: 100%;
+  margin: 0;
+  color: var(--color-partner-body);
+  font-size: var(--text-partner-model-body-desktop);
+  line-height: var(--text-partner-model-body-desktop--line-height);
+  font-weight: var(--text-partner-model-body-desktop--font-weight);
+  letter-spacing: var(--text-partner-model-body-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
 /* ≤1024px: tablet shares the mobile composition (Figma mobile values live here). */
 @media (width <= 1024px) {
   .partner-section {
@@ -3130,6 +3199,29 @@ body {
     line-height: var(--text-partner-field-title-mobile--line-height);
     font-weight: var(--text-partner-field-title-mobile--font-weight);
     letter-spacing: var(--text-partner-field-title-mobile--letter-spacing);
+  }
+
+  .partner-models {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-32);
+  }
+  .partner-model__icon {
+    width: 160px;
+    height: 160px;
+    margin-bottom: var(--spacing-24);
+  }
+  .partner-model__title {
+    margin-bottom: var(--spacing-16);
+    font-size: var(--text-partner-model-title-mobile);
+    line-height: var(--text-partner-model-title-mobile--line-height);
+    font-weight: var(--text-partner-model-title-mobile--font-weight);
+    letter-spacing: var(--text-partner-model-title-mobile--letter-spacing);
+  }
+  .partner-model__description {
+    font-size: var(--text-partner-model-body-mobile);
+    line-height: var(--text-partner-model-body-mobile--line-height);
+    font-weight: var(--text-partner-model-body-mobile--font-weight);
+    letter-spacing: var(--text-partner-model-body-mobile--letter-spacing);
   }
 }
 

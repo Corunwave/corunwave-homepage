@@ -19,6 +19,76 @@
   --font-family-slogan: var(--font-a2z-black), var(--font-family-body);
   --font-family-heading: var(--font-a2z-bold), var(--font-family-body);
 
+  /* Page hero (shared subpage hero) */
+  --page-hero-height: 530px;
+  --page-hero-inner-max: 1248px;
+  --page-hero-content-bottom: 80px;
+  --page-hero-content-bottom-mobile: 60px;
+  --page-hero-mask: linear-gradient(
+    90deg,
+    rgb(15 23 41 / 94%),
+    rgb(15 23 41 / 55%)
+  );
+
+  /* CEO message */
+  --ceo-inner-max: 1248px;
+  --ceo-letter-max: 840px;
+
+  /* Business direction */
+  --direction-inner-max: 1248px;
+  --direction-description-max: 900px;
+  --direction-visual-width: 400px;
+  --direction-visual-width-mobile: 358px;
+  --direction-connector-height: 48px;
+  --direction-values-gap: 32px;
+
+  /* Core challenges (scroll mode stage = viewport below the scrolled header) */
+  --challenges-inner-max: 1248px;
+  --challenges-gutter: var(--section-gutter-desktop);
+  --challenges-stage-padding: var(--spacing-48);
+  --challenges-stack-gap: var(--spacing-40);
+  --challenges-title-height: 44px; /* JS overwrites with the measured title height */
+  --challenges-controls-height: 74px;
+  --challenges-copy-max: 720px;
+  --challenges-copy-padding: 64px;
+  --challenges-stage-height: calc(
+    100svh - var(--header-height-desktop-scrolled)
+  );
+  --challenges-scene-min-height: 70svh;
+  --color-challenges-scrim: rgb(0 0 0 / 24%);
+  --color-challenges-overlay: rgb(15 23 41 / 45%);
+  --color-challenges-rule: rgb(255 255 255 / 40%);
+
+  /* Company values */
+  --values-inner-max: 1248px;
+  --values-header-gap: 10px;
+  --values-stack-gap: var(--spacing-16);
+  --values-cards-gap: var(--spacing-24);
+  --values-card-height: 300px;
+  --values-card-height-mobile: 208px;
+  --values-card-padding: 36px;
+  --values-card-padding-mobile: var(--spacing-24);
+  --values-art-width: 320px;
+  --values-art-height: 260px;
+  --values-art-width-mobile: 280px;
+  --values-art-height-mobile: 220px;
+  --values-object-width: 194px;
+  --values-object-height: 216px;
+  --values-object-width-mobile: 164px;
+  --values-object-height-mobile: 150px;
+  --values-copy-max: 270px;
+  --values-copy-max-mobile: 214px;
+  --values-motion-shift: -48px;
+  --color-values-glass: rgb(255 255 255 / 13%);
+  --color-values-cooperation-from: #746aca;
+  --color-values-cooperation-to: #4f47a7;
+  --color-values-run-from: #75c7fb;
+  --color-values-run-to: #299adf;
+  --color-values-wave-from: #1476e8;
+  --color-values-wave-to: #084fb6;
+  --shadow-values-card: 0 22px 54px rgb(15 23 41 / 12%);
+  --shadow-values-text: 0 1px 2px rgb(15 23 41 / 16%);
+
   /* Proposal targets */
   --proposal-inner-max: 1248px;
   --proposal-card-size: 300px;
@@ -141,6 +211,8 @@
   --spacing-space-40: var(--spacing-40);
   --spacing-48: 48px;
   --spacing-space-48: var(--spacing-48);
+  --spacing-64: 64px;
+  --spacing-space-64: var(--spacing-64);
   --spacing-96: 96px;
   --spacing-space-96: var(--spacing-96);
 
@@ -255,6 +327,156 @@
   --hero-cta-height-mobile: 48px;
 
   --hero-description-max-width: 760px;
+
+  /* Page hero typography */
+  --text-page-hero-title-desktop: 3.5rem;
+  --text-page-hero-title-desktop--line-height: 4.5rem;
+  --text-page-hero-title-desktop--font-weight: 700;
+  --text-page-hero-title-desktop--letter-spacing: 0;
+
+  --text-page-hero-title-mobile: 2rem;
+  --text-page-hero-title-mobile--line-height: 2.75rem;
+  --text-page-hero-title-mobile--font-weight: 700;
+  --text-page-hero-title-mobile--letter-spacing: 0;
+
+  --text-page-hero-description-desktop: 1.5rem;
+  --text-page-hero-description-desktop--line-height: 2.25rem;
+  --text-page-hero-description-desktop--font-weight: 400;
+  --text-page-hero-description-desktop--letter-spacing: 0;
+
+  --text-page-hero-description-mobile: 1rem;
+  --text-page-hero-description-mobile--line-height: 1.625rem;
+  --text-page-hero-description-mobile--font-weight: 400;
+  --text-page-hero-description-mobile--letter-spacing: 0;
+
+  /* CEO message typography (letter body desktop reuses --text-section-description-desktop) */
+  --text-ceo-title-desktop: 2.25rem;
+  --text-ceo-title-desktop--line-height: 3rem;
+  --text-ceo-title-desktop--font-weight: 700;
+  --text-ceo-title-desktop--letter-spacing: 0;
+
+  --text-ceo-title-mobile: 1.75rem;
+  --text-ceo-title-mobile--line-height: 2.375rem;
+  --text-ceo-title-mobile--font-weight: 700;
+  --text-ceo-title-mobile--letter-spacing: 0;
+
+  --text-ceo-letter-mobile: 1rem;
+  --text-ceo-letter-mobile--line-height: 1.625rem;
+  --text-ceo-letter-mobile--font-weight: 400;
+  --text-ceo-letter-mobile--letter-spacing: 0;
+
+  --text-ceo-name-desktop: 1.5rem;
+  --text-ceo-name-desktop--line-height: 2rem;
+  --text-ceo-name-desktop--font-weight: 700;
+  --text-ceo-name-desktop--letter-spacing: 0;
+
+  --text-ceo-name-mobile: 1.375rem;
+  --text-ceo-name-mobile--line-height: 1.875rem;
+  --text-ceo-name-mobile--font-weight: 700;
+  --text-ceo-name-mobile--letter-spacing: 0;
+
+  /* Business direction typography (description reuses section-description / ceo-letter-mobile) */
+  --text-direction-title-desktop: 2.25rem;
+  --text-direction-title-desktop--line-height: 3rem;
+  --text-direction-title-desktop--font-weight: 700;
+  --text-direction-title-desktop--letter-spacing: 0;
+
+  --text-direction-title-mobile: 1.5rem;
+  --text-direction-title-mobile--line-height: 2.125rem;
+  --text-direction-title-mobile--font-weight: 700;
+  --text-direction-title-mobile--letter-spacing: 0;
+
+  --text-direction-heading-desktop: 1.375rem;
+  --text-direction-heading-desktop--line-height: 2rem;
+  --text-direction-heading-desktop--font-weight: 700;
+  --text-direction-heading-desktop--letter-spacing: 0;
+
+  --text-direction-heading-mobile: 1.25rem;
+  --text-direction-heading-mobile--line-height: 1.875rem;
+  --text-direction-heading-mobile--font-weight: 700;
+  --text-direction-heading-mobile--letter-spacing: 0;
+
+  --text-direction-body-desktop: 1rem;
+  --text-direction-body-desktop--line-height: 1.6875rem;
+  --text-direction-body-desktop--font-weight: 400;
+  --text-direction-body-desktop--letter-spacing: 0;
+
+  --text-direction-body-mobile: 0.9375rem;
+  --text-direction-body-mobile--line-height: 1.5625rem;
+  --text-direction-body-mobile--font-weight: 400;
+  --text-direction-body-mobile--letter-spacing: 0;
+
+  /* Core challenges typography (body desktop reuses section-description, mobile reuses direction-body-desktop) */
+  --text-challenges-title-desktop: 2rem;
+  --text-challenges-title-desktop--line-height: 2.75rem;
+  --text-challenges-title-desktop--font-weight: 700;
+  --text-challenges-title-desktop--letter-spacing: 0;
+
+  --text-challenges-title-mobile: 1.75rem;
+  --text-challenges-title-mobile--line-height: 2.375rem;
+  --text-challenges-title-mobile--font-weight: 700;
+  --text-challenges-title-mobile--letter-spacing: 0;
+
+  --text-challenge-heading-desktop: 2.75rem;
+  --text-challenge-heading-desktop--line-height: 3.625rem;
+  --text-challenge-heading-desktop--font-weight: 700;
+  --text-challenge-heading-desktop--letter-spacing: -0.06875rem;
+
+  --text-challenge-heading-mobile: 1.75rem;
+  --text-challenge-heading-mobile--line-height: 2.375rem;
+  --text-challenge-heading-mobile--font-weight: 700;
+  --text-challenge-heading-mobile--letter-spacing: -0.04375rem;
+
+  --text-challenge-choice: 1rem;
+  --text-challenge-choice--line-height: 1.5rem;
+  --text-challenge-choice--font-weight: 400;
+  --text-challenge-choice--letter-spacing: 0;
+
+  --text-challenge-number: 0.875rem;
+  --text-challenge-number--line-height: 1.25rem;
+  --text-challenge-number--font-weight: 400;
+  --text-challenge-number--letter-spacing: 0;
+
+  /* Company values typography (description desktop reuses section-description / direction-body-desktop) */
+  --text-values-title-desktop: 2.25rem;
+  --text-values-title-desktop--line-height: 2.9375rem;
+  --text-values-title-desktop--font-weight: 700;
+  --text-values-title-desktop--letter-spacing: 0;
+
+  --text-values-title-mobile: 1.75rem;
+  --text-values-title-mobile--line-height: 2.375rem;
+  --text-values-title-mobile--font-weight: 700;
+  --text-values-title-mobile--letter-spacing: 0;
+
+  --text-values-intro-mobile: 0.9375rem;
+  --text-values-intro-mobile--line-height: 1.5rem;
+  --text-values-intro-mobile--font-weight: 400;
+  --text-values-intro-mobile--letter-spacing: 0;
+
+  --text-value-card-en-desktop: 1.375rem;
+  --text-value-card-en-desktop--line-height: 1.875rem;
+  --text-value-card-en-desktop--font-weight: 700;
+  --text-value-card-en-desktop--letter-spacing: 0;
+
+  --text-value-card-en-mobile: 0.9375rem;
+  --text-value-card-en-mobile--line-height: 1.25rem;
+  --text-value-card-en-mobile--font-weight: 700;
+  --text-value-card-en-mobile--letter-spacing: 0;
+
+  --text-value-card-ko-desktop: 2.75rem;
+  --text-value-card-ko-desktop--line-height: 3.25rem;
+  --text-value-card-ko-desktop--font-weight: 700;
+  --text-value-card-ko-desktop--letter-spacing: 0;
+
+  --text-value-card-ko-mobile: 1.375rem;
+  --text-value-card-ko-mobile--line-height: 1.8125rem;
+  --text-value-card-ko-mobile--font-weight: 700;
+  --text-value-card-ko-mobile--letter-spacing: 0;
+
+  --text-value-card-description-mobile: 0.8125rem;
+  --text-value-card-description-mobile--line-height: 1.3125rem;
+  --text-value-card-description-mobile--font-weight: 400;
+  --text-value-card-description-mobile--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -389,6 +611,14 @@ body {
 .site-header[data-light="true"] .site-header__desktop a:focus-visible {
   color: var(--color-action-primary);
 }
+/* Current page (usePathname → aria-current): blue + bold. Cyan on the dark transparent surface for contrast. */
+.site-header__desktop a[aria-current="page"] {
+  color: var(--color-brand-cyan);
+  font-weight: var(--font-weight-bold);
+}
+.site-header[data-light="true"] .site-header__desktop a[aria-current="page"] {
+  color: var(--color-action-primary);
+}
 .site-header__contact {
   display: flex;
   align-items: center;
@@ -477,6 +707,10 @@ body {
     font-size: var(--text-header-mobile-navigation);
     line-height: var(--text-header-mobile-navigation--line-height);
     font-weight: var(--text-header-mobile-navigation--font-weight);
+  }
+  .site-header__panel a[aria-current="page"] {
+    color: var(--color-action-primary);
+    font-weight: var(--font-weight-bold);
   }
   .site-header__panel .site-header__contact {
     width: 100%;
@@ -805,6 +1039,1004 @@ body {
     will-change: auto;
   }
   .bordered-button {
+    transition: none;
+  }
+}
+
+/* Page hero — 서브페이지 공용 Hero (preview company-hero; Figma 710:20386 / 710:21383).
+ * Background and mask are one background declaration, so the section has no decorative nodes.
+ */
+.page-hero {
+  position: relative;
+  width: 100%;
+  height: var(--page-hero-height);
+  overflow: hidden;
+  color: var(--color-text-on-dark);
+  background:
+    var(--page-hero-mask),
+    url("/images/company/hero-wave.svg") right center / cover no-repeat,
+    var(--color-brand-navy);
+}
+
+.page-hero__content {
+  position: absolute;
+  left: 50%;
+  bottom: var(--page-hero-content-bottom);
+  width: min(
+    var(--page-hero-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.page-hero__title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-page-hero-title-desktop);
+  line-height: var(--text-page-hero-title-desktop--line-height);
+  font-weight: var(--text-page-hero-title-desktop--font-weight);
+  letter-spacing: var(--text-page-hero-title-desktop--letter-spacing);
+}
+
+.page-hero__description {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-page-hero-description-desktop);
+  line-height: var(--text-page-hero-description-desktop--line-height);
+  font-weight: var(--text-page-hero-description-desktop--font-weight);
+  letter-spacing: var(--text-page-hero-description-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (width <= 760px) {
+  .page-hero__content {
+    bottom: var(--page-hero-content-bottom-mobile);
+    width: calc(100% - var(--spacing-32));
+    gap: var(--spacing-16);
+  }
+  .page-hero__title {
+    font-size: var(--text-page-hero-title-mobile);
+    line-height: var(--text-page-hero-title-mobile--line-height);
+    font-weight: var(--text-page-hero-title-mobile--font-weight);
+    letter-spacing: var(--text-page-hero-title-mobile--letter-spacing);
+  }
+  .page-hero__description {
+    font-size: var(--text-page-hero-description-mobile);
+    line-height: var(--text-page-hero-description-mobile--line-height);
+    font-weight: var(--text-page-hero-description-mobile--font-weight);
+    letter-spacing: var(--text-page-hero-description-mobile--letter-spacing);
+  }
+}
+
+/* CEO message — 드리는 말씀 (preview .ceo-section; Figma 640:20145 / 640:22153).
+ * Title is A2Z; the letter is Pretendard with word-level (keep-all) line breaks.
+ */
+.ceo-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.ceo-inner {
+  width: min(
+    var(--ceo-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.ceo-title {
+  margin: 0 0 var(--spacing-48);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-ceo-title-desktop);
+  line-height: var(--text-ceo-title-desktop--line-height);
+  font-weight: var(--text-ceo-title-desktop--font-weight);
+  letter-spacing: var(--text-ceo-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ceo-message {
+  max-width: var(--ceo-letter-max);
+  margin-inline: auto;
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ceo-letter {
+  display: grid;
+  gap: var(--spacing-24);
+}
+
+.ceo-letter p,
+.ceo-signoff p {
+  margin: 0;
+}
+
+.ceo-keep {
+  white-space: nowrap;
+}
+
+.ceo-signoff {
+  display: grid;
+  gap: var(--spacing-12);
+  margin-top: var(--spacing-32);
+  text-align: right;
+}
+
+.ceo-name {
+  color: var(--color-brand-navy);
+  font-size: var(--text-ceo-name-desktop);
+  line-height: var(--text-ceo-name-desktop--line-height);
+  font-weight: var(--text-ceo-name-desktop--font-weight);
+  letter-spacing: var(--text-ceo-name-desktop--letter-spacing);
+}
+
+@media (width <= 1024px) {
+  .ceo-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+}
+
+@media (width <= 760px) {
+  .ceo-section {
+    padding: 64px 0;
+  }
+  .ceo-inner {
+    width: calc(100% - var(--spacing-32));
+  }
+  .ceo-title {
+    margin-bottom: var(--spacing-32);
+    font-size: var(--text-ceo-title-mobile);
+    line-height: var(--text-ceo-title-mobile--line-height);
+    font-weight: var(--text-ceo-title-mobile--font-weight);
+    letter-spacing: var(--text-ceo-title-mobile--letter-spacing);
+  }
+  .ceo-message {
+    font-size: var(--text-ceo-letter-mobile);
+    line-height: var(--text-ceo-letter-mobile--line-height);
+    font-weight: var(--text-ceo-letter-mobile--font-weight);
+    letter-spacing: var(--text-ceo-letter-mobile--letter-spacing);
+  }
+  .ceo-name {
+    font-size: var(--text-ceo-name-mobile);
+    line-height: var(--text-ceo-name-mobile--line-height);
+    font-weight: var(--text-ceo-name-mobile--font-weight);
+    letter-spacing: var(--text-ceo-name-mobile--letter-spacing);
+  }
+}
+
+/* Business direction — 사업 방향성 (preview .business-direction; Figma 653:20134 / 653:20160).
+ * Static layout: hub artwork is the existing SVG, the label is overlaid as text.
+ */
+.direction-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+.direction-inner {
+  width: min(
+    var(--direction-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.direction-composition {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-24);
+}
+
+.direction-copy {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.direction-title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-title-desktop);
+  line-height: var(--text-direction-title-desktop--line-height);
+  font-weight: var(--text-direction-title-desktop--font-weight);
+  letter-spacing: var(--text-direction-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.direction-title-line {
+  display: block;
+}
+
+.direction-phrase,
+.direction-keep {
+  white-space: nowrap;
+}
+
+.direction-description {
+  max-width: var(--direction-description-max);
+  margin: var(--spacing-24) auto 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.direction-description strong {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+
+.direction-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(var(--direction-visual-width), 100%);
+  aspect-ratio: 704 / 420;
+  isolation: isolate;
+}
+
+.direction-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.direction-hub {
+  position: relative;
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-heading-desktop);
+  line-height: var(--text-direction-heading-desktop--line-height);
+  font-weight: var(--text-direction-heading-desktop--font-weight);
+  letter-spacing: var(--text-direction-heading-desktop--letter-spacing);
+}
+
+.direction-connectors {
+  position: relative;
+  width: 100%;
+  height: var(--direction-connector-height);
+}
+
+.direction-trunk {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 25px;
+  background: var(--color-border);
+}
+
+.direction-branch {
+  position: absolute;
+  top: 24px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.direction-branch::after {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 24px;
+  content: "";
+  background: inherit;
+}
+
+.direction-branch--0 {
+  left: calc((100% - var(--direction-values-gap) * 2) / 6);
+  right: 50%;
+}
+
+.direction-branch--0::after {
+  left: 0;
+}
+
+.direction-branch--1 {
+  left: 50%;
+  width: 1px;
+  height: 24px;
+}
+
+.direction-branch--1::after {
+  display: none;
+}
+
+.direction-branch--2 {
+  left: 50%;
+  right: calc((100% - var(--direction-values-gap) * 2) / 6);
+}
+
+.direction-branch--2::after {
+  right: 0;
+}
+
+.direction-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--direction-values-gap);
+  margin-top: var(--spacing-16);
+}
+
+.direction-value {
+  min-width: 0;
+}
+
+.direction-value h3 {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-direction-heading-desktop);
+  line-height: var(--text-direction-heading-desktop--line-height);
+  font-weight: var(--text-direction-heading-desktop--font-weight);
+  letter-spacing: var(--text-direction-heading-desktop--letter-spacing);
+  word-break: keep-all;
+}
+
+.direction-value p {
+  margin: var(--spacing-16) 0 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-direction-body-desktop);
+  line-height: var(--text-direction-body-desktop--line-height);
+  font-weight: var(--text-direction-body-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (width <= 1024px) {
+  .direction-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+  .direction-connectors {
+    display: none;
+  }
+  .direction-values {
+    grid-template-columns: 1fr;
+    margin-top: var(--spacing-32);
+  }
+  .direction-value h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+  }
+  .direction-value h3::before {
+    flex: none;
+    width: 24px;
+    height: 1px;
+    content: "";
+    background: var(--color-border);
+  }
+  .direction-value p {
+    padding-left: 36px;
+  }
+}
+
+@media (width <= 760px) {
+  .direction-section {
+    padding: 64px 0;
+  }
+  .direction-inner {
+    width: calc(100% - var(--spacing-32));
+  }
+  .direction-title {
+    font-size: var(--text-direction-title-mobile);
+    line-height: var(--text-direction-title-mobile--line-height);
+    font-weight: var(--text-direction-title-mobile--font-weight);
+    letter-spacing: var(--text-direction-title-mobile--letter-spacing);
+  }
+  .direction-title-line--first .direction-phrase {
+    display: block;
+  }
+  .direction-title-line--last {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 0.28em;
+  }
+  .direction-description {
+    font-size: var(--text-ceo-letter-mobile);
+    line-height: var(--text-ceo-letter-mobile--line-height);
+    font-weight: var(--text-ceo-letter-mobile--font-weight);
+  }
+  .direction-visual {
+    width: min(var(--direction-visual-width-mobile), 100%);
+  }
+  .direction-hub,
+  .direction-value h3 {
+    font-size: var(--text-direction-heading-mobile);
+    line-height: var(--text-direction-heading-mobile--line-height);
+    font-weight: var(--text-direction-heading-mobile--font-weight);
+    letter-spacing: var(--text-direction-heading-mobile--letter-spacing);
+  }
+  .direction-value p {
+    margin-top: var(--spacing-12);
+    font-size: var(--text-direction-body-mobile);
+    line-height: var(--text-direction-body-mobile--line-height);
+    font-weight: var(--text-direction-body-mobile--font-weight);
+    letter-spacing: var(--text-direction-body-mobile--letter-spacing);
+  }
+}
+
+/* Core challenges — 핵심과제 (preview .core-challenges; Figma 790:20440 / 674:20307 / 674:20268).
+ * flow (server, mobile, reduced motion, short viewport): scenes stack, each over its own photo.
+ * scroll (data-mode="scroll"): sticky stage; CoreChallengesSection writes
+ * --challenge-background-opacity / --challenge-copy-opacity / --challenge-copy-shift per frame.
+ */
+.challenges-section {
+  color: var(--color-white);
+  background: var(--color-brand-navy);
+  overflow-anchor: none;
+}
+
+.challenges-track,
+.challenges-stage {
+  position: relative;
+}
+
+.challenges-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  isolation: isolate;
+}
+
+.challenges-backdrops,
+.challenges-scenes {
+  display: contents;
+}
+
+.challenge-backdrop,
+.challenge-scene {
+  grid-column: 1;
+  min-width: 0;
+}
+
+.challenge-backdrop:nth-child(1),
+.challenge-scene:nth-child(1) {
+  grid-row: 1;
+}
+
+.challenge-backdrop:nth-child(2),
+.challenge-scene:nth-child(2) {
+  grid-row: 2;
+}
+
+.challenge-backdrop:nth-child(3),
+.challenge-scene:nth-child(3) {
+  grid-row: 3;
+}
+
+.challenge-backdrop {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-brand-navy);
+}
+
+.challenge-photo {
+  z-index: -3;
+  object-fit: cover;
+  object-position: 50% 50%;
+  pointer-events: none;
+}
+
+.challenge-backdrop::before,
+.challenge-backdrop::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.challenge-backdrop::before {
+  z-index: -2;
+  background: var(--color-challenges-scrim);
+}
+
+.challenge-backdrop::after {
+  z-index: -1;
+  background: var(--color-challenges-overlay);
+}
+
+.challenges-title,
+.challenge-content,
+.challenges-controls {
+  width: min(
+    var(--challenges-inner-max),
+    calc(100% - var(--challenges-gutter) * 2)
+  );
+  margin-inline: auto;
+}
+
+.challenges-title {
+  position: absolute;
+  z-index: 4;
+  top: var(--challenges-stage-padding);
+  right: 0;
+  left: 0;
+  margin-block: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-challenges-title-desktop);
+  line-height: var(--text-challenges-title-desktop--line-height);
+  font-weight: var(--text-challenges-title-desktop--font-weight);
+  letter-spacing: var(--text-challenges-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.challenge-scene {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: var(--challenges-scene-min-height);
+}
+
+.challenge-content {
+  padding-block: var(--challenges-copy-padding);
+}
+
+.challenge-scene:first-child .challenge-content {
+  padding-top: calc(
+    var(--challenges-stage-padding) + var(--challenges-title-height) +
+      var(--challenges-stack-gap)
+  );
+}
+
+.challenge-copy {
+  display: grid;
+  gap: var(--spacing-24);
+  max-width: var(--challenges-copy-max);
+}
+
+.challenge-heading {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-challenge-heading-desktop);
+  line-height: var(--text-challenge-heading-desktop--line-height);
+  font-weight: var(--text-challenge-heading-desktop--font-weight);
+  letter-spacing: var(--text-challenge-heading-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.challenge-body {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.challenges-controls {
+  display: none;
+  gap: var(--spacing-32);
+}
+
+.challenge-choice {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  min-width: 0;
+  min-height: var(--challenges-controls-height);
+  padding: var(--spacing-16) 0 0;
+  border: 0;
+  border-top: 1px solid var(--color-challenges-rule);
+  border-radius: var(--radius-0);
+  background: transparent;
+  color: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: var(--text-challenge-choice);
+  line-height: var(--text-challenge-choice--line-height);
+  font-weight: var(--text-challenge-choice--font-weight);
+  text-align: left;
+  word-break: keep-all;
+  cursor: pointer;
+}
+
+.challenge-choice[aria-current="step"] {
+  padding-top: 14px;
+  border-top: 3px solid var(--color-white);
+  font-weight: var(--font-weight-bold);
+}
+
+.challenge-choice:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.challenge-number {
+  font-size: var(--text-challenge-number);
+  line-height: var(--text-challenge-number--line-height);
+}
+
+.challenges-section[data-mode="scroll"] .challenges-track {
+  height: calc(var(--challenges-stage-height) * 4);
+}
+
+.challenges-section[data-mode="scroll"] .challenges-stage {
+  position: sticky;
+  top: var(--header-height-desktop-scrolled);
+  display: block;
+  height: var(--challenges-stage-height);
+}
+
+.challenges-section[data-mode="scroll"] .challenge-backdrop {
+  position: absolute;
+  inset: 0;
+  opacity: var(--challenge-background-opacity, 0);
+  will-change: opacity;
+}
+
+.challenges-section[data-mode="scroll"] .challenge-backdrop::before {
+  background: linear-gradient(
+    45deg,
+    var(--color-challenges-scrim) 70%,
+    transparent
+  );
+}
+
+.challenges-section[data-mode="scroll"] .challenge-scene {
+  position: absolute;
+  top: calc(
+    var(--challenges-stage-padding) + var(--challenges-title-height) +
+      var(--challenges-stack-gap)
+  );
+  right: 0;
+  bottom: calc(
+    var(--challenges-stage-padding) + var(--challenges-controls-height) +
+      var(--challenges-stack-gap)
+  );
+  left: 0;
+  min-height: 0;
+  opacity: var(--challenge-copy-opacity, 0);
+  transform: translateY(var(--challenge-copy-shift, 0px));
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.challenges-section[data-mode="scroll"] .challenge-scene:not([aria-hidden]) {
+  pointer-events: auto;
+}
+
+.challenges-section[data-mode="scroll"] .challenge-content,
+.challenges-section[data-mode="scroll"] .challenge-scene:first-child .challenge-content {
+  padding-block: 0;
+}
+
+.challenges-section[data-mode="scroll"] .challenges-controls {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  bottom: var(--challenges-stage-padding);
+  left: 0;
+  display: flex;
+}
+
+@media (width <= 1279px) {
+  .challenges-section {
+    --challenges-gutter: var(--section-gutter-mobile);
+  }
+}
+
+@media (width <= 1024px) {
+  .challenges-section {
+    --challenges-gutter: var(--spacing-16);
+    --challenges-title-height: 76px;
+  }
+  .challenges-title {
+    font-size: var(--text-challenges-title-mobile);
+    line-height: var(--text-challenges-title-mobile--line-height);
+    font-weight: var(--text-challenges-title-mobile--font-weight);
+    letter-spacing: var(--text-challenges-title-mobile--letter-spacing);
+  }
+  .challenge-heading {
+    font-size: var(--text-challenge-heading-mobile);
+    line-height: var(--text-challenge-heading-mobile--line-height);
+    font-weight: var(--text-challenge-heading-mobile--font-weight);
+    letter-spacing: var(--text-challenge-heading-mobile--letter-spacing);
+  }
+  .challenge-body {
+    font-size: var(--text-direction-body-desktop);
+    line-height: var(--text-direction-body-desktop--line-height);
+    font-weight: var(--text-direction-body-desktop--font-weight);
+  }
+}
+
+/* Company values — CoRunWave = Cooperation + Run + Wave (preview .company-values-section; Figma 662:20146 / 662:20180).
+ * Card layers, back to front: blurred art, glass overlay, 3D object, text.
+ */
+.values-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.values-inner {
+  display: grid;
+  gap: var(--values-stack-gap);
+  width: min(
+    var(--values-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.values-header {
+  display: grid;
+  gap: var(--values-header-gap);
+}
+
+.values-title {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-values-title-desktop);
+  line-height: var(--text-values-title-desktop--line-height);
+  font-weight: var(--text-values-title-desktop--font-weight);
+  letter-spacing: var(--text-values-title-desktop--letter-spacing);
+}
+
+.values-keep {
+  white-space: nowrap;
+}
+
+.values-intro {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  word-break: keep-all;
+}
+
+.values-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--values-cards-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  height: var(--values-card-height);
+  padding: var(--values-card-padding);
+  overflow: hidden;
+  border-radius: var(--radius-20);
+  box-shadow: var(--shadow-values-card);
+  color: var(--color-white);
+  text-shadow: var(--shadow-values-text);
+}
+
+.value-card--cooperation {
+  background-image: linear-gradient(
+    119deg,
+    var(--color-values-cooperation-from) 0%,
+    var(--color-values-cooperation-to) 100%
+  );
+}
+
+.value-card--run {
+  background-image: linear-gradient(
+    119deg,
+    var(--color-values-run-from) 0%,
+    var(--color-values-run-to) 100%
+  );
+}
+
+.value-card--wave {
+  background-image: linear-gradient(
+    119deg,
+    var(--color-values-wave-from) 0%,
+    var(--color-values-wave-to) 100%
+  );
+}
+
+.value-card__art {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: 5px;
+  width: var(--values-art-width);
+  height: var(--values-art-height);
+  opacity: 0.42;
+  filter: blur(10px);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.value-card__art img,
+.value-card__object {
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.value-card__art img {
+  width: 100%;
+  height: 100%;
+}
+
+.value-card__glass {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: var(--color-values-glass);
+  backdrop-filter: blur(9px);
+  pointer-events: none;
+}
+
+.value-card__object {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: 12px;
+  width: var(--values-object-width);
+  height: var(--values-object-height);
+  transform: translateY(-50%);
+}
+
+.value-card__heading,
+.value-card__description {
+  position: relative;
+  z-index: 3;
+}
+
+.value-card__heading {
+  display: grid;
+  gap: var(--values-header-gap);
+}
+
+.value-card__en,
+.value-card__ko {
+  margin: 0;
+}
+
+.value-card__en {
+  font-size: var(--text-value-card-en-desktop);
+  line-height: var(--text-value-card-en-desktop--line-height);
+  font-weight: var(--text-value-card-en-desktop--font-weight);
+  letter-spacing: var(--text-value-card-en-desktop--letter-spacing);
+}
+
+.value-card__ko {
+  font-size: var(--text-value-card-ko-desktop);
+  line-height: var(--text-value-card-ko-desktop--line-height);
+  font-weight: var(--text-value-card-ko-desktop--font-weight);
+  letter-spacing: var(--text-value-card-ko-desktop--letter-spacing);
+}
+
+.value-card__description {
+  max-width: var(--values-copy-max);
+  margin: 0;
+  font-size: var(--text-direction-body-desktop);
+  line-height: var(--text-direction-body-desktop--line-height);
+  word-break: keep-all;
+}
+
+/* Scroll reveal: data-reveal is set by CompanyValuesSection; without JS the cards stay visible. */
+.values-cards[data-reveal] .value-card {
+  transition:
+    opacity 560ms ease,
+    transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.values-cards[data-reveal="pending"] .value-card {
+  opacity: 0;
+  transform: translateY(var(--values-motion-shift));
+}
+
+.values-cards[data-reveal="visible"] .value-card {
+  opacity: 1;
+  transform: none;
+}
+
+.values-cards[data-reveal="visible"] .value-card:nth-child(1) {
+  transition-delay: 40ms;
+}
+.values-cards[data-reveal="visible"] .value-card:nth-child(2) {
+  transition-delay: 180ms;
+}
+.values-cards[data-reveal="visible"] .value-card:nth-child(3) {
+  transition-delay: 320ms;
+}
+
+/* ≤1024px: tablet shares the mobile (stacked) composition. */
+@media (width <= 1024px) {
+  .values-section {
+    padding: var(--spacing-64) 0;
+  }
+  .values-inner {
+    width: calc(100% - var(--section-gutter-desktop) * 2);
+  }
+  .values-header {
+    gap: var(--spacing-8);
+  }
+  .values-title {
+    font-size: var(--text-values-title-mobile);
+    line-height: var(--text-values-title-mobile--line-height);
+    letter-spacing: var(--text-values-title-mobile--letter-spacing);
+  }
+  .values-intro {
+    font-size: var(--text-values-intro-mobile);
+    line-height: var(--text-values-intro-mobile--line-height);
+  }
+  .values-cards {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-16);
+  }
+  .value-card {
+    height: var(--values-card-height-mobile);
+    padding: var(--values-card-padding-mobile);
+  }
+  .value-card__art {
+    right: var(--spacing-4);
+    width: var(--values-art-width-mobile);
+    height: var(--values-art-height-mobile);
+  }
+  .value-card__object {
+    right: var(--spacing-8);
+    width: var(--values-object-width-mobile);
+    height: var(--values-object-height-mobile);
+    opacity: 0.82;
+  }
+  .value-card__heading {
+    gap: 7px;
+  }
+  .value-card__en {
+    font-size: var(--text-value-card-en-mobile);
+    line-height: var(--text-value-card-en-mobile--line-height);
+    letter-spacing: var(--text-value-card-en-mobile--letter-spacing);
+  }
+  .value-card__ko {
+    font-size: var(--text-value-card-ko-mobile);
+    line-height: var(--text-value-card-ko-mobile--line-height);
+    letter-spacing: var(--text-value-card-ko-mobile--letter-spacing);
+  }
+  .value-card__description {
+    max-width: var(--values-copy-max-mobile);
+    font-size: var(--text-value-card-description-mobile);
+    line-height: var(--text-value-card-description-mobile--line-height);
+  }
+}
+
+@media (width <= 760px) {
+  .values-inner {
+    width: calc(100% - var(--spacing-16) * 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .values-cards[data-reveal] .value-card {
     transition: none;
   }
 }

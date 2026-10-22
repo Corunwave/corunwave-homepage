@@ -196,6 +196,12 @@
   );
   --partner-flow-chevron-clip-mobile: polygon(0 0, 50% 65%, 100% 0, 100% 35%, 50% 100%, 0 35%);
 
+  --color-partner-benefit-rule: #cfdaea;
+  --color-partner-benefit-sub: #69788d;
+  --color-partner-panel-border: #e1e8f2;
+  --partner-reveal-shift: 14px;
+  --partner-reveal-step: 80ms;
+
   /* Layout and scrolled-header surface */
   --section-gutter-desktop: var(--spacing-96);
   --section-gutter-mobile: var(--spacing-24);
@@ -753,6 +759,41 @@
   --text-partner-role-text--line-height: 1.75rem;
   --text-partner-role-text--font-weight: 400;
   --text-partner-role-text--letter-spacing: 0;
+
+  --text-partner-benefit-title-desktop: 2rem;
+  --text-partner-benefit-title-desktop--line-height: 2.75rem;
+  --text-partner-benefit-title-desktop--font-weight: 700;
+  --text-partner-benefit-title-desktop--letter-spacing: -0.035em;
+
+  --text-partner-benefit-title-mobile: 1.6875rem;
+  --text-partner-benefit-title-mobile--line-height: 2.375rem;
+  --text-partner-benefit-title-mobile--font-weight: 700;
+  --text-partner-benefit-title-mobile--letter-spacing: -0.035em;
+
+  --text-partner-benefit-english-desktop: 1rem;
+  --text-partner-benefit-english-desktop--line-height: 1.625rem;
+  --text-partner-benefit-english-desktop--font-weight: 400;
+  --text-partner-benefit-english-desktop--letter-spacing: 0;
+
+  --text-partner-benefit-english-mobile: 0.875rem;
+  --text-partner-benefit-english-mobile--line-height: 1.5rem;
+  --text-partner-benefit-english-mobile--font-weight: 400;
+  --text-partner-benefit-english-mobile--letter-spacing: 0;
+
+  --text-partner-strategy-title-desktop: 1.3125rem;
+  --text-partner-strategy-title-desktop--line-height: 2rem;
+  --text-partner-strategy-title-desktop--font-weight: 700;
+  --text-partner-strategy-title-desktop--letter-spacing: -0.03em;
+
+  --text-partner-strategy-title-mobile: 1.375rem;
+  --text-partner-strategy-title-mobile--line-height: 2.125rem;
+  --text-partner-strategy-title-mobile--font-weight: 700;
+  --text-partner-strategy-title-mobile--letter-spacing: -0.03em;
+
+  --text-partner-strategy-term: 0.875rem;
+  --text-partner-strategy-term--line-height: 1.375rem;
+  --text-partner-strategy-term--font-weight: 500;
+  --text-partner-strategy-term--letter-spacing: 0.04em;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -3732,6 +3773,181 @@ body {
   .partner-process-step__summary::after,
   .partner-process-step::details-content {
     transition: none;
+  }
+}
+
+/* Partnership benefits — 파트너십 기대효과 + To-be 전략 (Figma 876:28767 / 876:29963).
+ * Benefits are an open 2×2 grid (no hover/background); the To-be strategy sits in one shared panel.
+ */
+.partner-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--spacing-64);
+  margin-bottom: var(--spacing-64);
+}
+
+.partner-benefit {
+  min-width: 0;
+  padding: var(--spacing-32) 0 var(--spacing-40);
+  border-top: 1px solid var(--color-partner-benefit-rule);
+}
+
+.partner-benefit__title {
+  margin: 0 0 var(--spacing-16);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-benefit-title-desktop);
+  line-height: var(--text-partner-benefit-title-desktop--line-height);
+  font-weight: var(--text-partner-benefit-title-desktop--font-weight);
+  letter-spacing: var(--text-partner-benefit-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-benefit__english {
+  margin: 0;
+  color: var(--color-partner-benefit-sub);
+  font-size: var(--text-partner-benefit-english-desktop);
+  line-height: var(--text-partner-benefit-english-desktop--line-height);
+  font-weight: var(--text-partner-benefit-english-desktop--font-weight);
+  letter-spacing: var(--text-partner-benefit-english-desktop--letter-spacing);
+}
+
+.partner-strategy {
+  padding: var(--spacing-28);
+  border: 1px solid var(--color-partner-panel-border);
+  border-radius: var(--radius-20);
+  background: var(--color-white);
+}
+
+.partner-strategy__heading {
+  margin: 0 0 var(--spacing-28);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-step-title-desktop);
+  line-height: var(--text-partner-step-title-desktop--line-height);
+  font-weight: var(--text-partner-step-title-desktop--font-weight);
+  letter-spacing: var(--text-partner-step-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-strategy__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-32);
+}
+
+.partner-strategy__card {
+  min-width: 0;
+}
+
+.partner-strategy__term {
+  margin: 0 0 var(--spacing-12);
+  color: var(--color-solution-accent-deep);
+  font-family: var(--font-family-emphasis);
+  font-size: var(--text-partner-strategy-term);
+  line-height: var(--text-partner-strategy-term--line-height);
+  font-weight: var(--text-partner-strategy-term--font-weight);
+  letter-spacing: var(--text-partner-strategy-term--letter-spacing);
+}
+
+.partner-strategy__title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-strategy-title-desktop);
+  line-height: var(--text-partner-strategy-title-desktop--line-height);
+  font-weight: var(--text-partner-strategy-title-desktop--font-weight);
+  letter-spacing: var(--text-partner-strategy-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-strategy__description {
+  margin: 0;
+  padding-top: var(--spacing-16);
+  color: var(--color-partner-body);
+  font-size: var(--text-partner-role-text);
+  line-height: var(--text-partner-role-text--line-height);
+  font-weight: var(--text-partner-role-text--font-weight);
+  letter-spacing: var(--text-partner-role-text--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Scroll reveal: data-reveal is set by useScrollReveal; without JS (or with reduced motion) the benefits stay visible. */
+.partner-benefit[data-reveal] {
+  transition:
+    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.partner-benefit[data-reveal="pending"] {
+  opacity: 0.72;
+  transform: translateY(var(--partner-reveal-shift));
+}
+
+.partner-benefit[data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+.partner-benefit:nth-child(2)[data-reveal="visible"] {
+  transition-delay: var(--partner-reveal-step);
+}
+.partner-benefit:nth-child(3)[data-reveal="visible"] {
+  transition-delay: calc(var(--partner-reveal-step) * 2);
+}
+.partner-benefit:nth-child(4)[data-reveal="visible"] {
+  transition-delay: calc(var(--partner-reveal-step) * 3);
+}
+
+/* ≤1024px: tablet shares the mobile composition (single column). */
+@media (width <= 1024px) {
+  .partner-benefits {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-bottom: var(--spacing-48);
+  }
+  .partner-benefit {
+    padding: var(--spacing-28) 0 var(--spacing-32);
+  }
+  .partner-benefit__title {
+    margin-bottom: var(--spacing-12);
+    font-size: var(--text-partner-benefit-title-mobile);
+    line-height: var(--text-partner-benefit-title-mobile--line-height);
+    font-weight: var(--text-partner-benefit-title-mobile--font-weight);
+    letter-spacing: var(--text-partner-benefit-title-mobile--letter-spacing);
+  }
+  .partner-benefit__english {
+    font-size: var(--text-partner-benefit-english-mobile);
+    line-height: var(--text-partner-benefit-english-mobile--line-height);
+    font-weight: var(--text-partner-benefit-english-mobile--font-weight);
+    letter-spacing: var(--text-partner-benefit-english-mobile--letter-spacing);
+  }
+
+  .partner-strategy {
+    padding: var(--spacing-24);
+  }
+  .partner-strategy__heading {
+    font-size: var(--text-partner-step-title-mobile);
+    line-height: var(--text-partner-step-title-mobile--line-height);
+    font-weight: var(--text-partner-step-title-mobile--font-weight);
+    letter-spacing: var(--text-partner-step-title-mobile--letter-spacing);
+  }
+  .partner-strategy__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-28);
+  }
+  .partner-strategy__title {
+    font-size: var(--text-partner-strategy-title-mobile);
+    line-height: var(--text-partner-strategy-title-mobile--line-height);
+    font-weight: var(--text-partner-strategy-title-mobile--font-weight);
+    letter-spacing: var(--text-partner-strategy-title-mobile--letter-spacing);
+  }
+  .partner-strategy__description {
+    padding-top: var(--spacing-12);
   }
 }
 

@@ -5,6 +5,7 @@ import CollaborationProcessSection from "../_components/partner-strategy/Collabo
 import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
 import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
+import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
 import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
 import UniversityProposalSection from "../_components/partner-strategy/UniversityProposalSection";
 
@@ -41,6 +42,7 @@ export default function PartnerStrategyPage() {
       <CollaborationProcessSection />
       <PartnershipBenefitsSection />
       <UniversityProposalSection />
+      <PartnerLogosSection />
       <ContactCta />
     </main>
   );

@@ -205,6 +205,9 @@
   --color-partner-label-surface: #edf4ff;
   --color-partner-section-rule: #e7edf5;
 
+  --partner-marquee-duration: 32s;
+  --partner-marquee-fade: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+
   /* Layout and scrolled-header surface */
   --section-gutter-desktop: var(--spacing-96);
   --section-gutter-mobile: var(--spacing-24);
@@ -4046,6 +4049,89 @@ body {
     line-height: var(--text-partner-university-mobile--line-height);
     font-weight: var(--text-partner-university-mobile--font-weight);
     letter-spacing: var(--text-partner-university-mobile--letter-spacing);
+  }
+}
+
+/* Partner logos — 파트너사 (Figma 876:28855 / 876:30053). Grayscale logos at 60% opacity, as in Figma. */
+.partner-marquee {
+  overflow: hidden;
+  padding: var(--spacing-24) 0;
+  mask-image: var(--partner-marquee-fade);
+}
+
+.partner-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: partner-marquee var(--partner-marquee-duration) linear infinite;
+}
+
+.partner-logo-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--spacing-64);
+  padding-right: var(--spacing-64);
+}
+
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 64px;
+}
+
+.partner-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+
+.partner-marquee:hover .partner-marquee__track,
+.partner-marquee:focus-within .partner-marquee__track {
+  animation-play-state: paused;
+}
+
+.partner-marquee:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+  outline-offset: 5px;
+}
+
+@keyframes partner-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ≤1024px: tablet shares the mobile composition (smaller logos and gaps). */
+@media (width <= 1024px) {
+  .partner-logo-group {
+    gap: var(--spacing-40);
+    padding-right: var(--spacing-40);
+  }
+  .partner-logo {
+    width: 136px;
+    height: 52px;
+  }
+}
+
+/* Reduced motion: no sliding; the single visible group wraps and centers. */
+@media (prefers-reduced-motion: reduce) {
+  .partner-marquee__track {
+    display: block;
+    width: 100%;
+    animation: none;
+  }
+  .partner-logo-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-32);
+    padding: 0;
+  }
+  .partner-logo-group[aria-hidden="true"] {
+    display: none;
   }
 }
 

@@ -1,119 +1,17 @@
 "use client";
 
-import { MouseEvent, ReactNode, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { renderText } from "../../_lib/content/renderText";
+import type {
+  SolutionCardContent,
+  SolutionsContent,
+} from "../../_content/home";
 
-type SolutionId = "ax-infra" | "learning";
+type SolutionId = SolutionCardContent["id"];
 
-interface ProcessStage {
-  name: string;
-  ax: ReactNode;
-  learning: ReactNode;
-}
-
-interface Solution {
-  id: SolutionId;
-  title: ReactNode;
-  image: string;
-  description?: string;
-  items: ReactNode[];
-}
-
-const AX_LABEL = (
-  <>
-    AX Infra&nbsp;&amp;
-    <wbr /> IT Outsourcing
-  </>
-);
-
-const LEARNING_LABEL = (
-  <>
-    Learning Service&nbsp;&amp;
-    <wbr /> BPO
-  </>
-);
-
-const PROCESS_STAGES: ProcessStage[] = [
-  {
-    name: "기획",
-    ax: (
-      <>
-        비즈니스·인프라 진단
-        <br />
-        기술 로드맵
-      </>
-    ),
-    learning: (
-      <>
-        조직·직무 역량 진단
-        <br />
-        교육 로드맵
-      </>
-    ),
-  },
-  {
-    name: "설계",
-    ax: "아키텍처와 보안·운영 체계 설계",
-    learning: "과정·학습 방법론과 성과지표 설계",
-  },
-  {
-    name: "구축·개발",
-    ax: "인프라 구축, 통합, 마이그레이션",
-    learning: (
-      <>
-        콘텐츠 개발
-        <br />
-        PBL·실습 환경 구축
-      </>
-    ),
-  },
-  {
-    name: "운영",
-    ax: (
-      <>
-        AIOps, 유지관리
-        <br />
-        Managed ITO
-      </>
-    ),
-    learning: (
-      <>
-        교육 운영, 학습자 관리
-        <br />
-        Learning BPO
-      </>
-    ),
-  },
-];
-
-const SOLUTIONS: Solution[] = [
-  {
-    id: "ax-infra",
-    title: AX_LABEL,
-    image: "/images/solution/ax-infra-card.jpg",
-    items: [
-      "• 맞춤형 AX 인프라 제공",
-      "• 고객의 기술 내재화 실현",
-      "• 유연한 아키텍처 설계",
-      "• AX 챌린지 해소",
-      "• 검증 중심의 서비스",
-      "• 엔터프라이즈 페이스메이커",
-    ],
-  },
-  {
-    id: "learning",
-    title: LEARNING_LABEL,
-    image: "/images/solution/learning-card.jpg",
-    description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
-    items: [
-      "• 교육 기획 및 컨설팅",
-      "• 역량 중심 콘텐츠 개발",
-      "• 맞춤형 학습 방법론",
-      "• 교육 운영 및 Learning BPO",
-    ],
-  },
-];
+type SolutionsSectionProps = { content: SolutionsContent };
 
 const readMobileQuery = () => {
   const breakpoint = getComputedStyle(document.documentElement)
@@ -122,7 +20,9 @@ const readMobileQuery = () => {
   return window.matchMedia(`(max-width: ${breakpoint || "760px"})`);
 };
 
-const SolutionsSection = () => {
+const SolutionsSection = ({ content }: SolutionsSectionProps) => {
+  const axLabel = renderText(content.axLabel);
+  const learningLabel = renderText(content.learningLabel);
   const headerRef = useRef<HTMLElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -201,58 +101,57 @@ const SolutionsSection = () => {
       <div className="solutions-inner">
         <header ref={headerRef} className="solutions-header">
           <h2 id="solutions-title" className="solutions-title">
-            통합 End-to-End 서비스
+            {content.title}
           </h2>
           <p className="solutions-description">
-            AX Infra와 Learning Service를 하나의 과정으로 연결해 기술 운영과
-            조직의 역량 개발을 함께 지원합니다.
+            {content.description}
           </p>
         </header>
 
         <div
           ref={processRef}
           className="solutions-process"
-          aria-label="통합 End-to-End 서비스 단계"
+          aria-label={content.processLabel}
         >
           <div className="solutions-process__desktop">
             <div />
-            {PROCESS_STAGES.map(({ name }) => (
+            {content.stages.map(({ name }) => (
               <div key={name} className="solutions-process__stage-head">
                 <span>{name}</span>
               </div>
             ))}
-            <div className="solutions-process__track-label">{AX_LABEL}</div>
-            {PROCESS_STAGES.map(({ name, ax }) => (
+            <div className="solutions-process__track-label">{axLabel}</div>
+            {content.stages.map(({ name, ax }) => (
               <div key={name} className="solutions-process__track-cell">
-                {ax}
+                {renderText(ax)}
               </div>
             ))}
             <div className="solutions-process__track-label solutions-process__track-label--last">
-              {LEARNING_LABEL}
+              {learningLabel}
             </div>
-            {PROCESS_STAGES.map(({ name, learning }) => (
+            {content.stages.map(({ name, learning }) => (
               <div
                 key={name}
                 className="solutions-process__track-cell solutions-process__track-cell--last"
               >
-                {learning}
+                {renderText(learning)}
               </div>
             ))}
           </div>
 
           <div className="solutions-process__mobile">
-            {PROCESS_STAGES.map(({ name, ax, learning }) => (
+            {content.stages.map(({ name, ax, learning }) => (
               <article key={name} className="solutions-process__stage">
                 <h3>{name}</h3>
                 <p>
-                  <strong>{AX_LABEL}</strong>
+                  <strong>{axLabel}</strong>
                   <br />
-                  {ax}
+                  {renderText(ax)}
                 </p>
                 <p>
-                  <strong>{LEARNING_LABEL}</strong>
+                  <strong>{learningLabel}</strong>
                   <br />
-                  {learning}
+                  {renderText(learning)}
                 </p>
               </article>
             ))}
@@ -264,7 +163,7 @@ const SolutionsSection = () => {
           className="solutions-list"
           data-active-card={activeId ?? "none"}
         >
-          {SOLUTIONS.map(({ id, title, image, description, items }) => {
+          {content.solutions.map(({ id, title, image, description, items }) => {
             const active = activeId === id;
             return (
               <Link
@@ -291,7 +190,9 @@ const SolutionsSection = () => {
                     {active ? "↗" : "+"}
                   </span>
                   <span className="solution-card__summary">
-                    <span className="solution-card__title">{title}</span>
+                    <span className="solution-card__title">
+                      {renderText(title)}
+                    </span>
                     <span className="solution-card__panel">
                       {description && (
                         <span className="solution-card__description">

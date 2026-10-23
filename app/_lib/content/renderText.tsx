@@ -7,7 +7,7 @@ type RenderTextOptions = {
   breakClassName?: string;
 };
 
-/* Minimal markup for serialized copy: `\n` -> <br />, `[[text]]` -> keep span. Pure, so server and client components can both use it. */
+/* Minimal markup for serialized copy: `\n` -> <br />, `[[text]]` -> keep span, `<wbr>` -> word-break opportunity. Pure, so server and client components can both use it. */
 export const renderText = (
   text: string,
   { keepClassName, breakClassName }: RenderTextOptions = {},
@@ -15,8 +15,10 @@ export const renderText = (
   text.split("\n").map((line, lineIndex) => (
     <Fragment key={lineIndex}>
       {lineIndex > 0 && <br className={breakClassName} />}
-      {line.split(/(\[\[.*?\]\])/).map((part, partIndex) =>
-        part.startsWith("[[") && part.endsWith("]]") ? (
+      {line.split(/(\[\[.*?\]\]|<wbr>)/).map((part, partIndex) =>
+        part === "<wbr>" ? (
+          <wbr key={partIndex} />
+        ) : part.startsWith("[[") && part.endsWith("]]") ? (
           <span key={partIndex} className={keepClassName}>
             {part.slice(2, -2)}
           </span>

@@ -4,7 +4,7 @@ import Link from "next/link";
 const navigation = [
   { label: "회사소개", href: "/about" },
   { label: "솔루션", href: "#" },
-  { label: "파트너 전략", href: "#" },
+  { label: "파트너 전략", href: "/partner-strategy" },
 ];
 const legal = ["이용약관", "개인정보처리방침", "이메일무단수집거부"];
 

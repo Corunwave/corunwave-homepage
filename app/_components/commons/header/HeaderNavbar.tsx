@@ -10,7 +10,7 @@ import LinkButton from "../buttons/LinkButton";
 const navigation = [
   { label: "회사소개", href: "/about" },
   { label: "솔루션", href: "/solutions" },
-  { label: "파트너 전략", href: "#" },
+  { label: "파트너 전략", href: "/partner-strategy" },
   // { label: "소식", href: "#" },
 ];
 

@@ -1,8 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const navigation = ["회사소개", "솔루션", "파트너 전략"];
-const legal = ["이용약관", "개인정보처리방침", "이메일무단수집거부"];
+const navigation = [
+  { label: "회사소개", href: "/about" },
+  { label: "솔루션", href: "#" },
+  { label: "파트너 전략", href: "/partner-strategy" },
+];
+const legal = [
+  { label: "이용약관", href: "/service-term" },
+  { label: "개인정보처리방침", href: "/privacy-policy" },
+  { label: "이메일무단수집거부", href: "#" },
+];
 
 export default function Footer() {
 
@@ -44,12 +52,16 @@ export default function Footer() {
         {/* Add links when the corresponding pages are available. */}
         <nav className="site-footer__navigation" aria-label="하단 메뉴">
           <ul>
-            {navigation.map((label) => (
+            {navigation.map(({ label, href }) => (
               <li key={label}>
-                <Link href="#">
-                  <span aria-disabled="true" title="페이지 준비 중">
-                    {label}
-                  </span>
+                <Link href={href}>
+                  {href === "#" ? (
+                    <span aria-disabled="true" title="페이지 준비 중">
+                      {label}
+                    </span>
+                  ) : (
+                    label
+                  )}
                 </Link>
               </li>
             ))}
@@ -59,12 +71,16 @@ export default function Footer() {
 
       <div className="site-footer__bottom">
         <ul className="site-footer__legal" aria-label="약관 및 정책">
-          {legal.map((label) => (
+          {legal.map(({ label, href }) => (
             <li key={label}>
-              <Link href="#">
-                <span aria-disabled="true" title="페이지 준비 중">
-                  {label}
-                </span>
+              <Link href={href}>
+                {href === "#" ? (
+                  <span aria-disabled="true" title="페이지 준비 중">
+                    {label}
+                  </span>
+                ) : (
+                  label
+                )}
               </Link>
             </li>
           ))}

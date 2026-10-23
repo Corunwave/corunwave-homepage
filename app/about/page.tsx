@@ -4,22 +4,27 @@ import CeoMessageSection from "../_components/about/CeoMessageSection";
 import CompanyValuesSection from "../_components/about/CompanyValuesSection";
 import CoreChallengesSection from "../_components/about/CoreChallengesSection";
 import PageHero from "../_components/commons/hero/PageHero";
-
-const description = "코런웨이브는 “기술과 사람을 연결하는 서비스”를 제공합니다.";
+import {
+  aboutPage,
+  businessDirection,
+  ceoMessage,
+  companyValues,
+  coreChallenges,
+} from "../_content/about";
 
 export const metadata: Metadata = {
-  title: "회사 소개",
-  description,
+  title: aboutPage.title,
+  description: aboutPage.description,
 };
 
 export default function AboutPage() {
   return (
     <main>
-      <PageHero title="회사 소개" description={description} />
-      <CeoMessageSection />
-      <BusinessDirectionSection />
-      <CoreChallengesSection />
-      <CompanyValuesSection />
+      <PageHero title={aboutPage.title} description={aboutPage.description} />
+      <CeoMessageSection content={ceoMessage} />
+      <BusinessDirectionSection content={businessDirection} />
+      <CoreChallengesSection content={coreChallenges} />
+      <CompanyValuesSection content={companyValues} />
     </main>
   );
 }

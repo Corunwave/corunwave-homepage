@@ -6,22 +6,27 @@ import SolutionOverviewSection from "../_components/solutions/SolutionOverviewSe
 import SolutionServicesSection, {
   SolutionServicesFallback,
 } from "../_components/solutions/SolutionServicesSection";
-
-const description =
-  "인프라 설계부터 운영과 조달,인재 육성에 이르기까지 단절 없는 End-to-End 서비스 가치를 창출합니다.";
+import {
+  solutionOverview,
+  solutionServices,
+  solutionsPage,
+} from "../_content/solutions";
 
 export const metadata: Metadata = {
-  title: "솔루션",
-  description,
+  title: solutionsPage.title,
+  description: solutionsPage.description,
 };
 
 export default function SolutionsPage() {
   return (
     <main>
-      <PageHero title="솔루션" description={description} />
-      <SolutionOverviewSection />
-      <Suspense fallback={<SolutionServicesFallback />}>
-        <SolutionServicesSection />
+      <PageHero
+        title={solutionsPage.title}
+        description={solutionsPage.description}
+      />
+      <SolutionOverviewSection content={solutionOverview} />
+      <Suspense fallback={<SolutionServicesFallback content={solutionServices} />}>
+        <SolutionServicesSection content={solutionServices} />
       </Suspense>
       <ContactCta />
     </main>

@@ -1,45 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import Image from "next/image";
+import type { CompanyValuesContent } from "../../_content/about";
 
-interface CompanyValue {
-  id: "cooperation" | "run" | "wave";
-  en: string;
-  ko: string;
-  description: string;
-  image: string;
-}
-
-const COMPANY_VALUES: CompanyValue[] = [
-  {
-    id: "cooperation",
-    en: "Cooperation",
-    ko: "협업",
-    description:
-      "모든 고객 및 파트너, 직원과 열린 소통으로 협력(Cooperation)하는 기업",
-    image: "/images/values/cooperation-3d.png",
-  },
-  {
-    id: "run",
-    en: "Run",
-    ko: "실행",
-    description:
-      "고객의 니즈를 파악하고 협업을 통해 실행(Run)하는 역동적인 조직",
-    image: "/images/values/run-3d.png",
-  },
-  {
-    id: "wave",
-    en: "Wave",
-    ko: "확산",
-    description:
-      "지속가능한 성장 모멘텀을 고객과 사회에 공유하고 확산(Wave)하여 상생하는 기업",
-    image: "/images/values/wave-3d.png",
-  },
-];
+type CompanyValuesSectionProps = { content: CompanyValuesContent };
 
 /* Company values "CoRunWave = Cooperation + Run + Wave" (preview .company-values-section; Figma 662:20146 / 662:20180). Client component only for the scroll reveal. */
-const CompanyValuesSection = () => {
+const CompanyValuesSection = ({ content }: CompanyValuesSectionProps) => {
   const cardsRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
@@ -73,16 +41,20 @@ const CompanyValuesSection = () => {
       <div className="values-inner">
         <header className="values-header">
           <h2 id="values-title" className="values-title">
-            <span className="values-keep">CoRunWave =</span>{" "}
-            <span className="values-keep">Cooperation + Run + Wave</span>
+            {content.titleLines.map((line, index) => (
+              <Fragment key={line}>
+                {index > 0 && " "}
+                <span className="values-keep">{line}</span>
+              </Fragment>
+            ))}
           </h2>
           <p className="values-intro">
-            기술과 사람을 연결하는 서비스를 만듭니다.
+            {content.intro}
           </p>
         </header>
 
         <ul ref={cardsRef} className="values-cards">
-          {COMPANY_VALUES.map(({ id, en, ko, description, image }) => (
+          {content.values.map(({ id, en, ko, description, image }) => (
             <li key={id} className={`value-card value-card--${id}`}>
               <div className="value-card__art" aria-hidden="true">
                 <Image src={image} alt="" width={1536} height={1024} sizes="320px" />

@@ -1,4 +1,4 @@
-import type { LegalClause } from "../commons/legal/LegalDocument";
+import type { LegalClause } from "../../_components/commons/legal/LegalDocument";
 
 export const serviceTermIntro =
   "코런웨이브 주식회사(이하 “회사”)가 제공하는 [대상 서비스명]에 관한 이용약관 템플릿입니다. 서비스 범위와 실제 운영 절차에 맞게 각 조항을 확정합니다.";
@@ -60,3 +60,9 @@ export const serviceTermClauses: readonly LegalClause[] = [
     body: "시행일: [시행일 입력]\n이전 약관 및 변경 이력: [이력 발생 시 버전 및 열람 경로 입력]",
   },
 ];
+
+export const serviceTermPage = {
+  title: "서비스 이용약관",
+  description: "서비스 이용에 관한 기본 사항을 안내합니다.",
+  effectiveDate: "[시행일 입력]",
+};

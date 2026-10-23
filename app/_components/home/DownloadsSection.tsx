@@ -2,25 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import type { DownloadsContent } from "../../_content/home";
 import LinkButton from "../commons/buttons/LinkButton";
 
-interface DownloadItem {
-  href: string;
-  label: string;
-}
+type DownloadsSectionProps = { content: DownloadsContent };
 
-const DOWNLOADS: DownloadItem[] = [
-  {
-    href: "/downloads/corunwave-company-profile.pdf",
-    label: "회사소개서 PDF 다운로드",
-  },
-  {
-    href: "/downloads/corunwave-portfolio.pdf",
-    label: "포트폴리오 PDF 다운로드",
-  },
-];
-
-const DownloadsSection = () => {
+const DownloadsSection = ({ content }: DownloadsSectionProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,13 +54,13 @@ const DownloadsSection = () => {
             />
           </div>
           <h2 id="downloads-title" className="downloads-title">
-            코런웨이브의 자료를 확인하세요
+            {content.title}
           </h2>
           <p className="downloads-description">
-            회사소개서와 포트폴리오를 PDF로 다운로드할 수 있습니다.
+            {content.description}
           </p>
           <div className="downloads-actions">
-            {DOWNLOADS.map(({ href, label }) => (
+            {content.items.map(({ href, label }) => (
               <LinkButton
                 key={href}
                 href={href}

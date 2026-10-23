@@ -4,10 +4,10 @@ import PageHero from "../_components/commons/hero/PageHero";
 import {
   privacyPolicyClauses,
   privacyPolicyIntro,
-} from "../_components/legal/privacyPolicyContent";
+  privacyPolicyPage,
+} from "../_content/legal/privacyPolicy";
 
-const title = "개인정보처리방침";
-const description = "개인정보의 처리 및 보호에 관한 사항을 안내합니다.";
+const { title, description, effectiveDate } = privacyPolicyPage;
 
 export const metadata: Metadata = {
   title,
@@ -27,7 +27,7 @@ export default function PrivacyPolicyPage() {
       <LegalDocument
         idPrefix="privacy"
         title={title}
-        effectiveDate="[시행일 입력]"
+        effectiveDate={effectiveDate}
         intro={privacyPolicyIntro}
         clauses={privacyPolicyClauses}
       />

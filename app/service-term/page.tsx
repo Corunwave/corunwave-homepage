@@ -4,10 +4,10 @@ import PageHero from "../_components/commons/hero/PageHero";
 import {
   serviceTermClauses,
   serviceTermIntro,
-} from "../_components/legal/serviceTermContent";
+  serviceTermPage,
+} from "../_content/legal/serviceTerm";
 
-const title = "서비스 이용약관";
-const description = "서비스 이용에 관한 기본 사항을 안내합니다.";
+const { title, description, effectiveDate } = serviceTermPage;
 
 export const metadata: Metadata = {
   title,
@@ -27,7 +27,7 @@ export default function ServiceTermPage() {
       <LegalDocument
         idPrefix="terms"
         title={title}
-        effectiveDate="[시행일 입력]"
+        effectiveDate={effectiveDate}
         intro={serviceTermIntro}
         clauses={serviceTermClauses}
       />

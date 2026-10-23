@@ -424,6 +424,50 @@
   --text-page-hero-description-mobile--font-weight: 400;
   --text-page-hero-description-mobile--letter-spacing: 0;
 
+  /* Legal pages (privacy policy / service terms) */
+  --legal-copy-max-width: 840px;
+  --legal-clause-scroll-margin: 100px;
+
+  --text-legal-title-desktop: 2.25rem;
+  --text-legal-title-desktop--line-height: 3rem;
+  --text-legal-title-desktop--font-weight: 700;
+  --text-legal-title-desktop--letter-spacing: -0.03em;
+
+  --text-legal-title-mobile: 1.75rem;
+  --text-legal-title-mobile--line-height: 2.375rem;
+  --text-legal-title-mobile--font-weight: 700;
+  --text-legal-title-mobile--letter-spacing: -0.03em;
+
+  --text-legal-body-desktop: 1.125rem;
+  --text-legal-body-desktop--line-height: 1.875rem;
+  --text-legal-body-desktop--font-weight: 400;
+  --text-legal-body-desktop--letter-spacing: 0;
+
+  --text-legal-body-mobile: 1rem;
+  --text-legal-body-mobile--line-height: 1.625rem;
+  --text-legal-body-mobile--font-weight: 400;
+  --text-legal-body-mobile--letter-spacing: 0;
+
+  --text-legal-meta-desktop: 0.875rem;
+  --text-legal-meta-desktop--line-height: 1.5rem;
+  --text-legal-meta-desktop--font-weight: 400;
+  --text-legal-meta-desktop--letter-spacing: 0;
+
+  --text-legal-meta-mobile: 0.8125rem;
+  --text-legal-meta-mobile--line-height: 1.5rem;
+  --text-legal-meta-mobile--font-weight: 400;
+  --text-legal-meta-mobile--letter-spacing: 0;
+
+  --text-legal-clause-title-desktop: 1.375rem;
+  --text-legal-clause-title-desktop--line-height: 2rem;
+  --text-legal-clause-title-desktop--font-weight: 700;
+  --text-legal-clause-title-desktop--letter-spacing: -0.02em;
+
+  --text-legal-clause-title-mobile: 1.25rem;
+  --text-legal-clause-title-mobile--line-height: 1.875rem;
+  --text-legal-clause-title-mobile--font-weight: 700;
+  --text-legal-clause-title-mobile--letter-spacing: -0.02em;
+
   /* CEO message typography (letter body desktop reuses --text-section-description-desktop) */
   --text-ceo-title-desktop: 2.25rem;
   --text-ceo-title-desktop--line-height: 3rem;
@@ -1452,6 +1496,125 @@ body {
     line-height: var(--text-page-hero-description-mobile--line-height);
     font-weight: var(--text-page-hero-description-mobile--font-weight);
     letter-spacing: var(--text-page-hero-description-mobile--letter-spacing);
+  }
+}
+
+/* Legal pages — 개인정보처리방침 / 서비스 이용약관 (preview .legal-section). */
+.legal-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.legal-section__heading {
+  width: min(
+    var(--page-hero-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin: 0 auto var(--spacing-48);
+}
+
+.legal-section__title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-emphasis);
+  font-size: var(--text-legal-title-desktop);
+  line-height: var(--text-legal-title-desktop--line-height);
+  font-weight: var(--text-legal-title-desktop--font-weight);
+  letter-spacing: var(--text-legal-title-desktop--letter-spacing);
+}
+
+.legal-section__copy {
+  width: min(
+    var(--legal-copy-max-width),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin: 0 auto;
+  font-size: var(--text-legal-body-desktop);
+  line-height: var(--text-legal-body-desktop--line-height);
+  font-weight: var(--text-legal-body-desktop--font-weight);
+  letter-spacing: var(--text-legal-body-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.legal-section__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8) var(--spacing-24);
+  margin-bottom: var(--spacing-24);
+  color: var(--color-text-secondary);
+  font-size: var(--text-legal-meta-desktop);
+  line-height: var(--text-legal-meta-desktop--line-height);
+  font-weight: var(--text-legal-meta-desktop--font-weight);
+  letter-spacing: var(--text-legal-meta-desktop--letter-spacing);
+}
+
+.legal-section__intro {
+  margin: 0 0 var(--spacing-48);
+}
+
+.legal-clause {
+  margin: 0 0 var(--spacing-40);
+  scroll-margin-top: var(--legal-clause-scroll-margin);
+}
+
+.legal-clause__title {
+  margin: 0 0 var(--spacing-12);
+  color: var(--color-brand-navy);
+  font-size: var(--text-legal-clause-title-desktop);
+  line-height: var(--text-legal-clause-title-desktop--line-height);
+  font-weight: var(--text-legal-clause-title-desktop--font-weight);
+  letter-spacing: var(--text-legal-clause-title-desktop--letter-spacing);
+}
+
+.legal-clause__body {
+  margin: 0;
+  white-space: pre-line;
+}
+
+@media (width <= 1024px) {
+  .legal-section__heading {
+    width: calc(100% - var(--spacing-64));
+  }
+  .legal-section__copy {
+    width: min(var(--legal-copy-max-width), calc(100% - var(--spacing-64)));
+  }
+}
+
+@media (width <= 760px) {
+  .legal-section {
+    padding: var(--spacing-64) 0;
+  }
+  .legal-section__heading {
+    width: calc(100% - var(--spacing-32));
+    margin-bottom: var(--spacing-32);
+  }
+  .legal-section__title {
+    font-size: var(--text-legal-title-mobile);
+    line-height: var(--text-legal-title-mobile--line-height);
+    font-weight: var(--text-legal-title-mobile--font-weight);
+    letter-spacing: var(--text-legal-title-mobile--letter-spacing);
+  }
+  .legal-section__copy {
+    width: calc(100% - var(--spacing-32));
+    font-size: var(--text-legal-body-mobile);
+    line-height: var(--text-legal-body-mobile--line-height);
+  }
+  .legal-section__meta {
+    gap: var(--spacing-4) var(--spacing-16);
+    font-size: var(--text-legal-meta-mobile);
+    line-height: var(--text-legal-meta-mobile--line-height);
+  }
+  .legal-section__intro {
+    margin-bottom: var(--spacing-32);
+  }
+  .legal-clause {
+    margin-bottom: var(--spacing-32);
+  }
+  .legal-clause__title {
+    font-size: var(--text-legal-clause-title-mobile);
+    line-height: var(--text-legal-clause-title-mobile--line-height);
   }
 }
 

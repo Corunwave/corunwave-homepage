@@ -16,21 +16,31 @@ interface Solution {
   id: SolutionId;
   title: ReactNode;
   image: string;
-  description?: string;
+  description: string[];
   items: ReactNode[];
 }
-
-const AX_LABEL = (
-  <>
-    AX Infra&nbsp;&amp;
-    <wbr /> IT Outsourcing
-  </>
-);
 
 const LEARNING_LABEL = (
   <>
     Learning Service&nbsp;&amp;
     <wbr /> BPO
+  </>
+);
+
+/* Table labels break at "&" so the two tracks read as separate items. */
+const AX_TRACK_LABEL = (
+  <>
+    AX Infra&nbsp;&amp;
+    <br />
+    IT Outsourcing
+  </>
+);
+
+const LEARNING_TRACK_LABEL = (
+  <>
+    Learning Service&nbsp;&amp;
+    <br />
+    BPO
   </>
 );
 
@@ -54,12 +64,30 @@ const PROCESS_STAGES: ProcessStage[] = [
   },
   {
     name: "설계",
-    ax: "아키텍처와 보안·운영 체계 설계",
-    learning: "과정·학습 방법론과 성과지표 설계",
+    ax: (
+      <>
+        아키텍처와
+        <br />
+        보안·운영 체계 설계
+      </>
+    ),
+    learning: (
+      <>
+        과정·학습 방법론과
+        <br />
+        성과지표 설계
+      </>
+    ),
   },
   {
     name: "구축·개발",
-    ax: "인프라 구축, 통합, 마이그레이션",
+    ax: (
+      <>
+        인프라 구축, 통합,
+        <br />
+        마이그레이션
+      </>
+    ),
     learning: (
       <>
         콘텐츠 개발
@@ -90,8 +118,12 @@ const PROCESS_STAGES: ProcessStage[] = [
 const SOLUTIONS: Solution[] = [
   {
     id: "ax-infra",
-    title: AX_LABEL,
-    image: "/images/solution/ax-infra-card.jpg",
+    title: AX_TRACK_LABEL,
+    image: "/images/solution/ax-infra-resin-purple.png",
+    description: [
+      "설계부터 책임 운영까지,",
+      "비즈니스 연속성을 완성하는 AX 인프라 파트너",
+    ],
     items: [
       "• 맞춤형 AX 인프라 제공",
       "• 고객의 기술 내재화 실현",
@@ -104,8 +136,8 @@ const SOLUTIONS: Solution[] = [
   {
     id: "learning",
     title: LEARNING_LABEL,
-    image: "/images/solution/learning-card.jpg",
-    description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
+    image: "/images/solution/learning-resin-coral.png",
+    description: ["기술 트렌드를 반영한 전략적 인재양성 파트너"],
     items: [
       "• 교육 기획 및 컨설팅",
       "• 역량 중심 콘텐츠 개발",
@@ -221,14 +253,16 @@ const SolutionsSection = () => {
                 <span>{name}</span>
               </div>
             ))}
-            <div className="solutions-process__track-label">{AX_LABEL}</div>
+            <div className="solutions-process__track-label">
+              {AX_TRACK_LABEL}
+            </div>
             {PROCESS_STAGES.map(({ name, ax }) => (
               <div key={name} className="solutions-process__track-cell">
                 {ax}
               </div>
             ))}
             <div className="solutions-process__track-label solutions-process__track-label--last">
-              {LEARNING_LABEL}
+              {LEARNING_TRACK_LABEL}
             </div>
             {PROCESS_STAGES.map(({ name, learning }) => (
               <div
@@ -238,6 +272,13 @@ const SolutionsSection = () => {
                 {learning}
               </div>
             ))}
+            {[1, 2, 3].map((order) => (
+              <span
+                key={order}
+                className={`solutions-process__chevron solutions-process__chevron--${order}`}
+                aria-hidden="true"
+              />
+            ))}
           </div>
 
           <div className="solutions-process__mobile">
@@ -245,12 +286,12 @@ const SolutionsSection = () => {
               <article key={name} className="solutions-process__stage">
                 <h3>{name}</h3>
                 <p>
-                  <strong>{AX_LABEL}</strong>
+                  <strong>{AX_TRACK_LABEL}</strong>
                   <br />
                   {ax}
                 </p>
                 <p>
-                  <strong>{LEARNING_LABEL}</strong>
+                  <strong>{LEARNING_TRACK_LABEL}</strong>
                   <br />
                   {learning}
                 </p>
@@ -269,8 +310,8 @@ const SolutionsSection = () => {
             return (
               <Link
                 key={id}
-                href={`/solutions?tab=${id}`}
-                className="solution-card"
+                href={`/solutions?tab=${id}#solution-services`}
+                className={`solution-card solution-card--${id}`}
                 data-active={active}
                 onMouseEnter={() => handleEnter(id)}
                 onMouseLeave={handleLeave}
@@ -278,26 +319,31 @@ const SolutionsSection = () => {
                 onBlur={handleLeave}
                 onClick={(event) => handleClick(event, id)}
               >
-                <Image
-                  className="solution-card__image"
-                  src={image}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  sizes="(max-width: 760px) 100vw, 616px"
-                />
                 <span className="solution-card__content">
                   <span className="solution-card__meta" aria-hidden="true">
                     {active ? "↗" : "+"}
                   </span>
+                  <Image
+                    className="solution-card__image"
+                    src={image}
+                    width={1254}
+                    height={1254}
+                    sizes="224px"
+                    alt=""
+                    aria-hidden="true"
+                    loading="eager"
+                  />
                   <span className="solution-card__summary">
                     <span className="solution-card__title">{title}</span>
-                    <span className="solution-card__panel">
-                      {description && (
-                        <span className="solution-card__description">
-                          {description}
+                    <span className="solution-card__description">
+                      {description.map((line, index) => (
+                        <span key={line} className="solution-card__line">
+                          {line}
+                          {index < description.length - 1 && <br />}
                         </span>
-                      )}
+                      ))}
+                    </span>
+                    <span className="solution-card__panel">
                       <span className="solution-card__list">
                         {items.map((item, index) => (
                           <span key={index}>{item}</span>

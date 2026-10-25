@@ -97,15 +97,14 @@
 
   /* Solutions */
   --solutions-inner-max: 1248px;
-  --solutions-list-height: 520px;
+  --solutions-list-height: 560px;
   /* Active card weight against a 1fr collapsed card (~960px : 272px at 1248px). */
   --solutions-card-active-weight: 3.5fr;
   --solutions-card-active-weight-tablet: 3.4fr;
   --solutions-card-motion: 640ms cubic-bezier(0.22, 1, 0.36, 1);
-  --solutions-card-height-mobile: 112px;
-  --solutions-card-active-height-mobile: 420px;
-  --solutions-track-label-width: 184px;
-  --solutions-chevron-width: 28px;
+  --solutions-track-label-width: 232px;
+  --solutions-chevron-width: 32px;
+  --solutions-chevron-thickness: 13px;
   --color-process-divider: #d9e0e9;
   --color-process-divider-soft: #e7ebf0;
 
@@ -647,6 +646,25 @@
   --text-solution-card-description-mobile--line-height: 1.75rem;
   --text-solution-card-description-mobile--font-weight: 400;
   --text-solution-card-description-mobile--letter-spacing: 0;
+
+  --text-solutions-process: 1.3125rem;
+  --text-solutions-process--line-height: 2rem;
+  --text-solutions-process-narrow: 1.125rem;
+  --text-solutions-process-narrow--line-height: 1.75rem;
+  --text-solutions-process-mobile: 1.3125rem;
+  --text-solutions-process-mobile--line-height: 2rem;
+
+  --text-solutions-process-head: 1.4rem;
+  --text-solutions-process-head--line-height: 2.125rem;
+  --text-solutions-process-head-narrow: 1.1875rem;
+  --text-solutions-process-head-narrow--line-height: 1.75rem;
+  --text-solutions-process-head-mobile: 1.375rem;
+  --text-solutions-process-head-mobile--line-height: 2rem;
+
+  --text-solutions-description-desktop: 1.375rem;
+  --text-solutions-description-desktop--line-height: 2rem;
+  --text-solutions-description-mobile: 1.25rem;
+  --text-solutions-description-mobile--line-height: 1.875rem;
 
   --text-solution-tab-desktop: 1.25rem;
   --text-solution-tab-desktop--line-height: 1.75rem;
@@ -4726,14 +4744,14 @@ body {
 }
 
 .solutions-description {
-  max-width: 920px;
   margin: 0;
   color: var(--color-text-primary);
   font-family: var(--font-family-body);
-  font-size: var(--text-section-description-desktop);
-  line-height: var(--text-section-description-desktop--line-height);
+  font-size: var(--text-solutions-description-desktop);
+  line-height: var(--text-solutions-description-desktop--line-height);
   font-weight: var(--text-section-description-desktop--font-weight);
   word-break: keep-all;
+  text-wrap: balance;
 }
 
 /* Process table */
@@ -4744,7 +4762,10 @@ body {
 }
 
 .solutions-process__desktop {
+  position: relative;
+  isolation: isolate;
   display: grid;
+  grid-template-rows: repeat(3, auto);
   grid-template-columns: var(--solutions-track-label-width) repeat(
       4,
       minmax(0, 1fr)
@@ -4756,52 +4777,76 @@ body {
   position: relative;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   min-width: 0;
-  padding: 0 var(--spacing-32) var(--spacing-24) 0;
-  isolation: isolate;
+  padding: 0 var(--spacing-16) var(--spacing-24);
+  text-align: center;
 }
 
 .solutions-process__stage-head span {
   color: var(--color-action-primary);
-  font-size: 0.875rem;
-  line-height: 1.375rem;
+  font-size: var(--text-solutions-process-head);
+  line-height: var(--text-solutions-process-head--line-height);
   font-weight: var(--font-weight-bold);
 }
 
-.solutions-process__stage-head:not(:nth-child(5))::after {
-  content: "";
+/* One ">" flow marker in each gap between the stage columns, spanning the whole table; one continuous bend, apex at mid-height. */
+.solutions-process__chevron {
   position: absolute;
   z-index: -1;
   top: 0;
   right: calc((var(--spacing-24) + var(--solutions-chevron-width)) / -2);
-  bottom: -224px;
+  bottom: 0;
+  grid-row: 1 / -1;
   width: var(--solutions-chevron-width);
   background: linear-gradient(
     155deg,
     rgb(13 110 229 / 12%),
     rgb(122 201 255 / 50%)
   );
-  clip-path: polygon(0 0, 35% 0, 100% 50%, 35% 100%, 0 100%, 65% 50%);
+  clip-path: polygon(
+    0 0,
+    var(--solutions-chevron-thickness) 0,
+    100% 50%,
+    var(--solutions-chevron-thickness) 100%,
+    0 100%,
+    calc(100% - var(--solutions-chevron-thickness)) 50%
+  );
   pointer-events: none;
+}
+
+/* Both lines are required: an `auto` end line of an absolutely positioned item stretches to the container edge. */
+.solutions-process__chevron--1 {
+  grid-column: 2 / 3;
+}
+
+.solutions-process__chevron--2 {
+  grid-column: 3 / 4;
+}
+
+.solutions-process__chevron--3 {
+  grid-column: 4 / 5;
 }
 
 .solutions-process__track-label,
 .solutions-process__track-cell {
   border-top: 1px solid var(--color-process-divider);
-  font-size: 0.875rem;
-  line-height: 1.375rem;
+  font-size: var(--text-solutions-process);
+  line-height: var(--text-solutions-process--line-height);
 }
 
 .solutions-process__track-label {
-  padding: 22px var(--spacing-24) 22px 0;
+  padding: var(--spacing-24) var(--spacing-16) var(--spacing-24) 0;
   color: var(--color-brand-navy);
   font-weight: var(--font-weight-bold);
 }
 
 .solutions-process__track-cell {
-  min-height: 112px;
-  padding: 22px var(--spacing-8) 22px 0;
+  position: relative;
+  padding: var(--spacing-24) var(--spacing-16);
   color: var(--color-text-secondary);
+  text-align: center;
+  text-wrap: balance;
 }
 
 .solutions-process__track-label--last,
@@ -4811,6 +4856,21 @@ body {
 
 .solutions-process__mobile {
   display: none;
+}
+
+@media (1025px <= width <= 1279px) {
+  .solutions-process {
+    --solutions-track-label-width: 200px;
+  }
+  .solutions-process__stage-head span {
+    font-size: var(--text-solutions-process-head-narrow);
+    line-height: var(--text-solutions-process-head-narrow--line-height);
+  }
+  .solutions-process__track-label,
+  .solutions-process__track-cell {
+    font-size: var(--text-solutions-process-narrow);
+    line-height: var(--text-solutions-process-narrow--line-height);
+  }
 }
 
 /* Accordion cards */
@@ -4834,48 +4894,43 @@ body {
 .solution-card {
   position: relative;
   isolation: isolate;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  border-radius: var(--radius-20);
-  color: var(--color-white);
-  background: var(--color-brand-navy);
+  border-radius: var(--radius-24);
+  color: inherit;
+  background: var(--color-solution-purple-surface);
   text-decoration: none;
-  transition:
-    height var(--solutions-card-motion),
-    box-shadow var(--solutions-card-motion);
+  transition: box-shadow var(--solutions-card-motion);
 }
 
+.solution-card--learning {
+  background: var(--color-solution-coral-surface);
+}
+
+/* Same soft glow as the /solutions overview cards, pinned right so it follows the icon when the card widens. */
 .solution-card::before {
   content: "";
   position: absolute;
-  inset: 0;
-  z-index: 1;
+  z-index: -1;
+  top: -88px;
+  right: -109px;
+  width: 585.6px;
+  height: 376px;
+  background: url("/images/solution/overview-glow-ax-desktop.svg") 0 0 / 100%
+    100% no-repeat;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgb(15 23 41 / 22%),
-    rgb(15 23 41 / 36%) 45%,
-    rgb(15 23 41 / 78%)
-  );
 }
 
-.solution-card__image {
-  z-index: 0;
-  object-fit: cover;
-  transform: scale(1.025);
-  transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+.solution-card--learning::before {
+  background-image: url("/images/solution/overview-glow-learning-desktop.svg");
 }
 
 .solution-card:hover,
 .solution-card:focus-visible,
 .solution-card[data-active="true"] {
-  box-shadow: 0 24px 56px rgb(15 23 41 / 18%);
-}
-
-.solution-card:hover .solution-card__image,
-.solution-card:focus-visible .solution-card__image,
-.solution-card[data-active="true"] .solution-card__image {
-  transform: scale(1.065);
+  box-shadow: 0 24px 56px rgb(15 23 41 / 12%);
 }
 
 .solution-card:focus-visible {
@@ -4884,32 +4939,73 @@ body {
 }
 
 .solution-card__content {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
+  position: relative;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  align-items: flex-end;
+  min-height: 0;
   padding: var(--spacing-32);
 }
 
 .solution-card__meta {
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  top: var(--spacing-24);
+  left: var(--spacing-32);
+  color: var(--color-brand-primary);
   font-family: var(--font-family-body);
-  font-size: var(--text-solutions-meta);
-  line-height: var(--text-solutions-meta--line-height);
-  font-weight: var(--text-solutions-meta--font-weight);
+  font-size: var(--text-solution-service-toggle);
+  line-height: var(--text-solution-service-toggle--line-height);
+}
+
+.solution-card__image {
+  flex: none;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  transition:
+    width var(--solutions-card-motion),
+    height var(--solutions-card-motion);
+}
+
+/* Desktop/tablet: the icon shrinks to leave room for the bullet list and for the squeezed neighbour card. */
+@media (width >= 761px) {
+  .solution-card[data-active="true"] .solution-card__image,
+  .solutions-list:not([data-active-card="none"])
+    .solution-card:not([data-active="true"])
+    .solution-card__image {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 .solution-card__summary {
+  align-self: stretch;
   margin-top: auto;
+  padding-top: var(--spacing-12);
 }
 
 .solution-card__title {
   display: block;
+  color: var(--color-brand-navy);
   font-family: var(--font-family-heading);
-  font-size: 1.75rem;
-  line-height: 2.375rem;
+  font-size: var(--text-solution-card-title-desktop);
+  line-height: var(--text-solution-card-title-desktop--line-height);
+  font-weight: var(--text-solution-card-title-desktop--font-weight);
+  letter-spacing: var(--text-solution-card-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.solution-card__description {
+  display: block;
+  margin-top: var(--spacing-12);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-solution-card-description-desktop);
+  line-height: var(--text-solution-card-description-desktop--line-height);
+  font-weight: var(--text-solution-card-description-desktop--font-weight);
+  letter-spacing: var(--text-solution-card-description-desktop--letter-spacing);
   word-break: keep-all;
   overflow-wrap: normal;
 }
@@ -4933,10 +5029,10 @@ body {
   transition-delay: 0ms, 160ms, 0ms;
 }
 
-.solution-card__description,
 .solution-card__list,
 .solution-card__list > span {
   display: block;
+  color: var(--color-text-secondary);
   font-size: 1rem;
   line-height: 1.625rem;
   word-break: keep-all;
@@ -4995,6 +5091,24 @@ body {
   transition-delay: 540ms;
 }
 
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--1 {
+  transition-delay: 120ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--2 {
+  transition-delay: 260ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--3 {
+  transition-delay: 400ms;
+}
+
 @media (width <= 1024px) {
   .solutions-inner {
     width: calc(100% - var(--spacing-48) * 2);
@@ -5009,7 +5123,7 @@ body {
   }
   .solutions-process__stage {
     position: relative;
-    padding: var(--spacing-20) var(--spacing-24) 44px;
+    padding: var(--spacing-20) var(--spacing-24) 56px;
   }
   .solutions-process__stage:last-child {
     padding-bottom: var(--spacing-20);
@@ -5017,27 +5131,34 @@ body {
   .solutions-process__stage:not(:last-child)::after {
     content: "";
     position: absolute;
-    right: 0;
+    right: calc(50% - 40px);
     bottom: 0;
-    left: 0;
-    height: 22px;
+    left: calc(50% - 40px);
+    height: 40px;
     background: linear-gradient(
       110deg,
       rgb(13 110 229 / 9%),
       rgb(122 201 255 / 36%)
     );
-    clip-path: polygon(0 0, 50% 65%, 100% 0, 100% 35%, 50% 100%, 0 35%);
+    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
     pointer-events: none;
   }
   .solutions-process__stage h3,
   .solutions-process__stage p {
     margin: 0;
-    font-size: 0.875rem;
-    line-height: 1.375rem;
+    font-size: var(--text-solutions-process-mobile);
+    line-height: var(--text-solutions-process-mobile--line-height);
   }
   .solutions-process__stage h3 {
+    width: fit-content;
     margin-bottom: var(--spacing-12);
-    color: var(--color-action-primary);
+    padding: var(--spacing-4) var(--spacing-16);
+    border-radius: var(--radius-999);
+    color: var(--color-white);
+    background: var(--color-action-primary);
+    font-size: var(--text-solutions-process-head-mobile);
+    line-height: var(--text-solutions-process-head-mobile--line-height);
+    font-weight: var(--font-weight-bold);
   }
   .solutions-process__stage p + p {
     margin-top: var(--spacing-12);
@@ -5049,6 +5170,9 @@ body {
 @media (761px <= width <= 1024px) {
   .solution-card__content {
     padding: var(--spacing-24);
+  }
+  .solution-card__meta {
+    left: var(--spacing-24);
   }
   .solutions-list[data-active-card="ax-infra"] {
     grid-template-columns: var(--solutions-card-active-weight-tablet) 1fr;
@@ -5074,8 +5198,8 @@ body {
     line-height: var(--text-solutions-title-mobile--line-height);
   }
   .solutions-description {
-    font-size: 1rem;
-    line-height: 1.625rem;
+    font-size: var(--text-solutions-description-mobile);
+    line-height: var(--text-solutions-description-mobile--line-height);
   }
   .solutions-process {
     margin-bottom: 56px;
@@ -5089,17 +5213,32 @@ body {
   }
   .solution-card {
     width: 100%;
-    height: var(--solutions-card-height-mobile);
   }
-  .solution-card[data-active="true"] {
-    height: var(--solutions-card-active-height-mobile);
+  .solution-card::before {
+    right: -100px;
+    width: 382.4px;
+    background-image: url("/images/solution/overview-glow-ax-mobile.svg");
+  }
+  .solution-card--learning::before {
+    background-image: url("/images/solution/overview-glow-learning-mobile.svg");
   }
   .solution-card__content {
     padding: var(--spacing-24);
   }
+  .solution-card__meta {
+    left: var(--spacing-24);
+  }
+  .solution-card__image {
+    width: 184px;
+    height: 184px;
+  }
   .solution-card__title {
-    font-size: 1.375rem;
-    line-height: 2rem;
+    font-size: var(--text-solution-card-title-mobile);
+    line-height: var(--text-solution-card-title-mobile--line-height);
+  }
+  .solution-card__description {
+    font-size: var(--text-solution-card-description-mobile);
+    line-height: var(--text-solution-card-description-mobile--line-height);
   }
 }
 

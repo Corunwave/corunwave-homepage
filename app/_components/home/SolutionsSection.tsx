@@ -16,7 +16,7 @@ interface Solution {
   id: SolutionId;
   title: ReactNode;
   image: string;
-  description?: string;
+  description: string[];
   items: ReactNode[];
 }
 
@@ -119,7 +119,11 @@ const SOLUTIONS: Solution[] = [
   {
     id: "ax-infra",
     title: AX_TRACK_LABEL,
-    image: "/images/solution/ax-infra-card.jpg",
+    image: "/images/solution/ax-infra-resin-purple.png",
+    description: [
+      "설계부터 책임 운영까지,",
+      "비즈니스 연속성을 완성하는 AX 인프라 파트너",
+    ],
     items: [
       "• 맞춤형 AX 인프라 제공",
       "• 고객의 기술 내재화 실현",
@@ -132,8 +136,8 @@ const SOLUTIONS: Solution[] = [
   {
     id: "learning",
     title: LEARNING_LABEL,
-    image: "/images/solution/learning-card.jpg",
-    description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
+    image: "/images/solution/learning-resin-coral.png",
+    description: ["기술 트렌드를 반영한 전략적 인재양성 파트너"],
     items: [
       "• 교육 기획 및 컨설팅",
       "• 역량 중심 콘텐츠 개발",
@@ -306,8 +310,8 @@ const SolutionsSection = () => {
             return (
               <Link
                 key={id}
-                href={`/solutions?tab=${id}`}
-                className="solution-card"
+                href={`/solutions?tab=${id}#solution-services`}
+                className={`solution-card solution-card--${id}`}
                 data-active={active}
                 onMouseEnter={() => handleEnter(id)}
                 onMouseLeave={handleLeave}
@@ -315,26 +319,31 @@ const SolutionsSection = () => {
                 onBlur={handleLeave}
                 onClick={(event) => handleClick(event, id)}
               >
-                <Image
-                  className="solution-card__image"
-                  src={image}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  sizes="(max-width: 760px) 100vw, 616px"
-                />
                 <span className="solution-card__content">
                   <span className="solution-card__meta" aria-hidden="true">
                     {active ? "↗" : "+"}
                   </span>
+                  <Image
+                    className="solution-card__image"
+                    src={image}
+                    width={1254}
+                    height={1254}
+                    sizes="224px"
+                    alt=""
+                    aria-hidden="true"
+                    loading="eager"
+                  />
                   <span className="solution-card__summary">
                     <span className="solution-card__title">{title}</span>
-                    <span className="solution-card__panel">
-                      {description && (
-                        <span className="solution-card__description">
-                          {description}
+                    <span className="solution-card__description">
+                      {description.map((line, index) => (
+                        <span key={line} className="solution-card__line">
+                          {line}
+                          {index < description.length - 1 && <br />}
                         </span>
-                      )}
+                      ))}
+                    </span>
+                    <span className="solution-card__panel">
                       <span className="solution-card__list">
                         {items.map((item, index) => (
                           <span key={index}>{item}</span>

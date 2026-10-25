@@ -1,4 +1,4 @@
-import type { LegalClause } from "../commons/legal/LegalDocument";
+import type { LegalClause } from "../../_components/commons/legal/LegalDocument";
 
 export const privacyPolicyIntro =
   "코런웨이브 주식회사(이하 “회사”)의 개인정보처리방침 템플릿입니다. 아래 항목은 실제 개인정보 처리 현황에 맞게 작성합니다.";
@@ -65,3 +65,9 @@ export const privacyPolicyClauses: readonly LegalClause[] = [
     body: "시행일: [시행일 입력]\n변경 사항 안내 방법: [공지 위치 및 안내 시점 입력]\n이전 방침: [이력 발생 시 버전 및 열람 경로 입력]",
   },
 ];
+
+export const privacyPolicyPage = {
+  title: "개인정보처리방침",
+  description: "개인정보의 처리 및 보호에 관한 사항을 안내합니다.",
+  effectiveDate: "[시행일 입력]",
+};

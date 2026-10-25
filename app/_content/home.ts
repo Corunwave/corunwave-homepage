@@ -144,7 +144,7 @@ export type SolutionCardContent = {
   id: "ax-infra" | "learning";
   title: string;
   image: string;
-  description?: string;
+  description: string;
   items: readonly string[];
 };
 
@@ -164,8 +164,10 @@ export type SolutionsContent = {
   solutions: readonly SolutionCardContent[];
 };
 
-const AX_LABEL = "AX Infra\u00a0&<wbr> IT Outsourcing";
+/* Table labels and the AX card title break at "&"; the Learning card title keeps a soft break. */
+const AX_LABEL = "AX Infra\u00a0&\nIT Outsourcing";
 const LEARNING_LABEL = "Learning Service\u00a0&<wbr> BPO";
+const LEARNING_TRACK_LABEL = "Learning Service\u00a0&\nBPO";
 
 export const solutions: SolutionsContent = {
   title: "통합 End-to-End 서비스",
@@ -173,7 +175,7 @@ export const solutions: SolutionsContent = {
     "AX Infra와 Learning Service를 하나의 과정으로 연결해 기술 운영과 조직의 역량 개발을 함께 지원합니다.",
   processLabel: "통합 End-to-End 서비스 단계",
   axLabel: AX_LABEL,
-  learningLabel: LEARNING_LABEL,
+  learningLabel: LEARNING_TRACK_LABEL,
   stages: [
     {
       name: "기획",
@@ -182,12 +184,12 @@ export const solutions: SolutionsContent = {
     },
     {
       name: "설계",
-      ax: "아키텍처와 보안·운영 체계 설계",
-      learning: "과정·학습 방법론과 성과지표 설계",
+      ax: "아키텍처와\n보안·운영 체계 설계",
+      learning: "과정·학습 방법론과\n성과지표 설계",
     },
     {
       name: "구축·개발",
-      ax: "인프라 구축, 통합, 마이그레이션",
+      ax: "인프라 구축, 통합,\n마이그레이션",
       learning: "콘텐츠 개발\nPBL·실습 환경 구축",
     },
     {
@@ -200,7 +202,9 @@ export const solutions: SolutionsContent = {
     {
       id: "ax-infra",
       title: AX_LABEL,
-      image: "/images/solution/ax-infra-card.jpg",
+      image: "/images/solution/ax-infra-resin-purple.png",
+      description:
+        "설계부터 책임 운영까지,\n비즈니스 연속성을 완성하는 AX 인프라 파트너",
       items: [
         "• 맞춤형 AX 인프라 제공",
         "• 고객의 기술 내재화 실현",
@@ -213,7 +217,7 @@ export const solutions: SolutionsContent = {
     {
       id: "learning",
       title: LEARNING_LABEL,
-      image: "/images/solution/learning-card.jpg",
+      image: "/images/solution/learning-resin-coral.png",
       description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
       items: [
         "• 교육 기획 및 컨설팅",

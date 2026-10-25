@@ -137,6 +137,13 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
                 {renderText(learning)}
               </div>
             ))}
+            {[1, 2, 3].map((order) => (
+              <span
+                key={order}
+                className={`solutions-process__chevron solutions-process__chevron--${order}`}
+                aria-hidden="true"
+              />
+            ))}
           </div>
 
           <div className="solutions-process__mobile">
@@ -168,8 +175,8 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
             return (
               <Link
                 key={id}
-                href={`/solutions?tab=${id}`}
-                className="solution-card"
+                href={`/solutions?tab=${id}#solution-services`}
+                className={`solution-card solution-card--${id}`}
                 data-active={active}
                 onMouseEnter={() => handleEnter(id)}
                 onMouseLeave={handleLeave}
@@ -177,28 +184,28 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
                 onBlur={handleLeave}
                 onClick={(event) => handleClick(event, id)}
               >
-                <Image
-                  className="solution-card__image"
-                  src={image}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  sizes="(max-width: 760px) 100vw, 616px"
-                />
                 <span className="solution-card__content">
                   <span className="solution-card__meta" aria-hidden="true">
                     {active ? "↗" : "+"}
                   </span>
+                  <Image
+                    className="solution-card__image"
+                    src={image}
+                    width={1254}
+                    height={1254}
+                    sizes="224px"
+                    alt=""
+                    aria-hidden="true"
+                    loading="eager"
+                  />
                   <span className="solution-card__summary">
                     <span className="solution-card__title">
                       {renderText(title)}
                     </span>
+                    <span className="solution-card__description">
+                      {renderText(description)}
+                    </span>
                     <span className="solution-card__panel">
-                      {description && (
-                        <span className="solution-card__description">
-                          {description}
-                        </span>
-                      )}
                       <span className="solution-card__list">
                         {items.map((item, index) => (
                           <span key={index}>{item}</span>

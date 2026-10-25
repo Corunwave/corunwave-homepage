@@ -20,17 +20,27 @@ interface Solution {
   items: ReactNode[];
 }
 
-const AX_LABEL = (
-  <>
-    AX Infra&nbsp;&amp;
-    <wbr /> IT Outsourcing
-  </>
-);
-
 const LEARNING_LABEL = (
   <>
     Learning Service&nbsp;&amp;
     <wbr /> BPO
+  </>
+);
+
+/* Table labels break at "&" so the two tracks read as separate items. */
+const AX_TRACK_LABEL = (
+  <>
+    AX Infra&nbsp;&amp;
+    <br />
+    IT Outsourcing
+  </>
+);
+
+const LEARNING_TRACK_LABEL = (
+  <>
+    Learning Service&nbsp;&amp;
+    <br />
+    BPO
   </>
 );
 
@@ -54,12 +64,30 @@ const PROCESS_STAGES: ProcessStage[] = [
   },
   {
     name: "설계",
-    ax: "아키텍처와 보안·운영 체계 설계",
-    learning: "과정·학습 방법론과 성과지표 설계",
+    ax: (
+      <>
+        아키텍처와
+        <br />
+        보안·운영 체계 설계
+      </>
+    ),
+    learning: (
+      <>
+        과정·학습 방법론과
+        <br />
+        성과지표 설계
+      </>
+    ),
   },
   {
     name: "구축·개발",
-    ax: "인프라 구축, 통합, 마이그레이션",
+    ax: (
+      <>
+        인프라 구축, 통합,
+        <br />
+        마이그레이션
+      </>
+    ),
     learning: (
       <>
         콘텐츠 개발
@@ -90,7 +118,7 @@ const PROCESS_STAGES: ProcessStage[] = [
 const SOLUTIONS: Solution[] = [
   {
     id: "ax-infra",
-    title: AX_LABEL,
+    title: AX_TRACK_LABEL,
     image: "/images/solution/ax-infra-card.jpg",
     items: [
       "• 맞춤형 AX 인프라 제공",
@@ -221,14 +249,16 @@ const SolutionsSection = () => {
                 <span>{name}</span>
               </div>
             ))}
-            <div className="solutions-process__track-label">{AX_LABEL}</div>
+            <div className="solutions-process__track-label">
+              {AX_TRACK_LABEL}
+            </div>
             {PROCESS_STAGES.map(({ name, ax }) => (
               <div key={name} className="solutions-process__track-cell">
                 {ax}
               </div>
             ))}
             <div className="solutions-process__track-label solutions-process__track-label--last">
-              {LEARNING_LABEL}
+              {LEARNING_TRACK_LABEL}
             </div>
             {PROCESS_STAGES.map(({ name, learning }) => (
               <div
@@ -238,6 +268,13 @@ const SolutionsSection = () => {
                 {learning}
               </div>
             ))}
+            {[1, 2, 3].map((order) => (
+              <span
+                key={order}
+                className={`solutions-process__chevron solutions-process__chevron--${order}`}
+                aria-hidden="true"
+              />
+            ))}
           </div>
 
           <div className="solutions-process__mobile">
@@ -245,12 +282,12 @@ const SolutionsSection = () => {
               <article key={name} className="solutions-process__stage">
                 <h3>{name}</h3>
                 <p>
-                  <strong>{AX_LABEL}</strong>
+                  <strong>{AX_TRACK_LABEL}</strong>
                   <br />
                   {ax}
                 </p>
                 <p>
-                  <strong>{LEARNING_LABEL}</strong>
+                  <strong>{LEARNING_TRACK_LABEL}</strong>
                   <br />
                   {learning}
                 </p>

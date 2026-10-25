@@ -19,6 +19,8 @@ export type CooperationRoleContent = {
 
 export type CooperationModelsContent = {
   title: string;
+  /** "\n" is a desktop line break. */
+  description: string;
   stages: CooperationStepTexts;
   roles: readonly CooperationRoleContent[];
 };
@@ -104,6 +106,8 @@ export const partnerStrategyPage: PartnerStrategyPageContent = {
 
 export const cooperationModels: CooperationModelsContent = {
   title: "우리가 제안하는 협력모델",
+  description:
+    "코런웨이브는 각 분야 전문가를 모십니다.\n투명한 협업 절차에 따라 새로운 비즈니스 가치를 창출하고 함께 성장할 수 있는 협력모델을 제안합니다.",
   stages: ["기회 발굴", "전략 및 제안", "구축 및 수행", "성과 공유"],
   roles: [
     {

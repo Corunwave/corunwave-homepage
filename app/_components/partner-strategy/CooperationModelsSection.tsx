@@ -15,9 +15,13 @@ const CooperationModelsSection = ({
       aria-labelledby="partner-models-title"
     >
       <div className="partner-inner">
-        <h2 id="partner-models-title" className="partner-heading">
+        <h2
+          id="partner-models-title"
+          className="partner-heading partner-heading--with-description"
+        >
           {content.title}
         </h2>
+        <p className="partner-description">{content.description}</p>
         <div className="partner-coop">
           <div className="partner-coop__head" aria-hidden="true">
             <span className="partner-coop__corner" />

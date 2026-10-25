@@ -3382,6 +3382,24 @@ body {
   overflow-wrap: normal;
 }
 
+.partner-heading--with-description {
+  margin-bottom: var(--spacing-16);
+}
+
+/* Section description under a heading: shared section-description typography (mobile reuses ceo-letter). */
+.partner-description {
+  margin: 0 0 var(--spacing-40);
+  color: var(--color-partner-body);
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  letter-spacing: var(--text-section-description-desktop--letter-spacing);
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
 /* Cooperation models — 우리가 제안하는 협력모델 (Figma 876:28713 / 876:29907). */
 .partner-section--subtle {
   background: var(--color-partner-subtle);
@@ -3512,6 +3530,18 @@ body {
     line-height: var(--text-partner-heading-mobile--line-height);
     font-weight: var(--text-partner-heading-mobile--font-weight);
     letter-spacing: var(--text-partner-heading-mobile--letter-spacing);
+  }
+
+  .partner-heading--with-description {
+    margin-bottom: var(--spacing-12);
+  }
+  .partner-description {
+    margin-bottom: var(--spacing-28);
+    font-size: var(--text-ceo-letter-mobile);
+    line-height: var(--text-ceo-letter-mobile--line-height);
+    font-weight: var(--text-ceo-letter-mobile--font-weight);
+    letter-spacing: var(--text-ceo-letter-mobile--letter-spacing);
+    white-space: normal;
   }
 
   .partner-coop {

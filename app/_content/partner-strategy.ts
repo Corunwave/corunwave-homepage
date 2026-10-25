@@ -5,15 +5,22 @@ export type PartnerStrategyPageContent = {
   openGraphTitle: string;
 };
 
-export type CooperationModelContent = {
-  title: string;
-  image: string;
-  description: string;
+export type CooperationStepTexts = readonly [string, string, string, string];
+
+export type CooperationRoleContent = {
+  id: "corunwave" | "sales" | "ax-infra" | "learning";
+  /** Shown as the role title; the corunwave row uses it as the logo alt. */
+  name: string;
+  subName?: string;
+  accent: "logo" | "primary" | "cyan" | "lavender";
+  /** Same order as `stages`. "\n" is a desktop line break. */
+  steps: CooperationStepTexts;
 };
 
 export type CooperationModelsContent = {
   title: string;
-  models: readonly CooperationModelContent[];
+  stages: CooperationStepTexts;
+  roles: readonly CooperationRoleContent[];
 };
 
 export type CustomerProposalContent = {
@@ -97,26 +104,54 @@ export const partnerStrategyPage: PartnerStrategyPageContent = {
 
 export const cooperationModels: CooperationModelsContent = {
   title: "우리가 제안하는 협력모델",
-  models: [
-  {
-    title: "The Orchestrator",
-    image: "/images/partner/orchestrator-soft.png",
-    description:
-      "글로벌 IT 교육 및 인프라 기획 역량을 바탕으로 프로젝트 전체를 설계하고 조율합니다.",
-  },
-  {
-    title: "The Specialist",
-    image: "/images/partner/specialist-soft.png",
-    description:
-      "파트너 여러분은 자신의 핵심 역량(영업, 강의, 콘텐츠 개발, 인프라 구축 등)에만 집중하십시오.",
-  },
-  {
-    title: "Win-Win Growth",
-    image: "/images/partner/growth-soft.png",
-    description:
-      "코런웨이브가 확보한 서비스를 통해 파트너의 전문성이 시장에 안정적으로 공급되도록 지원합니다.",
-  },
-],
+  stages: ["기회 발굴", "전략 및 제안", "구축 및 수행", "성과 공유"],
+  roles: [
+    {
+      id: "corunwave",
+      name: "코런웨이브",
+      accent: "logo",
+      steps: [
+        "사업 타당성 검토 및\n제안 컨소시엄 구성",
+        "제안서 준비 리딩,\nTCO 분석 및 비즈니스 모델링",
+        "프로젝트 리딩, 운영 행정,\n품질 보증(QA), 학습자 관리",
+        "투명한 프로젝트 성과 평가,\n공유 및 레퍼런스 공동 자산화",
+      ],
+    },
+    {
+      id: "sales",
+      name: "Sales 파트너",
+      subName: "(Infra 및 Learning 영역)",
+      accent: "primary",
+      steps: [
+        "네트워크 활용 고객발굴 및 확보(Infra 및 Learning 서비스 영역)",
+        "고객사 핵심 이해관계자 분석 및 의사결정 지원",
+        "프로젝트 진척 관리 모니터링 및 고객 소통",
+        "고객 만족도 관리 및\n추가 사업 기회 확보",
+      ],
+    },
+    {
+      id: "ax-infra",
+      name: "AX Infra 파트너",
+      accent: "cyan",
+      steps: [
+        "기술 트렌드 기반 인프라 도입\n니즈 파악 및 공유",
+        "H/W·S/W 사이징 및\n하드웨어 / AI솔루션\n아키텍처 설계",
+        "인프라 구축 및 기술 지원",
+        "기술 고도화 제안 및\n유지보수 파이프라인 확보",
+      ],
+    },
+    {
+      id: "learning",
+      name: "Learning 파트너",
+      accent: "lavender",
+      steps: [
+        "기술 트렌드 기반 고객 대상별\n인재 육성 니즈 파악 및 공유",
+        "커리큘럼 기획, 설계 및 영역별\n전문가 매칭",
+        "강의 구성 및 콘텐츠 제작,\n성과평가 지표",
+        "성과 분석 및 교육 데이터\n기반 차기 교육 로드맵 제안",
+      ],
+    },
+  ],
 };
 
 export const customerProposals: CustomerProposalsContent = {

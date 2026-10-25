@@ -167,6 +167,10 @@
   --partner-motion: 360ms cubic-bezier(0.22, 1, 0.36, 1);
   --color-partner-body: #4b5c73;
   --color-partner-subtle: #f5f7fb;
+  --partner-coop-role-col: 200px;
+  --partner-coop-head-height: 76px;
+  --partner-coop-row-height: 148px;
+  --partner-coop-accent: linear-gradient(90deg, #0d6ee5, #7ac9ff);
 
   --color-partner-glow-violet: #e7e3ff77;
   --color-partner-glow-cyan: #cceeff77;
@@ -731,16 +735,6 @@
   --text-partner-heading-mobile--font-weight: 700;
   --text-partner-heading-mobile--letter-spacing: -0.035em;
 
-  --text-partner-model-title-desktop: 1.6875rem;
-  --text-partner-model-title-desktop--line-height: 2.25rem;
-  --text-partner-model-title-desktop--font-weight: 700;
-  --text-partner-model-title-desktop--letter-spacing: -0.035em;
-
-  --text-partner-model-title-mobile: 1.5rem;
-  --text-partner-model-title-mobile--line-height: 2.125rem;
-  --text-partner-model-title-mobile--font-weight: 700;
-  --text-partner-model-title-mobile--letter-spacing: -0.035em;
-
   --text-partner-model-body-desktop: 1.0625rem;
   --text-partner-model-body-desktop--line-height: 1.8125rem;
   --text-partner-model-body-desktop--font-weight: 400;
@@ -750,6 +744,41 @@
   --text-partner-model-body-mobile--line-height: 1.75rem;
   --text-partner-model-body-mobile--font-weight: 400;
   --text-partner-model-body-mobile--letter-spacing: 0;
+
+  --text-partner-coop-stage-desktop: 1.125rem;
+  --text-partner-coop-stage-desktop--line-height: 1.75rem;
+  --text-partner-coop-stage-desktop--font-weight: 700;
+  --text-partner-coop-stage-desktop--letter-spacing: 0;
+
+  --text-partner-coop-stage-mobile: 0.9375rem;
+  --text-partner-coop-stage-mobile--line-height: 1.5rem;
+  --text-partner-coop-stage-mobile--font-weight: 700;
+  --text-partner-coop-stage-mobile--letter-spacing: 0;
+
+  --text-partner-coop-role-desktop: 1rem;
+  --text-partner-coop-role-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-desktop--font-weight: 700;
+  --text-partner-coop-role-desktop--letter-spacing: 0;
+
+  --text-partner-coop-role-mobile: 1.125rem;
+  --text-partner-coop-role-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-mobile--font-weight: 700;
+  --text-partner-coop-role-mobile--letter-spacing: 0;
+
+  --text-partner-coop-role-sub-desktop: 0.75rem;
+  --text-partner-coop-role-sub-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-sub-desktop--font-weight: 700;
+  --text-partner-coop-role-sub-desktop--letter-spacing: 0;
+
+  --text-partner-coop-role-sub-mobile: 0.8125rem;
+  --text-partner-coop-role-sub-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-sub-mobile--font-weight: 700;
+  --text-partner-coop-role-sub-mobile--letter-spacing: 0;
+
+  --text-partner-coop-body: 1rem;
+  --text-partner-coop-body--line-height: 1.75rem;
+  --text-partner-coop-body--font-weight: 400;
+  --text-partner-coop-body--letter-spacing: 0;
 
   --text-partner-tab-desktop: 1.125rem;
   --text-partner-tab-desktop--line-height: 1.75rem;
@@ -3358,46 +3387,113 @@ body {
   background: var(--color-partner-subtle);
 }
 
-.partner-models {
+.partner-coop__head {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-48);
+  grid-template-columns: var(--partner-coop-role-col) repeat(4, minmax(0, 1fr));
+  height: calc(var(--partner-coop-head-height) + 4px);
+  padding-bottom: 4px;
 }
 
-.partner-model {
+.partner-coop__head::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: var(--partner-coop-role-col);
+  height: 4px;
+  background: var(--partner-coop-accent);
+}
+
+.partner-coop__stage {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  min-width: 0;
+  justify-content: center;
+  padding-inline: var(--spacing-8);
+  color: var(--color-brand-navy);
+  font-size: var(--text-partner-coop-stage-desktop);
+  line-height: var(--text-partner-coop-stage-desktop--line-height);
+  font-weight: var(--text-partner-coop-stage-desktop--font-weight);
+  letter-spacing: var(--text-partner-coop-stage-desktop--letter-spacing);
   text-align: center;
 }
 
-.partner-model__icon {
-  display: block;
-  width: 192px;
-  height: 192px;
-  margin: 0 0 var(--spacing-28);
-  object-fit: contain;
+.partner-coop__role {
+  display: grid;
+  grid-template-columns: var(--partner-coop-role-col) minmax(0, 1fr);
+  min-height: var(--partner-coop-row-height);
 }
 
-.partner-model__title {
-  margin: 0 0 var(--spacing-20);
+.partner-coop__role + .partner-coop__role {
+  border-top: 1px solid var(--color-border);
+}
+
+.partner-coop__role-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
   color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-partner-model-title-desktop);
-  line-height: var(--text-partner-model-title-desktop--line-height);
-  font-weight: var(--text-partner-model-title-desktop--font-weight);
-  letter-spacing: var(--text-partner-model-title-desktop--letter-spacing);
+  font-size: var(--text-partner-coop-role-desktop);
+  line-height: var(--text-partner-coop-role-desktop--line-height);
+  font-weight: var(--text-partner-coop-role-desktop--font-weight);
+  letter-spacing: var(--text-partner-coop-role-desktop--letter-spacing);
+  text-align: center;
 }
 
-.partner-model__description {
+.partner-coop__role-name {
+  display: block;
+  max-width: 158px;
+}
+
+.partner-coop__role-sub {
+  display: block;
+  font-size: var(--text-partner-coop-role-sub-desktop);
+  line-height: var(--text-partner-coop-role-sub-desktop--line-height);
+  font-weight: var(--text-partner-coop-role-sub-desktop--font-weight);
+  letter-spacing: var(--text-partner-coop-role-sub-desktop--letter-spacing);
+}
+
+.partner-coop__logo {
+  display: block;
+  width: 152px;
+  height: auto;
+}
+
+.partner-coop__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+}
+
+.partner-coop__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 17px 0 var(--spacing-24);
+}
+
+/* Stage names stay readable to assistive tech while the desktop header row shows them visually. */
+.partner-coop__step-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.partner-coop__step-text {
   width: 100%;
   margin: 0;
-  color: var(--color-partner-body);
-  font-size: var(--text-partner-model-body-desktop);
-  line-height: var(--text-partner-model-body-desktop--line-height);
-  font-weight: var(--text-partner-model-body-desktop--font-weight);
-  letter-spacing: var(--text-partner-model-body-desktop--letter-spacing);
+  color: var(--color-text-primary);
+  font-size: var(--text-partner-coop-body);
+  line-height: var(--text-partner-coop-body--line-height);
+  font-weight: var(--text-partner-coop-body--font-weight);
+  letter-spacing: var(--text-partner-coop-body--letter-spacing);
+  white-space: pre-line;
   word-break: keep-all;
   overflow-wrap: normal;
 }
@@ -3418,27 +3514,74 @@ body {
     letter-spacing: var(--text-partner-heading-mobile--letter-spacing);
   }
 
-  .partner-models {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-32);
+  .partner-coop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-40);
   }
-  .partner-model__icon {
-    width: 160px;
-    height: 160px;
-    margin-bottom: var(--spacing-24);
+  .partner-coop__head {
+    display: none;
   }
-  .partner-model__title {
-    margin-bottom: var(--spacing-16);
-    font-size: var(--text-partner-model-title-mobile);
-    line-height: var(--text-partner-model-title-mobile--line-height);
-    font-weight: var(--text-partner-model-title-mobile--font-weight);
-    letter-spacing: var(--text-partner-model-title-mobile--letter-spacing);
+  .partner-coop__role {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16);
+    min-height: 0;
+    padding: var(--spacing-20);
   }
-  .partner-model__description {
-    font-size: var(--text-partner-model-body-mobile);
-    line-height: var(--text-partner-model-body-mobile--line-height);
-    font-weight: var(--text-partner-model-body-mobile--font-weight);
-    letter-spacing: var(--text-partner-model-body-mobile--letter-spacing);
+  .partner-coop__role + .partner-coop__role {
+    border-top: 0;
+  }
+  .partner-coop__role-title {
+    height: 56px;
+    padding-bottom: var(--spacing-16);
+    box-sizing: content-box;
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-partner-coop-role-mobile);
+    line-height: var(--text-partner-coop-role-mobile--line-height);
+    font-weight: var(--text-partner-coop-role-mobile--font-weight);
+    letter-spacing: var(--text-partner-coop-role-mobile--letter-spacing);
+  }
+  .partner-coop__role-name {
+    max-width: 260px;
+  }
+  .partner-coop__role-sub {
+    font-size: var(--text-partner-coop-role-sub-mobile);
+    line-height: var(--text-partner-coop-role-sub-mobile--line-height);
+    font-weight: var(--text-partner-coop-role-sub-mobile--font-weight);
+    letter-spacing: var(--text-partner-coop-role-sub-mobile--letter-spacing);
+  }
+  .partner-coop__logo {
+    width: 132px;
+  }
+  .partner-coop__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16);
+  }
+  .partner-coop__step {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--spacing-8);
+    padding: 0;
+  }
+  .partner-coop__step-label {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    color: var(--color-brand-primary);
+    font-size: var(--text-partner-coop-stage-mobile);
+    line-height: var(--text-partner-coop-stage-mobile--line-height);
+    font-weight: var(--text-partner-coop-stage-mobile--font-weight);
+    letter-spacing: var(--text-partner-coop-stage-mobile--letter-spacing);
+    text-align: center;
+  }
+  .partner-coop__step-text {
+    white-space: normal;
   }
 }
 

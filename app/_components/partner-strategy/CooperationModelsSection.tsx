@@ -3,34 +3,62 @@ import type { CooperationModelsContent } from "../../_content/partner-strategy";
 
 type CooperationModelsSectionProps = { content: CooperationModelsContent };
 
-/* Cooperation models "우리가 제안하는 협력모델" (preview .partner-models; Figma 876:28713 / 876:29907). Static server component. */
+/* Cooperation models "우리가 제안하는 협력모델" (Figma 876:28713 / 876:29907; preview not referenced).
+ * Static server component: one markup, a role × stage matrix on desktop and stacked role cards at ≤1024px. */
 const CooperationModelsSection = ({
   content,
 }: CooperationModelsSectionProps) => {
   return (
     <section
       id="partner-models"
-      className="partner-section partner-section--subtle"
+      className="partner-section"
       aria-labelledby="partner-models-title"
     >
       <div className="partner-inner">
         <h2 id="partner-models-title" className="partner-heading">
           {content.title}
         </h2>
-        <div className="partner-models">
-          {content.models.map(({ title, image, description }) => (
-            <article key={title} className="partner-model">
-              <Image
-                className="partner-model__icon"
-                src={image}
-                alt=""
-                aria-hidden="true"
-                width={1024}
-                height={1024}
-                sizes="(max-width: 1024px) 160px, 192px"
-              />
-              <h3 className="partner-model__title">{title}</h3>
-              <p className="partner-model__description">{description}</p>
+        <div className="partner-coop">
+          <div className="partner-coop__head" aria-hidden="true">
+            <span className="partner-coop__corner" />
+            {content.stages.map((stage) => (
+              <span key={stage} className="partner-coop__stage">
+                {stage}
+              </span>
+            ))}
+          </div>
+          {content.roles.map(({ id, name, subName, accent, steps }) => (
+            <article
+              key={id}
+              className={`partner-coop__role partner-coop__role--${accent}`}
+            >
+              <h3 className="partner-coop__role-title">
+                {accent === "logo" ? (
+                  <Image
+                    className="partner-coop__logo"
+                    src="/images/logos/corunwave-ko-en-color.png"
+                    alt={name}
+                    width={2496}
+                    height={832}
+                    sizes="152px"
+                  />
+                ) : (
+                  <span className="partner-coop__role-name">
+                    {name}
+                    {subName ? (
+                      <span className="partner-coop__role-sub">{subName}</span>
+                    ) : null}
+                  </span>
+                )}
+              </h3>
+              <dl className="partner-coop__steps">
+                {content.stages.map((stage, index) => (
+                  <div key={stage} className="partner-coop__step">
+                    <dt className="partner-coop__step-label">{stage}</dt>
+                    <dd className="partner-coop__step-text">{steps[index]}</dd>
+                  </div>
+                ))}
+              </dl>
             </article>
           ))}
         </div>

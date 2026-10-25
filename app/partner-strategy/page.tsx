@@ -4,7 +4,6 @@ import PageHero from "../_components/commons/hero/PageHero";
 import CollaborationProcessSection from "../_components/partner-strategy/CollaborationProcessSection";
 import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
-import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
 import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
 import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
 import UniversityProposalSection from "../_components/partner-strategy/UniversityProposalSection";
@@ -12,7 +11,6 @@ import {
   collaborationProcess,
   cooperationModels,
   customerProposals,
-  partnerFields,
   partnerLogos,
   partnerStrategyPage,
   partnershipBenefits,
@@ -37,8 +35,8 @@ export default function PartnerStrategyPage() {
       <PageHero
         title={partnerStrategyPage.title}
         description={partnerStrategyPage.description}
+        descriptionSize="compact"
       />
-      <PartnerFieldsSection content={partnerFields} />
       <CooperationModelsSection content={cooperationModels} />
       <CustomerProposalsSection content={customerProposals} />
       <CollaborationProcessSection content={collaborationProcess} />

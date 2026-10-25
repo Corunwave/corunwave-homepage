@@ -3516,6 +3516,33 @@ body {
   overflow-wrap: normal;
 }
 
+/* Scroll reveal: data-reveal is set by useScrollReveal; without JS (or with reduced motion) the rows stay visible. Rows enter top to bottom. */
+.partner-coop__role[data-reveal] {
+  transition:
+    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.partner-coop__role[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(var(--partner-reveal-shift));
+}
+
+.partner-coop__role[data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+}
+
+.partner-coop__role:nth-of-type(2)[data-reveal="visible"] {
+  transition-delay: var(--partner-reveal-step);
+}
+.partner-coop__role:nth-of-type(3)[data-reveal="visible"] {
+  transition-delay: calc(var(--partner-reveal-step) * 2);
+}
+.partner-coop__role:nth-of-type(4)[data-reveal="visible"] {
+  transition-delay: calc(var(--partner-reveal-step) * 3);
+}
+
 /* ≤1024px: tablet shares the mobile composition (Figma mobile values live here). */
 @media (width <= 1024px) {
   .partner-section {
@@ -3551,6 +3578,9 @@ body {
   }
   .partner-coop__head {
     display: none;
+  }
+  .partner-coop__role:nth-of-type(n)[data-reveal="visible"] {
+    transition-delay: 0ms;
   }
   .partner-coop__role {
     display: flex;

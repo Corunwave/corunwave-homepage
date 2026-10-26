@@ -165,6 +165,16 @@
   /* Partner strategy page */
   --partner-inner-max: 1248px;
   --partner-motion: 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Tab glass indicator: spring travel (~2% overshoot) + subtle landing squash. */
+  --partner-tab-spring: 560ms
+    linear(0, 0.12 4.5%, 0.42 11%, 0.7 18%, 0.88 25%, 0.975 32%, 1.015 39%, 1.02 45%, 1.012 53%, 1.003 63%, 0.999 75%, 1);
+  --partner-tab-squash-duration: 440ms;
+  /* Customer panel content enter on tab change. */
+  --partner-panel-enter: 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  --partner-panel-stagger: 60ms;
+  --color-partner-tab-glass-from: rgb(255 255 255 / 96%);
+  --color-partner-tab-glass-to: rgb(255 255 255 / 74%);
+  --color-partner-tab-glass-edge: rgb(255 255 255 / 55%);
   --color-partner-body: #4b5c73;
   --color-partner-subtle: #f5f7fb;
   --partner-coop-role-col: 200px;
@@ -823,14 +833,14 @@
   --text-partner-coop-body--font-weight: 400;
   --text-partner-coop-body--letter-spacing: 0;
 
-  --text-partner-tab-desktop: 1.125rem;
+  --text-partner-tab-desktop: 1.25rem;
   --text-partner-tab-desktop--line-height: 1.75rem;
-  --text-partner-tab-desktop--font-weight: 600;
+  --text-partner-tab-desktop--font-weight: 700;
   --text-partner-tab-desktop--letter-spacing: 0;
 
-  --text-partner-tab-mobile: 0.9375rem;
+  --text-partner-tab-mobile: 1.03125rem;
   --text-partner-tab-mobile--line-height: 1.5rem;
-  --text-partner-tab-mobile--font-weight: 600;
+  --text-partner-tab-mobile--font-weight: 700;
   --text-partner-tab-mobile--letter-spacing: 0;
 
   --text-partner-intro-title-desktop: 1.875rem;
@@ -3954,6 +3964,8 @@ body {
 }
 
 .partner-tabs {
+  position: relative;
+  isolation: isolate;
   display: flex;
   gap: var(--spacing-8);
   margin-bottom: var(--spacing-32);
@@ -3967,7 +3979,62 @@ body {
   backdrop-filter: blur(22px) saturate(140%);
 }
 
+/* Glass pill that slides under the active tab (position/width written by CustomerProposalsSection). */
+.partner-tabs__indicator {
+  position: absolute;
+  top: var(--spacing-8);
+  bottom: var(--spacing-8);
+  left: 0;
+  z-index: 0;
+  width: var(--partner-tab-width, 0);
+  translate: var(--partner-tab-x, 0) 0;
+  border: 1px solid var(--color-white);
+  border-radius: 18px;
+  background: linear-gradient(
+    180deg,
+    var(--color-partner-tab-glass-from),
+    var(--color-partner-tab-glass-to)
+  );
+  box-shadow:
+    inset 0 1px 0 var(--color-white),
+    inset 0 -1px 0 var(--color-partner-tab-glass-edge),
+    var(--solution-tab-active-shadow);
+  backdrop-filter: blur(12px) saturate(180%);
+  pointer-events: none;
+}
+
+.partner-tabs[data-indicator-ready="true"] .partner-tabs__indicator {
+  transition:
+    translate var(--partner-tab-spring),
+    width var(--partner-tab-spring);
+}
+
+.partner-tabs__indicator[data-pulse="0"] {
+  animation: partner-tab-squash-a var(--partner-tab-squash-duration) ease-out;
+}
+
+.partner-tabs__indicator[data-pulse="1"] {
+  animation: partner-tab-squash-b var(--partner-tab-squash-duration) ease-out;
+}
+
+/* Two identical keyframes so alternating data-pulse restarts the animation on every move. */
+@keyframes partner-tab-squash-a {
+  0% { scale: 1 1; }
+  30% { scale: 1.025 0.96; }
+  62% { scale: 0.995 1.01; }
+  100% { scale: 1 1; }
+}
+
+@keyframes partner-tab-squash-b {
+  0% { scale: 1 1; }
+  30% { scale: 1.025 0.96; }
+  62% { scale: 0.995 1.01; }
+  100% { scale: 1 1; }
+}
+
 .partner-tab {
+  position: relative;
+  z-index: 1;
   flex: 1 1 0;
   min-width: 0;
   padding: 18px var(--spacing-12);
@@ -3975,26 +4042,20 @@ body {
   border-radius: 18px;
   background: transparent;
   color: var(--color-solution-tab-text);
-  font-family: var(--font-family-body);
+  font-family: var(--font-family-heading);
   font-size: var(--text-partner-tab-desktop);
   line-height: var(--text-partner-tab-desktop--line-height);
   font-weight: var(--text-partner-tab-desktop--font-weight);
   letter-spacing: var(--text-partner-tab-desktop--letter-spacing);
-  text-align: left;
+  text-align: center;
   word-break: keep-all;
   overflow-wrap: normal;
   cursor: pointer;
-  transition:
-    color var(--partner-motion),
-    background-color var(--partner-motion),
-    box-shadow var(--partner-motion);
+  transition: color var(--partner-motion);
 }
 
 .partner-tab[aria-selected="true"] {
-  border-color: var(--color-white);
-  background: var(--color-white);
   color: var(--color-solution-accent-deep);
-  box-shadow: var(--solution-tab-active-shadow);
 }
 
 .partner-tab:focus-visible,
@@ -4016,6 +4077,44 @@ body {
 
 .partner-customer-panel[hidden] {
   display: none;
+}
+
+/* Panel enter on tab change (not on first load): leaving [hidden] restarts these animations.
+ * The intro card rises in first, then the offerings follow one by one. */
+.partner-customer-panel[data-animate] .partner-customer-intro {
+  animation: partner-panel-enter var(--partner-panel-enter) both;
+}
+
+.partner-customer-panel[data-animate] .partner-customer-intro__image {
+  animation: partner-panel-enter var(--partner-panel-enter) both;
+  animation-delay: var(--partner-panel-stagger);
+}
+
+.partner-customer-panel[data-animate] .partner-offerings li {
+  animation: partner-panel-enter var(--partner-panel-enter) both;
+}
+
+.partner-customer-panel[data-animate] .partner-offerings li:nth-child(1) {
+  animation-delay: var(--partner-panel-stagger);
+}
+.partner-customer-panel[data-animate] .partner-offerings li:nth-child(2) {
+  animation-delay: calc(var(--partner-panel-stagger) * 2);
+}
+.partner-customer-panel[data-animate] .partner-offerings li:nth-child(n + 3) {
+  animation-delay: calc(var(--partner-panel-stagger) * 3);
+}
+
+@keyframes partner-panel-enter {
+  from {
+    opacity: 0;
+    translate: 0 var(--spacing-12);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
 }
 
 .partner-customer-intro {
@@ -4109,6 +4208,9 @@ body {
     border-radius: var(--radius-20);
     scrollbar-width: thin;
   }
+  .partner-tabs__indicator {
+    border-radius: var(--radius-20);
+  }
   .partner-tab {
     flex: 0 0 auto;
     padding: 14px 18px;
@@ -4159,8 +4261,15 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .partner-tab {
+  .partner-tab,
+  .partner-tabs[data-indicator-ready="true"] .partner-tabs__indicator {
     transition: none;
+  }
+  .partner-tabs__indicator[data-pulse],
+  .partner-customer-panel[data-animate] .partner-customer-intro,
+  .partner-customer-panel[data-animate] .partner-customer-intro__image,
+  .partner-customer-panel[data-animate] .partner-offerings li {
+    animation: none;
   }
 }
 

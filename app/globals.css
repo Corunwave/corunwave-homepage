@@ -20,10 +20,10 @@
   --font-family-heading: var(--font-a2z-bold), var(--font-family-body);
 
   /* Page hero (shared subpage hero) */
-  --page-hero-height: 530px;
+  --page-hero-height: 310px;
   --page-hero-inner-max: 1248px;
-  --page-hero-content-bottom: 80px;
-  --page-hero-content-bottom-mobile: 60px;
+  --page-hero-content-bottom: 48px;
+  --page-hero-content-bottom-mobile: 32px;
   --page-hero-mask: linear-gradient(
     90deg,
     rgb(15 23 41 / 94%),

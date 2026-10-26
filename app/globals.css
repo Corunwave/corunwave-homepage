@@ -20,10 +20,10 @@
   --font-family-heading: var(--font-a2z-bold), var(--font-family-body);
 
   /* Page hero (shared subpage hero) */
-  --page-hero-height: 530px;
+  --page-hero-height: 310px;
   --page-hero-inner-max: 1248px;
-  --page-hero-content-bottom: 80px;
-  --page-hero-content-bottom-mobile: 60px;
+  --page-hero-content-bottom: 48px;
+  --page-hero-content-bottom-mobile: 32px;
   --page-hero-mask: linear-gradient(
     90deg,
     rgb(15 23 41 / 94%),
@@ -344,12 +344,12 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  --text-header-navigation: 1rem;
-  --text-header-navigation--line-height: 1.5rem;
-  --text-header-navigation--font-weight: 400;
+  --text-header-navigation: 1.0625rem;
+  --text-header-navigation--line-height: 1.625rem;
+  --text-header-navigation--font-weight: 500;
   --text-header-navigation--letter-spacing: 0;
 
-  --text-header-cta: 0.875rem;
+  --text-header-cta: 0.9375rem;
   --text-header-cta--line-height: 1.25rem;
   --text-header-cta--font-weight: 700;
   --text-header-cta--letter-spacing: 0;
@@ -1031,7 +1031,7 @@ body {
 }
 .site-header__desktop ul {
   display: flex;
-  gap: var(--spacing-28);
+  gap: var(--spacing-40);
 }
 .site-header__desktop a {
   display: block;
@@ -1093,6 +1093,9 @@ body {
 @media (width <= 1024px) {
   .site-header__bar {
     padding-inline: var(--spacing-48);
+  }
+  .site-header__desktop ul {
+    gap: var(--spacing-32);
   }
 }
 @media (width <= 760px) {
@@ -1250,9 +1253,23 @@ body {
 .site-footer__legal {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-20);
+  row-gap: var(--spacing-8);
   font-size: var(--text-footer-company-information);
   line-height: 22px;
+}
+
+.site-footer__legal li {
+  display: flex;
+  align-items: center;
+}
+
+/* Vertical dividers between legal links only (no outer edges). */
+.site-footer__legal li + li::before {
+  content: "";
+  width: 1px;
+  height: var(--spacing-12);
+  margin-inline: var(--spacing-12);
+  background: var(--color-process-divider);
 }
 
 .site-footer__copyright {
@@ -1309,11 +1326,6 @@ body {
   }
   .site-footer__bottom {
     margin-top: var(--spacing-32);
-  }
-  .site-footer__legal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-8) var(--spacing-20);
   }
 }
 

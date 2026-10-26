@@ -1,25 +1,3 @@
-export type SolutionStageContent = {
-  title: string;
-  ax: string;
-  learning: string;
-};
-
-export type SolutionOverviewCardContent = {
-  id: "ax-infra" | "learning";
-  title: string;
-  image: string;
-  /** One entry per line. */
-  description: readonly string[];
-};
-
-export type SolutionOverviewContent = {
-  title: string;
-  axLabel: string;
-  learningLabel: string;
-  stages: readonly SolutionStageContent[];
-  cards: readonly SolutionOverviewCardContent[];
-};
-
 export type SolutionServiceItem = {
   title: string;
   subtitle?: string;
@@ -50,38 +28,6 @@ export const solutionsPage: SolutionsPageContent = {
   title: "솔루션",
   description:
     "인프라 설계부터 운영과 조달,인재 육성에 이르기까지 단절 없는 End-to-End 서비스 가치를 창출합니다.",
-};
-
-const AX_LABEL = "AX Infra & IT Outsourcing";
-const LEARNING_LABEL = "Learning Service & BPO";
-
-export const solutionOverview: SolutionOverviewContent = {
-  title: "통합 End-to-End 서비스",
-  axLabel: AX_LABEL,
-  learningLabel: LEARNING_LABEL,
-  stages: [
-    { title: "기획", ax: "최적의 전략 수립", learning: "전략적 분석 및 목표설정" },
-    { title: "설계", ax: "기술적 무결성", learning: "방법론 혁신" },
-    { title: "구축/개발", ax: "현장 구현 및 통합", learning: "실무 적합성" },
-    { title: "운영", ax: "안정성 및 성과 보장", learning: "품질 및 효율보장" },
-  ],
-  cards: [
-    {
-      id: "ax-infra",
-      title: AX_LABEL,
-      image: "/images/solution/ax-infra-resin-purple.png",
-      description: [
-        "설계부터 책임 운영까지,",
-        "비즈니스 연속성을 완성하는 AX 인프라 파트너",
-      ],
-    },
-    {
-      id: "learning",
-      title: LEARNING_LABEL,
-      image: "/images/solution/learning-resin-coral.png",
-      description: ["기술 트렌드를 반영한 전략적 인재양성 파트너"],
-    },
-  ],
 };
 
 const serviceTabs: readonly SolutionServiceTab[] = [

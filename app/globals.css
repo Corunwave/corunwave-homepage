@@ -122,34 +122,18 @@
   --color-downloads-end: #68c8ff;
 
   /* Solution page */
-  --solution-inner-max: 1248px;
   --solution-motion: 360ms cubic-bezier(0.22, 1, 0.36, 1);
   --solution-reveal-shift: 24px;
   --solution-reveal-step: 100ms;
   --solution-cta-wave-size: 1440px 530px;
   --solution-cta-wave-top: -175px;
   --solution-cta-wave-top-mobile: -153px;
-  --color-solution-purple-surface: #fcfaff;
-  --color-solution-coral-surface: #fffaf7;
-  /* Service details: matches the preview's glass look (tinted glows under translucent surfaces). */
-  --color-solution-services-base: #f4f7fb;
-  --color-solution-glow-violet: #e7e3ff99;
-  --color-solution-glow-cyan: #cceeff99;
+  /* Glass tabs and accent, shared with the partner strategy page. */
   --color-solution-glass: rgb(255 255 255 / 48%);
-  --color-solution-glass-from: rgb(255 255 255 / 76%);
-  --color-solution-glass-to: rgb(255 255 255 / 42%);
-  --color-solution-glass-fallback-tabs: #e8eff9;
-  --color-solution-glass-fallback-service: #fbfcff;
   --color-solution-tab-text: #465772;
   --color-solution-accent-deep: #0b55b0;
-  --color-solution-intro: #42516a;
-  --color-solution-toggle: #607694;
-  --color-solution-subtitle: #586b83;
-  --color-solution-column-text: #3d4d64;
-  --color-solution-column-rule: #e6edf5;
   --solution-tabs-shadow: 0 12px 32px #173d6e0b;
   --solution-tab-active-shadow: 0 5px 18px #28457310;
-  --solution-service-shadow: 0 8px 28px rgb(47 72 117 / 3.5%);
 
   /* AX Infra: white section; surfaces are separated by a neutral hairline, open rows get a faint tint. */
   --ax-inner-max: 1248px;
@@ -595,57 +579,7 @@
   --text-value-card-description-mobile--font-weight: 400;
   --text-value-card-description-mobile--letter-spacing: 0;
 
-  /* Solution page typography (panel intro reuses section-description-desktop / ceo-letter-mobile) */
-  --text-solution-heading-desktop: 2.5rem;
-  --text-solution-heading-desktop--line-height: 3.375rem;
-  --text-solution-heading-desktop--font-weight: 700;
-  --text-solution-heading-desktop--letter-spacing: -0.035em;
-
-  --text-solution-heading-mobile: 1.75rem;
-  --text-solution-heading-mobile--line-height: 2.375rem;
-  --text-solution-heading-mobile--font-weight: 700;
-  --text-solution-heading-mobile--letter-spacing: -0.035em;
-
-  --text-solution-tab-desktop: 1.25rem;
-  --text-solution-tab-desktop--line-height: 1.75rem;
-  --text-solution-tab-desktop--font-weight: 600;
-  --text-solution-tab-desktop--letter-spacing: 0;
-
-  --text-solution-tab-mobile: 0.875rem;
-  --text-solution-tab-mobile--line-height: 1.375rem;
-  --text-solution-tab-mobile--font-weight: 600;
-  --text-solution-tab-mobile--letter-spacing: 0;
-
-  --text-solution-service-title-desktop: 1.375rem;
-  --text-solution-service-title-desktop--line-height: 2rem;
-  --text-solution-service-title-desktop--font-weight: 700;
-  --text-solution-service-title-desktop--letter-spacing: -0.02em;
-
-  --text-solution-service-title-mobile: 1.125rem;
-  --text-solution-service-title-mobile--line-height: 1.75rem;
-  --text-solution-service-title-mobile--font-weight: 700;
-  --text-solution-service-title-mobile--letter-spacing: -0.02em;
-
-  --text-solution-service-toggle: 1.5rem;
-  --text-solution-service-toggle--line-height: 2rem;
-  --text-solution-service-toggle--font-weight: 400;
-  --text-solution-service-toggle--letter-spacing: 0;
-
-  --text-solution-service-column-title: 0.875rem;
-  --text-solution-service-column-title--line-height: 1.375rem;
-  --text-solution-service-column-title--font-weight: 700;
-  --text-solution-service-column-title--letter-spacing: 0;
-
-  --text-solution-service-column-text-desktop: 1rem;
-  --text-solution-service-column-text-desktop--line-height: 1.75rem;
-  --text-solution-service-column-text-desktop--font-weight: 400;
-  --text-solution-service-column-text-desktop--letter-spacing: 0;
-
-  --text-solution-service-column-text-mobile: 0.9375rem;
-  --text-solution-service-column-text-mobile--line-height: 1.625rem;
-  --text-solution-service-column-text-mobile--font-weight: 400;
-  --text-solution-service-column-text-mobile--letter-spacing: 0;
-
+  /* Solution page typography (contact CTA) */
   --text-solution-cta-title-desktop: 2rem;
   --text-solution-cta-title-desktop--line-height: 2.75rem;
   --text-solution-cta-title-desktop--font-weight: 700;
@@ -2557,279 +2491,7 @@ body {
   }
 }
 
-/* Solution page — 솔루션 (preview .solution-view; Figma 847:26513 / 847:27623).
- * Hero reuses .page-hero. Chevrons and glows are Figma-exported SVGs used as decorative backgrounds;
- * tablet (≤1024px) shares the mobile composition.
- */
-.solution-heading {
-  margin: 0;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-solution-heading-desktop);
-  line-height: var(--text-solution-heading-desktop--line-height);
-  font-weight: var(--text-solution-heading-desktop--font-weight);
-  letter-spacing: var(--text-solution-heading-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-/* Service details — 솔루션 상세 (preview .solution-services glass look; Figma 847:27561 / 847:28662 for layout). */
-.solution-services {
-  padding: 80px 0 96px;
-  background:
-    radial-gradient(
-      ellipse at 15% 5%,
-      var(--color-solution-glow-violet),
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 85% 0%,
-      var(--color-solution-glow-cyan),
-      transparent 40%
-    ),
-    var(--color-solution-services-base);
-  color: var(--color-text-primary);
-  scroll-margin-top: var(--header-height-desktop-scrolled);
-}
-
-.solution-services__inner {
-  width: min(
-    var(--solution-inner-max),
-    calc(100% - var(--section-gutter-desktop) * 2)
-  );
-  margin-inline: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-32);
-}
-
-.solution-tabs {
-  display: flex;
-  gap: var(--spacing-8);
-  padding: var(--spacing-8);
-  border: 1px solid var(--color-white);
-  border-radius: var(--radius-24);
-  background: var(--color-solution-glass);
-  box-shadow:
-    inset 0 1px 0 var(--color-white),
-    var(--solution-tabs-shadow);
-  backdrop-filter: blur(22px) saturate(140%);
-}
-
-.solution-tab {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: var(--spacing-20) var(--spacing-16);
-  border: 1px solid transparent;
-  border-radius: 18px;
-  background: transparent;
-  color: var(--color-solution-tab-text);
-  font-family: var(--font-family-body);
-  font-size: var(--text-solution-tab-desktop);
-  line-height: var(--text-solution-tab-desktop--line-height);
-  font-weight: var(--text-solution-tab-desktop--font-weight);
-  letter-spacing: var(--text-solution-tab-desktop--letter-spacing);
-  text-align: left;
-  word-break: keep-all;
-  overflow-wrap: normal;
-  cursor: pointer;
-  transition:
-    color var(--solution-motion),
-    background-color var(--solution-motion),
-    box-shadow var(--solution-motion);
-}
-
-.solution-tab[aria-selected="true"] {
-  border-color: var(--color-white);
-  background: var(--color-white);
-  color: var(--color-solution-accent-deep);
-  box-shadow: var(--solution-tab-active-shadow);
-}
-
-.solution-tab:focus-visible {
-  outline: 2px solid var(--color-action-primary);
-  outline-offset: -2px;
-}
-
-.solution-panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-32);
-}
-
-.solution-panel[hidden] {
-  display: none;
-}
-
-.solution-panel__intro {
-  max-width: 980px;
-  margin: 0;
-  color: var(--color-solution-intro);
-  font-family: var(--font-family-body);
-  font-size: var(--text-section-description-desktop);
-  line-height: var(--text-section-description-desktop--line-height);
-  font-weight: var(--text-section-description-desktop--font-weight);
-  letter-spacing: var(--text-section-description-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-.solution-service-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-12);
-}
-
-.solution-service {
-  min-width: 0;
-  border-radius: var(--radius-20);
-  background: linear-gradient(
-    120deg,
-    var(--color-solution-glass-from),
-    var(--color-solution-glass-to)
-  );
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 80%),
-    var(--solution-service-shadow);
-  backdrop-filter: blur(24px) saturate(135%);
-  overflow: clip;
-  interpolate-size: allow-keywords;
-}
-
-.solution-service__summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-24);
-  padding: 26px var(--spacing-32);
-  list-style: none;
-  cursor: pointer;
-}
-
-.solution-service__summary::-webkit-details-marker {
-  display: none;
-}
-
-.solution-service__summary:focus-visible {
-  outline: 2px solid var(--color-action-primary);
-  outline-offset: -2px;
-  border-radius: 18px;
-}
-
-.solution-service__title {
-  flex: 1 1 0;
-  min-width: 0;
-  margin: 0;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-solution-service-title-desktop);
-  line-height: var(--text-solution-service-title-desktop--line-height);
-  font-weight: var(--text-solution-service-title-desktop--font-weight);
-  letter-spacing: var(--text-solution-service-title-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: break-word;
-}
-
-.solution-service__subtitle {
-  color: var(--color-solution-subtitle);
-  font-family: var(--font-family-body);
-  font-size: 0.82em;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-/* Plus / minus drawn with two bars: the vertical bar rotates away when open. */
-.solution-service__toggle {
-  position: relative;
-  flex: none;
-  width: 24px;
-  height: 24px;
-  color: var(--color-solution-toggle);
-}
-
-.solution-service__toggle::before,
-.solution-service__toggle::after {
-  content: "";
-  position: absolute;
-  top: 11px;
-  left: 4px;
-  width: 16px;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-}
-
-.solution-service__toggle::after {
-  transform: rotate(90deg);
-}
-
-.solution-service[open] .solution-service__toggle {
-  color: var(--color-brand-primary);
-}
-
-.solution-service[open] .solution-service__toggle::after {
-  transform: rotate(0);
-}
-
-.solution-service__body {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-32) 40px;
-  margin: 0 var(--spacing-32);
-  padding: 28px 0 var(--spacing-32);
-  border-top: 1px solid var(--color-solution-column-rule);
-}
-
-.solution-service__column {
-  min-width: 0;
-}
-
-.solution-service__column-title {
-  margin: 0 0 14px;
-  color: var(--color-solution-accent-deep);
-  font-family: var(--font-family-body);
-  font-size: var(--text-solution-service-column-title);
-  line-height: var(--text-solution-service-column-title--line-height);
-  font-weight: var(--text-solution-service-column-title--font-weight);
-  letter-spacing: var(--text-solution-service-column-title--letter-spacing);
-}
-
-.solution-service__column-text {
-  margin: 0;
-  color: var(--color-solution-column-text);
-  white-space: pre-line;
-  word-break: keep-all;
-  overflow-wrap: break-word;
-  font-family: var(--font-family-body);
-  font-size: var(--text-solution-service-column-text-desktop);
-  line-height: var(--text-solution-service-column-text-desktop--line-height);
-  font-weight: var(--text-solution-service-column-text-desktop--font-weight);
-  letter-spacing: var(--text-solution-service-column-text-desktop--letter-spacing);
-}
-
-/* Without backdrop-filter the translucent surfaces would read as washed out, so fall back to opaque tints. */
-@supports not (backdrop-filter: blur(1px)) {
-  .solution-tabs {
-    background: var(--color-solution-glass-fallback-tabs);
-  }
-  .solution-service {
-    background: var(--color-solution-glass-fallback-service);
-  }
-}
-
-/* Progressive enhancement: animate <details> where ::details-content is supported; elsewhere it toggles instantly. */
-@supports selector(::details-content) {
-  .solution-service::details-content {
-    block-size: 0;
-    overflow: clip;
-    transition:
-      block-size var(--solution-motion),
-      content-visibility var(--solution-motion) allow-discrete;
-  }
-  .solution-service[open]::details-content {
-    block-size: auto;
-  }
-}
+/* Solution page — 솔루션. Hero reuses .page-hero and the closing CTA is .contact-cta. */
 
 /* AX Infra — 솔루션 AX Infra (Figma 1191:35163 / 1191:35166; no preview section).
  * Map cards and detail rows are exclusive <details>. Desktop places the map groups on one grid
@@ -3367,21 +3029,18 @@ body {
   display: contents;
 }
 
-:is(.solution-services, .contact-cta)
-  [data-reveal-item][data-reveal] {
+.contact-cta [data-reveal-item][data-reveal] {
   transition:
     opacity 560ms ease,
     transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-:is(.solution-services, .contact-cta)
-  [data-reveal-item][data-reveal="pending"] {
+.contact-cta [data-reveal-item][data-reveal="pending"] {
   opacity: 0;
   transform: translateY(var(--solution-reveal-shift));
 }
 
-:is(.solution-services, .contact-cta)
-  [data-reveal-item][data-reveal="visible"] {
+.contact-cta [data-reveal-item][data-reveal="visible"] {
   opacity: 1;
   transform: none;
 }
@@ -3393,95 +3052,14 @@ body {
     background-color var(--solution-motion);
 }
 
-.solution-service:nth-child(2)[data-reveal="visible"] {
-  transition-delay: calc(var(--solution-reveal-step) * 1);
-}
-.solution-service:nth-child(3)[data-reveal="visible"] {
-  transition-delay: calc(var(--solution-reveal-step) * 2);
-}
-.solution-service:nth-child(4)[data-reveal="visible"] {
-  transition-delay: calc(var(--solution-reveal-step) * 3);
-}
-.solution-service:nth-child(5)[data-reveal="visible"] {
-  transition-delay: calc(var(--solution-reveal-step) * 4);
-}
 .contact-cta__button[data-reveal="visible"] {
   transition-delay: calc(var(--solution-reveal-step) * 1.5);
 }
 
 /* ≤1024px: tablet shares the mobile composition (Figma mobile values live here). */
 @media (width <= 1024px) {
-  .solution-heading {
-    font-size: var(--text-solution-heading-mobile);
-    line-height: var(--text-solution-heading-mobile--line-height);
-    font-weight: var(--text-solution-heading-mobile--font-weight);
-    letter-spacing: var(--text-solution-heading-mobile--letter-spacing);
-  }
-
   .contact-cta__button[data-reveal="visible"] {
     transition-delay: 0ms;
-  }
-
-  .solution-services {
-    padding: 56px 0 64px;
-  }
-  .solution-services__inner {
-    width: calc(100% - var(--spacing-48) * 2);
-    gap: var(--spacing-24);
-  }
-  .solution-tabs {
-    gap: 6px;
-    padding: 6px;
-    border-radius: var(--radius-20);
-  }
-  .solution-tab {
-    min-height: 72px;
-    padding: 14px var(--spacing-8);
-    border-radius: 15px;
-    font-size: var(--text-solution-tab-mobile);
-    line-height: var(--text-solution-tab-mobile--line-height);
-    font-weight: var(--text-solution-tab-mobile--font-weight);
-    letter-spacing: var(--text-solution-tab-mobile--letter-spacing);
-  }
-  .solution-panel {
-    gap: var(--spacing-24);
-  }
-  .solution-panel__intro {
-    font-size: var(--text-ceo-letter-mobile);
-    line-height: var(--text-ceo-letter-mobile--line-height);
-    font-weight: var(--text-ceo-letter-mobile--font-weight);
-    letter-spacing: var(--text-ceo-letter-mobile--letter-spacing);
-  }
-  .solution-services__break {
-    display: none;
-  }
-  .solution-service__summary {
-    gap: var(--spacing-16);
-    padding: 22px var(--spacing-20);
-  }
-  .solution-service__summary:focus-visible {
-    outline-offset: -5px;
-  }
-  .solution-service__title {
-    font-size: var(--text-solution-service-title-mobile);
-    line-height: var(--text-solution-service-title-mobile--line-height);
-    font-weight: var(--text-solution-service-title-mobile--font-weight);
-    letter-spacing: var(--text-solution-service-title-mobile--letter-spacing);
-  }
-  .solution-service__body {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-24);
-    margin: 0 var(--spacing-20);
-    padding: var(--spacing-24) 0;
-  }
-  .solution-service__column-title {
-    margin-bottom: var(--spacing-8);
-  }
-  .solution-service__column-text {
-    font-size: var(--text-solution-service-column-text-mobile);
-    line-height: var(--text-solution-service-column-text-mobile--line-height);
-    font-weight: var(--text-solution-service-column-text-mobile--font-weight);
-    letter-spacing: var(--text-solution-service-column-text-mobile--letter-spacing);
   }
 
   .contact-cta {
@@ -3511,16 +3089,13 @@ body {
 }
 
 @media (width <= 760px) {
-  .solution-services__inner,
   .contact-cta__inner {
     width: calc(100% - var(--spacing-32));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .solution-tab,
-  .contact-cta__button,
-  .solution-service::details-content {
+  .contact-cta__button {
     transition: none;
   }
 }

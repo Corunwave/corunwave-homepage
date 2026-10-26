@@ -301,12 +301,12 @@
   --font-weight-medium: 500;
   --font-weight-bold: 700;
 
-  --text-header-navigation: 1rem;
-  --text-header-navigation--line-height: 1.5rem;
-  --text-header-navigation--font-weight: 400;
+  --text-header-navigation: 1.0625rem;
+  --text-header-navigation--line-height: 1.625rem;
+  --text-header-navigation--font-weight: 500;
   --text-header-navigation--letter-spacing: 0;
 
-  --text-header-cta: 0.875rem;
+  --text-header-cta: 0.9375rem;
   --text-header-cta--line-height: 1.25rem;
   --text-header-cta--font-weight: 700;
   --text-header-cta--letter-spacing: 0;
@@ -994,7 +994,7 @@ body {
 }
 .site-header__desktop ul {
   display: flex;
-  gap: var(--spacing-28);
+  gap: var(--spacing-40);
 }
 .site-header__desktop a {
   display: block;
@@ -1056,6 +1056,9 @@ body {
 @media (width <= 1024px) {
   .site-header__bar {
     padding-inline: var(--spacing-48);
+  }
+  .site-header__desktop ul {
+    gap: var(--spacing-32);
   }
 }
 @media (width <= 760px) {

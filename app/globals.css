@@ -1213,9 +1213,23 @@ body {
 .site-footer__legal {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-20);
+  row-gap: var(--spacing-8);
   font-size: var(--text-footer-company-information);
   line-height: 22px;
+}
+
+.site-footer__legal li {
+  display: flex;
+  align-items: center;
+}
+
+/* Vertical dividers between legal links only (no outer edges). */
+.site-footer__legal li + li::before {
+  content: "";
+  width: 1px;
+  height: var(--spacing-12);
+  margin-inline: var(--spacing-12);
+  background: var(--color-process-divider);
 }
 
 .site-footer__copyright {
@@ -1272,11 +1286,6 @@ body {
   }
   .site-footer__bottom {
     margin-top: var(--spacing-32);
-  }
-  .site-footer__legal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-8) var(--spacing-20);
   }
 }
 

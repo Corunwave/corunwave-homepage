@@ -3,7 +3,7 @@ import ScrollReveal from "../commons/reveal/ScrollReveal";
 
 type PartnershipBenefitsSectionProps = { content: PartnershipBenefitsContent };
 
-/* Partnership benefits "파트너십 기대효과" + To-be strategy (preview .partner-benefits / .partner-strategy; Figma 876:28767 / 876:29963).
+/* Partnership benefits "파트너십 기대효과" (preview .partner-benefits; Figma 876:28767 / 876:29963).
  * Server component; ScrollReveal only marks the benefits for the staggered entry. */
 const PartnershipBenefitsSection = ({
   content,
@@ -26,21 +26,6 @@ const PartnershipBenefitsSection = ({
                 <p className="partner-benefit__english">{english}</p>
               </article>
             ))}
-          </div>
-
-          <div className="partner-strategy">
-            <h3 className="partner-strategy__heading">
-              {content.strategyHeading}
-            </h3>
-            <div className="partner-strategy__grid">
-              {content.strategies.map(({ term, title, description }) => (
-                <article key={term} className="partner-strategy__card">
-                  <p className="partner-strategy__term">{term}</p>
-                  <h4 className="partner-strategy__title">{title}</h4>
-                  <p className="partner-strategy__description">{description}</p>
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </ScrollReveal>

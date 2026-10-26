@@ -198,6 +198,43 @@
   --color-partner-benefit-sub: #69788d;
   --color-partner-panel-border: #e1e8f2;
   --partner-reveal-shift: 14px;
+
+  /* To-be strategy */
+  --color-partner-lavender: #7168c8;
+  --partner-tobe-bubble-surface: linear-gradient(
+    90deg,
+    rgb(227 242 255 / 82%),
+    rgb(247 250 255 / 76%)
+  );
+  --partner-tobe-height: 520px;
+  --partner-tobe-overhang: 48px;
+  --partner-tobe-chevron-tip: 22px;
+  --partner-tobe-track-top: 236px;
+  --partner-tobe-track-height: 28px;
+  --partner-tobe-point-size: 18px;
+  --partner-tobe-point-top: 241px;
+  --partner-tobe-bubble-width: 360px;
+  --partner-tobe-bubble-height: 176px;
+  --partner-tobe-bubble-lower-top: 330px;
+  --partner-tobe-mid-connector: 66px;
+  --partner-tobe-term-width: 240px;
+  --partner-tobe-term-below: 290px;
+  --partner-tobe-term-above: 190px;
+  --partner-tobe-glow-blur: 24px;
+  --partner-tobe-glow-opacity: 0.45;
+  --partner-tobe-glow-duration: 0.18s;
+  --partner-tobe-bubble-height-mobile: 220px;
+  --partner-tobe-term-offset: 58px;
+  --partner-tobe-rail-gutter: 54px;
+  --partner-tobe-rail-left: 6px;
+  --partner-tobe-rail-width: 28px;
+  --partner-tobe-rail-tip: 12px;
+  --partner-tobe-rail-end: 44px;
+  --partner-tobe-rail-connector-left: 28px;
+  --partner-tobe-point-left-mobile: 11px;
+  --partner-tobe-point-top-mobile: 151px;
+  --partner-tobe-connector-top-mobile: 159px;
+  --partner-tobe-connector-length-mobile: 26px;
   --partner-reveal-step: 80ms;
 
   --color-partner-label-surface: #edf4ff;
@@ -268,12 +305,18 @@
   --spacing-space-4: var(--spacing-4);
   --spacing-8: 8px;
   --spacing-space-8: var(--spacing-8);
+  --spacing-10: 10px;
+  --spacing-space-10: var(--spacing-10);
   --spacing-12: 12px;
   --spacing-space-12: var(--spacing-12);
   --spacing-16: 16px;
   --spacing-space-16: var(--spacing-16);
+  --spacing-18: 18px;
+  --spacing-space-18: var(--spacing-18);
   --spacing-20: 20px;
   --spacing-space-20: var(--spacing-20);
+  --spacing-22: 22px;
+  --spacing-space-22: var(--spacing-22);
   --spacing-24: 24px;
   --spacing-space-24: var(--spacing-24);
   --spacing-28: 28px;
@@ -860,20 +903,20 @@
   --text-partner-benefit-english-mobile--font-weight: 400;
   --text-partner-benefit-english-mobile--letter-spacing: 0;
 
-  --text-partner-strategy-title-desktop: 1.3125rem;
-  --text-partner-strategy-title-desktop--line-height: 2rem;
-  --text-partner-strategy-title-desktop--font-weight: 700;
-  --text-partner-strategy-title-desktop--letter-spacing: -0.03em;
+  --text-partner-tobe-title: 1.3125rem;
+  --text-partner-tobe-title--line-height: 1.875rem;
+  --text-partner-tobe-title--font-weight: 700;
+  --text-partner-tobe-title--letter-spacing: 0;
 
-  --text-partner-strategy-title-mobile: 1.375rem;
-  --text-partner-strategy-title-mobile--line-height: 2.125rem;
-  --text-partner-strategy-title-mobile--font-weight: 700;
-  --text-partner-strategy-title-mobile--letter-spacing: -0.03em;
+  --text-partner-tobe-term-desktop: 1.1875rem;
+  --text-partner-tobe-term-desktop--line-height: 2rem;
+  --text-partner-tobe-term-desktop--font-weight: 700;
+  --text-partner-tobe-term-desktop--letter-spacing: 0;
 
-  --text-partner-strategy-term: 0.875rem;
-  --text-partner-strategy-term--line-height: 1.375rem;
-  --text-partner-strategy-term--font-weight: 500;
-  --text-partner-strategy-term--letter-spacing: 0.04em;
+  --text-partner-tobe-term-mobile: 1.1875rem;
+  --text-partner-tobe-term-mobile--line-height: 1.875rem;
+  --text-partner-tobe-term-mobile--font-weight: 700;
+  --text-partner-tobe-term-mobile--letter-spacing: 0;
 
   --text-partner-label: 0.875rem;
   --text-partner-label--line-height: 1.375rem;
@@ -3651,6 +3694,255 @@ body {
   }
 }
 
+/* To-be strategy — 파트너십 성공을 위한 To-be 전략 (Figma 1097:34491 / 1097:34519; preview not referenced).
+ * Desktop: three chevron stages on one horizontal track, speech bubbles alternate above / below / above.
+ * ≤1024px (tablet shares mobile): a vertical rail with one bubble per stage. Glow on hover is desktop-only.
+ */
+.partner-tobe {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0 var(--partner-tobe-overhang) 0 0;
+  list-style: none;
+}
+
+.partner-tobe__stage {
+  position: relative;
+  height: var(--partner-tobe-height);
+}
+
+.partner-tobe__stage--short {
+  --tobe-accent: var(--color-brand-primary);
+  --tobe-term: var(--color-brand-primary);
+}
+.partner-tobe__stage--mid {
+  --tobe-accent: var(--color-brand-cyan);
+  --tobe-term: var(--color-brand-primary);
+}
+.partner-tobe__stage--long {
+  --tobe-accent: var(--color-partner-lavender);
+  --tobe-term: var(--color-partner-lavender);
+}
+
+.partner-tobe__chevron {
+  position: absolute;
+  top: var(--partner-tobe-track-top);
+  left: 0;
+  width: calc(100% + var(--partner-tobe-chevron-tip));
+  height: var(--partner-tobe-track-height);
+}
+.partner-tobe__stage--short .partner-tobe__chevron {
+  z-index: 3;
+}
+.partner-tobe__stage--mid .partner-tobe__chevron {
+  z-index: 2;
+}
+.partner-tobe__stage--long .partner-tobe__chevron {
+  z-index: 1;
+  width: calc(100% + var(--partner-tobe-overhang));
+}
+.partner-tobe__chevron--mobile {
+  display: none;
+}
+
+.partner-tobe__point {
+  position: absolute;
+  z-index: 4;
+  top: var(--partner-tobe-point-top);
+  left: calc(50% - var(--partner-tobe-point-size) / 2);
+  width: var(--partner-tobe-point-size);
+  height: var(--partner-tobe-point-size);
+  box-sizing: border-box;
+  border: var(--spacing-4) solid var(--tobe-accent);
+  border-radius: var(--radius-999);
+  background: var(--color-white);
+}
+
+.partner-tobe__connector {
+  position: absolute;
+  left: calc(50% - 1px);
+  width: 2px;
+  background: var(--tobe-accent);
+}
+.partner-tobe__stage--short .partner-tobe__connector,
+.partner-tobe__stage--long .partner-tobe__connector {
+  top: var(--partner-tobe-bubble-height);
+  height: calc(var(--partner-tobe-track-top) + 1px - var(--partner-tobe-bubble-height));
+}
+.partner-tobe__stage--mid .partner-tobe__connector {
+  top: calc(var(--partner-tobe-track-top) + var(--partner-tobe-track-height));
+  height: var(--partner-tobe-mid-connector);
+}
+
+.partner-tobe__term {
+  position: absolute;
+  top: var(--partner-tobe-term-below);
+  left: calc(50% - var(--partner-tobe-term-width) / 2);
+  width: var(--partner-tobe-term-width);
+  margin: 0;
+  color: var(--tobe-term);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-tobe-term-desktop);
+  line-height: var(--text-partner-tobe-term-desktop--line-height);
+  font-weight: var(--text-partner-tobe-term-desktop--font-weight);
+  letter-spacing: var(--text-partner-tobe-term-desktop--letter-spacing);
+  text-align: center;
+}
+.partner-tobe__stage--mid .partner-tobe__term {
+  top: var(--partner-tobe-term-above);
+}
+
+.partner-tobe__card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: min(var(--partner-tobe-bubble-width), calc(100% - var(--spacing-40)));
+  margin-inline: auto;
+}
+.partner-tobe__stage--mid .partner-tobe__card {
+  top: var(--partner-tobe-bubble-lower-top);
+}
+
+/* Glow sits behind the translucent bubble (sibling, not ::before, so the bubble's backdrop blur stays above it). */
+.partner-tobe__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-24);
+  background: var(--tobe-accent);
+  filter: blur(var(--partner-tobe-glow-blur));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--partner-tobe-glow-duration) ease;
+}
+
+.partner-tobe__bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-10);
+  min-height: var(--partner-tobe-bubble-height);
+  box-sizing: border-box;
+  padding: var(--spacing-22) var(--spacing-20);
+  border-radius: var(--radius-24);
+  background: var(--partner-tobe-bubble-surface);
+  backdrop-filter: blur(11px);
+  color: var(--color-brand-navy);
+  text-align: center;
+}
+
+.partner-tobe__title {
+  margin: 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-tobe-title);
+  line-height: var(--text-partner-tobe-title--line-height);
+  font-weight: var(--text-partner-tobe-title--font-weight);
+  letter-spacing: var(--text-partner-tobe-title--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-tobe__description {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--text-partner-role-text);
+  line-height: var(--text-partner-role-text--line-height);
+  font-weight: var(--text-partner-role-text--font-weight);
+  letter-spacing: var(--text-partner-role-text--letter-spacing);
+  white-space: pre-line;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+@media (hover: hover) and (width > 1024px) {
+  .partner-tobe__stage:hover .partner-tobe__glow {
+    opacity: var(--partner-tobe-glow-opacity);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-tobe__glow {
+    transition: none;
+  }
+}
+
+/* ≤1024px: tablet shares the mobile composition (Figma mobile values live here). */
+@media (width <= 1024px) {
+  .partner-tobe {
+    display: block;
+    padding-right: 0;
+  }
+  .partner-tobe__stage {
+    height: auto;
+    padding: var(--partner-tobe-term-offset) 0 0 var(--partner-tobe-rail-gutter);
+  }
+  .partner-tobe__stage--long {
+    padding-bottom: var(--partner-tobe-rail-end);
+  }
+  .partner-tobe__stage--mid {
+    --tobe-accent: var(--color-brand-primary);
+  }
+
+  .partner-tobe__chevron--desktop {
+    display: none;
+  }
+  .partner-tobe__chevron--mobile {
+    display: block;
+  }
+  .partner-tobe__chevron,
+  .partner-tobe__stage--long .partner-tobe__chevron {
+    top: 0;
+    left: var(--partner-tobe-rail-left);
+    width: var(--partner-tobe-rail-width);
+    height: calc(100% + var(--partner-tobe-rail-tip));
+  }
+  .partner-tobe__stage--long .partner-tobe__chevron {
+    height: 100%;
+  }
+
+  .partner-tobe__point {
+    top: var(--partner-tobe-point-top-mobile);
+    left: var(--partner-tobe-point-left-mobile);
+  }
+
+  .partner-tobe__stage .partner-tobe__connector {
+    top: var(--partner-tobe-connector-top-mobile);
+    left: var(--partner-tobe-rail-connector-left);
+    width: var(--partner-tobe-connector-length-mobile);
+    height: 2px;
+  }
+
+  .partner-tobe__term,
+  .partner-tobe__stage--mid .partner-tobe__term {
+    position: static;
+    width: auto;
+    margin-bottom: var(--spacing-12);
+    font-size: var(--text-partner-tobe-term-mobile);
+    line-height: var(--text-partner-tobe-term-mobile--line-height);
+    font-weight: var(--text-partner-tobe-term-mobile--font-weight);
+    letter-spacing: var(--text-partner-tobe-term-mobile--letter-spacing);
+    text-align: left;
+  }
+
+  .partner-tobe__card,
+  .partner-tobe__stage--mid .partner-tobe__card {
+    position: relative;
+    top: auto;
+    width: auto;
+    margin: 0;
+  }
+
+  .partner-tobe__bubble {
+    min-height: var(--partner-tobe-bubble-height-mobile);
+    padding: var(--spacing-20) var(--spacing-18);
+  }
+  .partner-tobe__description {
+    white-space: normal;
+  }
+}
+
 /* Customer proposals — 고객 유형별 제안 (Figma 876:28790 / 876:29988; state variants 876:30096).
  * Own tab classes: the solution tabs' mobile overrides (min-height, tight padding) do not fit a scrolling row.
  */
@@ -4073,8 +4365,8 @@ body {
   }
 }
 
-/* Partnership benefits — 파트너십 기대효과 + To-be 전략 (Figma 876:28767 / 876:29963).
- * Benefits are an open 2×2 grid (no hover/background); the To-be strategy sits in one shared panel.
+/* Partnership benefits — 파트너십 기대효과 (Figma 876:28767 / 876:29963).
+ * Benefits are an open 2×2 grid (no hover/background).
  */
 .partner-benefits {
   display: grid;
@@ -4108,69 +4400,6 @@ body {
   line-height: var(--text-partner-benefit-english-desktop--line-height);
   font-weight: var(--text-partner-benefit-english-desktop--font-weight);
   letter-spacing: var(--text-partner-benefit-english-desktop--letter-spacing);
-}
-
-.partner-strategy {
-  padding: var(--spacing-28);
-  border: 1px solid var(--color-partner-panel-border);
-  border-radius: var(--radius-20);
-  background: var(--color-white);
-}
-
-.partner-strategy__heading {
-  margin: 0 0 var(--spacing-28);
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-partner-step-title-desktop);
-  line-height: var(--text-partner-step-title-desktop--line-height);
-  font-weight: var(--text-partner-step-title-desktop--font-weight);
-  letter-spacing: var(--text-partner-step-title-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-.partner-strategy__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-32);
-}
-
-.partner-strategy__card {
-  min-width: 0;
-}
-
-.partner-strategy__term {
-  margin: 0 0 var(--spacing-12);
-  color: var(--color-solution-accent-deep);
-  font-family: var(--font-family-emphasis);
-  font-size: var(--text-partner-strategy-term);
-  line-height: var(--text-partner-strategy-term--line-height);
-  font-weight: var(--text-partner-strategy-term--font-weight);
-  letter-spacing: var(--text-partner-strategy-term--letter-spacing);
-}
-
-.partner-strategy__title {
-  margin: 0;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-partner-strategy-title-desktop);
-  line-height: var(--text-partner-strategy-title-desktop--line-height);
-  font-weight: var(--text-partner-strategy-title-desktop--font-weight);
-  letter-spacing: var(--text-partner-strategy-title-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-.partner-strategy__description {
-  margin: 0;
-  padding-top: var(--spacing-16);
-  color: var(--color-partner-body);
-  font-size: var(--text-partner-role-text);
-  line-height: var(--text-partner-role-text--line-height);
-  font-weight: var(--text-partner-role-text--font-weight);
-  letter-spacing: var(--text-partner-role-text--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
 }
 
 /* Scroll reveal: data-reveal is set by useScrollReveal; without JS (or with reduced motion) the benefits stay visible. */
@@ -4222,29 +4451,6 @@ body {
     line-height: var(--text-partner-benefit-english-mobile--line-height);
     font-weight: var(--text-partner-benefit-english-mobile--font-weight);
     letter-spacing: var(--text-partner-benefit-english-mobile--letter-spacing);
-  }
-
-  .partner-strategy {
-    padding: var(--spacing-24);
-  }
-  .partner-strategy__heading {
-    font-size: var(--text-partner-step-title-mobile);
-    line-height: var(--text-partner-step-title-mobile--line-height);
-    font-weight: var(--text-partner-step-title-mobile--font-weight);
-    letter-spacing: var(--text-partner-step-title-mobile--letter-spacing);
-  }
-  .partner-strategy__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-28);
-  }
-  .partner-strategy__title {
-    font-size: var(--text-partner-strategy-title-mobile);
-    line-height: var(--text-partner-strategy-title-mobile--line-height);
-    font-weight: var(--text-partner-strategy-title-mobile--font-weight);
-    letter-spacing: var(--text-partner-strategy-title-mobile--letter-spacing);
-  }
-  .partner-strategy__description {
-    padding-top: var(--spacing-12);
   }
 }
 

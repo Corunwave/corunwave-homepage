@@ -54,12 +54,19 @@ export type CollaborationProcessContent = {
 export type PartnershipBenefitsContent = {
   title: string;
   benefits: readonly { title: string; english: string }[];
-  strategyHeading: string;
-  strategies: readonly {
-    term: string;
-    title: string;
-    description: string;
-  }[];
+};
+
+export type ToBeStageContent = {
+  id: "short" | "mid" | "long";
+  term: string;
+  title: string;
+  /** "\n" is a desktop line break. */
+  description: string;
+};
+
+export type ToBeStrategyContent = {
+  title: string;
+  stages: readonly [ToBeStageContent, ToBeStageContent, ToBeStageContent];
 };
 
 export type UniversityProposalContent = {
@@ -265,27 +272,33 @@ export const partnershipBenefits: PartnershipBenefitsContent = {
   { title: "통합 솔루션의 완성", english: "Value Integration" },
   { title: "전략적 자원 최적화", english: "Resource Efficiency" },
 ],
-  strategyHeading: "파트너십 성공을 위한 To-be 전략",
-  strategies: [
-  {
-    term: "short-term",
-    title: "레퍼런스 공유 및 공동 수주",
-    description:
-      "파트너사의 기존 레퍼런스를 코런웨이브의 기획력으로 재포장하여 신규 시장을 공동 개척합니다.",
-  },
-  {
-    term: "mid-term",
-    title: "서비스 표준화 및 패키징",
-    description:
-      "개별 프로젝트 단위의 협업을 넘어 공동 브랜드 상품을 개발하여 시장 지배력을 높입니다.",
-  },
-  {
-    term: "long-term",
-    title: "플랫폼 생태계 완성",
-    description:
-      "협업 파트너들이 자발적으로 기회를 제안하고 성과를 나누는 선순환 구조를 완성합니다.",
-  },
-],
+};
+
+export const toBeStrategy: ToBeStrategyContent = {
+  title: "파트너십 성공을 위한 To-be 전략",
+  stages: [
+    {
+      id: "short",
+      term: "short-term",
+      title: "레퍼런스 공유 및 공동 수주",
+      description:
+        "파트너의 기존 레퍼런스를\n코런웨이브의 기획력으로 재구성하여\n신규 시장을 공동 개척합니다.",
+    },
+    {
+      id: "mid",
+      term: "mid-term",
+      title: "서비스 표준화 및 패키징",
+      description:
+        "개별 프로젝트 단위의 협업을 넘어\n공동의 서비스를 개발하여\n시장 지배력을 높입니다.",
+    },
+    {
+      id: "long",
+      term: "long-term",
+      title: "비즈니스 생태계 완성",
+      description:
+        "협업 파트너와 비즈니스 목표를 설정하고\n공동의 사업 제안 및 성과를 나누는\n선순환 구조를 완성합니다.",
+    },
+  ],
 };
 
 export const universityProposal: UniversityProposalContent = {

@@ -6,6 +6,7 @@ import CooperationModelsSection from "../_components/partner-strategy/Cooperatio
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
 import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
 import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
+import ToBeStrategySection from "../_components/partner-strategy/ToBeStrategySection";
 import UniversityProposalSection from "../_components/partner-strategy/UniversityProposalSection";
 import {
   collaborationProcess,
@@ -14,6 +15,7 @@ import {
   partnerLogos,
   partnerStrategyPage,
   partnershipBenefits,
+  toBeStrategy,
   universityProposal,
 } from "../_content/partner-strategy";
 
@@ -38,6 +40,7 @@ export default function PartnerStrategyPage() {
         descriptionSize="compact"
       />
       <CooperationModelsSection content={cooperationModels} />
+      <ToBeStrategySection content={toBeStrategy} />
       <CustomerProposalsSection content={customerProposals} />
       <CollaborationProcessSection content={collaborationProcess} />
       <PartnershipBenefitsSection content={partnershipBenefits} />

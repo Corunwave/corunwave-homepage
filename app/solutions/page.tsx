@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import PageHero from "../_components/commons/hero/PageHero";
 import ContactCta from "../_components/commons/cta/ContactCta";
-import SolutionServicesSection, {
-  SolutionServicesFallback,
-} from "../_components/solutions/SolutionServicesSection";
-import { solutionServices, solutionsPage } from "../_content/solutions";
+import SolutionAXSection from "../_components/solutions/SolutionAXSection";
+import SolutionLearningSection from "../_components/solutions/SolutionLearningSection";
+import { axInfra, solutionsPage } from "../_content/solutions";
 
 export const metadata: Metadata = {
   title: solutionsPage.title,
@@ -19,9 +17,8 @@ export default function SolutionsPage() {
         title={solutionsPage.title}
         description={solutionsPage.description}
       />
-      <Suspense fallback={<SolutionServicesFallback content={solutionServices} />}>
-        <SolutionServicesSection content={solutionServices} />
-      </Suspense>
+      <SolutionAXSection content={axInfra} />
+      <SolutionLearningSection />
       <ContactCta />
     </main>
   );

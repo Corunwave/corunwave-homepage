@@ -95,18 +95,7 @@
   --proposal-feature-width: 616px;
   --proposal-graphic-size: 150px;
 
-  /* Solutions */
-  --solutions-inner-max: 1248px;
-  --solutions-list-height: 560px;
-  /* Active card weight against a 1fr collapsed card (~960px : 272px at 1248px). */
-  --solutions-card-active-weight: 3.5fr;
-  --solutions-card-active-weight-tablet: 3.4fr;
-  --solutions-card-motion: 640ms cubic-bezier(0.22, 1, 0.36, 1);
-  --solutions-track-label-width: 232px;
-  --solutions-chevron-width: 32px;
-  --solutions-chevron-thickness: 13px;
   --color-process-divider: #d9e0e9;
-  --color-process-divider-soft: #e7ebf0;
 
   /* Service values */
   --service-values-inner-max: 1248px;
@@ -161,6 +150,15 @@
   --solution-tabs-shadow: 0 12px 32px #173d6e0b;
   --solution-tab-active-shadow: 0 5px 18px #28457310;
   --solution-service-shadow: 0 8px 28px rgb(47 72 117 / 3.5%);
+
+  /* AX Infra: white section; surfaces are separated by a neutral hairline, open rows get a faint tint. */
+  --ax-inner-max: 1248px;
+  --ax-flow-width: 220px;
+  /* Network heading, AI environment box and compact card width; the internal column is wider. */
+  --ax-map-domain-width: 160px;
+  --ax-map-internal-width: 248px;
+  --color-ax-line: #e5e8ec;
+  --color-ax-surface-active: #f7f9fc;
 
   /* Partner strategy page */
   --partner-inner-max: 1248px;
@@ -292,6 +290,7 @@
 
   --radius-0: 0px;
   --radius-12: 12px;
+  --radius-16: 16px;
   --radius-20: 20px;
   --radius-24: 24px;
   --radius-28: 28px;
@@ -607,45 +606,6 @@
   --text-solution-heading-mobile--font-weight: 700;
   --text-solution-heading-mobile--letter-spacing: -0.035em;
 
-  --text-solution-card-title-desktop: 1.6875rem;
-  --text-solution-card-title-desktop--line-height: 2.25rem;
-  --text-solution-card-title-desktop--font-weight: 700;
-  --text-solution-card-title-desktop--letter-spacing: 0;
-
-  --text-solution-card-title-mobile: 1.4375rem;
-  --text-solution-card-title-mobile--line-height: 2rem;
-  --text-solution-card-title-mobile--font-weight: 700;
-  --text-solution-card-title-mobile--letter-spacing: 0;
-
-  --text-solution-card-description-desktop: 1.0625rem;
-  --text-solution-card-description-desktop--line-height: 1.75rem;
-  --text-solution-card-description-desktop--font-weight: 400;
-  --text-solution-card-description-desktop--letter-spacing: 0;
-
-  --text-solution-card-description-mobile: 1rem;
-  --text-solution-card-description-mobile--line-height: 1.75rem;
-  --text-solution-card-description-mobile--font-weight: 400;
-  --text-solution-card-description-mobile--letter-spacing: 0;
-
-  --text-solutions-process: 1.3125rem;
-  --text-solutions-process--line-height: 2rem;
-  --text-solutions-process-narrow: 1.125rem;
-  --text-solutions-process-narrow--line-height: 1.75rem;
-  --text-solutions-process-mobile: 1.3125rem;
-  --text-solutions-process-mobile--line-height: 2rem;
-
-  --text-solutions-process-head: 1.4rem;
-  --text-solutions-process-head--line-height: 2.125rem;
-  --text-solutions-process-head-narrow: 1.1875rem;
-  --text-solutions-process-head-narrow--line-height: 1.75rem;
-  --text-solutions-process-head-mobile: 1.375rem;
-  --text-solutions-process-head-mobile--line-height: 2rem;
-
-  --text-solutions-description-desktop: 1.375rem;
-  --text-solutions-description-desktop--line-height: 2rem;
-  --text-solutions-description-mobile: 1.25rem;
-  --text-solutions-description-mobile--line-height: 1.875rem;
-
   --text-solution-tab-desktop: 1.25rem;
   --text-solution-tab-desktop--line-height: 1.75rem;
   --text-solution-tab-desktop--font-weight: 600;
@@ -665,7 +625,6 @@
   --text-solution-service-title-mobile--line-height: 1.75rem;
   --text-solution-service-title-mobile--font-weight: 700;
   --text-solution-service-title-mobile--letter-spacing: -0.02em;
-
 
   --text-solution-service-toggle: 1.5rem;
   --text-solution-service-toggle--line-height: 2rem;
@@ -696,6 +655,47 @@
   --text-solution-cta-title-mobile--line-height: 2.125rem;
   --text-solution-cta-title-mobile--font-weight: 700;
   --text-solution-cta-title-mobile--letter-spacing: 0;
+
+  /* AX Infra typography (intro desktop reuses section-description-desktop, AI environment reuses solutions-meta) */
+  --text-ax-title-desktop: 2.5rem;
+  --text-ax-title-desktop--line-height: 3.5rem;
+  --text-ax-title-desktop--font-weight: 700;
+  --text-ax-title-desktop--letter-spacing: 0;
+
+  --text-ax-title-mobile: 1.75rem;
+  --text-ax-title-mobile--line-height: 2.5rem;
+  --text-ax-title-mobile--font-weight: 700;
+  --text-ax-title-mobile--letter-spacing: 0;
+
+  --text-ax-intro-mobile: 1rem;
+  --text-ax-intro-mobile--line-height: 1.75rem;
+  --text-ax-intro-mobile--font-weight: 400;
+  --text-ax-intro-mobile--letter-spacing: 0;
+
+  --text-ax-flow: 1.125rem;
+  --text-ax-flow--line-height: 1.75rem;
+  --text-ax-flow--font-weight: 500;
+  --text-ax-flow--letter-spacing: 0;
+
+  --text-ax-label: 1.125rem;
+  --text-ax-label--line-height: 1.75rem;
+  --text-ax-label--font-weight: 700;
+  --text-ax-label--letter-spacing: 0;
+
+  --text-ax-detail-title: 1.25rem;
+  --text-ax-detail-title--line-height: 1.75rem;
+  --text-ax-detail-title--font-weight: 700;
+  --text-ax-detail-title--letter-spacing: 0;
+
+  --text-ax-body: 0.9375rem;
+  --text-ax-body--line-height: 1.625rem;
+  --text-ax-body--font-weight: 400;
+  --text-ax-body--letter-spacing: 0;
+
+  --text-ax-action: 1rem;
+  --text-ax-action--line-height: 1.5rem;
+  --text-ax-action--font-weight: 700;
+  --text-ax-action--letter-spacing: 0;
 
   --text-solution-cta-button: 1rem;
   --text-solution-cta-button--line-height: 1.5rem;
@@ -2831,6 +2831,470 @@ body {
   }
 }
 
+/* AX Infra — 솔루션 AX Infra (Figma 1191:35163 / 1191:35166; no preview section).
+ * Map cards and detail rows are exclusive <details>. Desktop places the map groups on one grid
+ * (groups are display: contents); ≤1024px the map stacks in DOM order, as in the mobile design.
+ */
+.ax-section {
+  padding: 64px 0 var(--spacing-96);
+  background: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.ax-inner {
+  width: min(
+    var(--ax-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.ax-title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-ax-title-desktop);
+  line-height: var(--text-ax-title-desktop--line-height);
+  font-weight: var(--text-ax-title-desktop--font-weight);
+  letter-spacing: var(--text-ax-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ax-intro {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  letter-spacing: var(--text-section-description-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.ax-overview {
+  display: grid;
+  grid-template-columns: var(--ax-flow-width) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--spacing-32);
+}
+
+/* Flow: two-line steps joined by a centered down chevron. */
+.ax-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ax-flow__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.ax-flow__chevron {
+  display: block;
+  margin-inline: auto;
+}
+
+.ax-flow__text {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-flow);
+  line-height: var(--text-ax-flow--line-height);
+  font-weight: var(--text-ax-flow--font-weight);
+  letter-spacing: var(--text-ax-flow--letter-spacing);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Each flow line is a bullet point. */
+.ax-flow__line {
+  display: block;
+}
+
+.ax-flow__line::before {
+  content: "•";
+  margin-right: var(--spacing-8);
+}
+
+/* Map grid: the 내부망 heading (160) and the internal column (248) overlap the second track (72),
+ * so the 외부망 heading starts at 176 and the external columns at 264, as in Figma. */
+.ax-map {
+  display: grid;
+  grid-template-columns:
+    var(--ax-map-domain-width)
+    calc(
+      var(--ax-map-internal-width) - var(--ax-map-domain-width) -
+        var(--spacing-16)
+    )
+    minmax(0, 1fr);
+  align-items: start;
+  gap: var(--spacing-16);
+}
+
+.ax-map__group {
+  display: contents;
+}
+
+.ax-domain {
+  margin: 0;
+  padding: var(--spacing-16);
+  border-radius: var(--radius-12);
+  background: var(--color-brand-navy);
+  color: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-label);
+  line-height: var(--text-ax-label--line-height);
+  font-weight: var(--text-ax-label--font-weight);
+  letter-spacing: var(--text-ax-label--letter-spacing);
+  text-align: center;
+}
+
+.ax-domain--internal {
+  grid-area: 1 / 1;
+}
+
+.ax-domain--external {
+  grid-area: 1 / 2 / 2 / -1;
+}
+
+.ax-map__internal {
+  grid-area: 2 / 1 / 3 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+}
+
+.ax-map__external {
+  grid-area: 2 / 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--spacing-16);
+}
+
+.ax-map__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.ax-map__ito {
+  grid-area: 3 / 1 / 4 / -1;
+  padding: var(--spacing-16);
+  border: 1.5px dashed var(--color-brand-primary);
+  border-radius: var(--radius-20);
+}
+
+.ax-env {
+  width: var(--ax-map-domain-width);
+  margin: 0;
+  padding: var(--spacing-16);
+  border: 1px solid var(--color-ax-line);
+  border-radius: var(--radius-12);
+  background: var(--color-white);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-solutions-meta);
+  line-height: var(--text-solutions-meta--line-height);
+  font-weight: var(--text-solutions-meta--font-weight);
+  letter-spacing: var(--text-solutions-meta--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Map cards and detail rows share the outlined white surface and the active tint. */
+.ax-card,
+.ax-detail {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--color-ax-line);
+  border-radius: var(--radius-16);
+  background: var(--color-white);
+  interpolate-size: allow-keywords;
+  transition: background-color var(--solution-motion);
+}
+
+.ax-card--compact {
+  width: var(--ax-map-domain-width);
+}
+
+.ax-card[open],
+.ax-detail[open] {
+  background: var(--color-ax-surface-active);
+}
+
+.ax-detail {
+  scroll-margin-top: calc(
+    var(--header-height-desktop-scrolled) + var(--spacing-16)
+  );
+}
+
+.ax-card__summary,
+.ax-detail__summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  list-style: none;
+  cursor: pointer;
+}
+
+.ax-detail__summary {
+  padding: var(--spacing-24);
+}
+
+.ax-card__summary::-webkit-details-marker,
+.ax-detail__summary::-webkit-details-marker {
+  display: none;
+}
+
+.ax-card__summary:focus-visible,
+.ax-detail__summary:focus-visible,
+.ax-card__action:focus-visible {
+  outline: 2px solid var(--color-action-primary);
+  outline-offset: -2px;
+  border-radius: var(--radius-16);
+}
+
+.ax-card__title,
+.ax-detail__title {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  color: var(--color-brand-navy);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.ax-card__title {
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-label);
+  line-height: var(--text-ax-label--line-height);
+  font-weight: var(--text-ax-label--font-weight);
+  letter-spacing: var(--text-ax-label--letter-spacing);
+}
+
+.ax-detail__title {
+  transition: color var(--solution-motion);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-ax-detail-title);
+  line-height: var(--text-ax-detail-title--line-height);
+  font-weight: var(--text-ax-detail-title--font-weight);
+  letter-spacing: var(--text-ax-detail-title--letter-spacing);
+}
+
+/* Map cards: plus / minus drawn with two bars; the vertical bar rotates flat when open. */
+.ax-toggle {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--color-brand-primary);
+}
+
+.ax-toggle::before,
+.ax-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--solution-motion);
+}
+
+.ax-toggle::after {
+  transform: rotate(90deg);
+}
+
+.ax-card[open] > summary .ax-toggle::after {
+  transform: rotate(0);
+}
+
+/* Detail rows: down chevron that flips up when open (a bordered square rotated 45deg). */
+.ax-chevron {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: var(--color-brand-primary);
+}
+
+.ax-chevron::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translate(-50%, -75%) rotate(45deg);
+  transition: transform var(--solution-motion);
+}
+
+.ax-detail[open] .ax-detail__title {
+  color: var(--color-brand-primary);
+}
+
+.ax-detail[open] > summary .ax-chevron::before {
+  transform: translate(-50%, -25%) rotate(-135deg);
+}
+
+.ax-card__body,
+.ax-detail__body {
+  border-top: 1px solid var(--color-ax-line);
+}
+
+.ax-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  margin: 0 var(--spacing-16);
+  padding: var(--spacing-16) 0;
+}
+
+.ax-detail__body {
+  margin: 0 var(--spacing-24);
+  padding: var(--spacing-16) 0 var(--spacing-24);
+}
+
+.ax-card__text,
+.ax-detail__text {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-body);
+  line-height: var(--text-ax-body--line-height);
+  font-weight: var(--text-ax-body--font-weight);
+  letter-spacing: var(--text-ax-body--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.ax-card__action {
+  padding: var(--spacing-8) 0;
+  border: 0;
+  border-top: 1px solid var(--color-ax-line);
+  background: none;
+  color: var(--color-brand-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-action);
+  line-height: var(--text-ax-action--line-height);
+  font-weight: var(--text-ax-action--font-weight);
+  letter-spacing: var(--text-ax-action--letter-spacing);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ax-card__action:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.ax-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+/* Progressive enhancement: animate <details> where ::details-content is supported; elsewhere it toggles instantly. */
+@supports selector(::details-content) {
+  .ax-card::details-content,
+  .ax-detail::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--solution-motion),
+      content-visibility var(--solution-motion) allow-discrete;
+  }
+  .ax-card[open]::details-content,
+  .ax-detail[open]::details-content {
+    block-size: auto;
+  }
+}
+
+/* ≤1024px: tablet shares the mobile composition (single column, map stacked in DOM order). */
+@media (width <= 1024px) {
+  .ax-section {
+    padding: 48px 0 64px;
+  }
+  .ax-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+  .ax-title {
+    font-size: var(--text-ax-title-mobile);
+    line-height: var(--text-ax-title-mobile--line-height);
+    font-weight: var(--text-ax-title-mobile--font-weight);
+    letter-spacing: var(--text-ax-title-mobile--letter-spacing);
+  }
+  .ax-intro {
+    font-size: var(--text-ax-intro-mobile);
+    line-height: var(--text-ax-intro-mobile--line-height);
+    font-weight: var(--text-ax-intro-mobile--font-weight);
+    letter-spacing: var(--text-ax-intro-mobile--letter-spacing);
+  }
+  .ax-overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ax-map,
+  .ax-map__group,
+  .ax-map__internal,
+  .ax-map__external,
+  .ax-map__column {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-16);
+  }
+  .ax-env,
+  .ax-card--compact {
+    width: 100%;
+  }
+  .ax-detail {
+    scroll-margin-top: calc(
+      var(--header-height-mobile-scrolled) + var(--spacing-16)
+    );
+  }
+}
+
+@media (width <= 760px) {
+  .ax-inner {
+    width: calc(100% - var(--spacing-20) * 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ax-card,
+  .ax-detail,
+  .ax-toggle::before,
+  .ax-toggle::after,
+  .ax-chevron::before,
+  .ax-detail__title {
+    transition: none;
+  }
+  /* Kept separate: an unsupported ::details-content would invalidate the whole selector list. */
+  .ax-card::details-content,
+  .ax-detail::details-content {
+    transition: none;
+  }
+}
+
 /* Contact CTA — same navy + wave + mask surface as the header/hero (Figma 847:27590 / 847:28691). */
 .contact-cta {
   display: flex;
@@ -4433,546 +4897,6 @@ body {
   .proposal-graphic,
   .proposal-detail-link,
   .proposal-grid[data-reveal] > * {
-    transition: none;
-  }
-}
-
-/* Solutions — 통합 End-to-End 서비스 (preview-first; Figma 227:1979 / 227:4001 / 250:3960). */
-.solutions-section {
-  padding: var(--spacing-96) 0;
-  background: var(--color-bg-subtle);
-}
-
-.solutions-inner {
-  width: min(
-    var(--solutions-inner-max),
-    calc(100% - var(--section-gutter-desktop) * 2)
-  );
-  margin-inline: auto;
-}
-
-.solutions-header {
-  display: grid;
-  justify-items: start;
-  gap: var(--spacing-12);
-  margin-bottom: var(--spacing-48);
-}
-
-.solutions-title {
-  margin: 0;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-solutions-title-desktop);
-  line-height: var(--text-solutions-title-desktop--line-height);
-  letter-spacing: 0;
-}
-
-.solutions-description {
-  margin: 0;
-  color: var(--color-text-primary);
-  font-family: var(--font-family-body);
-  font-size: var(--text-solutions-description-desktop);
-  line-height: var(--text-solutions-description-desktop--line-height);
-  font-weight: var(--text-section-description-desktop--font-weight);
-  word-break: keep-all;
-  text-wrap: balance;
-}
-
-/* Process table */
-.solutions-process {
-  margin-bottom: var(--spacing-48);
-  font-family: var(--font-family-body);
-  word-break: keep-all;
-}
-
-.solutions-process__desktop {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-rows: repeat(3, auto);
-  grid-template-columns: var(--solutions-track-label-width) repeat(
-      4,
-      minmax(0, 1fr)
-    );
-  column-gap: var(--spacing-24);
-}
-
-.solutions-process__stage-head {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  min-width: 0;
-  padding: 0 var(--spacing-16) var(--spacing-24);
-  text-align: center;
-}
-
-.solutions-process__stage-head span {
-  color: var(--color-action-primary);
-  font-size: var(--text-solutions-process-head);
-  line-height: var(--text-solutions-process-head--line-height);
-  font-weight: var(--font-weight-bold);
-}
-
-/* One ">" flow marker in each gap between the stage columns, spanning the whole table; one continuous bend, apex at mid-height. */
-.solutions-process__chevron {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  right: calc((var(--spacing-24) + var(--solutions-chevron-width)) / -2);
-  bottom: 0;
-  grid-row: 1 / -1;
-  width: var(--solutions-chevron-width);
-  background: linear-gradient(
-    155deg,
-    rgb(13 110 229 / 12%),
-    rgb(122 201 255 / 50%)
-  );
-  clip-path: polygon(
-    0 0,
-    var(--solutions-chevron-thickness) 0,
-    100% 50%,
-    var(--solutions-chevron-thickness) 100%,
-    0 100%,
-    calc(100% - var(--solutions-chevron-thickness)) 50%
-  );
-  pointer-events: none;
-}
-
-/* Both lines are required: an `auto` end line of an absolutely positioned item stretches to the container edge. */
-.solutions-process__chevron--1 {
-  grid-column: 2 / 3;
-}
-
-.solutions-process__chevron--2 {
-  grid-column: 3 / 4;
-}
-
-.solutions-process__chevron--3 {
-  grid-column: 4 / 5;
-}
-
-.solutions-process__track-label,
-.solutions-process__track-cell {
-  border-top: 1px solid var(--color-process-divider);
-  font-size: var(--text-solutions-process);
-  line-height: var(--text-solutions-process--line-height);
-}
-
-.solutions-process__track-label {
-  padding: var(--spacing-24) var(--spacing-16) var(--spacing-24) 0;
-  color: var(--color-brand-navy);
-  font-weight: var(--font-weight-bold);
-}
-
-.solutions-process__track-cell {
-  position: relative;
-  padding: var(--spacing-24) var(--spacing-16);
-  color: var(--color-text-secondary);
-  text-align: center;
-  text-wrap: balance;
-}
-
-.solutions-process__track-label--last,
-.solutions-process__track-cell--last {
-  border-bottom: 1px solid var(--color-process-divider);
-}
-
-.solutions-process__mobile {
-  display: none;
-}
-
-@media (1025px <= width <= 1279px) {
-  .solutions-process {
-    --solutions-track-label-width: 200px;
-  }
-  .solutions-process__stage-head span {
-    font-size: var(--text-solutions-process-head-narrow);
-    line-height: var(--text-solutions-process-head-narrow--line-height);
-  }
-  .solutions-process__track-label,
-  .solutions-process__track-cell {
-    font-size: var(--text-solutions-process-narrow);
-    line-height: var(--text-solutions-process-narrow--line-height);
-  }
-}
-
-/* Accordion cards */
-.solutions-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-16);
-  height: var(--solutions-list-height);
-  /* fr tracks interpolate smoothly, unlike flex-grow/flex-basis mixes. */
-  transition: grid-template-columns var(--solutions-card-motion);
-}
-
-.solutions-list[data-active-card="ax-infra"] {
-  grid-template-columns: var(--solutions-card-active-weight) 1fr;
-}
-
-.solutions-list[data-active-card="learning"] {
-  grid-template-columns: 1fr var(--solutions-card-active-weight);
-}
-
-.solution-card {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  overflow: hidden;
-  border-radius: var(--radius-24);
-  color: inherit;
-  background: var(--color-solution-purple-surface);
-  text-decoration: none;
-  transition: box-shadow var(--solutions-card-motion);
-}
-
-.solution-card--learning {
-  background: var(--color-solution-coral-surface);
-}
-
-/* Same soft glow as the /solutions overview cards, pinned right so it follows the icon when the card widens. */
-.solution-card::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: -88px;
-  right: -109px;
-  width: 585.6px;
-  height: 376px;
-  background: url("/images/solution/overview-glow-ax-desktop.svg") 0 0 / 100%
-    100% no-repeat;
-  pointer-events: none;
-}
-
-.solution-card--learning::before {
-  background-image: url("/images/solution/overview-glow-learning-desktop.svg");
-}
-
-.solution-card:hover,
-.solution-card:focus-visible,
-.solution-card[data-active="true"] {
-  box-shadow: 0 24px 56px rgb(15 23 41 / 12%);
-}
-
-.solution-card:focus-visible {
-  outline: var(--spacing-4) solid var(--color-focus-ring);
-  outline-offset: calc(var(--spacing-4) * -1);
-}
-
-.solution-card__content {
-  position: relative;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-end;
-  min-height: 0;
-  padding: var(--spacing-32);
-}
-
-.solution-card__meta {
-  position: absolute;
-  top: var(--spacing-24);
-  left: var(--spacing-32);
-  color: var(--color-brand-primary);
-  font-family: var(--font-family-body);
-  font-size: var(--text-solution-service-toggle);
-  line-height: var(--text-solution-service-toggle--line-height);
-}
-
-.solution-card__image {
-  flex: none;
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  transition:
-    width var(--solutions-card-motion),
-    height var(--solutions-card-motion);
-}
-
-/* Desktop/tablet: the icon shrinks to leave room for the bullet list and for the squeezed neighbour card. */
-@media (width >= 761px) {
-  .solution-card[data-active="true"] .solution-card__image,
-  .solutions-list:not([data-active-card="none"])
-    .solution-card:not([data-active="true"])
-    .solution-card__image {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-.solution-card__summary {
-  align-self: stretch;
-  margin-top: auto;
-  padding-top: var(--spacing-12);
-}
-
-.solution-card__title {
-  display: block;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-solution-card-title-desktop);
-  line-height: var(--text-solution-card-title-desktop--line-height);
-  font-weight: var(--text-solution-card-title-desktop--font-weight);
-  letter-spacing: var(--text-solution-card-title-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-.solution-card__description {
-  display: block;
-  margin-top: var(--spacing-12);
-  color: var(--color-text-primary);
-  font-family: var(--font-family-body);
-  font-size: var(--text-solution-card-description-desktop);
-  line-height: var(--text-solution-card-description-desktop--line-height);
-  font-weight: var(--text-solution-card-description-desktop--font-weight);
-  letter-spacing: var(--text-solution-card-description-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
-}
-
-.solution-card__panel {
-  display: block;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  font-family: var(--font-family-body);
-  transition:
-    max-height var(--solutions-card-motion),
-    opacity 240ms ease,
-    margin var(--solutions-card-motion);
-}
-
-.solution-card[data-active="true"] .solution-card__panel {
-  max-height: 240px;
-  margin-top: var(--spacing-12);
-  opacity: 1;
-  transition-delay: 0ms, 160ms, 0ms;
-}
-
-.solution-card__list,
-.solution-card__list > span {
-  display: block;
-  color: var(--color-text-secondary);
-  font-size: 1rem;
-  line-height: 1.625rem;
-  word-break: keep-all;
-}
-
-/* Scroll reveal: data-reveal is set by SolutionsSection; without JS everything stays visible. */
-.solutions-header[data-reveal] > *,
-.solutions-process[data-reveal] .solutions-process__desktop > *,
-.solutions-list[data-reveal] .solution-card {
-  transition:
-    opacity 520ms ease,
-    transform 660ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.solutions-header[data-reveal="pending"] > *,
-.solutions-process[data-reveal="pending"] .solutions-process__desktop > *,
-.solutions-list[data-reveal="pending"] .solution-card {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-.solutions-header[data-reveal="visible"] > *,
-.solutions-process[data-reveal="visible"] .solutions-process__desktop > *,
-.solutions-list[data-reveal="visible"] .solution-card {
-  opacity: 1;
-  transform: none;
-}
-
-.solutions-header[data-reveal="visible"] > :nth-child(2),
-.solutions-list[data-reveal="visible"] .solution-card:nth-child(2) {
-  transition-delay: 90ms;
-}
-
-/* Columns reveal left to right: label, 기획, 설계, 구축·개발, 운영. */
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > :nth-child(5n + 3) {
-  transition-delay: 120ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > :nth-child(5n + 4) {
-  transition-delay: 260ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > :nth-child(5n + 5) {
-  transition-delay: 400ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > :nth-child(5n + 6) {
-  transition-delay: 540ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > .solutions-process__chevron--1 {
-  transition-delay: 120ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > .solutions-process__chevron--2 {
-  transition-delay: 260ms;
-}
-
-.solutions-process[data-reveal="visible"]
-  .solutions-process__desktop
-  > .solutions-process__chevron--3 {
-  transition-delay: 400ms;
-}
-
-@media (width <= 1024px) {
-  .solutions-inner {
-    width: calc(100% - var(--spacing-48) * 2);
-  }
-  .solutions-process__desktop {
-    display: none;
-  }
-  .solutions-process__mobile {
-    position: relative;
-    display: grid;
-    gap: var(--spacing-16);
-  }
-  .solutions-process__stage {
-    position: relative;
-    padding: var(--spacing-20) var(--spacing-24) 56px;
-  }
-  .solutions-process__stage:last-child {
-    padding-bottom: var(--spacing-20);
-  }
-  .solutions-process__stage:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: calc(50% - 40px);
-    bottom: 0;
-    left: calc(50% - 40px);
-    height: 40px;
-    background: linear-gradient(
-      110deg,
-      rgb(13 110 229 / 9%),
-      rgb(122 201 255 / 36%)
-    );
-    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
-    pointer-events: none;
-  }
-  .solutions-process__stage h3,
-  .solutions-process__stage p {
-    margin: 0;
-    font-size: var(--text-solutions-process-mobile);
-    line-height: var(--text-solutions-process-mobile--line-height);
-  }
-  .solutions-process__stage h3 {
-    width: fit-content;
-    margin-bottom: var(--spacing-12);
-    padding: var(--spacing-4) var(--spacing-16);
-    border-radius: var(--radius-999);
-    color: var(--color-white);
-    background: var(--color-action-primary);
-    font-size: var(--text-solutions-process-head-mobile);
-    line-height: var(--text-solutions-process-head-mobile--line-height);
-    font-weight: var(--font-weight-bold);
-  }
-  .solutions-process__stage p + p {
-    margin-top: var(--spacing-12);
-    padding-top: var(--spacing-12);
-    border-top: 1px solid var(--color-process-divider-soft);
-  }
-}
-
-@media (761px <= width <= 1024px) {
-  .solution-card__content {
-    padding: var(--spacing-24);
-  }
-  .solution-card__meta {
-    left: var(--spacing-24);
-  }
-  .solutions-list[data-active-card="ax-infra"] {
-    grid-template-columns: var(--solutions-card-active-weight-tablet) 1fr;
-  }
-  .solutions-list[data-active-card="learning"] {
-    grid-template-columns: 1fr var(--solutions-card-active-weight-tablet);
-  }
-  .solution-card__title {
-    font-size: 1.375rem;
-    line-height: 2rem;
-  }
-}
-
-@media (width <= 760px) {
-  .solutions-section {
-    padding: 72px 0;
-  }
-  .solutions-inner {
-    width: calc(100% - var(--spacing-48));
-  }
-  .solutions-title {
-    font-size: var(--text-solutions-title-mobile);
-    line-height: var(--text-solutions-title-mobile--line-height);
-  }
-  .solutions-description {
-    font-size: var(--text-solutions-description-mobile);
-    line-height: var(--text-solutions-description-mobile--line-height);
-  }
-  .solutions-process {
-    margin-bottom: 56px;
-  }
-  .solutions-list,
-  .solutions-list[data-active-card] {
-    display: flex;
-    height: auto;
-    flex-direction: column;
-    gap: var(--spacing-12);
-  }
-  .solution-card {
-    width: 100%;
-  }
-  .solution-card::before {
-    right: -100px;
-    width: 382.4px;
-    background-image: url("/images/solution/overview-glow-ax-mobile.svg");
-  }
-  .solution-card--learning::before {
-    background-image: url("/images/solution/overview-glow-learning-mobile.svg");
-  }
-  .solution-card__content {
-    padding: var(--spacing-24);
-  }
-  .solution-card__meta {
-    left: var(--spacing-24);
-  }
-  .solution-card__image {
-    width: 184px;
-    height: 184px;
-  }
-  .solution-card__title {
-    font-size: var(--text-solution-card-title-mobile);
-    line-height: var(--text-solution-card-title-mobile--line-height);
-  }
-  .solution-card__description {
-    font-size: var(--text-solution-card-description-mobile);
-    line-height: var(--text-solution-card-description-mobile--line-height);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .solution-card,
-  .solution-card__image,
-  .solution-card__panel,
-  .solutions-header[data-reveal] > *,
-  .solutions-process[data-reveal] .solutions-process__desktop > *,
-  .solutions-list[data-reveal] .solution-card {
     transition: none;
   }
 }

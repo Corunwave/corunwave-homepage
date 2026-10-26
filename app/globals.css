@@ -190,8 +190,13 @@
   --partner-intro-startup: radial-gradient(ellipse at 80% 70%, #ffe0d8, #fff5f0 65%);
   --partner-intro-university: radial-gradient(ellipse at 80% 70%, #d4dbf7, #eef0ff 65%);
 
-  --color-partner-benefit-rule: #cfdaea;
-  --color-partner-benefit-sub: #69788d;
+  /* Partnership benefits: 4:3 photo, ambient glow bleeds 120px past it (Figma Ambient / * at 12%). */
+  --partner-benefit-ambient-bleed: 120px;
+  --color-partner-benefit-ambient-scale: #0d6ee5;
+  --color-partner-benefit-ambient-operation: #7ac9ff;
+  --color-partner-benefit-ambient-integration: #7168c8;
+  --color-partner-benefit-ambient-resource: #ff9e7d;
+  --partner-benefit-reveal: 180ms ease-out;
   --color-partner-panel-border: #e1e8f2;
   --partner-reveal-shift: 14px;
 
@@ -854,25 +859,31 @@
   --text-partner-role-text--font-weight: 400;
   --text-partner-role-text--letter-spacing: 0;
 
-  --text-partner-benefit-title-desktop: 2rem;
-  --text-partner-benefit-title-desktop--line-height: 2.75rem;
+  --text-partner-benefit-title-desktop: 2.125rem;
+  --text-partner-benefit-title-desktop--line-height: 3rem;
   --text-partner-benefit-title-desktop--font-weight: 700;
-  --text-partner-benefit-title-desktop--letter-spacing: -0.035em;
+  --text-partner-benefit-title-desktop--letter-spacing: 0;
 
-  --text-partner-benefit-title-mobile: 1.6875rem;
-  --text-partner-benefit-title-mobile--line-height: 2.375rem;
+  --text-partner-benefit-title-mobile: 1.8125rem;
+  --text-partner-benefit-title-mobile--line-height: 2.625rem;
   --text-partner-benefit-title-mobile--font-weight: 700;
-  --text-partner-benefit-title-mobile--letter-spacing: -0.035em;
+  --text-partner-benefit-title-mobile--letter-spacing: 0;
 
-  --text-partner-benefit-english-desktop: 1rem;
-  --text-partner-benefit-english-desktop--line-height: 1.625rem;
-  --text-partner-benefit-english-desktop--font-weight: 400;
-  --text-partner-benefit-english-desktop--letter-spacing: 0;
+  --text-partner-benefit-subtitle-desktop: 1.375rem;
+  --text-partner-benefit-subtitle-desktop--line-height: 2.25rem;
+  --text-partner-benefit-subtitle-desktop--font-weight: 500;
+  --text-partner-benefit-subtitle-desktop--letter-spacing: 0;
 
-  --text-partner-benefit-english-mobile: 0.875rem;
-  --text-partner-benefit-english-mobile--line-height: 1.5rem;
-  --text-partner-benefit-english-mobile--font-weight: 400;
-  --text-partner-benefit-english-mobile--letter-spacing: 0;
+  --text-partner-benefit-subtitle-mobile: 1.25rem;
+  --text-partner-benefit-subtitle-mobile--line-height: 2rem;
+  --text-partner-benefit-subtitle-mobile--font-weight: 500;
+  --text-partner-benefit-subtitle-mobile--letter-spacing: 0;
+
+  /* Same on desktop and mobile. */
+  --text-partner-benefit-body: 1.125rem;
+  --text-partner-benefit-body--line-height: 1.875rem;
+  --text-partner-benefit-body--font-weight: 400;
+  --text-partner-benefit-body--letter-spacing: 0;
 
   --text-partner-tobe-title: 1.3125rem;
   --text-partner-tobe-title--line-height: 1.875rem;
@@ -4234,20 +4245,70 @@ body {
   }
 }
 
-/* Partnership benefits — 파트너십 기대효과 (Figma 876:28767 / 876:29963).
- * Benefits are an open 2×2 grid (no hover/background).
+/* Partnership benefits — 파트너십 기대효과 (Figma 876:28767 / 876:29963; preview not referenced).
+ * Editorial rows: 4:3 photo + content, photo side alternates on desktop. No hover state in Figma.
+ * Each photo carries a soft ambient glow (Figma Ambient / *) that bleeds past it, so the section clips horizontally.
  */
+.partner-section--benefits {
+  overflow-x: clip;
+}
+
 .partner-benefits {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 var(--spacing-64);
-  margin-bottom: var(--spacing-64);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-96);
 }
 
 .partner-benefit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-64);
+  align-items: center;
+}
+
+.partner-benefit:nth-child(even) .partner-benefit__photo {
+  order: 1;
+}
+
+.partner-benefit--scale {
+  --partner-benefit-ambient: var(--color-partner-benefit-ambient-scale);
+}
+.partner-benefit--operation {
+  --partner-benefit-ambient: var(--color-partner-benefit-ambient-operation);
+}
+.partner-benefit--integration {
+  --partner-benefit-ambient: var(--color-partner-benefit-ambient-integration);
+}
+.partner-benefit--resource {
+  --partner-benefit-ambient: var(--color-partner-benefit-ambient-resource);
+}
+
+.partner-benefit__photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.partner-benefit__photo::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--partner-benefit-ambient-bleed) * -1);
+  background: radial-gradient(
+    closest-side,
+    color-mix(in srgb, var(--partner-benefit-ambient) 12%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.partner-benefit__photo img {
+  border-radius: var(--radius-24);
+  object-fit: cover;
+}
+
+.partner-benefit__content {
   min-width: 0;
-  padding: var(--spacing-32) 0 var(--spacing-40);
-  border-top: 1px solid var(--color-partner-benefit-rule);
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .partner-benefit__title {
@@ -4258,29 +4319,54 @@ body {
   line-height: var(--text-partner-benefit-title-desktop--line-height);
   font-weight: var(--text-partner-benefit-title-desktop--font-weight);
   letter-spacing: var(--text-partner-benefit-title-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: normal;
 }
 
-.partner-benefit__english {
+.partner-benefit__subtitle {
+  margin: 0 0 var(--spacing-24);
+  color: var(--color-text-primary);
+  font-size: var(--text-partner-benefit-subtitle-desktop);
+  line-height: var(--text-partner-benefit-subtitle-desktop--line-height);
+  font-weight: var(--text-partner-benefit-subtitle-desktop--font-weight);
+  letter-spacing: var(--text-partner-benefit-subtitle-desktop--letter-spacing);
+  white-space: pre-line;
+}
+
+.partner-benefit__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
   margin: 0;
-  color: var(--color-partner-benefit-sub);
-  font-size: var(--text-partner-benefit-english-desktop);
-  line-height: var(--text-partner-benefit-english-desktop--line-height);
-  font-weight: var(--text-partner-benefit-english-desktop--font-weight);
-  letter-spacing: var(--text-partner-benefit-english-desktop--letter-spacing);
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-primary);
+  font-size: var(--text-partner-benefit-body);
+  line-height: var(--text-partner-benefit-body--line-height);
+  font-weight: var(--text-partner-benefit-body--font-weight);
+  letter-spacing: var(--text-partner-benefit-body--letter-spacing);
 }
 
-/* Scroll reveal: data-reveal is set by useScrollReveal; without JS (or with reduced motion) the benefits stay visible. */
+.partner-benefit__bullets li {
+  display: grid;
+  grid-template-columns: var(--spacing-8) minmax(0, 1fr);
+  gap: var(--spacing-8);
+}
+
+.partner-benefit__bullets li::before {
+  content: "•";
+}
+
+/* Scroll reveal: data-reveal is set by useScrollReveal; without JS (or with reduced motion) the rows stay visible.
+ * Each row eases down into place (top → bottom) over 180ms as it scrolls into view.
+ */
 .partner-benefit[data-reveal] {
   transition:
-    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--partner-benefit-reveal),
+    transform var(--partner-benefit-reveal);
 }
 
 .partner-benefit[data-reveal="pending"] {
-  opacity: 0.72;
-  transform: translateY(var(--partner-reveal-shift));
+  opacity: 0;
+  transform: translateY(calc(var(--partner-reveal-shift) * -1));
 }
 
 .partner-benefit[data-reveal="visible"] {
@@ -4288,38 +4374,29 @@ body {
   transform: none;
 }
 
-.partner-benefit:nth-child(2)[data-reveal="visible"] {
-  transition-delay: var(--partner-reveal-step);
-}
-.partner-benefit:nth-child(3)[data-reveal="visible"] {
-  transition-delay: calc(var(--partner-reveal-step) * 2);
-}
-.partner-benefit:nth-child(4)[data-reveal="visible"] {
-  transition-delay: calc(var(--partner-reveal-step) * 3);
-}
-
-/* ≤1024px: tablet shares the mobile composition (single column). */
+/* ≤1024px: tablet shares the mobile composition (photo on top, full-width 4:3). */
 @media (width <= 1024px) {
   .partner-benefits {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    margin-bottom: var(--spacing-48);
+    gap: var(--spacing-64);
   }
   .partner-benefit {
-    padding: var(--spacing-28) 0 var(--spacing-32);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-24);
+  }
+  .partner-benefit:nth-child(even) .partner-benefit__photo {
+    order: 0;
   }
   .partner-benefit__title {
-    margin-bottom: var(--spacing-12);
     font-size: var(--text-partner-benefit-title-mobile);
     line-height: var(--text-partner-benefit-title-mobile--line-height);
     font-weight: var(--text-partner-benefit-title-mobile--font-weight);
     letter-spacing: var(--text-partner-benefit-title-mobile--letter-spacing);
   }
-  .partner-benefit__english {
-    font-size: var(--text-partner-benefit-english-mobile);
-    line-height: var(--text-partner-benefit-english-mobile--line-height);
-    font-weight: var(--text-partner-benefit-english-mobile--font-weight);
-    letter-spacing: var(--text-partner-benefit-english-mobile--letter-spacing);
+  .partner-benefit__subtitle {
+    font-size: var(--text-partner-benefit-subtitle-mobile);
+    line-height: var(--text-partner-benefit-subtitle-mobile--line-height);
+    font-weight: var(--text-partner-benefit-subtitle-mobile--font-weight);
+    letter-spacing: var(--text-partner-benefit-subtitle-mobile--letter-spacing);
   }
 }
 

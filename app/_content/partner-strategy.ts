@@ -38,9 +38,19 @@ export type CustomerProposalsContent = {
   proposals: readonly CustomerProposalContent[];
 };
 
+export type PartnershipBenefitContent = {
+  id: "scale" | "operation" | "integration" | "resource";
+  title: string;
+  /** "\n" is a line break kept from Figma. */
+  subtitle: string;
+  bullets: readonly [string, string];
+  /** Temporary Unsplash stock photo exported from Figma. */
+  image: string;
+};
+
 export type PartnershipBenefitsContent = {
   title: string;
-  benefits: readonly { title: string; english: string }[];
+  benefits: readonly PartnershipBenefitContent[];
 };
 
 export type ToBeStageContent = {
@@ -205,11 +215,51 @@ export const customerProposals: CustomerProposalsContent = {
 export const partnershipBenefits: PartnershipBenefitsContent = {
   title: "파트너십 기대효과",
   benefits: [
-  { title: "비즈니스 규모의 확장", english: "Scalability & Reliability" },
-  { title: "운영 탁월성 확보", english: "Operational Excellence" },
-  { title: "통합 솔루션의 완성", english: "Value Integration" },
-  { title: "전략적 자원 최적화", english: "Resource Efficiency" },
-],
+    {
+      id: "scale",
+      title: "비즈니스 규모의 확장",
+      subtitle:
+        "단절 없는 인프라와 검증된 러닝 솔루션의 결합으로 시장 지배력을 전방위로 확장합니다",
+      bullets: [
+        "파트너십을 통해 인프라 구축부터 인재 역량 강화까지 커버리지 영역을 즉시 확장합니다.",
+        "신규 시장 진입 장벽을 낮추고 신속한 시장 침투로 양사의 비즈니스 스케일업을 가속화합니다.",
+      ],
+      image: "/images/partner/benefits/scale.jpg",
+    },
+    {
+      id: "operation",
+      title: "운영 탁월성 확보",
+      subtitle:
+        "표준화된 AX 인프라와 리딩 커리큘럼으로 운영 공백 없는 완벽한 실행력을 구현합니다",
+      bullets: [
+        "축적된 AX 인프라 운영 노하우와 커스텀 학습 프로세스를 결합하여 운영 리스크를 최소화합니다.",
+        "리소스 투입 대비 최상의 실행 속도와 안정적인 품질을 동시에 확보합니다.",
+      ],
+      image: "/images/partner/benefits/operation.jpg",
+    },
+    {
+      id: "integration",
+      title: "통합 솔루션의 완성",
+      subtitle:
+        "인프라 구성부터 기술역량까지 단 하나의 패키지로 완결되는\nAX Transformation을 제공합니다",
+      bullets: [
+        "하드웨어·소프트웨어 인프라 구성부터 실무 적용을 위한 AX 학습 체계까지 원스톱(One-stop)으로 제공합니다.",
+        "고객에게 파편화되지 않은 최고의 통합 사용자 경험(UX)과 명확한 ROI를 제시합니다",
+      ],
+      image: "/images/partner/benefits/integration.jpg",
+    },
+    {
+      id: "resource",
+      title: "전략적 자원 최적화",
+      subtitle:
+        "핵심 역량 집중과 시너지 창출로 투자 효율성과 비즈니스 경쟁력을 극대화합니다",
+      bullets: [
+        "각 사의 독보적인 강점에 집중함으로써 중복 투자와 기술 개발 시간을 획기적으로 줄입니다.",
+        "최적화된 자원 배분으로 더 높은 시장 경쟁력과 지속 가능한 성장 동력을 확보합니다.",
+      ],
+      image: "/images/partner/benefits/resource.jpg",
+    },
+  ],
 };
 
 export const toBeStrategy: ToBeStrategyContent = {

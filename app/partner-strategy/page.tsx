@@ -39,8 +39,8 @@ export default function PartnerStrategyPage() {
       />
       <CooperationModelsSection content={cooperationModels} />
       <ToBeStrategySection content={toBeStrategy} />
-      <CustomerProposalsSection content={customerProposals} />
       <PartnershipBenefitsSection content={partnershipBenefits} />
+      <CustomerProposalsSection content={customerProposals} />
       <UniversityProposalSection content={universityProposal} />
       <PartnerLogosSection content={partnerLogos} />
       <ContactCta />

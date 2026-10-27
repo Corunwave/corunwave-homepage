@@ -2,8 +2,13 @@
 
 import Image from "next/image";
 import DetailAccordion from "../commons/accordion/DetailAccordion";
+import BulletList from "../commons/lists/BulletList";
 import { renderText } from "../../_lib/content/renderText";
-import type { AxInfraContent, AxServiceId } from "../../_content/solutions";
+import type {
+  AxInfraContent,
+  AxMap,
+  AxServiceId,
+} from "../../_content/solutions";
 
 type SolutionAXSectionProps = { content: AxInfraContent };
 
@@ -36,13 +41,30 @@ const openDetail = (id: AxServiceId) => {
   detail.querySelector("summary")?.focus({ preventScroll: true });
 };
 
+/* Map card body: optional highlighted quote, then bullet groups (parallel groups sit side by side, each in a container). */
+const AxMapBody = ({ map }: { map: AxMap }) => (
+  <>
+    {map.quote && <p className="ax-card__quote">{map.quote}</p>}
+    <div
+      className={`ax-card__groups${map.parallel ? " ax-card__groups--parallel" : ""}`}
+    >
+      {map.groups.map(({ heading, items }) => (
+        <div key={heading ?? items[0].text} className="ax-card__group">
+          {heading && <p className="ax-card__heading">{heading}</p>}
+          <BulletList className="ax-bullets" items={items} />
+        </div>
+      ))}
+    </div>
+  </>
+);
+
 type AxMapCardProps = {
   id: AxServiceId;
   content: AxInfraContent;
 };
 
 const AxMapCard = ({ id, content }: AxMapCardProps) => {
-  const { mapTitle, mapBody } = content.services[id];
+  const { map } = content.services[id];
   const compact = COMPACT_SERVICES.includes(id);
   return (
     <details
@@ -50,11 +72,11 @@ const AxMapCard = ({ id, content }: AxMapCardProps) => {
       className={`ax-card${compact ? " ax-card--compact" : ""}`}
     >
       <summary className="ax-card__summary">
-        <h3 className="ax-card__title">{mapTitle}</h3>
+        <h3 className="ax-card__title">{renderText(map.title)}</h3>
         <span className="ax-toggle" aria-hidden="true" />
       </summary>
       <div className="ax-card__body">
-        <p className="ax-card__text">{renderText(mapBody)}</p>
+        <AxMapBody map={map} />
         <button
           type="button"
           className="ax-card__action"
@@ -139,15 +161,16 @@ const SolutionAXSection = ({ content }: SolutionAXSectionProps) => (
 
       <div className="detail-accordion-list">
         {content.detailOrder.map((id) => {
-          const { detailTitle, detailBody } = content.services[id];
+          const { title, lead, items } = content.services[id].detail;
           return (
             <DetailAccordion
               key={id}
               id={detailId(id)}
               name="ax-detail"
-              title={detailTitle}
+              title={title}
             >
-              <p className="detail-accordion__text">{renderText(detailBody)}</p>
+              <p className="detail-accordion__lead">{lead}</p>
+              <BulletList className="ax-bullets" items={items} />
             </DetailAccordion>
           );
         })}

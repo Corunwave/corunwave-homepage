@@ -1,36 +1,12 @@
 import DetailAccordion from "../commons/accordion/DetailAccordion";
+import BulletList from "../commons/lists/BulletList";
 import { renderText } from "../../_lib/content/renderText";
-import type {
-  LearningBullet,
-  LearningServiceContent,
-} from "../../_content/solutions";
+import type { LearningServiceContent } from "../../_content/solutions";
 
 type SolutionLearningSectionProps = { content: LearningServiceContent };
 
 /* Pillar accents reuse the existing sky / blue / violet theme colors (see .learning-pillar--*). */
 const PILLAR_ACCENTS = ["sky", "blue", "violet"] as const;
-
-type BulletListProps = { items: readonly LearningBullet[] };
-
-/* "제목: 내용" copy: the title is a bullet, its content one level below. */
-const BulletList = ({ items }: BulletListProps) => (
-  <ul className="learning-bullets">
-    {items.map(({ text, children }) => (
-      <li key={text} className="learning-bullets__item">
-        {text}
-        {children && (
-          <ul className="learning-bullets__sub">
-            {children.map((child) => (
-              <li key={child} className="learning-bullets__sub-item">
-                {child}
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-    ))}
-  </ul>
-);
 
 /* Learning Service & BPO (preview .learning-bpo; Figma 1206:39515 / 1206:39591). Static server component.
  * Detail rows reuse the shared DetailAccordion (same as AX Infra). */
@@ -101,7 +77,7 @@ const SolutionLearningSection = ({ content }: SolutionLearningSectionProps) => (
                 {value}
               </p>
               <div className="learning-row__system" role="cell">
-                <BulletList items={system} />
+                <BulletList className="learning-bullets" items={system} />
               </div>
             </div>
           ))}
@@ -118,7 +94,7 @@ const SolutionLearningSection = ({ content }: SolutionLearningSectionProps) => (
       <div className="detail-accordion-list">
         {content.details.map(({ title, body }) => (
           <DetailAccordion key={title} name="learning-detail" title={title}>
-            <BulletList items={body} />
+            <BulletList className="learning-bullets" items={body} />
           </DetailAccordion>
         ))}
       </div>

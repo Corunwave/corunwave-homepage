@@ -2982,17 +2982,125 @@ body {
   padding: var(--spacing-16) 0 var(--spacing-24);
 }
 
-.ax-card__text,
-.detail-accordion__text {
+/* Bullet list shared by the solution sections: an item with content below it is a bold title bullet.
+ * Size and line height come from the section (.ax-bullets, .learning-bullets). */
+.bullet-list,
+.bullet-list__sub {
   margin: 0;
-  color: var(--color-text-primary);
+  padding: 0;
+  list-style: none;
   font-family: var(--font-family-body);
-  font-size: var(--text-ax-body);
-  line-height: var(--text-ax-body--line-height);
-  font-weight: var(--text-ax-body--font-weight);
-  letter-spacing: var(--text-ax-body--letter-spacing);
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+.bullet-list__item,
+.bullet-list__sub-item {
+  position: relative;
+  padding-left: var(--spacing-16);
+}
+
+.bullet-list__item + .bullet-list__item {
+  margin-top: var(--spacing-8);
+}
+
+.bullet-list__item {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+.bullet-list__item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+.bullet-list__item:has(> .bullet-list__sub) {
+  color: var(--color-brand-navy);
+  font-weight: var(--font-weight-bold);
+}
+
+.bullet-list__sub {
+  margin-top: var(--spacing-4);
+}
+
+.bullet-list__sub-item {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.bullet-list__sub-item::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+}
+
+/* AX map cards and detail accordions. */
+.ax-bullets,
+.ax-card__heading,
+.detail-accordion__lead {
+  font-size: var(--text-ax-body);
+  line-height: var(--text-ax-body--line-height);
+  letter-spacing: var(--text-ax-body--letter-spacing);
+}
+
+/* Bold lines: the accordion lead sentence and the unbulleted group headings (IBM TAPE, ...). */
+.ax-card__heading,
+.detail-accordion__lead {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-bold);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.detail-accordion__lead {
+  margin-bottom: var(--spacing-12);
+}
+
+.ax-card__heading {
+  margin-bottom: var(--spacing-8);
+}
+
+.ax-card__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+/* Highlighted line (ITO): centered, bold, accent color. */
+.ax-card__quote {
+  margin: 0;
+  color: var(--color-brand-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-label);
+  line-height: var(--text-ax-label--line-height);
+  font-weight: var(--text-ax-label--font-weight);
+  letter-spacing: var(--text-ax-label--letter-spacing);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Parallel groups sit side by side, each in its own container; the grid stretches both to the taller one. */
+.ax-card__groups--parallel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.ax-card__groups--parallel .ax-card__group {
+  padding: var(--spacing-16);
+  border: 1px solid var(--color-ax-line);
+  border-radius: var(--radius-12);
+  background: var(--color-white);
+}
+
+.ax-card__groups--parallel .ax-card__heading {
+  margin-bottom: var(--spacing-12);
+  font-size: var(--text-ax-label);
+  line-height: var(--text-ax-label--line-height);
 }
 
 .ax-card__action {
@@ -3058,6 +3166,9 @@ body {
     letter-spacing: var(--text-ax-intro-mobile--letter-spacing);
   }
   .ax-overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ax-card__groups--parallel {
     grid-template-columns: minmax(0, 1fr);
   }
   .ax-flow__step {
@@ -3365,60 +3476,11 @@ body {
   min-width: 0;
 }
 
-/* Bullets shared by the table cells and the detail accordions: title bullet, content one level below. */
-.learning-bullets,
-.learning-bullets__sub {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-family: var(--font-family-body);
+/* Typography of the bullet lists in the table cells and the detail accordions (structure: .bullet-list). */
+.learning-bullets {
   font-size: var(--text-learning-body-desktop);
   line-height: var(--text-learning-body-desktop--line-height);
   letter-spacing: var(--text-learning-body-desktop--letter-spacing);
-  word-break: keep-all;
-  overflow-wrap: break-word;
-}
-
-.learning-bullets__item,
-.learning-bullets__sub-item {
-  position: relative;
-  padding-left: var(--spacing-16);
-}
-
-.learning-bullets__item + .learning-bullets__item {
-  margin-top: var(--spacing-8);
-}
-
-.learning-bullets__item {
-  color: var(--color-text-primary);
-  font-weight: var(--text-learning-body-desktop--font-weight);
-}
-
-.learning-bullets__item::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-}
-
-/* An item with content below it is a title bullet. */
-.learning-bullets__item:has(> .learning-bullets__sub) {
-  color: var(--color-brand-navy);
-  font-weight: var(--text-learning-head--font-weight);
-}
-
-.learning-bullets__sub {
-  margin-top: var(--spacing-4);
-}
-
-.learning-bullets__sub-item {
-  color: var(--color-text-secondary);
-  font-weight: var(--text-learning-body-desktop--font-weight);
-}
-
-.learning-bullets__sub-item::before {
-  content: "–";
-  position: absolute;
-  left: 0;
 }
 
 .learning-process {
@@ -3542,7 +3604,6 @@ body {
     grid-column: 1 / -1;
   }
   .learning-bullets,
-  .learning-bullets__sub,
   .learning-process {
     font-size: var(--text-learning-body-mobile);
     line-height: var(--text-learning-body-mobile--line-height);

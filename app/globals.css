@@ -37,10 +37,30 @@
   /* Business direction */
   --direction-inner-max: 1248px;
   --direction-description-max: 900px;
-  --direction-visual-width: 400px;
-  --direction-visual-width-mobile: 358px;
   --direction-connector-height: 48px;
   --direction-values-gap: 32px;
+
+  /* Solution hub diagram (1280×720 artboard; chip type scales with the container) */
+  --solution-hub-max: 1024px;
+  --solution-hub-chip-size: clamp(12px, calc(17 / 1280 * 100cqw), 17px);
+  --solution-hub-chip-size-mobile: 14px;
+  --solution-hub-placeholder-size: clamp(10px, calc(12 / 1280 * 100cqw), 12px);
+  --solution-hub-motion: 250ms ease;
+  --solution-hub-flow-duration: 2.8s;
+  --solution-hub-flow-easing: cubic-bezier(0.4, 0, 0.6, 1);
+  --color-solution-hub-accent: #2563eb;
+  --color-solution-hub-ribbon-start: #7dd3fc;
+  --color-solution-hub-ribbon-end: #7c3aed;
+  --color-solution-hub-link: #9db5dc;
+  --color-solution-hub-ribbon-shadow: #312e81;
+  --color-solution-hub-core-border: #e3ecfa;
+  --color-solution-hub-core-shadow: #1e3a8a;
+  --color-solution-hub-placeholder-border: #b7c8e4;
+  --color-solution-hub-placeholder-text: #5b6b85;
+  --color-solution-hub-chip-border: #d5e0f2;
+  --color-solution-hub-chip-text: #1b2740;
+  --shadow-solution-hub-chip: 0 2px 10px rgb(15 42 92 / 6%);
+  --shadow-solution-hub-chip-active: 0 10px 28px rgb(37 99 235 / 18%);
 
   /* Core challenges (scroll mode stage = viewport below the scrolled header) */
   --challenges-inner-max: 1248px;
@@ -357,9 +377,11 @@
   --spacing-space-96: var(--spacing-96);
 
   --radius-0: 0px;
+  --radius-10: 10px;
   --radius-12: 12px;
   --radius-16: 16px;
   --radius-20: 20px;
+  --radius-22: 22px;
   --radius-24: 24px;
   --radius-28: 28px;
   --radius-999: 999px;
@@ -1886,7 +1908,7 @@ body {
 }
 
 /* Business direction — 사업 방향성 (preview .business-direction; Figma 653:20134 / 653:20160).
- * Static layout: hub artwork is the existing SVG, the label is overlaid as text.
+ * The hub diagram is SolutionHub (.solution-hub, below this block).
  */
 .direction-section {
   padding: var(--spacing-96) 0;
@@ -1949,36 +1971,6 @@ body {
 .direction-description strong {
   font-weight: 700;
   color: var(--color-brand-primary);
-}
-
-.direction-visual {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: min(var(--direction-visual-width), 100%);
-  aspect-ratio: 704 / 420;
-  isolation: isolate;
-}
-
-.direction-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-}
-
-.direction-hub {
-  position: relative;
-  margin: 0;
-  color: var(--color-brand-navy);
-  font-family: var(--font-family-heading);
-  font-size: var(--text-direction-heading-desktop);
-  line-height: var(--text-direction-heading-desktop--line-height);
-  font-weight: var(--text-direction-heading-desktop--font-weight);
-  letter-spacing: var(--text-direction-heading-desktop--letter-spacing);
 }
 
 .direction-connectors {
@@ -2049,6 +2041,7 @@ body {
 
 .direction-value {
   min-width: 0;
+  text-align: center;
 }
 
 .direction-value h3 {
@@ -2082,6 +2075,9 @@ body {
   .direction-values {
     grid-template-columns: 1fr;
     margin-top: var(--spacing-32);
+  }
+  .direction-value {
+    text-align: left;
   }
   .direction-value h3 {
     display: flex;
@@ -2127,10 +2123,6 @@ body {
     line-height: var(--text-ceo-letter-mobile--line-height);
     font-weight: var(--text-ceo-letter-mobile--font-weight);
   }
-  .direction-visual {
-    width: min(var(--direction-visual-width-mobile), 100%);
-  }
-  .direction-hub,
   .direction-value h3 {
     font-size: var(--text-direction-heading-mobile);
     line-height: var(--text-direction-heading-mobile--line-height);
@@ -2143,6 +2135,349 @@ body {
     line-height: var(--text-direction-body-mobile--line-height);
     font-weight: var(--text-direction-body-mobile--font-weight);
     letter-spacing: var(--text-direction-body-mobile--letter-spacing);
+  }
+}
+
+/* Solution hub — 사업 방향성 diagram (SolutionHub). Everything is laid out on a 1280×720
+ * artboard centered at (640, 410): chips sit at x/1280, y/720 over the SVG, and chip type
+ * scales with the container (cqw). Lines and chips carry data-state="active|inactive"
+ * while one chip is hovered/focused.
+ * The stage crops the artboard's empty top/bottom (y 140–690, chips span 163–657);
+ * canvas and chip layer are offset by the same amount.
+ * ≤760px: the stage crops to the ribbons (artboard 400–880 × 170–650) and the chips
+ * drop below as a two-column list.
+ */
+.solution-hub {
+  position: relative;
+  width: 100%;
+  max-width: var(--solution-hub-max);
+  margin-inline: auto;
+  container-type: inline-size;
+  background: var(--color-white);
+}
+
+.solution-hub__stage {
+  position: relative;
+  aspect-ratio: 1280 / 550;
+}
+
+.solution-hub__canvas {
+  position: absolute;
+  top: calc(-140 / 550 * 100%);
+  left: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.solution-hub__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.solution-hub__stop--start {
+  stop-color: var(--color-solution-hub-ribbon-start);
+}
+
+.solution-hub__stop--accent {
+  stop-color: var(--color-solution-hub-accent);
+}
+
+.solution-hub__stop--end {
+  stop-color: var(--color-solution-hub-ribbon-end);
+}
+
+.solution-hub__shadow--ribbon {
+  flood-color: var(--color-solution-hub-ribbon-shadow);
+  flood-opacity: 0.18;
+}
+
+.solution-hub__shadow--hub {
+  flood-color: var(--color-solution-hub-core-shadow);
+  flood-opacity: 0.16;
+}
+
+.solution-hub__ribbons--back {
+  opacity: 0.38;
+}
+
+.solution-hub__ribbon {
+  opacity: 0.94;
+}
+
+.solution-hub__ribbon-highlight {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.solution-hub__core {
+  fill: var(--color-white);
+  stroke: var(--color-solution-hub-core-border);
+  stroke-width: 1;
+}
+
+.solution-hub__link {
+  fill: none;
+  transition:
+    opacity var(--solution-hub-motion),
+    stroke var(--solution-hub-motion);
+}
+
+.solution-hub__link--base {
+  stroke: var(--color-solution-hub-link);
+  stroke-width: 1.5;
+  opacity: 0.3;
+}
+
+.solution-hub__link--base[data-state="active"] {
+  stroke: var(--color-solution-hub-accent);
+  opacity: 0.9;
+}
+
+.solution-hub__link--base[data-state="inactive"] {
+  opacity: 0.08;
+}
+
+/* Dash starts just before the partner end and leaves past the hub end (lines are ~194 long). */
+.solution-hub__link--flow {
+  stroke: var(--color-solution-hub-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 34 400;
+  opacity: 0.7;
+  animation: solution-hub-flow var(--solution-hub-flow-duration)
+    var(--solution-hub-flow-easing) infinite;
+}
+
+.solution-hub__link--flow[data-state="active"] {
+  opacity: 1;
+}
+
+.solution-hub__link--flow[data-state="inactive"] {
+  opacity: 0.12;
+}
+
+.solution-hub__link--1 {
+  animation-delay: -0.47s;
+}
+
+.solution-hub__link--2 {
+  animation-delay: -0.93s;
+}
+
+.solution-hub__link--3 {
+  animation-delay: -1.4s;
+}
+
+.solution-hub__link--4 {
+  animation-delay: -1.87s;
+}
+
+.solution-hub__link--5 {
+  animation-delay: -2.33s;
+}
+
+@keyframes solution-hub-flow {
+  from {
+    stroke-dashoffset: 34;
+  }
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+/* 116×64 logo slot anchored by its center on the hub (640, 410), nudged to (643, 414):
+ * the ko-en wordmark's ink sits up-left of its box (heavy 한글 line over thin CORUNWAVE),
+ * so the box center alone reads as off-center inside the circle.
+ */
+.solution-hub__logo {
+  position: absolute;
+  top: calc(414 / 720 * 100%);
+  left: calc(643 / 1280 * 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(116 / 1280 * 100%);
+  height: calc(64 / 720 * 100%);
+  transform: translate(-50%, -50%);
+}
+
+.solution-hub__logo > * {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.solution-hub__logo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.solution-hub__logo-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1.5px dashed var(--color-solution-hub-placeholder-border);
+  border-radius: var(--radius-10);
+  color: var(--color-solution-hub-placeholder-text);
+  font-family: var(--font-family-body);
+  font-size: var(--solution-hub-placeholder-size);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.solution-hub__partners {
+  position: absolute;
+  top: calc(-140 / 550 * 100%);
+  right: 0;
+  left: 0;
+  height: calc(720 / 550 * 100%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.solution-hub__partner {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.solution-hub__partner--0 {
+  top: calc(185 / 720 * 100%);
+  left: calc(510 / 1280 * 100%);
+}
+
+.solution-hub__partner--1 {
+  top: calc(185 / 720 * 100%);
+  left: calc(770 / 1280 * 100%);
+}
+
+.solution-hub__partner--2 {
+  top: calc(410 / 720 * 100%);
+  left: calc(878 / 1280 * 100%);
+  transform: translateY(-50%);
+}
+
+.solution-hub__partner--3 {
+  top: calc(635 / 720 * 100%);
+  left: calc(770 / 1280 * 100%);
+}
+
+.solution-hub__partner--4 {
+  top: calc(635 / 720 * 100%);
+  left: calc(510 / 1280 * 100%);
+}
+
+.solution-hub__partner--5 {
+  top: calc(410 / 720 * 100%);
+  left: calc(402 / 1280 * 100%);
+  transform: translate(-100%, -50%);
+}
+
+/* Padding and height are em-based (11/22/44 at 17px) so chips scale with the type. */
+.solution-hub__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(44em / 17);
+  padding: calc(11em / 17) calc(22em / 17);
+  border: 1px solid var(--color-solution-hub-chip-border);
+  border-radius: var(--radius-999);
+  background: var(--color-white);
+  box-shadow: var(--shadow-solution-hub-chip);
+  color: var(--color-solution-hub-chip-text);
+  font-family: var(--font-family-body);
+  font-size: var(--solution-hub-chip-size);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: default;
+  pointer-events: auto;
+  transition:
+    opacity var(--solution-hub-motion),
+    color var(--solution-hub-motion),
+    border-color var(--solution-hub-motion),
+    box-shadow var(--solution-hub-motion);
+}
+
+.solution-hub__partner--2 .solution-hub__chip {
+  justify-content: flex-start;
+  border-radius: var(--radius-22);
+  line-height: 1.35;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.solution-hub__chip[data-state="active"] {
+  border-color: var(--color-solution-hub-accent);
+  color: var(--color-solution-hub-accent);
+  box-shadow: var(--shadow-solution-hub-chip-active);
+}
+
+.solution-hub__chip[data-state="inactive"] {
+  opacity: 0.4;
+}
+
+.solution-hub__chip:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+  outline-offset: 3px;
+}
+
+@media (width <= 760px) {
+  .solution-hub__stage {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+  .solution-hub__canvas {
+    position: absolute;
+    top: calc(-170 / 480 * 100%);
+    left: calc(-400 / 480 * 100%);
+    width: calc(1280 / 480 * 100%);
+  }
+  .solution-hub__links {
+    display: none;
+  }
+  .solution-hub__partners {
+    position: static;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-12);
+    margin-top: var(--spacing-16);
+  }
+  .solution-hub__partner,
+  .solution-hub__partner--2,
+  .solution-hub__partner--5 {
+    position: static;
+    transform: none;
+  }
+  .solution-hub__chip,
+  .solution-hub__partner--2 .solution-hub__chip {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    font-size: var(--solution-hub-chip-size-mobile);
+    text-align: center;
+    white-space: pre-line;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-hub__link--flow {
+    display: none;
+  }
+  .solution-hub__chip,
+  .solution-hub__link {
+    transition: none;
   }
 }
 

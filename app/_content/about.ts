@@ -16,8 +16,7 @@ export type BusinessDirectionContent = {
   descriptionLead: string;
   descriptionEmphasis: string;
   descriptionTail: string;
-  hubLabel: string;
-  visual: { src: string; width: number; height: number };
+  hubLogo: { src: string; width: number; height: number; alt: string };
   values: readonly { title: string; body: string }[];
 };
 
@@ -76,11 +75,11 @@ export const businessDirection: BusinessDirectionContent = {
     "단순한 서비스 공급자가 아닌 기술과 교육을 융합하고 전문가 네트워크를 연결해 시장의 격차를 해소하는",
   descriptionEmphasis: "“솔루션 허브”",
   descriptionTail: " 가 되겠습니다",
-  hubLabel: "솔루션 허브",
-  visual: {
-    src: "/images/company/business-direction-hub.svg",
-    width: 704,
-    height: 420,
+  hubLogo: {
+    src: "/images/logos/corunwave-ko-en-color.png",
+    width: 120,
+    height: 40,
+    alt: "코런웨이브",
   },
   values: [
     {

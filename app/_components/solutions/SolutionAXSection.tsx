@@ -86,8 +86,8 @@ const SolutionAXSection = ({ content }: SolutionAXSectionProps) => (
                 <Image
                   className="ax-flow__chevron"
                   src="/images/solution/ax-flow-chevron.svg"
-                  width={24}
-                  height={12}
+                  width={56}
+                  height={14}
                   alt=""
                   aria-hidden="true"
                 />

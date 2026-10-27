@@ -6,7 +6,7 @@ export type SolutionsPageContent = {
 export const solutionsPage: SolutionsPageContent = {
   title: "솔루션",
   description:
-    "인프라 설계부터 운영과 조달,인재 육성에 이르기까지 단절 없는 End-to-End 서비스 가치를 창출합니다.",
+    "인프라 설계부터 운영과 조달, 인재 육성에 이르기까지 단절 없는 End-to-End 서비스를 제공합니다.",
 };
 
 export type AxServiceId =

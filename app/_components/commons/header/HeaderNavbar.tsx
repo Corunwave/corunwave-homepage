@@ -134,7 +134,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
         </nav>
         <Link
           className="site-header__contact site-header__desktop-contact"
-          href="#"
+          href="/contact"
         >
           문의하기
         </Link>
@@ -185,7 +185,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
           ))}
           <li>
             <LinkButton
-              href={"#"}
+              href="/contact"
               className="site-header__contact"
               onClick={() => setMenuOpen(false)}
             >

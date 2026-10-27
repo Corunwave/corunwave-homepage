@@ -175,7 +175,7 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
             return (
               <Link
                 key={id}
-                href={`/solutions#${id}`}
+                href={`/solutions?tab=${id}#solution-services`}
                 className={`solution-card solution-card--${id}`}
                 data-active={active}
                 onMouseEnter={() => handleEnter(id)}

@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="28" height="232" viewBox="0 0 28 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Stage Gradient Chevron" d="M0 0H9.8L28 116L9.8 232H0L18.2 116L0 0Z" fill="url(#paint0_linear_0_53)" fill-opacity="0.32"/>
+<defs>
+<linearGradient id="paint0_linear_0_53" x1="-3.45205" y1="76.274" x2="31.4764" y2="77.8548" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0D6EE5"/>
+<stop offset="1" stop-color="#7AC9FF"/>
+</linearGradient>
+</defs>
+</svg>

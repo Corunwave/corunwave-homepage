@@ -113,11 +113,42 @@
   --proposal-inner-max: 1248px;
   --proposal-card-size: 300px;
   --proposal-feature-width: 616px;
-  --proposal-graphic-size: 150px;
+  /* Stock photo behind each target card; the blur keeps it a texture under the copy. */
+  --proposal-photo-blur: 4px;
+  --proposal-photo-bleed: -16px;
+  --proposal-overlay-enterprise: linear-gradient(
+    180deg,
+    rgb(15 23 41 / 52%),
+    rgb(15 23 41 / 78%)
+  );
+  --proposal-overlay-public: linear-gradient(
+    180deg,
+    rgb(53 97 235 / 62%),
+    rgb(18 48 150 / 86%)
+  );
+  --proposal-overlay-startup: linear-gradient(
+    180deg,
+    rgb(199 230 255 / 80%),
+    rgb(199 230 255 / 92%)
+  );
 
   /* Solutions */
   --solutions-inner-max: 1248px;
-  --solutions-list-height: 560px;
+  --solutions-list-height: 448px;
+  --solution-card-min-height-mobile: 300px;
+  /* Photo overlays: lighter at the top so the photo reads, dense at the bottom under the copy. */
+  --solution-card-overlay-ax: linear-gradient(
+    180deg,
+    rgb(15 23 41 / 36%),
+    rgb(15 23 41 / 62%) 45%,
+    rgb(15 23 41 / 90%)
+  );
+  --solution-card-overlay-learning: linear-gradient(
+    180deg,
+    rgb(64 30 20 / 30%),
+    rgb(52 26 20 / 60%) 45%,
+    rgb(36 20 18 / 90%)
+  );
   /* Active card weight against a 1fr collapsed card (~960px : 272px at 1248px). */
   --solutions-card-active-weight: 3.5fr;
   --solutions-card-active-weight-tablet: 3.4fr;
@@ -5596,6 +5627,9 @@ body {
 .proposal-card {
   position: relative;
   isolation: isolate;
+  /* Column flex lets the content fill the card even when its height is auto (tablet/mobile). */
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   height: var(--proposal-card-size);
   padding: var(--spacing-24);
@@ -5622,15 +5656,44 @@ body {
   );
 }
 
+/* Blurred stock photo (Unsplash); bleeds past the card so the blur has no soft edge. */
+.proposal-card:not(.proposal-card--university)::before {
+  content: "";
+  position: absolute;
+  inset: var(--proposal-photo-bleed);
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  filter: blur(var(--proposal-photo-blur));
+  pointer-events: none;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .proposal-card--enterprise {
   grid-column: 1;
   grid-row: 1;
+}
+
+.proposal-card--enterprise::before {
+  background-image: url("/images/proposal/targets/enterprise-skyscrapers-abbe-sublett.jpg");
+}
+
+.proposal-card--enterprise::after {
+  background: var(--proposal-overlay-enterprise);
 }
 
 .proposal-card--public {
   grid-column: 2;
   grid-row: 1;
   background: var(--color-proposal-public);
+}
+
+.proposal-card--public::before {
+  background-image: url("/images/proposal/targets/public-city-night-ken-cheung.jpg");
+}
+
+.proposal-card--public::after {
+  background: var(--proposal-overlay-public);
 }
 
 .proposal-card--startup {
@@ -5641,13 +5704,12 @@ body {
   background: var(--color-proposal-startup);
 }
 
+.proposal-card--startup::before {
+  background-image: url("/images/proposal/targets/startup-sticky-notes-ux-indonesia.jpg");
+}
+
 .proposal-card--startup::after {
-  background: linear-gradient(
-    180deg,
-    rgb(199 230 255 / 0%),
-    rgb(199 230 255 / 20%) 55%,
-    rgb(199 230 255 / 42%)
-  );
+  background: var(--proposal-overlay-startup);
 }
 
 .proposal-card--university {
@@ -5666,8 +5728,8 @@ body {
   position: relative;
   z-index: 2;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  height: 100%;
 }
 
 .proposal-card__tags {
@@ -5715,25 +5777,11 @@ body {
   color: var(--color-text-secondary);
 }
 
-.proposal-graphic {
-  position: absolute;
-  right: var(--spacing-16);
-  bottom: var(--spacing-16);
-  z-index: 1;
-  width: var(--proposal-graphic-size);
-  height: var(--proposal-graphic-size);
-  object-fit: contain;
-  filter: blur(2px);
-  pointer-events: none;
-  user-select: none;
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 .proposal-card:not(.proposal-card--university):hover {
   transform: translateY(-6px);
 }
 
-.proposal-card:not(.proposal-card--university):hover .proposal-graphic {
+.proposal-card:not(.proposal-card--university):hover::before {
   transform: scale(1.06);
 }
 
@@ -5772,6 +5820,12 @@ body {
   line-height: 1.125rem;
   word-break: keep-all;
   overflow-wrap: normal;
+}
+
+.proposal-explanation__highlight {
+  color: var(--color-action-primary);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
 }
 
 .proposal-detail-link {
@@ -5936,7 +5990,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .proposal-card,
-  .proposal-graphic,
+  .proposal-card::before,
   .proposal-detail-link,
   .proposal-grid[data-reveal] > * {
     transition: none;
@@ -6130,31 +6184,29 @@ body {
   overflow: hidden;
   border-radius: var(--radius-24);
   color: inherit;
-  background: var(--color-solution-purple-surface);
+  background: var(--color-brand-navy);
   text-decoration: none;
   transition: box-shadow var(--solutions-card-motion);
 }
 
-.solution-card--learning {
-  background: var(--color-solution-coral-surface);
-}
-
-/* Same soft glow as the /solutions overview cards, pinned right so it follows the icon when the card widens. */
+/* Stock photo (Unsplash) under a tinted overlay; cover keeps it filling the card while the column width animates. */
 .solution-card::before {
   content: "";
   position: absolute;
+  inset: 0;
   z-index: -1;
-  top: -88px;
-  right: -109px;
-  width: 585.6px;
-  height: 376px;
-  background: url("/images/solution/overview-glow-ax-desktop.svg") 0 0 / 100%
-    100% no-repeat;
+  background:
+    var(--solution-card-overlay-ax),
+    url("/images/solution/ax-infra-server-rack-taylor-vick.jpg") center / cover
+      no-repeat;
   pointer-events: none;
 }
 
 .solution-card--learning::before {
-  background-image: url("/images/solution/overview-glow-learning-desktop.svg");
+  background:
+    var(--solution-card-overlay-learning),
+    url("/images/solution/learning-laptop-christin-hume.jpg") center / cover
+      no-repeat;
 }
 
 .solution-card:hover,
@@ -6182,31 +6234,10 @@ body {
   position: absolute;
   top: var(--spacing-24);
   left: var(--spacing-32);
-  color: var(--color-brand-primary);
+  color: var(--color-white);
   font-family: var(--font-family-body);
   font-size: var(--text-solution-service-toggle);
   line-height: var(--text-solution-service-toggle--line-height);
-}
-
-.solution-card__image {
-  flex: none;
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  transition:
-    width var(--solutions-card-motion),
-    height var(--solutions-card-motion);
-}
-
-/* Desktop/tablet: the icon shrinks to leave room for the bullet list and for the squeezed neighbour card. */
-@media (width >= 761px) {
-  .solution-card[data-active="true"] .solution-card__image,
-  .solutions-list:not([data-active-card="none"])
-    .solution-card:not([data-active="true"])
-    .solution-card__image {
-    width: 120px;
-    height: 120px;
-  }
 }
 
 .solution-card__summary {
@@ -6217,7 +6248,7 @@ body {
 
 .solution-card__title {
   display: block;
-  color: var(--color-brand-navy);
+  color: var(--color-white);
   font-family: var(--font-family-heading);
   font-size: var(--text-solution-card-title-desktop);
   line-height: var(--text-solution-card-title-desktop--line-height);
@@ -6230,7 +6261,7 @@ body {
 .solution-card__description {
   display: block;
   margin-top: var(--spacing-12);
-  color: var(--color-text-primary);
+  color: rgb(255 255 255 / 88%);
   font-family: var(--font-family-body);
   font-size: var(--text-solution-card-description-desktop);
   line-height: var(--text-solution-card-description-desktop--line-height);
@@ -6262,7 +6293,7 @@ body {
 .solution-card__list,
 .solution-card__list > span {
   display: block;
-  color: var(--color-text-secondary);
+  color: rgb(255 255 255 / 80%);
   font-size: 1rem;
   line-height: 1.625rem;
   word-break: keep-all;
@@ -6444,23 +6475,14 @@ body {
   .solution-card {
     width: 100%;
   }
-  .solution-card::before {
-    right: -100px;
-    width: 382.4px;
-    background-image: url("/images/solution/overview-glow-ax-mobile.svg");
-  }
-  .solution-card--learning::before {
-    background-image: url("/images/solution/overview-glow-learning-mobile.svg");
-  }
   .solution-card__content {
     padding: var(--spacing-24);
   }
   .solution-card__meta {
     left: var(--spacing-24);
   }
-  .solution-card__image {
-    width: 184px;
-    height: 184px;
+  .solution-card__content {
+    min-height: var(--solution-card-min-height-mobile);
   }
   .solution-card__title {
     font-size: var(--text-solution-card-title-mobile);
@@ -6474,7 +6496,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .solution-card,
-  .solution-card__image,
   .solution-card__panel,
   .solutions-header[data-reveal] > *,
   .solutions-process[data-reveal] .solutions-process__desktop > *,

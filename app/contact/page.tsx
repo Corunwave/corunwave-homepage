@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { sharedOpenGraph } from "../_lib/metadata";
 import Image from "next/image";
 import PageHero from "../_components/commons/hero/PageHero";
 import ContactForm from "../_components/contact/ContactForm";
@@ -11,10 +12,9 @@ export const metadata: Metadata = {
   title,
   description: lead,
   openGraph: {
+    ...sharedOpenGraph,
     title: `${title} · 코런웨이브`,
     description: lead,
-    type: "website",
-    locale: "ko_KR",
   },
 };
 

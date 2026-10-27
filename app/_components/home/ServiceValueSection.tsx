@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { renderText } from "../../_lib/content/renderText";
 import type { ServiceValuesContent } from "../../_content/home";
 
 type ServiceValueSectionProps = { content: ServiceValuesContent };
@@ -119,7 +120,11 @@ const ServiceValueSection = ({ content }: ServiceValueSectionProps) => {
                 </div>
                 <article className="service-value__copy">
                   <h3 className="service-value__title">{title}</h3>
-                  <p className="service-value__description">{description}</p>
+                  <p className="service-value__description">
+                    {renderText(description, {
+                      breakClassName: "service-value__break",
+                    })}
+                  </p>
                 </article>
               </li>
             ))}

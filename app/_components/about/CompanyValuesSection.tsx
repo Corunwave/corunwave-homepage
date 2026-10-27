@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useRef } from "react";
 import Image from "next/image";
+import { renderText } from "../../_lib/content/renderText";
 import type { CompanyValuesContent } from "../../_content/about";
 
 type CompanyValuesSectionProps = { content: CompanyValuesContent };
@@ -73,7 +74,9 @@ const CompanyValuesSection = ({ content }: CompanyValuesSectionProps) => {
                 <p className="value-card__en">{en}</p>
                 <h3 className="value-card__ko">{ko}</h3>
               </div>
-              <p className="value-card__description">{description}</p>
+              <p className="value-card__description">
+                {renderText(description)}
+              </p>
             </li>
           ))}
         </ul>

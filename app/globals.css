@@ -69,7 +69,7 @@
   --challenges-stack-gap: var(--spacing-40);
   --challenges-title-height: 44px; /* JS overwrites with the measured title height */
   --challenges-controls-height: 74px;
-  --challenges-copy-max: 720px;
+  --challenges-copy-max: 1120px;
   --challenges-copy-padding: 64px;
   --challenges-stage-height: calc(
     100svh - var(--header-height-desktop-scrolled)
@@ -825,19 +825,19 @@
   --text-solution-card-description-mobile--font-weight: 400;
   --text-solution-card-description-mobile--letter-spacing: 0;
 
-  --text-solutions-process: 1.3125rem;
-  --text-solutions-process--line-height: 2rem;
-  --text-solutions-process-narrow: 1.125rem;
-  --text-solutions-process-narrow--line-height: 1.75rem;
-  --text-solutions-process-mobile: 1.3125rem;
-  --text-solutions-process-mobile--line-height: 2rem;
+  --text-solutions-process: 1.125rem;
+  --text-solutions-process--line-height: 1.75rem;
+  --text-solutions-process-narrow: 1rem;
+  --text-solutions-process-narrow--line-height: 1.625rem;
+  --text-solutions-process-mobile: 1.0625rem;
+  --text-solutions-process-mobile--line-height: 1.625rem;
 
-  --text-solutions-process-head: 1.4rem;
-  --text-solutions-process-head--line-height: 2.125rem;
-  --text-solutions-process-head-narrow: 1.1875rem;
-  --text-solutions-process-head-narrow--line-height: 1.75rem;
-  --text-solutions-process-head-mobile: 1.375rem;
-  --text-solutions-process-head-mobile--line-height: 2rem;
+  --text-solutions-process-head: 1.25rem;
+  --text-solutions-process-head--line-height: 1.875rem;
+  --text-solutions-process-head-narrow: 1.125rem;
+  --text-solutions-process-head-narrow--line-height: 1.625rem;
+  --text-solutions-process-head-mobile: 1.1875rem;
+  --text-solutions-process-head-mobile--line-height: 1.75rem;
 
   --text-solutions-description-desktop: 1.375rem;
   --text-solutions-description-desktop--line-height: 2rem;
@@ -2128,6 +2128,9 @@ body {
     line-height: var(--text-direction-heading-mobile--line-height);
     font-weight: var(--text-direction-heading-mobile--font-weight);
     letter-spacing: var(--text-direction-heading-mobile--letter-spacing);
+  }
+  .direction-break {
+    display: none;
   }
   .direction-value p {
     margin-top: var(--spacing-12);
@@ -6572,7 +6575,7 @@ body {
   z-index: 2;
   top: 94px;
   left: 8.4%;
-  width: min(420px, 35%);
+  width: min(560px, 46%);
 }
 
 .service-value__title {
@@ -6743,6 +6746,9 @@ body {
   .service-value__title {
     font-size: var(--text-service-value-title-mobile);
     line-height: var(--text-service-value-title-mobile--line-height);
+  }
+  .service-value__break {
+    display: none;
   }
   .service-value__description {
     margin-top: var(--spacing-12);

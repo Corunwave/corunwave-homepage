@@ -46,7 +46,7 @@ export type DownloadsContent = {
 export const homeHero: HomeHeroContent = {
   title: "Innovation Together,\nCreating Waves",
   description:
-    "AX Infra와 Learning Service를 연결해 기술 도입부터\n운영, 인재 육성까지 이어지는 서비스를 제공합니다.",
+    "AX Infra와 Learning Service를 연결해 기술 도입부터 운영,\n인재 육성까지 이어지는 서비스를 제공합니다.",
   cta: { label: "솔루션 바로보기", href: "/solutions" },
 };
 
@@ -93,6 +93,7 @@ export const proposalTargets: ProposalTargetsContent = {
   },
 };
 
+/* Description breaks are desktop-only; the space before each `\n` keeps words apart once the <br /> is hidden. */
 export const serviceValues: ServiceValuesContent = {
   title: "서비스 가치",
   intro:
@@ -103,7 +104,7 @@ export const serviceValues: ServiceValuesContent = {
       word: "TRUST",
       title: "신뢰",
       description:
-        "신뢰는 서비스 결과로 증명되고 고객 만족으로 완성됩니다. 약속은 반드시 지키고 과정은 투명하게 공개하는 것, 이것이 “코런웨이브”가 흔들림 없이 고객신뢰를 쌓아가는 단 하나의 원칙입니다.",
+        "신뢰는 서비스 결과로 증명되고 고객 만족으로 완성됩니다. \n약속은 반드시 지키고 과정은 투명하게 공개하는 것, \n이것이 “코런웨이브”가 흔들림 없이 고객의 신뢰를 쌓아가는 단 하나의 원칙입니다.",
       image: "/images/service-values/service-trust-3d.png",
     },
     {
@@ -111,7 +112,7 @@ export const serviceValues: ServiceValuesContent = {
       word: "INSIGHT",
       title: "통찰",
       description:
-        "진정한 통찰은 깊은 공감에서 시작됩니다. 고객의 상황을 이해하고 비즈니스 환경을 면밀하게 분석하여 남들이 보지 못한 성장의 기회를 발굴함으로써 가장 확실한 성공 솔루션을 제공합니다.",
+        "진정한 통찰은 깊은 공감에서 시작됩니다. \n고객의 상황을 이해하고 비즈니스 환경을 면밀하게 분석하여 \n남들이 보지 못한 성장의 기회를 발굴함으로써 \n가장 확실한 성공 솔루션을 제공합니다.",
       image: "/images/service-values/service-insight-3d.png",
     },
     {
@@ -119,7 +120,7 @@ export const serviceValues: ServiceValuesContent = {
       word: "PARTNERSHIP",
       title: "동행",
       description:
-        "비즈니스는 관계의 연속입니다. 고객과 함께 관계를 발전시키고 이어가는 것, 지속 가능한 협력 로드맵을 통해 동반성장의 가치를 현실화 하는 상생파트너로 고객과 함께 하겠습니다.",
+        "비즈니스는 관계의 연속입니다. \n고객과 함께 관계를 발전시키고 이어가는 것, 지속 가능한 협력 로드맵을 통해 \n동반성장의 가치를 현실화 하는 상생파트너로 고객과 함께 하겠습니다.",
       image: "/images/service-values/service-partnership-3d.png",
     },
   ],

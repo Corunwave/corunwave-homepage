@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { renderText } from "../../_lib/content/renderText";
 import type { CoreChallengesContent } from "../../_content/about";
 
 type CoreChallengesSectionProps = { content: CoreChallengesContent };
@@ -248,7 +249,7 @@ const CoreChallengesSection = ({ content }: CoreChallengesSectionProps) => {
                     <h3 id={`challenge-${id}-title`} className="challenge-heading">
                       {title}
                     </h3>
-                    <p className="challenge-body">{body}</p>
+                    <p className="challenge-body">{renderText(body)}</p>
                   </div>
                 </div>
               </article>

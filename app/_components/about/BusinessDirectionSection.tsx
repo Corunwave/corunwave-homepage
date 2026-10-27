@@ -2,10 +2,12 @@ import { Fragment } from "react";
 import Image from "next/image";
 import { renderText } from "../../_lib/content/renderText";
 import type { BusinessDirectionContent } from "../../_content/about";
+import SolutionHub from "./SolutionHub";
 
 type BusinessDirectionSectionProps = { content: BusinessDirectionContent };
 
-/* Business direction "사업 방향성" (preview .business-direction; Figma 653:20134 / 653:20160). Static server component. */
+/* Business direction "사업 방향성" (preview .business-direction; Figma 653:20134 / 653:20160).
+ * Server component; only the SolutionHub diagram hydrates. */
 const BusinessDirectionSection = ({
   content,
 }: BusinessDirectionSectionProps) => {
@@ -39,16 +41,17 @@ const BusinessDirectionSection = ({
               </span>
             </p>
           </header>
-          <div className="direction-visual" aria-hidden="true">
-            <Image
-              className="direction-art"
-              src={content.visual.src}
-              width={content.visual.width}
-              height={content.visual.height}
-              alt=""
-            />
-            <p className="direction-hub">{content.hubLabel}</p>
-          </div>
+          <SolutionHub
+            logo={
+              <Image
+                className="solution-hub__logo-image"
+                src={content.hubLogo.src}
+                width={content.hubLogo.width}
+                height={content.hubLogo.height}
+                alt={content.hubLogo.alt}
+              />
+            }
+          />
         </div>
         <div className="direction-connectors" aria-hidden="true">
           <span className="direction-trunk" />

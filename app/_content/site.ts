@@ -34,7 +34,7 @@ export const siteFooter: SiteFooterContent = {
   navigationLabel: "하단 메뉴",
   navigation: [
     { label: "회사소개", href: "/about" },
-    { label: "솔루션", href: "#" },
+    { label: "솔루션", href: "/solutions" },
     { label: "파트너 전략", href: "/partner-strategy" },
   ],
   legalLabel: "약관 및 정책",

@@ -63,7 +63,12 @@ const BusinessDirectionSection = ({
           {content.values.map(({ title, body }) => (
             <article key={title} className="direction-value">
               <h3>{title}</h3>
-              <p>{renderText(body, { keepClassName: "direction-keep" })}</p>
+              <p>
+                {renderText(body, {
+                  keepClassName: "direction-keep",
+                  breakClassName: "direction-break",
+                })}
+              </p>
             </article>
           ))}
         </div>

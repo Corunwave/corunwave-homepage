@@ -69,7 +69,7 @@
   --challenges-stack-gap: var(--spacing-40);
   --challenges-title-height: 44px; /* JS overwrites with the measured title height */
   --challenges-controls-height: 74px;
-  --challenges-copy-max: 720px;
+  --challenges-copy-max: 1120px;
   --challenges-copy-padding: 64px;
   --challenges-stage-height: calc(
     100svh - var(--header-height-desktop-scrolled)
@@ -2128,6 +2128,9 @@ body {
     line-height: var(--text-direction-heading-mobile--line-height);
     font-weight: var(--text-direction-heading-mobile--font-weight);
     letter-spacing: var(--text-direction-heading-mobile--letter-spacing);
+  }
+  .direction-break {
+    display: none;
   }
   .direction-value p {
     margin-top: var(--spacing-12);

@@ -310,7 +310,7 @@ export const axInfra: AxInfraContent = {
               { text: "앱/사무용 애플리케이션 개발" },
               { text: "국내 및 베트남 개발자 활용" },
               { text: "피그마 작업 지원 가능" },
-              { text: "AI 활용을 통한 투입 개발자 최적화" },
+              { text: "AI 활용을 통한 투여 개발자 최적화" },
               { text: "PM 등을 설정하여 자체 관리" },
               { text: "일별·주별 상황 관리 가능" },
               { text: "기존 경험을 바탕으로 신속 개발" },

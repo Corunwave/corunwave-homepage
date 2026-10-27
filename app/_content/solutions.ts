@@ -130,3 +130,182 @@ export const axInfra: AxInfraContent = {
     },
   },
 };
+
+export type LearningBullet = {
+  text: string;
+  /** Sub-bullets: the "제목: 내용" copy is split into the title bullet and its content one level below. */
+  children?: readonly string[];
+};
+
+export type LearningStageRow = {
+  stage: string;
+  value: string;
+  system: readonly LearningBullet[];
+};
+
+export type LearningDetail = {
+  title: string;
+  body: readonly LearningBullet[];
+};
+
+export type LearningServiceContent = {
+  title: string;
+  lead: string;
+  support: readonly string[];
+  pillars: readonly string[];
+  marketTitle: string;
+  trends: readonly string[];
+  tableLabel: string;
+  tableHead: readonly [string, string, string];
+  rows: readonly LearningStageRow[];
+  /** Closing sentence: the stage chain is emphasized, `rest` continues it. */
+  process: { highlight: string; rest: string };
+  details: readonly LearningDetail[];
+};
+
+/* Copy follows the preview (.learning-bpo; Figma 1206:39515 / 1206:39591). */
+export const learningService: LearningServiceContent = {
+  title: "Learning Service & BPO",
+  lead: "“기술과 사람을 연결해 기업의 AX전환과 비즈니스 성장을 이끄는 최적의 인재육성 파트너”",
+  support: [
+    "단순한 지식 전달을 넘어 최신 기술과 사람을 연결하여 기업의 실질적인 디지털 전환(AX)을 이끄는 기술중심 교육서비스를 제공합니다.",
+    "현장에서 검증된 학습 방법론을 바탕으로 고객의 비즈니스 성장을 가속화할 최적의 인재육성 방안을 제시합니다.",
+  ],
+  pillars: [
+    "기술 트렌드를 반영한\n전략적 인재양성 파트너",
+    "AX Infra 연계\n현업 밀착형 교육 서비스",
+    "안정적 교육운영으로\n성과창출 극대화",
+  ],
+  marketTitle: "Market Trend",
+  trends: [
+    "기술 격차의 심화\n경제적 손실 가속화",
+    "성장 중심 문화의 확산\n인재 육성이 기업 경쟁력",
+    "AI 리터러시 채용 트렌드",
+    "에이전트 중심 협업미래",
+  ],
+  tableLabel: "서비스 체계",
+  tableHead: ["단계", "핵심 가치", "서비스 체계"],
+  rows: [
+    {
+      stage: "기획",
+      value: "전략적 분석 및 목표설정",
+      system: [
+        {
+          text: "비즈니스 목표와 인재 육성 전략을 정렬하여 실질적인 성과 로드맵을 수립",
+        },
+      ],
+    },
+    {
+      stage: "설계",
+      value: "방법론 혁신",
+      system: [
+        {
+          text: "성과 극대화를 위한 Hybrid Learning 적용, 최적의 학습 방법론과 커리큘럼 구조화",
+        },
+      ],
+    },
+    {
+      stage: "개발",
+      value: "실무 적합성",
+      system: [
+        {
+          text: "과정 및 기술 전문가와 협업하여 현업 밀착형 실무 콘텐츠 제작",
+        },
+      ],
+    },
+    {
+      stage: "운영",
+      value: "품질 및 효율보장",
+      system: [
+        {
+          text: "데이터 기반의 통합 운영 위탁(BPO)을 통해 교육의 품질을 관리하고 성과 창출",
+        },
+        {
+          text: "Learning BPO",
+          children: [
+            "교육 행정부터 학습자 관리까지 전문 인력을 통한 전 과정 통합 운영 위탁",
+          ],
+        },
+        {
+          text: "LMS/CMS 최적화",
+          children: [
+            "중단 없는 학습 환경을 위한 인프라 구축 및 사용자 경험(UX) 중심의 시스템 운영",
+          ],
+        },
+        {
+          text: "성과 가시화 보고 및 지속적 개선",
+          children: [
+            "학습 데이터를 분석하여 개인별 성장 리포트 및 비즈니스 성과 기여도 최종 검증 (Feedback Loop)",
+          ],
+        },
+      ],
+    },
+  ],
+  process: {
+    highlight: "기획 → 설계 → 개발 → 운영",
+    rest: "으로 이어지는 교육 전 과정을 통합 관리하여 고객의 교육 니즈를 해결하고\n고객의 상황에 맞는 단계별 교육서비스로 운영효율과 학습품질을 동시에 보장함으로써 실질적인 업무역량 성장을 견인합니다.",
+  },
+  details: [
+    {
+      title: "1. AX & AI 리터러시 현업 밀착형 교육",
+      body: [
+        {
+          text: "AX Infra 연계 훈련",
+          children: [
+            "기업의 내부 기술/시스템 인프라와 연계된 실전형 AI 교육",
+          ],
+        },
+        {
+          text: "직무별 AI 에이전트 협업",
+          children: [
+            "영업, 마케팅, 개발, HR 등 직무별 Agentic Workflow 구현",
+          ],
+        },
+        {
+          text: "PBL 기반 실무 프로젝트",
+          children: [
+            "현업 이슈를 직접 해결하는 문제 해결형 워크숍 및 부트캠프",
+          ],
+        },
+      ],
+    },
+    {
+      title: "2. Hybrid Learning & 맞춤형 커리큘럼 개발",
+      body: [
+        {
+          text: "온·오프라인 결합 설계",
+          children: [
+            "이론 습득과 실습·피드백이 유기적으로 연결된 하이브리드 학습",
+          ],
+        },
+        {
+          text: "도메인 특화 콘텐츠",
+          children: ["산업군별 맞춤형 실무 아티팩트 및 템플릿 개발"],
+        },
+      ],
+    },
+    {
+      title: "3. All-in-One Learning BPO (통합 운영 위탁 서비스)",
+      body: [
+        {
+          text: "교육 행정 & 운영 BPO",
+          children: [
+            "기획, 학습자 관리, 강사 수급, 평가까지 전 과정 위탁 운영",
+          ],
+        },
+        {
+          text: "LMS / CMS 인프라 최적화",
+          children: [
+            "중단 없는 안심 학습 환경과 사용자 경험(UX) 중심의 시스템 운용",
+          ],
+        },
+        {
+          text: "Data-driven Feedback Loop",
+          children: [
+            "학습 데이터를 분석하여 개인별 성장 리포트 및 비즈니스 성과 기여도를 검증하는 최종 성과 보고서 제공",
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -139,3 +139,92 @@ export const downloads: DownloadsContent = {
     },
   ],
 };
+
+export type SolutionCardContent = {
+  id: "ax-infra" | "learning";
+  title: string;
+  image: string;
+  description: string;
+  items: readonly string[];
+};
+
+export type ProcessStageContent = {
+  name: string;
+  ax: string;
+  learning: string;
+};
+
+export type SolutionsContent = {
+  title: string;
+  description: string;
+  processLabel: string;
+  axLabel: string;
+  learningLabel: string;
+  stages: readonly ProcessStageContent[];
+  solutions: readonly SolutionCardContent[];
+};
+
+/* Table labels and the AX card title break at "&"; the Learning card title keeps a soft break. */
+const AX_LABEL = "AX Infra\u00a0&\nIT Outsourcing";
+const LEARNING_LABEL = "Learning Service\u00a0&<wbr> BPO";
+const LEARNING_TRACK_LABEL = "Learning Service\u00a0&\nBPO";
+
+export const solutions: SolutionsContent = {
+  title: "통합 End-to-End 서비스",
+  description:
+    "AX Infra와 Learning Service를 하나의 과정으로 연결해 기술 운영과 조직의 역량 개발을 함께 지원합니다.",
+  processLabel: "통합 End-to-End 서비스 단계",
+  axLabel: AX_LABEL,
+  learningLabel: LEARNING_TRACK_LABEL,
+  stages: [
+    {
+      name: "기획",
+      ax: "비즈니스·인프라 진단\n기술 로드맵",
+      learning: "조직·직무 역량 진단\n교육 로드맵",
+    },
+    {
+      name: "설계",
+      ax: "아키텍처와\n보안·운영 체계 설계",
+      learning: "과정·학습 방법론과\n성과지표 설계",
+    },
+    {
+      name: "구축·개발",
+      ax: "인프라 구축, 통합,\n마이그레이션",
+      learning: "콘텐츠 개발\nPBL·실습 환경 구축",
+    },
+    {
+      name: "운영",
+      ax: "AIOps, 유지관리\nManaged ITO",
+      learning: "교육 운영, 학습자 관리\nLearning BPO",
+    },
+  ],
+  solutions: [
+    {
+      id: "ax-infra",
+      title: AX_LABEL,
+      image: "/images/solution/ax-infra-resin-purple.png",
+      description:
+        "설계부터 책임 운영까지,\n비즈니스 연속성을 완성하는 AX 인프라 파트너",
+      items: [
+        "• 맞춤형 AX 인프라 제공",
+        "• 고객의 기술 내재화 실현",
+        "• 유연한 아키텍처 설계",
+        "• AX 챌린지 해소",
+        "• 검증 중심의 서비스",
+        "• 엔터프라이즈 페이스메이커",
+      ],
+    },
+    {
+      id: "learning",
+      title: LEARNING_LABEL,
+      image: "/images/solution/learning-resin-coral.png",
+      description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
+      items: [
+        "• 교육 기획 및 컨설팅",
+        "• 역량 중심 콘텐츠 개발",
+        "• 맞춤형 학습 방법론",
+        "• 교육 운영 및 Learning BPO",
+      ],
+    },
+  ],
+};

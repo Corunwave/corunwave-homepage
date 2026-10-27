@@ -95,7 +95,18 @@
   --proposal-feature-width: 616px;
   --proposal-graphic-size: 150px;
 
+  /* Solutions */
+  --solutions-inner-max: 1248px;
+  --solutions-list-height: 560px;
+  /* Active card weight against a 1fr collapsed card (~960px : 272px at 1248px). */
+  --solutions-card-active-weight: 3.5fr;
+  --solutions-card-active-weight-tablet: 3.4fr;
+  --solutions-card-motion: 640ms cubic-bezier(0.22, 1, 0.36, 1);
+  --solutions-track-label-width: 232px;
+  --solutions-chevron-width: 32px;
+  --solutions-chevron-thickness: 13px;
   --color-process-divider: #d9e0e9;
+  --color-process-divider-soft: #e7ebf0;
 
   /* Service values */
   --service-values-inner-max: 1248px;
@@ -132,6 +143,8 @@
   --color-solution-glass: rgb(255 255 255 / 48%);
   --color-solution-tab-text: #465772;
   --color-solution-accent-deep: #0b55b0;
+  --color-solution-purple-surface: #fcfaff;
+  --color-solution-coral-surface: #fffaf7;
   --solution-tabs-shadow: 0 12px 32px #173d6e0b;
   --solution-tab-active-shadow: 0 5px 18px #28457310;
 
@@ -143,6 +156,20 @@
   --ax-map-internal-width: 248px;
   --color-ax-line: #e5e8ec;
   --color-ax-surface-active: #f7f9fc;
+
+  /* Learning Service & BPO: white section like AX Infra. Card accents reuse the sky / blue / violet theme colors. */
+  --learning-inner-max: var(--ax-inner-max);
+  --learning-market-width: 220px;
+  --learning-stage-width: 64px;
+  --learning-value-width: 180px;
+  --learning-pillar-min-height: 104px;
+  --learning-pillar-min-height-mobile: 112px;
+  --learning-trend-min-height-mobile: 84px;
+  --learning-trend-min-height-mobile-lead: 110px;
+  --color-learning-head: #e4f1ff;
+  --color-learning-accent-sky: var(--color-values-run-to);
+  --color-learning-accent-blue: var(--color-brand-primary);
+  --color-learning-accent-violet: var(--color-values-cooperation-from);
 
   /* Partner strategy page */
   --partner-inner-max: 1248px;
@@ -630,6 +657,110 @@
   --text-ax-action--line-height: 1.5rem;
   --text-ax-action--font-weight: 700;
   --text-ax-action--letter-spacing: 0;
+
+  --text-learning-lead-desktop: 1.25rem;
+  --text-learning-lead-desktop--line-height: 2rem;
+  --text-learning-lead-desktop--font-weight: 700;
+  --text-learning-lead-desktop--letter-spacing: 0;
+
+  --text-learning-lead-mobile: 1.125rem;
+  --text-learning-lead-mobile--line-height: 1.875rem;
+  --text-learning-lead-mobile--font-weight: 700;
+  --text-learning-lead-mobile--letter-spacing: 0;
+
+  --text-learning-pillar-desktop: 1.125rem;
+  --text-learning-pillar-desktop--line-height: 1.75rem;
+  --text-learning-pillar-desktop--font-weight: 500;
+  --text-learning-pillar-desktop--letter-spacing: 0;
+
+  --text-learning-pillar-mobile: 0.875rem;
+  --text-learning-pillar-mobile--line-height: 1.375rem;
+  --text-learning-pillar-mobile--font-weight: 500;
+  --text-learning-pillar-mobile--letter-spacing: 0;
+
+  --text-learning-market-title: 1.25rem;
+  --text-learning-market-title--line-height: 1.75rem;
+  --text-learning-market-title--font-weight: 700;
+  --text-learning-market-title--letter-spacing: 0;
+
+  --text-learning-body-desktop: 1rem;
+  --text-learning-body-desktop--line-height: 1.75rem;
+  --text-learning-body-desktop--font-weight: 400;
+  --text-learning-body-desktop--letter-spacing: 0;
+
+  --text-learning-body-mobile: 0.9375rem;
+  --text-learning-body-mobile--line-height: 1.625rem;
+  --text-learning-body-mobile--font-weight: 400;
+  --text-learning-body-mobile--letter-spacing: 0;
+
+  --text-learning-trend-desktop: 1rem;
+  --text-learning-trend-desktop--line-height: 1.75rem;
+  --text-learning-trend-desktop--font-weight: 600;
+  --text-learning-trend-desktop--letter-spacing: 0;
+
+  --text-learning-trend-mobile: 0.9375rem;
+  --text-learning-trend-mobile--line-height: 1.625rem;
+  --text-learning-trend-mobile--font-weight: 600;
+  --text-learning-trend-mobile--letter-spacing: 0;
+
+  --text-learning-head: 1rem;
+  --text-learning-head--line-height: 1.5rem;
+  --text-learning-head--font-weight: 700;
+  --text-learning-head--letter-spacing: 0;
+
+  --text-learning-stage-desktop: 1.25rem;
+  --text-learning-stage-desktop--line-height: 1.75rem;
+  --text-learning-stage-desktop--font-weight: 700;
+  --text-learning-stage-desktop--letter-spacing: 0;
+
+  --text-learning-stage-mobile: 1.125rem;
+  --text-learning-stage-mobile--line-height: 1.75rem;
+  --text-learning-stage-mobile--font-weight: 700;
+  --text-learning-stage-mobile--letter-spacing: 0;
+
+  --text-solution-card-title-desktop: 1.6875rem;
+  --text-solution-card-title-desktop--line-height: 2.25rem;
+  --text-solution-card-title-desktop--font-weight: 700;
+  --text-solution-card-title-desktop--letter-spacing: 0;
+
+  --text-solution-card-title-mobile: 1.4375rem;
+  --text-solution-card-title-mobile--line-height: 2rem;
+  --text-solution-card-title-mobile--font-weight: 700;
+  --text-solution-card-title-mobile--letter-spacing: 0;
+
+  --text-solution-card-description-desktop: 1.0625rem;
+  --text-solution-card-description-desktop--line-height: 1.75rem;
+  --text-solution-card-description-desktop--font-weight: 400;
+  --text-solution-card-description-desktop--letter-spacing: 0;
+
+  --text-solution-card-description-mobile: 1rem;
+  --text-solution-card-description-mobile--line-height: 1.75rem;
+  --text-solution-card-description-mobile--font-weight: 400;
+  --text-solution-card-description-mobile--letter-spacing: 0;
+
+  --text-solutions-process: 1.3125rem;
+  --text-solutions-process--line-height: 2rem;
+  --text-solutions-process-narrow: 1.125rem;
+  --text-solutions-process-narrow--line-height: 1.75rem;
+  --text-solutions-process-mobile: 1.3125rem;
+  --text-solutions-process-mobile--line-height: 2rem;
+
+  --text-solutions-process-head: 1.4rem;
+  --text-solutions-process-head--line-height: 2.125rem;
+  --text-solutions-process-head-narrow: 1.1875rem;
+  --text-solutions-process-head-narrow--line-height: 1.75rem;
+  --text-solutions-process-head-mobile: 1.375rem;
+  --text-solutions-process-head-mobile--line-height: 2rem;
+
+  --text-solutions-description-desktop: 1.375rem;
+  --text-solutions-description-desktop--line-height: 2rem;
+  --text-solutions-description-mobile: 1.25rem;
+  --text-solutions-description-mobile--line-height: 1.875rem;
+
+  --text-solution-service-toggle: 1.5rem;
+  --text-solution-service-toggle--line-height: 2rem;
+  --text-solution-service-toggle--font-weight: 400;
+  --text-solution-service-toggle--letter-spacing: 0;
 
   --text-solution-cta-button: 1rem;
   --text-solution-cta-button--line-height: 1.5rem;
@@ -2676,9 +2807,10 @@ body {
   overflow-wrap: normal;
 }
 
-/* Map cards and detail rows share the outlined white surface and the active tint. */
+/* Map cards and detail rows share the outlined white surface and the active tint.
+ * .detail-accordion (commons/accordion/DetailAccordion) is also used by the Learning Service section. */
 .ax-card,
-.ax-detail {
+.detail-accordion {
   width: 100%;
   min-width: 0;
   border: 1px solid var(--color-ax-line);
@@ -2693,18 +2825,18 @@ body {
 }
 
 .ax-card[open],
-.ax-detail[open] {
+.detail-accordion[open] {
   background: var(--color-ax-surface-active);
 }
 
-.ax-detail {
+.detail-accordion {
   scroll-margin-top: calc(
     var(--header-height-desktop-scrolled) + var(--spacing-16)
   );
 }
 
 .ax-card__summary,
-.ax-detail__summary {
+.detail-accordion__summary {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
@@ -2713,17 +2845,17 @@ body {
   cursor: pointer;
 }
 
-.ax-detail__summary {
+.detail-accordion__summary {
   padding: var(--spacing-24);
 }
 
 .ax-card__summary::-webkit-details-marker,
-.ax-detail__summary::-webkit-details-marker {
+.detail-accordion__summary::-webkit-details-marker {
   display: none;
 }
 
 .ax-card__summary:focus-visible,
-.ax-detail__summary:focus-visible,
+.detail-accordion__summary:focus-visible,
 .ax-card__action:focus-visible {
   outline: 2px solid var(--color-action-primary);
   outline-offset: -2px;
@@ -2731,7 +2863,7 @@ body {
 }
 
 .ax-card__title,
-.ax-detail__title {
+.detail-accordion__title {
   flex: 1 1 0;
   min-width: 0;
   margin: 0;
@@ -2748,7 +2880,7 @@ body {
   letter-spacing: var(--text-ax-label--letter-spacing);
 }
 
-.ax-detail__title {
+.detail-accordion__title {
   transition: color var(--solution-motion);
   font-family: var(--font-family-heading);
   font-size: var(--text-ax-detail-title);
@@ -2789,7 +2921,7 @@ body {
 }
 
 /* Detail rows: down chevron that flips up when open (a bordered square rotated 45deg). */
-.ax-chevron {
+.detail-accordion__chevron {
   position: relative;
   flex: none;
   width: 32px;
@@ -2797,7 +2929,7 @@ body {
   color: var(--color-brand-primary);
 }
 
-.ax-chevron::before {
+.detail-accordion__chevron::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -2810,16 +2942,16 @@ body {
   transition: transform var(--solution-motion);
 }
 
-.ax-detail[open] .ax-detail__title {
+.detail-accordion[open] .detail-accordion__title {
   color: var(--color-brand-primary);
 }
 
-.ax-detail[open] > summary .ax-chevron::before {
+.detail-accordion[open] > summary .detail-accordion__chevron::before {
   transform: translate(-50%, -25%) rotate(-135deg);
 }
 
 .ax-card__body,
-.ax-detail__body {
+.detail-accordion__body {
   border-top: 1px solid var(--color-ax-line);
 }
 
@@ -2831,13 +2963,13 @@ body {
   padding: var(--spacing-16) 0;
 }
 
-.ax-detail__body {
+.detail-accordion__body {
   margin: 0 var(--spacing-24);
   padding: var(--spacing-16) 0 var(--spacing-24);
 }
 
 .ax-card__text,
-.ax-detail__text {
+.detail-accordion__text {
   margin: 0;
   color: var(--color-text-primary);
   font-family: var(--font-family-body);
@@ -2869,7 +3001,7 @@ body {
   text-underline-offset: 4px;
 }
 
-.ax-details {
+.detail-accordion-list {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-12);
@@ -2878,7 +3010,7 @@ body {
 /* Progressive enhancement: animate <details> where ::details-content is supported; elsewhere it toggles instantly. */
 @supports selector(::details-content) {
   .ax-card::details-content,
-  .ax-detail::details-content {
+  .detail-accordion::details-content {
     block-size: 0;
     overflow: clip;
     transition:
@@ -2886,7 +3018,7 @@ body {
       content-visibility var(--solution-motion) allow-discrete;
   }
   .ax-card[open]::details-content,
-  .ax-detail[open]::details-content {
+  .detail-accordion[open]::details-content {
     block-size: auto;
   }
 }
@@ -2928,7 +3060,7 @@ body {
   .ax-card--compact {
     width: 100%;
   }
-  .ax-detail {
+  .detail-accordion {
     scroll-margin-top: calc(
       var(--header-height-mobile-scrolled) + var(--spacing-16)
     );
@@ -2937,23 +3069,477 @@ body {
 
 @media (width <= 760px) {
   .ax-inner {
-    width: calc(100% - var(--spacing-20) * 2);
+    width: calc(100% - var(--spacing-32));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .ax-card,
-  .ax-detail,
+  .detail-accordion,
   .ax-toggle::before,
   .ax-toggle::after,
-  .ax-chevron::before,
-  .ax-detail__title {
+  .detail-accordion__chevron::before,
+  .detail-accordion__title {
     transition: none;
   }
   /* Kept separate: an unsupported ::details-content would invalidate the whole selector list. */
   .ax-card::details-content,
-  .ax-detail::details-content {
+  .detail-accordion::details-content {
     transition: none;
+  }
+}
+
+/* Learning Service & BPO — 솔루션 Learning (preview .learning-bpo; Figma 1206:39515 / 1206:39591).
+ * Same white surface, width and padding as AX Infra. The pillar cards carry the sky / blue / violet accent only as a border glow;
+ * trend cards and table rows use the same neutral hairline as the AX cards.
+ */
+.learning-section {
+  padding: 64px 0 var(--spacing-96);
+  background: var(--color-white);
+  color: var(--color-text-primary);
+}
+
+.learning-inner {
+  width: min(
+    var(--learning-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+}
+
+.learning-title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-ax-title-desktop);
+  line-height: var(--text-ax-title-desktop--line-height);
+  font-weight: var(--text-ax-title-desktop--font-weight);
+  letter-spacing: var(--text-ax-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.learning-intro {
+  display: grid;
+  gap: var(--spacing-12);
+}
+
+.learning-lead,
+.learning-support {
+  margin: 0;
+  font-family: var(--font-family-body);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.learning-lead {
+  color: var(--color-brand-navy);
+  font-size: var(--text-learning-lead-desktop);
+  line-height: var(--text-learning-lead-desktop--line-height);
+  font-weight: var(--text-learning-lead-desktop--font-weight);
+  letter-spacing: var(--text-learning-lead-desktop--letter-spacing);
+}
+
+.learning-support {
+  color: var(--color-text-primary);
+  font-size: var(--text-section-description-desktop);
+  line-height: var(--text-section-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  letter-spacing: var(--text-section-description-desktop--letter-spacing);
+}
+
+/* Pillar cards: opaque white fill with a border glow in each card's accent color (hairline ring + soft halo). */
+.learning-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-pillar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--learning-pillar-min-height);
+  padding: var(--spacing-24);
+  border-radius: var(--radius-12);
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--learning-accent) 40%, transparent),
+    0 0 16px color-mix(in srgb, var(--learning-accent) 32%, transparent);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-size: var(--text-learning-pillar-desktop);
+  line-height: var(--text-learning-pillar-desktop--line-height);
+  font-weight: var(--text-learning-pillar-desktop--font-weight);
+  letter-spacing: var(--text-learning-pillar-desktop--letter-spacing);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.learning-pillar--sky {
+  --learning-accent: var(--color-learning-accent-sky);
+}
+
+.learning-pillar--blue {
+  --learning-accent: var(--color-learning-accent-blue);
+}
+
+.learning-pillar--violet {
+  --learning-accent: var(--color-learning-accent-violet);
+}
+
+/* Diagram: Market Trend (with its gentle ">") | service table. */
+.learning-diagram {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--spacing-16);
+  align-items: start;
+}
+
+/* The ">" sits beside the trend cards only, so it is exactly as tall as the four cards (the title is above it). */
+.learning-market {
+  display: grid;
+  grid-template-columns: var(--learning-market-width) var(--solutions-chevron-width);
+  column-gap: var(--spacing-16);
+  row-gap: var(--spacing-20);
+  min-width: 0;
+}
+
+.learning-market__title,
+.learning-trends {
+  grid-column: 1;
+}
+
+.learning-market__title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-size: var(--text-learning-market-title);
+  line-height: var(--text-learning-market-title--line-height);
+  font-weight: var(--text-learning-market-title--font-weight);
+  letter-spacing: var(--text-learning-market-title--letter-spacing);
+  text-align: center;
+}
+
+.learning-trends {
+  display: grid;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.learning-trend {
+  padding: var(--spacing-20);
+  border: 1px solid var(--color-ax-line);
+  border-radius: var(--radius-12);
+  background: var(--color-white);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-size: var(--text-learning-trend-desktop);
+  line-height: var(--text-learning-trend-desktop--line-height);
+  font-weight: var(--text-learning-trend-desktop--font-weight);
+  letter-spacing: var(--text-learning-trend-desktop--letter-spacing);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Each trend line is a bullet point, as in the AX Infra flow. */
+.learning-trend__line {
+  display: block;
+}
+
+.learning-trend__line::before {
+  content: "•";
+  margin-right: var(--spacing-8);
+}
+
+/* Same flow marker as the home End-to-End table: one continuous bend, apex at mid-height. */
+.learning-chevron {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: stretch;
+  width: var(--solutions-chevron-width);
+  background: linear-gradient(
+    155deg,
+    rgb(13 110 229 / 12%),
+    rgb(122 201 255 / 50%)
+  );
+  clip-path: polygon(
+    0 0,
+    var(--solutions-chevron-thickness) 0,
+    100% 50%,
+    var(--solutions-chevron-thickness) 100%,
+    0 100%,
+    calc(100% - var(--solutions-chevron-thickness)) 50%
+  );
+  pointer-events: none;
+}
+
+.learning-table {
+  display: grid;
+  gap: var(--spacing-12);
+  min-width: 0;
+}
+
+.learning-table__head,
+.learning-row {
+  display: grid;
+  grid-template-columns:
+    var(--learning-stage-width)
+    var(--learning-value-width)
+    minmax(0, 1fr);
+  gap: var(--spacing-24);
+  align-items: center;
+  min-width: 0;
+  padding: var(--spacing-24);
+}
+
+.learning-table__head {
+  border-radius: var(--radius-12);
+  background: var(--color-learning-head);
+  color: var(--color-brand-navy);
+  /* Same size and weight as the AX Infra table labels (.ax-domain). */
+  font-family: var(--font-family-body);
+  font-size: var(--text-ax-label);
+  line-height: var(--text-ax-label--line-height);
+  font-weight: var(--text-ax-label--font-weight);
+  letter-spacing: var(--text-ax-label--letter-spacing);
+}
+
+.learning-row {
+  border: 1px solid var(--color-ax-line);
+  border-radius: var(--radius-20);
+  background: var(--color-white);
+}
+
+.learning-row__stage,
+.learning-row__value {
+  margin: 0;
+  font-family: var(--font-family-body);
+  word-break: keep-all;
+}
+
+.learning-row__stage {
+  color: var(--color-brand-primary);
+  font-size: var(--text-learning-stage-desktop);
+  line-height: var(--text-learning-stage-desktop--line-height);
+  font-weight: var(--text-learning-stage-desktop--font-weight);
+  letter-spacing: var(--text-learning-stage-desktop--letter-spacing);
+}
+
+.learning-row__value {
+  color: var(--color-brand-navy);
+  font-size: var(--text-learning-head);
+  line-height: var(--text-learning-head--line-height);
+  font-weight: var(--text-learning-head--font-weight);
+  letter-spacing: var(--text-learning-head--letter-spacing);
+}
+
+.learning-row__system {
+  min-width: 0;
+}
+
+/* Bullets shared by the table cells and the detail accordions: title bullet, content one level below. */
+.learning-bullets,
+.learning-bullets__sub {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-family-body);
+  font-size: var(--text-learning-body-desktop);
+  line-height: var(--text-learning-body-desktop--line-height);
+  letter-spacing: var(--text-learning-body-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.learning-bullets__item,
+.learning-bullets__sub-item {
+  position: relative;
+  padding-left: var(--spacing-16);
+}
+
+.learning-bullets__item + .learning-bullets__item {
+  margin-top: var(--spacing-8);
+}
+
+.learning-bullets__item {
+  color: var(--color-text-primary);
+  font-weight: var(--text-learning-body-desktop--font-weight);
+}
+
+.learning-bullets__item::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+/* An item with content below it is a title bullet. */
+.learning-bullets__item:has(> .learning-bullets__sub) {
+  color: var(--color-brand-navy);
+  font-weight: var(--text-learning-head--font-weight);
+}
+
+.learning-bullets__sub {
+  margin-top: var(--spacing-4);
+}
+
+.learning-bullets__sub-item {
+  color: var(--color-text-secondary);
+  font-weight: var(--text-learning-body-desktop--font-weight);
+}
+
+.learning-bullets__sub-item::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+}
+
+.learning-process {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-learning-body-desktop);
+  line-height: var(--text-learning-body-desktop--line-height);
+  font-weight: var(--text-learning-body-desktop--font-weight);
+  letter-spacing: var(--text-learning-body-desktop--letter-spacing);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.learning-process__highlight {
+  color: var(--color-brand-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ≤1024px: tablet shares the mobile composition (single column, downward chevron, compact table). */
+@media (width <= 1024px) {
+  .learning-section {
+    padding: 48px 0 64px;
+  }
+  .learning-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+  .learning-title {
+    font-size: var(--text-ax-title-mobile);
+    line-height: var(--text-ax-title-mobile--line-height);
+    font-weight: var(--text-ax-title-mobile--font-weight);
+    letter-spacing: var(--text-ax-title-mobile--letter-spacing);
+  }
+  .learning-lead {
+    font-size: var(--text-learning-lead-mobile);
+    line-height: var(--text-learning-lead-mobile--line-height);
+    font-weight: var(--text-learning-lead-mobile--font-weight);
+    letter-spacing: var(--text-learning-lead-mobile--letter-spacing);
+  }
+  .learning-support {
+    font-size: var(--text-ax-intro-mobile);
+    line-height: var(--text-ax-intro-mobile--line-height);
+    font-weight: var(--text-ax-intro-mobile--font-weight);
+    letter-spacing: var(--text-ax-intro-mobile--letter-spacing);
+  }
+  .learning-pillars {
+    gap: var(--spacing-8);
+  }
+  .learning-pillar {
+    min-height: var(--learning-pillar-min-height-mobile);
+    padding: var(--spacing-12);
+    font-size: var(--text-learning-pillar-mobile);
+    line-height: var(--text-learning-pillar-mobile--line-height);
+    font-weight: var(--text-learning-pillar-mobile--font-weight);
+    letter-spacing: var(--text-learning-pillar-mobile--letter-spacing);
+  }
+  .learning-diagram {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .learning-market {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--spacing-16);
+  }
+  .learning-trends {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-8);
+  }
+  .learning-trend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--learning-trend-min-height-mobile);
+    padding: var(--spacing-16);
+    font-size: var(--text-learning-trend-mobile);
+    line-height: var(--text-learning-trend-mobile--line-height);
+    font-weight: var(--text-learning-trend-mobile--font-weight);
+    letter-spacing: var(--text-learning-trend-mobile--letter-spacing);
+  }
+  .learning-trend:nth-child(-n + 2) {
+    min-height: var(--learning-trend-min-height-mobile-lead);
+  }
+  /* Downward flow marker, as in the home End-to-End mobile stages. */
+  .learning-chevron {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: auto;
+    width: 80px;
+    height: 40px;
+    margin-inline: auto;
+    background: linear-gradient(
+      110deg,
+      rgb(13 110 229 / 9%),
+      rgb(122 201 255 / 36%)
+    );
+    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
+  }
+  .learning-table__head {
+    display: block;
+    padding: var(--spacing-16);
+  }
+  .learning-table__head > span:not(:last-child) {
+    display: none;
+  }
+  .learning-row {
+    grid-template-columns: 60px minmax(0, 1fr);
+    gap: var(--spacing-12);
+    align-items: start;
+    padding: var(--spacing-20);
+  }
+  .learning-row__stage {
+    font-size: var(--text-learning-stage-mobile);
+    line-height: var(--text-learning-stage-mobile--line-height);
+    font-weight: var(--text-learning-stage-mobile--font-weight);
+    letter-spacing: var(--text-learning-stage-mobile--letter-spacing);
+  }
+  .learning-row__value {
+    line-height: var(--text-learning-body-desktop--line-height);
+  }
+  .learning-row__system {
+    grid-column: 1 / -1;
+  }
+  .learning-bullets,
+  .learning-bullets__sub,
+  .learning-process {
+    font-size: var(--text-learning-body-mobile);
+    line-height: var(--text-learning-body-mobile--line-height);
+  }
+  .learning-section .detail-accordion {
+    scroll-margin-top: calc(
+      var(--header-height-mobile-scrolled) + var(--spacing-16)
+    );
+  }
+}
+
+@media (width <= 760px) {
+  .learning-inner {
+    width: calc(100% - var(--spacing-32));
   }
 }
 
@@ -4472,6 +5058,546 @@ body {
   .proposal-graphic,
   .proposal-detail-link,
   .proposal-grid[data-reveal] > * {
+    transition: none;
+  }
+}
+
+/* Solutions — 통합 End-to-End 서비스 (preview-first; Figma 227:1979 / 227:4001 / 250:3960). */
+.solutions-section {
+  padding: var(--spacing-96) 0;
+  background: var(--color-bg-subtle);
+}
+
+.solutions-inner {
+  width: min(
+    var(--solutions-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+}
+
+.solutions-header {
+  display: grid;
+  justify-items: start;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-48);
+}
+
+.solutions-title {
+  margin: 0;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-solutions-title-desktop);
+  line-height: var(--text-solutions-title-desktop--line-height);
+  letter-spacing: 0;
+}
+
+.solutions-description {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-solutions-description-desktop);
+  line-height: var(--text-solutions-description-desktop--line-height);
+  font-weight: var(--text-section-description-desktop--font-weight);
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+/* Process table */
+.solutions-process {
+  margin-bottom: var(--spacing-48);
+  font-family: var(--font-family-body);
+  word-break: keep-all;
+}
+
+.solutions-process__desktop {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: var(--solutions-track-label-width) repeat(
+      4,
+      minmax(0, 1fr)
+    );
+  column-gap: var(--spacing-24);
+}
+
+.solutions-process__stage-head {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 var(--spacing-16) var(--spacing-24);
+  text-align: center;
+}
+
+.solutions-process__stage-head span {
+  color: var(--color-action-primary);
+  font-size: var(--text-solutions-process-head);
+  line-height: var(--text-solutions-process-head--line-height);
+  font-weight: var(--font-weight-bold);
+}
+
+/* One ">" flow marker in each gap between the stage columns, spanning the whole table; one continuous bend, apex at mid-height. */
+.solutions-process__chevron {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: calc((var(--spacing-24) + var(--solutions-chevron-width)) / -2);
+  bottom: 0;
+  grid-row: 1 / -1;
+  width: var(--solutions-chevron-width);
+  background: linear-gradient(
+    155deg,
+    rgb(13 110 229 / 12%),
+    rgb(122 201 255 / 50%)
+  );
+  clip-path: polygon(
+    0 0,
+    var(--solutions-chevron-thickness) 0,
+    100% 50%,
+    var(--solutions-chevron-thickness) 100%,
+    0 100%,
+    calc(100% - var(--solutions-chevron-thickness)) 50%
+  );
+  pointer-events: none;
+}
+
+/* Both lines are required: an `auto` end line of an absolutely positioned item stretches to the container edge. */
+.solutions-process__chevron--1 {
+  grid-column: 2 / 3;
+}
+
+.solutions-process__chevron--2 {
+  grid-column: 3 / 4;
+}
+
+.solutions-process__chevron--3 {
+  grid-column: 4 / 5;
+}
+
+.solutions-process__track-label,
+.solutions-process__track-cell {
+  border-top: 1px solid var(--color-process-divider);
+  font-size: var(--text-solutions-process);
+  line-height: var(--text-solutions-process--line-height);
+}
+
+.solutions-process__track-label {
+  padding: var(--spacing-24) var(--spacing-16) var(--spacing-24) 0;
+  color: var(--color-brand-navy);
+  font-weight: var(--font-weight-bold);
+}
+
+.solutions-process__track-cell {
+  position: relative;
+  padding: var(--spacing-24) var(--spacing-16);
+  color: var(--color-text-secondary);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.solutions-process__track-label--last,
+.solutions-process__track-cell--last {
+  border-bottom: 1px solid var(--color-process-divider);
+}
+
+.solutions-process__mobile {
+  display: none;
+}
+
+@media (1025px <= width <= 1279px) {
+  .solutions-process {
+    --solutions-track-label-width: 200px;
+  }
+  .solutions-process__stage-head span {
+    font-size: var(--text-solutions-process-head-narrow);
+    line-height: var(--text-solutions-process-head-narrow--line-height);
+  }
+  .solutions-process__track-label,
+  .solutions-process__track-cell {
+    font-size: var(--text-solutions-process-narrow);
+    line-height: var(--text-solutions-process-narrow--line-height);
+  }
+}
+
+/* Accordion cards */
+.solutions-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-16);
+  height: var(--solutions-list-height);
+  /* fr tracks interpolate smoothly, unlike flex-grow/flex-basis mixes. */
+  transition: grid-template-columns var(--solutions-card-motion);
+}
+
+.solutions-list[data-active-card="ax-infra"] {
+  grid-template-columns: var(--solutions-card-active-weight) 1fr;
+}
+
+.solutions-list[data-active-card="learning"] {
+  grid-template-columns: 1fr var(--solutions-card-active-weight);
+}
+
+.solution-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-24);
+  color: inherit;
+  background: var(--color-solution-purple-surface);
+  text-decoration: none;
+  transition: box-shadow var(--solutions-card-motion);
+}
+
+.solution-card--learning {
+  background: var(--color-solution-coral-surface);
+}
+
+/* Same soft glow as the /solutions overview cards, pinned right so it follows the icon when the card widens. */
+.solution-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -88px;
+  right: -109px;
+  width: 585.6px;
+  height: 376px;
+  background: url("/images/solution/overview-glow-ax-desktop.svg") 0 0 / 100%
+    100% no-repeat;
+  pointer-events: none;
+}
+
+.solution-card--learning::before {
+  background-image: url("/images/solution/overview-glow-learning-desktop.svg");
+}
+
+.solution-card:hover,
+.solution-card:focus-visible,
+.solution-card[data-active="true"] {
+  box-shadow: 0 24px 56px rgb(15 23 41 / 12%);
+}
+
+.solution-card:focus-visible {
+  outline: var(--spacing-4) solid var(--color-focus-ring);
+  outline-offset: calc(var(--spacing-4) * -1);
+}
+
+.solution-card__content {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+  min-height: 0;
+  padding: var(--spacing-32);
+}
+
+.solution-card__meta {
+  position: absolute;
+  top: var(--spacing-24);
+  left: var(--spacing-32);
+  color: var(--color-brand-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-solution-service-toggle);
+  line-height: var(--text-solution-service-toggle--line-height);
+}
+
+.solution-card__image {
+  flex: none;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  transition:
+    width var(--solutions-card-motion),
+    height var(--solutions-card-motion);
+}
+
+/* Desktop/tablet: the icon shrinks to leave room for the bullet list and for the squeezed neighbour card. */
+@media (width >= 761px) {
+  .solution-card[data-active="true"] .solution-card__image,
+  .solutions-list:not([data-active-card="none"])
+    .solution-card:not([data-active="true"])
+    .solution-card__image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.solution-card__summary {
+  align-self: stretch;
+  margin-top: auto;
+  padding-top: var(--spacing-12);
+}
+
+.solution-card__title {
+  display: block;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-solution-card-title-desktop);
+  line-height: var(--text-solution-card-title-desktop--line-height);
+  font-weight: var(--text-solution-card-title-desktop--font-weight);
+  letter-spacing: var(--text-solution-card-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.solution-card__description {
+  display: block;
+  margin-top: var(--spacing-12);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-solution-card-description-desktop);
+  line-height: var(--text-solution-card-description-desktop--line-height);
+  font-weight: var(--text-solution-card-description-desktop--font-weight);
+  letter-spacing: var(--text-solution-card-description-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.solution-card__panel {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-family: var(--font-family-body);
+  transition:
+    max-height var(--solutions-card-motion),
+    opacity 240ms ease,
+    margin var(--solutions-card-motion);
+}
+
+.solution-card[data-active="true"] .solution-card__panel {
+  max-height: 240px;
+  margin-top: var(--spacing-12);
+  opacity: 1;
+  transition-delay: 0ms, 160ms, 0ms;
+}
+
+.solution-card__list,
+.solution-card__list > span {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  line-height: 1.625rem;
+  word-break: keep-all;
+}
+
+/* Scroll reveal: data-reveal is set by SolutionsSection; without JS everything stays visible. */
+.solutions-header[data-reveal] > *,
+.solutions-process[data-reveal] .solutions-process__desktop > *,
+.solutions-list[data-reveal] .solution-card {
+  transition:
+    opacity 520ms ease,
+    transform 660ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.solutions-header[data-reveal="pending"] > *,
+.solutions-process[data-reveal="pending"] .solutions-process__desktop > *,
+.solutions-list[data-reveal="pending"] .solution-card {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.solutions-header[data-reveal="visible"] > *,
+.solutions-process[data-reveal="visible"] .solutions-process__desktop > *,
+.solutions-list[data-reveal="visible"] .solution-card {
+  opacity: 1;
+  transform: none;
+}
+
+.solutions-header[data-reveal="visible"] > :nth-child(2),
+.solutions-list[data-reveal="visible"] .solution-card:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+/* Columns reveal left to right: label, 기획, 설계, 구축·개발, 운영. */
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > :nth-child(5n + 3) {
+  transition-delay: 120ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > :nth-child(5n + 4) {
+  transition-delay: 260ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > :nth-child(5n + 5) {
+  transition-delay: 400ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > :nth-child(5n + 6) {
+  transition-delay: 540ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--1 {
+  transition-delay: 120ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--2 {
+  transition-delay: 260ms;
+}
+
+.solutions-process[data-reveal="visible"]
+  .solutions-process__desktop
+  > .solutions-process__chevron--3 {
+  transition-delay: 400ms;
+}
+
+@media (width <= 1024px) {
+  .solutions-inner {
+    width: calc(100% - var(--spacing-48) * 2);
+  }
+  .solutions-process__desktop {
+    display: none;
+  }
+  .solutions-process__mobile {
+    position: relative;
+    display: grid;
+    gap: var(--spacing-16);
+  }
+  .solutions-process__stage {
+    position: relative;
+    padding: var(--spacing-20) var(--spacing-24) 56px;
+  }
+  .solutions-process__stage:last-child {
+    padding-bottom: var(--spacing-20);
+  }
+  .solutions-process__stage:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: calc(50% - 40px);
+    bottom: 0;
+    left: calc(50% - 40px);
+    height: 40px;
+    background: linear-gradient(
+      110deg,
+      rgb(13 110 229 / 9%),
+      rgb(122 201 255 / 36%)
+    );
+    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
+    pointer-events: none;
+  }
+  .solutions-process__stage h3,
+  .solutions-process__stage p {
+    margin: 0;
+    font-size: var(--text-solutions-process-mobile);
+    line-height: var(--text-solutions-process-mobile--line-height);
+  }
+  .solutions-process__stage h3 {
+    width: fit-content;
+    margin-bottom: var(--spacing-12);
+    padding: var(--spacing-4) var(--spacing-16);
+    border-radius: var(--radius-999);
+    color: var(--color-white);
+    background: var(--color-action-primary);
+    font-size: var(--text-solutions-process-head-mobile);
+    line-height: var(--text-solutions-process-head-mobile--line-height);
+    font-weight: var(--font-weight-bold);
+  }
+  .solutions-process__stage p + p {
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-12);
+    border-top: 1px solid var(--color-process-divider-soft);
+  }
+}
+
+@media (761px <= width <= 1024px) {
+  .solution-card__content {
+    padding: var(--spacing-24);
+  }
+  .solution-card__meta {
+    left: var(--spacing-24);
+  }
+  .solutions-list[data-active-card="ax-infra"] {
+    grid-template-columns: var(--solutions-card-active-weight-tablet) 1fr;
+  }
+  .solutions-list[data-active-card="learning"] {
+    grid-template-columns: 1fr var(--solutions-card-active-weight-tablet);
+  }
+  .solution-card__title {
+    font-size: 1.375rem;
+    line-height: 2rem;
+  }
+}
+
+@media (width <= 760px) {
+  .solutions-section {
+    padding: 72px 0;
+  }
+  .solutions-inner {
+    width: calc(100% - var(--spacing-48));
+  }
+  .solutions-title {
+    font-size: var(--text-solutions-title-mobile);
+    line-height: var(--text-solutions-title-mobile--line-height);
+  }
+  .solutions-description {
+    font-size: var(--text-solutions-description-mobile);
+    line-height: var(--text-solutions-description-mobile--line-height);
+  }
+  .solutions-process {
+    margin-bottom: 56px;
+  }
+  .solutions-list,
+  .solutions-list[data-active-card] {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    gap: var(--spacing-12);
+  }
+  .solution-card {
+    width: 100%;
+  }
+  .solution-card::before {
+    right: -100px;
+    width: 382.4px;
+    background-image: url("/images/solution/overview-glow-ax-mobile.svg");
+  }
+  .solution-card--learning::before {
+    background-image: url("/images/solution/overview-glow-learning-mobile.svg");
+  }
+  .solution-card__content {
+    padding: var(--spacing-24);
+  }
+  .solution-card__meta {
+    left: var(--spacing-24);
+  }
+  .solution-card__image {
+    width: 184px;
+    height: 184px;
+  }
+  .solution-card__title {
+    font-size: var(--text-solution-card-title-mobile);
+    line-height: var(--text-solution-card-title-mobile--line-height);
+  }
+  .solution-card__description {
+    font-size: var(--text-solution-card-description-mobile);
+    line-height: var(--text-solution-card-description-mobile--line-height);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-card,
+  .solution-card__image,
+  .solution-card__panel,
+  .solutions-header[data-reveal] > *,
+  .solutions-process[data-reveal] .solutions-process__desktop > *,
+  .solutions-list[data-reveal] .solution-card {
     transition: none;
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import DetailAccordion from "../commons/accordion/DetailAccordion";
 import { renderText } from "../../_lib/content/renderText";
 import type { AxInfraContent, AxServiceId } from "../../_content/solutions";
 
@@ -136,24 +137,18 @@ const SolutionAXSection = ({ content }: SolutionAXSectionProps) => (
         </div>
       </div>
 
-      <div className="ax-details">
+      <div className="detail-accordion-list">
         {content.detailOrder.map((id) => {
           const { detailTitle, detailBody } = content.services[id];
           return (
-            <details
+            <DetailAccordion
               key={id}
               id={detailId(id)}
               name="ax-detail"
-              className="ax-detail"
+              title={detailTitle}
             >
-              <summary className="ax-detail__summary">
-                <h3 className="ax-detail__title">{detailTitle}</h3>
-                <span className="ax-chevron" aria-hidden="true" />
-              </summary>
-              <div className="ax-detail__body">
-                <p className="ax-detail__text">{renderText(detailBody)}</p>
-              </div>
-            </details>
+              <p className="detail-accordion__text">{renderText(detailBody)}</p>
+            </DetailAccordion>
           );
         })}
       </div>

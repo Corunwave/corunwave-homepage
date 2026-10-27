@@ -1,4 +1,129 @@
-/* Learning Service section — placeholder; the UI is implemented in a follow-up task. */
-const SolutionLearningSection = () => null;
+import DetailAccordion from "../commons/accordion/DetailAccordion";
+import { renderText } from "../../_lib/content/renderText";
+import type {
+  LearningBullet,
+  LearningServiceContent,
+} from "../../_content/solutions";
+
+type SolutionLearningSectionProps = { content: LearningServiceContent };
+
+/* Pillar accents reuse the existing sky / blue / violet theme colors (see .learning-pillar--*). */
+const PILLAR_ACCENTS = ["sky", "blue", "violet"] as const;
+
+type BulletListProps = { items: readonly LearningBullet[] };
+
+/* "제목: 내용" copy: the title is a bullet, its content one level below. */
+const BulletList = ({ items }: BulletListProps) => (
+  <ul className="learning-bullets">
+    {items.map(({ text, children }) => (
+      <li key={text} className="learning-bullets__item">
+        {text}
+        {children && (
+          <ul className="learning-bullets__sub">
+            {children.map((child) => (
+              <li key={child} className="learning-bullets__sub-item">
+                {child}
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+);
+
+/* Learning Service & BPO (preview .learning-bpo; Figma 1206:39515 / 1206:39591). Static server component.
+ * Detail rows reuse the shared DetailAccordion (same as AX Infra). */
+const SolutionLearningSection = ({ content }: SolutionLearningSectionProps) => (
+  <section
+    id="learning"
+    className="learning-section"
+    aria-labelledby="learning-title"
+  >
+    <div className="learning-inner">
+      <h2 id="learning-title" className="learning-title">
+        {content.title}
+      </h2>
+
+      <div className="learning-intro">
+        <p className="learning-lead">{content.lead}</p>
+        {content.support.map((paragraph) => (
+          <p key={paragraph} className="learning-support">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+
+      <ul className="learning-pillars">
+        {content.pillars.map((pillar, index) => (
+          <li
+            key={pillar}
+            className={`learning-pillar learning-pillar--${PILLAR_ACCENTS[index]}`}
+          >
+            {renderText(pillar)}
+          </li>
+        ))}
+      </ul>
+
+      <div className="learning-diagram">
+        <aside className="learning-market" aria-labelledby="learning-market-title">
+          <h3 id="learning-market-title" className="learning-market__title">
+            {content.marketTitle}
+          </h3>
+          <ul className="learning-trends">
+            {content.trends.map((trend) => (
+              <li key={trend} className="learning-trend">
+                {trend.split("\n").map((line) => (
+                  <span key={line} className="learning-trend__line">
+                    {line}
+                  </span>
+                ))}
+              </li>
+            ))}
+          </ul>
+          <span className="learning-chevron" aria-hidden="true" />
+        </aside>
+
+        <div className="learning-table" role="table" aria-label={content.tableLabel}>
+          <div className="learning-table__head" role="row">
+            {content.tableHead.map((label) => (
+              <span key={label} role="columnheader">
+                {label}
+              </span>
+            ))}
+          </div>
+          {content.rows.map(({ stage, value, system }) => (
+            <div key={stage} className="learning-row" role="row">
+              <p className="learning-row__stage" role="cell">
+                {stage}
+              </p>
+              <p className="learning-row__value" role="cell">
+                {value}
+              </p>
+              <div className="learning-row__system" role="cell">
+                <BulletList items={system} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p className="learning-process">
+        <strong className="learning-process__highlight">
+          {content.process.highlight}
+        </strong>
+        {renderText(content.process.rest)}
+      </p>
+
+      <div className="detail-accordion-list">
+        {content.details.map(({ title, body }) => (
+          <DetailAccordion key={title} name="learning-detail" title={title}>
+            <BulletList items={body} />
+          </DetailAccordion>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default SolutionLearningSection;

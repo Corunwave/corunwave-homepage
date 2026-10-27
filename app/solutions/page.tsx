@@ -3,7 +3,11 @@ import PageHero from "../_components/commons/hero/PageHero";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import SolutionAXSection from "../_components/solutions/SolutionAXSection";
 import SolutionLearningSection from "../_components/solutions/SolutionLearningSection";
-import { axInfra, solutionsPage } from "../_content/solutions";
+import {
+  axInfra,
+  learningService,
+  solutionsPage,
+} from "../_content/solutions";
 
 export const metadata: Metadata = {
   title: solutionsPage.title,
@@ -18,7 +22,7 @@ export default function SolutionsPage() {
         description={solutionsPage.description}
       />
       <SolutionAXSection content={axInfra} />
-      <SolutionLearningSection />
+      <SolutionLearningSection content={learningService} />
       <ContactCta />
     </main>
   );

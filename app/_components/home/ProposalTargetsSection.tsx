@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { renderText } from "../../_lib/content/renderText";
 import type { ProposalTargetsContent } from "../../_content/home";
 import LinkButton from "../commons/buttons/LinkButton";
-import Image from "next/image";
 
 type ProposalTargetsSectionProps = { content: ProposalTargetsContent };
 
@@ -53,7 +52,7 @@ const ProposalTargetsSection = ({ content }: ProposalTargetsSectionProps) => {
           </p>
         </header>
         <div ref={gridRef} className="proposal-grid">
-          {content.cards.map(({ modifier, tags, title, description, graphic }) => (
+          {content.cards.map(({ modifier, tags, title, description }) => (
             <article
               key={modifier}
               className={`proposal-card proposal-card--${modifier}`}
@@ -65,17 +64,6 @@ const ProposalTargetsSection = ({ content }: ProposalTargetsSectionProps) => {
                 </h3>
                 <p className="proposal-card__description">{description}</p>
               </div>
-              {graphic && (
-                <Image
-                  className="proposal-graphic"
-                  src={graphic}
-                  alt=""
-                  aria-hidden="true"
-                  decoding="async"
-                  width={150}
-                  height={150}
-                />
-              )}
             </article>
           ))}
           <div className="proposal-explanation">
@@ -83,7 +71,9 @@ const ProposalTargetsSection = ({ content }: ProposalTargetsSectionProps) => {
               {renderText(content.explanation.title)}
             </h3>
             <p className="proposal-explanation__description">
-              {content.explanation.description}
+              {renderText(content.explanation.description, {
+                keepClassName: "proposal-explanation__highlight",
+              })}
             </p>
             <LinkButton
               href={content.explanation.link.href}

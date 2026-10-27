@@ -1,7 +1,6 @@
 "use client";
 
 import { MouseEvent, useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { renderText } from "../../_lib/content/renderText";
 import type {
@@ -170,7 +169,7 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
           className="solutions-list"
           data-active-card={activeId ?? "none"}
         >
-          {content.solutions.map(({ id, title, image, description, items }) => {
+          {content.solutions.map(({ id, title, description, items }) => {
             const active = activeId === id;
             return (
               <Link
@@ -188,16 +187,6 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
                   <span className="solution-card__meta" aria-hidden="true">
                     {active ? "↗" : "+"}
                   </span>
-                  <Image
-                    className="solution-card__image"
-                    src={image}
-                    width={1254}
-                    height={1254}
-                    sizes="224px"
-                    alt=""
-                    aria-hidden="true"
-                    loading="eager"
-                  />
                   <span className="solution-card__summary">
                     <span className="solution-card__title">
                       {renderText(title)}

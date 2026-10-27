@@ -9,7 +9,6 @@ export type ProposalCardContent = {
   tags: string;
   title: string;
   description: string;
-  graphic?: string;
 };
 
 export type ProposalTargetsContent = {
@@ -61,14 +60,12 @@ export const proposalTargets: ProposalTargetsContent = {
       title: "AX Infra &\nIT Outsourcing",
       description:
         "전사 DX 전환 컨설팅 · 프라이빗 클라우드 구축 · 임직원 맞춤형 DX 교육",
-      graphic: "/images/proposal/targets/enterprise-cloud.png",
     },
     {
       modifier: "public",
       tags: "#공공 #정부기관",
-      title: "AI 인프라 구축과\n디지털 인재 양성",
+      title: "AI 인프라 구축·\n디지털 인재 양성",
       description: "국가 DX 전략 사업 · AI 인프라 구축 · 디지털 인재 양성 사업",
-      graphic: "/images/proposal/targets/public-ai-infra.png",
     },
     {
       modifier: "university",
@@ -82,13 +79,12 @@ export const proposalTargets: ProposalTargetsContent = {
       title: "AI 도입부터\n실무 인재 조기 전력화",
       description:
         "AI 도입 인프라 매칭 · 초기 IT 아웃소싱(ITO) · 실무 인재 조기 전력화 교육",
-      graphic: "/images/proposal/targets/startup-ai-chip.png",
     },
   ],
   explanation: {
     title: "기술과 사람을\n연결하는 서비스",
     description:
-      "고객의 복잡한 난제를 해결하기 위한 가장 적합한 전문가와 솔루션을 연결하고 상생협력을 조율하는 비즈니스 허브",
+      "고객의 복잡한 난제를 해결하기 위한 가장 적합한 전문가와 솔루션을 연결하고 상생협력을 조율하는 [[솔루션 허브]]",
     link: { label: "자세히보기", href: "/partner-strategy" },
   },
 };
@@ -144,7 +140,6 @@ export const downloads: DownloadsContent = {
 export type SolutionCardContent = {
   id: "ax-infra" | "learning";
   title: string;
-  image: string;
   description: string;
   items: readonly string[];
 };
@@ -203,7 +198,6 @@ export const solutions: SolutionsContent = {
     {
       id: "ax-infra",
       title: AX_LABEL,
-      image: "/images/solution/ax-infra-resin-purple.png",
       description:
         "설계부터 책임 운영까지,\n비즈니스 연속성을 완성하는 AX 인프라 파트너",
       items: [
@@ -218,7 +212,6 @@ export const solutions: SolutionsContent = {
     {
       id: "learning",
       title: LEARNING_LABEL,
-      image: "/images/solution/learning-resin-coral.png",
       description: "기술 트렌드를 반영한 전략적 인재양성 파트너",
       items: [
         "• 교육 기획 및 컨설팅",

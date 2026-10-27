@@ -1,3 +1,5 @@
+import { contactCta } from "./site";
+
 export type PartnerStrategyPageContent = {
   title: string;
   description: string;
@@ -66,11 +68,39 @@ export type ToBeStrategyContent = {
   stages: readonly [ToBeStageContent, ToBeStageContent, ToBeStageContent];
 };
 
-export type UniversityProposalContent = {
-  label: string;
-  title: string;
-  link: { label: string; href: string };
+export type ProposalBrandContent = {
   description: string;
+  /** Logo alt text. */
+  name: string;
+  logo: {
+    src: string;
+    /** Intrinsic size, so next/image keeps the file's aspect ratio. */
+    width: number;
+    height: number;
+  };
+};
+
+export type ProposalCardContent = {
+  id: "university" | "enterprise";
+  /** Accent-colored first line of the card title. */
+  audience: string;
+  title: string;
+  lead: string;
+  body: string;
+  download: {
+    label: string;
+    ariaLabel: string;
+    /** Omitted until the portfolio is ready: the control renders as an inert button. */
+    href?: string;
+    fileName?: string;
+  };
+};
+
+export type ProposalContent = {
+  title: string;
+  brands: readonly [ProposalBrandContent, ProposalBrandContent];
+  cards: readonly [ProposalCardContent, ProposalCardContent];
+  contact: { label: string; href: string };
 };
 
 export type PartnerLogoContent = {
@@ -289,12 +319,55 @@ export const toBeStrategy: ToBeStrategyContent = {
   ],
 };
 
-export const universityProposal: UniversityProposalContent = {
-  label: "협력 제안",
-  title: "대학 맞춤형\nAI Platform",
-  link: { label: "문의하기", href: "#" },
-  description:
-    "AX 인프라 및 Leaning 기업 “코런웨이브(CORUNWAVE)”가 국산 서버, AI컴퓨팅 솔루션 기업인 “엑세스랩(XSLAB)”과 손잡고 대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.",
+export const proposal: ProposalContent = {
+  title: "협력 제안",
+  brands: [
+    {
+      description: "AX 인프라 및 Learning 기업",
+      name: "코런웨이브 CORUNWAVE",
+      logo: {
+        src: "/images/logos/corunwave-ko-en-color.png",
+        width: 2496,
+        height: 832,
+      },
+    },
+    {
+      description: "국산 Arm 서버·AI 컴퓨팅 솔루션 기업",
+      name: "엑세스랩 XSLAB",
+      logo: {
+        src: "/images/partner/logos/xslab-color.png",
+        width: 1781,
+        height: 303,
+      },
+    },
+  ],
+  cards: [
+    {
+      id: "university",
+      audience: "대학 맞춤형",
+      title: "AX Platform",
+      lead: "대학 AI 교육 및 연구 인프라 혁신을 위한 최선의 선택",
+      body: "대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.",
+      download: {
+        label: "포트폴리오 다운로드",
+        ariaLabel: "대학 맞춤형 AX Platform 포트폴리오 다운로드",
+        // TODO: link the portfolio file (AI Infra Solution_UNIV_CRW_2026.pptx).
+        href: "#",
+      },
+    },
+    {
+      id: "enterprise",
+      audience: "기업 및 공공 맞춤형",
+      title: "AX Platform",
+      lead: "AX 변화를 위한 시작, 인프라 혁신을 위한 최선의 선택",
+      body: "AX 업무에 최적화된 저전력·고성능 AI 통합솔루션을 제안합니다.",
+      download: {
+        label: "포트폴리오 다운로드",
+        ariaLabel: "기업 및 공공 맞춤형 AX Platform 포트폴리오 다운로드",
+      },
+    },
+  ],
+  contact: { label: "문의하기", href: contactCta.href },
 };
 
 export const partnerLogos: PartnerLogosContent = {

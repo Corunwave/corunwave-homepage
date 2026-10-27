@@ -5,16 +5,16 @@ import CooperationModelsSection from "../_components/partner-strategy/Cooperatio
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
 import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
 import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
+import ProposalSection from "../_components/partner-strategy/ProposalSection";
 import ToBeStrategySection from "../_components/partner-strategy/ToBeStrategySection";
-import UniversityProposalSection from "../_components/partner-strategy/UniversityProposalSection";
 import {
   cooperationModels,
   customerProposals,
   partnerLogos,
   partnerStrategyPage,
   partnershipBenefits,
+  proposal,
   toBeStrategy,
-  universityProposal,
 } from "../_content/partner-strategy";
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function PartnerStrategyPage() {
       <ToBeStrategySection content={toBeStrategy} />
       <PartnershipBenefitsSection content={partnershipBenefits} />
       <CustomerProposalsSection content={customerProposals} />
-      <UniversityProposalSection content={universityProposal} />
+      <ProposalSection content={proposal} />
       <PartnerLogosSection content={partnerLogos} />
       <ContactCta />
     </main>

@@ -249,8 +249,20 @@
   --partner-tobe-connector-length-mobile: 26px;
   --partner-reveal-step: 80ms;
 
-  --color-partner-label-surface: #edf4ff;
   --color-partner-section-rule: #e7edf5;
+
+  /* Cooperation proposal: logos keep their aspect inside a fixed box (object-fit: contain). */
+  --color-partner-proposal-rule: #d6e1ef;
+  --color-partner-proposal-enterprise: #b84232;
+  --partner-proposal-logo-width: 208px;
+  --partner-proposal-logo-height: 70.4px;
+  --partner-proposal-logo-width-mobile: 185.6px;
+  --partner-proposal-logo-height-mobile: 62.4px;
+  --partner-proposal-brand-max: 360px;
+  --partner-proposal-brand-max-mobile: 280px;
+  --partner-proposal-copy-max: 480px;
+  --partner-proposal-button-height: 48px;
+  --partner-proposal-icon-size: 18px;
 
   --partner-marquee-duration: 32s;
   --partner-marquee-fade: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
@@ -947,25 +959,51 @@
   --text-partner-tobe-term-mobile--font-weight: 700;
   --text-partner-tobe-term-mobile--letter-spacing: 0;
 
-  --text-partner-label: 0.875rem;
-  --text-partner-label--line-height: 1.375rem;
-  --text-partner-label--font-weight: 600;
-  --text-partner-label--letter-spacing: 0;
+  /* Cooperation proposal typography (preview partner-proposal-1027; mobile values also cover tablet) */
+  --text-partner-proposal-brand-desktop: 0.9375rem;
+  --text-partner-proposal-brand-desktop--line-height: 1.6875rem;
+  --text-partner-proposal-brand-desktop--font-weight: 400;
+  --text-partner-proposal-brand-desktop--letter-spacing: 0;
 
-  --text-partner-link: 1.0625rem;
-  --text-partner-link--line-height: 1.75rem;
-  --text-partner-link--font-weight: 600;
-  --text-partner-link--letter-spacing: 0;
+  --text-partner-proposal-brand-mobile: 0.875rem;
+  --text-partner-proposal-brand-mobile--line-height: 1.575rem;
+  --text-partner-proposal-brand-mobile--font-weight: 400;
+  --text-partner-proposal-brand-mobile--letter-spacing: 0;
 
-  --text-partner-university-desktop: 1.3125rem;
-  --text-partner-university-desktop--line-height: 2.375rem;
-  --text-partner-university-desktop--font-weight: 400;
-  --text-partner-university-desktop--letter-spacing: 0;
+  --text-partner-proposal-title-desktop: 2rem;
+  --text-partner-proposal-title-desktop--line-height: 2.8rem;
+  --text-partner-proposal-title-desktop--font-weight: 700;
+  --text-partner-proposal-title-desktop--letter-spacing: -0.035em;
 
-  --text-partner-university-mobile: 1.0625rem;
-  --text-partner-university-mobile--line-height: 1.875rem;
-  --text-partner-university-mobile--font-weight: 400;
-  --text-partner-university-mobile--letter-spacing: 0;
+  --text-partner-proposal-title-mobile: 1.75rem;
+  --text-partner-proposal-title-mobile--line-height: 2.45rem;
+  --text-partner-proposal-title-mobile--font-weight: 700;
+  --text-partner-proposal-title-mobile--letter-spacing: -0.035em;
+
+  --text-partner-proposal-lead-desktop: 1.25rem;
+  --text-partner-proposal-lead-desktop--line-height: 2rem;
+  --text-partner-proposal-lead-desktop--font-weight: 600;
+  --text-partner-proposal-lead-desktop--letter-spacing: -0.025em;
+
+  --text-partner-proposal-lead-mobile: 1.125rem;
+  --text-partner-proposal-lead-mobile--line-height: 1.8rem;
+  --text-partner-proposal-lead-mobile--font-weight: 600;
+  --text-partner-proposal-lead-mobile--letter-spacing: -0.025em;
+
+  --text-partner-proposal-body-desktop: 1.125rem;
+  --text-partner-proposal-body-desktop--line-height: 2.08125rem;
+  --text-partner-proposal-body-desktop--font-weight: 400;
+  --text-partner-proposal-body-desktop--letter-spacing: 0;
+
+  --text-partner-proposal-body-mobile: 1.0625rem;
+  --text-partner-proposal-body-mobile--line-height: 1.965625rem;
+  --text-partner-proposal-body-mobile--font-weight: 400;
+  --text-partner-proposal-body-mobile--letter-spacing: 0;
+
+  --text-partner-proposal-button: 1rem;
+  --text-partner-proposal-button--line-height: 1.5rem;
+  --text-partner-proposal-button--font-weight: 700;
+  --text-partner-proposal-button--letter-spacing: 0;
 }
 
 /* Application aliases: bg-background, text-foreground, font-sans.
@@ -4827,78 +4865,252 @@ body {
   }
 }
 
-/* University proposal — 대학 맞춤형 AI Platform (Figma 876:28845 / 876:30043). */
+/* Cooperation proposal — 협력 제안 (preview #partner-university, outputs/partner-proposal-1027/proposal.css).
+ * Shared Corunwave × XSLAB band, two proposal cards with a portfolio download each, one shared contact button.
+ */
 .partner-section--ruled {
   border-bottom: 1px solid var(--color-partner-section-rule);
 }
 
-.partner-university {
+.partner-proposal__heading {
+  margin-bottom: var(--spacing-32);
+}
+
+.partner-proposal__partnership {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-40);
+  margin: 0 0 var(--spacing-40);
+  padding: var(--spacing-28) var(--spacing-32);
+  border-radius: var(--radius-16);
+  background: var(--color-partner-subtle);
+}
+
+.partner-proposal__brand {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--partner-proposal-brand-max);
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: var(--spacing-64);
-  align-items: center;
+  justify-items: center;
+  gap: var(--spacing-12);
 }
 
-.partner-university__label {
-  display: inline-block;
-  margin-bottom: var(--spacing-20);
-  padding: var(--spacing-8) var(--spacing-16);
-  border-radius: var(--radius-999);
-  background: var(--color-partner-label-surface);
-  color: var(--color-solution-accent-deep);
-  font-size: var(--text-partner-label);
-  line-height: var(--text-partner-label--line-height);
-  font-weight: var(--text-partner-label--font-weight);
-  letter-spacing: var(--text-partner-label--letter-spacing);
-}
-
-.partner-university__title {
-  margin-bottom: var(--spacing-24);
-}
-
-.partner-university__link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-32);
-  min-height: 44px;
-  color: var(--color-solution-accent-deep);
-  font-size: var(--text-partner-link);
-  line-height: var(--text-partner-link--line-height);
-  font-weight: var(--text-partner-link--font-weight);
-  letter-spacing: var(--text-partner-link--letter-spacing);
-  text-decoration: none;
-}
-
-.partner-university__link:focus-visible {
-  outline: 3px solid var(--color-action-primary);
-  outline-offset: 5px;
-}
-
-.partner-university__description {
+.partner-proposal__brand-description {
   margin: 0;
   color: var(--color-partner-body);
-  font-size: var(--text-partner-university-desktop);
-  line-height: var(--text-partner-university-desktop--line-height);
-  font-weight: var(--text-partner-university-desktop--font-weight);
-  letter-spacing: var(--text-partner-university-desktop--letter-spacing);
+  font-family: var(--font-family-body);
+  font-size: var(--text-partner-proposal-brand-desktop);
+  line-height: var(--text-partner-proposal-brand-desktop--line-height);
+  font-weight: var(--text-partner-proposal-brand-desktop--font-weight);
+  letter-spacing: var(--text-partner-proposal-brand-desktop--letter-spacing);
+  text-align: center;
   word-break: keep-all;
   overflow-wrap: normal;
 }
 
-/* ≤1024px: tablet shares the mobile composition (single column). */
+.partner-proposal__logo {
+  display: block;
+  width: min(80%, var(--partner-proposal-logo-width));
+  height: var(--partner-proposal-logo-height);
+  object-fit: contain;
+}
+
+.partner-proposal__times {
+  flex: none;
+  color: var(--color-brand-primary);
+  font-size: 24px;
+  line-height: 1;
+}
+
+.partner-proposal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.partner-proposal__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: var(--spacing-8) var(--spacing-40) var(--spacing-12) 0;
+}
+
+.partner-proposal__card + .partner-proposal__card {
+  padding: var(--spacing-8) 0 var(--spacing-12) var(--spacing-40);
+  border-left: 1px solid var(--color-partner-proposal-rule);
+}
+
+.partner-proposal__title {
+  margin: 0 0 var(--spacing-28);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: var(--text-partner-proposal-title-desktop);
+  line-height: var(--text-partner-proposal-title-desktop--line-height);
+  font-weight: var(--text-partner-proposal-title-desktop--font-weight);
+  letter-spacing: var(--text-partner-proposal-title-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-proposal__audience {
+  color: var(--color-brand-primary);
+}
+
+.partner-proposal__card--enterprise .partner-proposal__audience {
+  color: var(--color-partner-proposal-enterprise);
+}
+
+.partner-proposal__lead {
+  max-width: var(--partner-proposal-copy-max);
+  margin: 0 0 var(--spacing-16);
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-body);
+  font-size: var(--text-partner-proposal-lead-desktop);
+  line-height: var(--text-partner-proposal-lead-desktop--line-height);
+  font-weight: var(--text-partner-proposal-lead-desktop--font-weight);
+  letter-spacing: var(--text-partner-proposal-lead-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.partner-proposal__body {
+  max-width: var(--partner-proposal-copy-max);
+  margin: 0 0 var(--spacing-32);
+  color: var(--color-partner-body);
+  font-family: var(--font-family-body);
+  font-size: var(--text-partner-proposal-body-desktop);
+  line-height: var(--text-partner-proposal-body-desktop--line-height);
+  font-weight: var(--text-partner-proposal-body-desktop--font-weight);
+  letter-spacing: var(--text-partner-proposal-body-desktop--letter-spacing);
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* Preview's shared .contact-submit pill: primary surface, white label, 48px tall. */
+.partner-proposal__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  min-width: 144px;
+  height: var(--partner-proposal-button-height);
+  padding: 0 var(--spacing-28);
+  border: 0;
+  border-radius: var(--radius-999);
+  background: var(--color-action-primary);
+  color: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: var(--text-partner-proposal-button);
+  line-height: var(--text-partner-proposal-button--line-height);
+  font-weight: var(--text-partner-proposal-button--font-weight);
+  letter-spacing: var(--text-partner-proposal-button--letter-spacing);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.partner-proposal__button:hover {
+  background: var(--color-action-primary-hover);
+}
+
+.partner-proposal__button:active {
+  background: var(--color-action-primary-pressed);
+}
+
+.partner-proposal__button:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+  outline-offset: 3px;
+}
+
+.partner-proposal__button--download {
+  margin-top: auto;
+}
+
+.partner-proposal__button--contact {
+  gap: var(--spacing-24);
+}
+
+.partner-proposal__icon {
+  flex: none;
+  width: var(--partner-proposal-icon-size);
+  height: var(--partner-proposal-icon-size);
+}
+
+.partner-proposal__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-40);
+  padding-top: var(--spacing-32);
+  border-top: 1px solid var(--color-partner-proposal-rule);
+}
+
+/* ≤1024px: tablet shares the mobile composition (stacked band, single column, full-width buttons). */
 @media (width <= 1024px) {
-  .partner-university {
+  .partner-proposal__heading {
+    margin-bottom: var(--spacing-24);
+  }
+  .partner-proposal__partnership {
+    flex-direction: column;
+    gap: var(--spacing-16);
+    margin-bottom: var(--spacing-32);
+    padding: var(--spacing-24) var(--spacing-20);
+  }
+  .partner-proposal__brand {
+    width: 100%;
+    max-width: var(--partner-proposal-brand-max-mobile);
+  }
+  .partner-proposal__brand-description {
+    font-size: var(--text-partner-proposal-brand-mobile);
+    line-height: var(--text-partner-proposal-brand-mobile--line-height);
+    font-weight: var(--text-partner-proposal-brand-mobile--font-weight);
+    letter-spacing: var(--text-partner-proposal-brand-mobile--letter-spacing);
+  }
+  .partner-proposal__logo {
+    width: min(80%, var(--partner-proposal-logo-width-mobile));
+    height: var(--partner-proposal-logo-height-mobile);
+  }
+  .partner-proposal__times {
+    font-size: 20px;
+  }
+  .partner-proposal__grid {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-28);
   }
-  .partner-university__label {
-    margin-bottom: var(--spacing-16);
+  .partner-proposal__card {
+    padding: 0 0 var(--spacing-32);
   }
-  .partner-university__description {
-    font-size: var(--text-partner-university-mobile);
-    line-height: var(--text-partner-university-mobile--line-height);
-    font-weight: var(--text-partner-university-mobile--font-weight);
-    letter-spacing: var(--text-partner-university-mobile--letter-spacing);
+  .partner-proposal__card + .partner-proposal__card {
+    padding: var(--spacing-32) 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--color-partner-proposal-rule);
+  }
+  .partner-proposal__title {
+    margin-bottom: var(--spacing-20);
+    font-size: var(--text-partner-proposal-title-mobile);
+    line-height: var(--text-partner-proposal-title-mobile--line-height);
+    font-weight: var(--text-partner-proposal-title-mobile--font-weight);
+    letter-spacing: var(--text-partner-proposal-title-mobile--letter-spacing);
+  }
+  .partner-proposal__lead {
+    margin-bottom: var(--spacing-12);
+    font-size: var(--text-partner-proposal-lead-mobile);
+    line-height: var(--text-partner-proposal-lead-mobile--line-height);
+    font-weight: var(--text-partner-proposal-lead-mobile--font-weight);
+    letter-spacing: var(--text-partner-proposal-lead-mobile--letter-spacing);
+  }
+  .partner-proposal__body {
+    max-width: none;
+    margin-bottom: var(--spacing-24);
+    font-size: var(--text-partner-proposal-body-mobile);
+    line-height: var(--text-partner-proposal-body-mobile--line-height);
+    font-weight: var(--text-partner-proposal-body-mobile--font-weight);
+    letter-spacing: var(--text-partner-proposal-body-mobile--letter-spacing);
+  }
+  .partner-proposal__button {
+    width: 100%;
+  }
+  .partner-proposal__footer {
+    margin-top: var(--spacing-32);
+    padding-top: var(--spacing-28);
   }
 }
 

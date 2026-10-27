@@ -415,5 +415,13 @@ export const partnerLogos: PartnerLogosContent = {
       height: 734,
       visible: true,
     },
+    {
+      id: "ey",
+      name: "EY",
+      src: "/images/partner/logos/ey.svg",
+      width: 92,
+      height: 100,
+      visible: true,
+    },
   ],
 };

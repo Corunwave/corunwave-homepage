@@ -693,10 +693,15 @@
   --text-ax-intro-mobile--font-weight: 400;
   --text-ax-intro-mobile--letter-spacing: 0;
 
-  --text-ax-flow: 1.125rem;
+  --text-ax-flow: 1rem;
   --text-ax-flow--line-height: 1.75rem;
-  --text-ax-flow--font-weight: 500;
+  --text-ax-flow--font-weight: 600;
   --text-ax-flow--letter-spacing: 0;
+
+  --text-ax-flow-mobile: 0.9375rem;
+  --text-ax-flow-mobile--line-height: 1.625rem;
+  --text-ax-flow-mobile--font-weight: 600;
+  --text-ax-flow-mobile--letter-spacing: 0;
 
   --text-ax-label: 1.125rem;
   --text-ax-label--line-height: 1.75rem;
@@ -3255,6 +3260,12 @@ body {
   }
   .ax-flow__step {
     flex: none;
+  }
+  .ax-flow__text {
+    font-size: var(--text-ax-flow-mobile);
+    line-height: var(--text-ax-flow-mobile--line-height);
+    font-weight: var(--text-ax-flow-mobile--font-weight);
+    letter-spacing: var(--text-ax-flow-mobile--letter-spacing);
   }
   .ax-map,
   .ax-map__group,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { sharedOpenGraph } from "../_lib/metadata";
 import PageHero from "../_components/commons/hero/PageHero";
 
 const title = "소식";
@@ -8,10 +9,9 @@ export const metadata: Metadata = {
   title,
   description,
   openGraph: {
+    ...sharedOpenGraph,
     title: `${title} · 코런웨이브`,
     description,
-    type: "website",
-    locale: "ko_KR",
   },
 };
 

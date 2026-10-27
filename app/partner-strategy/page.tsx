@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { sharedOpenGraph } from "../_lib/metadata";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import PageHero from "../_components/commons/hero/PageHero";
 import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
@@ -22,10 +23,9 @@ export const metadata: Metadata = {
   description: partnerStrategyPage.description,
   keywords: [...partnerStrategyPage.keywords],
   openGraph: {
+    ...sharedOpenGraph,
     title: partnerStrategyPage.openGraphTitle,
     description: partnerStrategyPage.description,
-    type: "website",
-    locale: "ko_KR",
   },
 };
 

@@ -1,81 +1,66 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import Image from "next/image";
+import type {
+  CustomerProposalContent,
+  CustomerProposalsContent,
+} from "../../_content/partner-strategy";
 
-type CustomerId = "public" | "enterprise" | "startup" | "university";
+type CustomerId = CustomerProposalContent["id"];
 
-type CustomerProposal = {
-  id: CustomerId;
-  label: string;
-  description: string;
-  image: string;
-  offerings: string[];
-};
-
-const CUSTOMER_PROPOSALS: CustomerProposal[] = [
-  {
-    id: "public",
-    label: "공공/정부기관",
-    description:
-      "정책 목표와 운영 환경을 반영한 AI 인프라와 디지털 인재 양성을 함께 제안합니다.",
-    image: "/images/partner/public.png",
-    offerings: ["국가 DX 전략 사업", "AI 인프라 구축", "디지털 인재 양성 사업"],
-  },
-  {
-    id: "enterprise",
-    label: "대기업/중견기업",
-    description:
-      "전사 DX와 AI 활용을 위해 인프라 변화와 직무별 역량 개발을 같은 로드맵에서 추진합니다.",
-    image: "/images/partner/enterprise.png",
-    offerings: [
-      "전사 DX 전환 컨설팅",
-      "프라이빗 클라우드 구축",
-      "임직원 맞춤형 DX 교육",
-    ],
-  },
-  {
-    id: "startup",
-    label: "스타트업/중소기업",
-    description:
-      "한정된 예산과 인력 안에서 필요한 인프라부터 시작하고 운영과 실무교육을 단계적으로 확장합니다.",
-    image: "/images/partner/startup.png",
-    offerings: [
-      "AI 도입 인프라 매칭",
-      "초기 IT 아웃소싱(ITO)",
-      "실무 인재 조기 전력화 교육",
-    ],
-  },
-  {
-    id: "university",
-    label: "대학교",
-    description:
-      "연구용 AI 인프라와 학과별 실습, PBL·산학협력 프로그램을 하나의 교육·연구 환경으로 구성합니다.",
-    image: "/images/partner/university.png",
-    offerings: [
-      "연구용 AI 인프라(HPC) 구축",
-      "재학생 DX 실무 역량 강화 교육",
-      "산학 연계 캡스톤 프로젝트",
-    ],
-  },
-];
+type CustomerProposalsSectionProps = { content: CustomerProposalsContent };
 
 /* Customer proposals "고객 유형별 제안" (preview .partner-customers; Figma 876:28790 / 876:29988, states 876:30096).
- * Tab state is local (no URL sync); tabs follow the WAI-ARIA tablist pattern with roving tabIndex. */
-const CustomerProposalsSection = () => {
-  const [activeId, setActiveId] = useState<CustomerId>("public");
+ * Tab state is local (no URL sync); tabs follow the WAI-ARIA tablist pattern with roving tabIndex.
+ * A single glass indicator slides under the active tab: JS only writes its position/width as CSS
+ * variables; the spring travel and the landing squash (re-triggered via data-pulse) live in globals.css. */
+const CustomerProposalsSection = ({
+  content,
+}: CustomerProposalsSectionProps) => {
+  const [activeId, setActiveId] = useState<CustomerId>(
+    content.proposals[0].id,
+  );
+  const [moves, setMoves] = useState(0);
+  const tablistRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndex = content.proposals.findIndex(({ id }) => id === activeId);
+
+  useLayoutEffect(() => {
+    const tablist = tablistRef.current;
+    const tab = tabRefs.current[activeIndex];
+    if (!tablist || !tab) return;
+
+    const place = () => {
+      tablist.style.setProperty("--partner-tab-x", `${tab.offsetLeft}px`);
+      tablist.style.setProperty("--partner-tab-width", `${tab.offsetWidth}px`);
+    };
+    place();
+    // First placement must not animate; enable transitions on the next frame.
+    const frame = requestAnimationFrame(() => {
+      tablist.dataset.indicatorReady = "true";
+    });
+
+    const observer = new ResizeObserver(place);
+    observer.observe(tablist);
+    observer.observe(tab);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [activeIndex]);
 
   const select = (index: number) => {
-    setActiveId(CUSTOMER_PROPOSALS[index].id);
+    if (index !== activeIndex) setMoves((count) => count + 1);
+    setActiveId(content.proposals[index].id);
     const tab = tabRefs.current[index];
     tab?.focus();
     tab?.scrollIntoView({ block: "nearest", inline: "nearest" });
   };
 
   const handleKeyDown = (event: KeyboardEvent, index: number) => {
-    const count = CUSTOMER_PROPOSALS.length;
+    const count = content.proposals.length;
     const next =
       event.key === "ArrowRight"
         ? (index + 1) % count
@@ -99,15 +84,21 @@ const CustomerProposalsSection = () => {
     >
       <div className="partner-inner">
         <h2 id="partner-customers-title" className="partner-heading">
-          고객 유형별 제안
+          {content.title}
         </h2>
 
         <div
+          ref={tablistRef}
           className="partner-tabs"
           role="tablist"
           aria-labelledby="partner-customers-title"
         >
-          {CUSTOMER_PROPOSALS.map(({ id, label }, index) => (
+          <span
+            className="partner-tabs__indicator"
+            aria-hidden="true"
+            data-pulse={moves === 0 ? undefined : moves % 2}
+          />
+          {content.proposals.map(({ id, label }, index) => (
             <button
               key={id}
               ref={(node) => {
@@ -128,7 +119,7 @@ const CustomerProposalsSection = () => {
           ))}
         </div>
 
-        {CUSTOMER_PROPOSALS.map(
+        {content.proposals.map(
           ({ id, label, description, image, offerings }) => (
             <div
               key={id}
@@ -138,6 +129,7 @@ const CustomerProposalsSection = () => {
               aria-labelledby={`partner-tab-${id}`}
               tabIndex={0}
               hidden={id !== activeId}
+              data-animate={moves > 0 || undefined}
             >
               <div
                 className={`partner-customer-intro partner-customer-intro--${id}`}

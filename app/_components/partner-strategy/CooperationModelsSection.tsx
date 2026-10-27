@@ -1,61 +1,79 @@
 import Image from "next/image";
+import type { CooperationModelsContent } from "../../_content/partner-strategy";
+import ScrollReveal from "../commons/reveal/ScrollReveal";
 
-type CooperationModel = {
-  title: string;
-  image: string;
-  description: string;
-};
+type CooperationModelsSectionProps = { content: CooperationModelsContent };
 
-const COOPERATION_MODELS: CooperationModel[] = [
-  {
-    title: "The Orchestrator",
-    image: "/images/partner/orchestrator-soft.png",
-    description:
-      "글로벌 IT 교육 및 인프라 기획 역량을 바탕으로 프로젝트 전체를 설계하고 조율합니다.",
-  },
-  {
-    title: "The Specialist",
-    image: "/images/partner/specialist-soft.png",
-    description:
-      "파트너 여러분은 자신의 핵심 역량(영업, 강의, 콘텐츠 개발, 인프라 구축 등)에만 집중하십시오.",
-  },
-  {
-    title: "Win-Win Growth",
-    image: "/images/partner/growth-soft.png",
-    description:
-      "코런웨이브가 확보한 서비스를 통해 파트너의 전문성이 시장에 안정적으로 공급되도록 지원합니다.",
-  },
-];
-
-/* Cooperation models "우리가 제안하는 협력모델" (preview .partner-models; Figma 876:28713 / 876:29907). Static server component. */
-const CooperationModelsSection = () => {
+/* Cooperation models "우리가 제안하는 협력모델" (Figma 876:28713 / 876:29907; preview not referenced).
+ * Server component (ScrollReveal only marks the role rows for the top-to-bottom entry): one markup, a role × stage matrix on desktop and stacked role cards at ≤1024px. */
+const CooperationModelsSection = ({
+  content,
+}: CooperationModelsSectionProps) => {
   return (
     <section
       id="partner-models"
-      className="partner-section partner-section--subtle"
+      className="partner-section"
       aria-labelledby="partner-models-title"
     >
       <div className="partner-inner">
-        <h2 id="partner-models-title" className="partner-heading">
-          우리가 제안하는 협력모델
+        <h2
+          id="partner-models-title"
+          className="partner-heading partner-heading--with-description"
+        >
+          {content.title}
         </h2>
-        <div className="partner-models">
-          {COOPERATION_MODELS.map(({ title, image, description }) => (
-            <article key={title} className="partner-model">
-              <Image
-                className="partner-model__icon"
-                src={image}
-                alt=""
-                aria-hidden="true"
-                width={1024}
-                height={1024}
-                sizes="(max-width: 1024px) 160px, 192px"
-              />
-              <h3 className="partner-model__title">{title}</h3>
-              <p className="partner-model__description">{description}</p>
-            </article>
-          ))}
-        </div>
+        <p className="partner-description">{content.description}</p>
+        <ScrollReveal>
+          <div className="partner-coop">
+            <div className="partner-coop__head" aria-hidden="true">
+              <span className="partner-coop__corner" />
+              {content.stages.map((stage) => (
+                <span key={stage} className="partner-coop__stage">
+                  {stage}
+                </span>
+              ))}
+            </div>
+            {content.roles.map(({ id, name, subName, accent, steps }) => (
+              <article
+                key={id}
+                className={`partner-coop__role partner-coop__role--${accent}`}
+                data-reveal-item
+              >
+                <h3 className="partner-coop__role-title">
+                  {accent === "logo" ? (
+                    <Image
+                      className="partner-coop__logo"
+                      src="/images/logos/corunwave-ko-en-color.png"
+                      alt={name}
+                      width={2496}
+                      height={832}
+                      sizes="152px"
+                    />
+                  ) : (
+                    <span className="partner-coop__role-name">
+                      {name}
+                      {subName ? (
+                        <span className="partner-coop__role-sub">
+                          {subName}
+                        </span>
+                      ) : null}
+                    </span>
+                  )}
+                </h3>
+                <dl className="partner-coop__steps">
+                  {content.stages.map((stage, index) => (
+                    <div key={stage} className="partner-coop__step">
+                      <dt className="partner-coop__step-label">{stage}</dt>
+                      <dd className="partner-coop__step-text">
+                        {steps[index]}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

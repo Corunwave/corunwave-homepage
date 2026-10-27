@@ -11,7 +11,7 @@ const navigation = [
   { label: "회사소개", href: "/about" },
   { label: "솔루션", href: "/solutions" },
   { label: "파트너 전략", href: "/partner-strategy" },
-  // { label: "소식", href: "#" },
+  { label: "소식", href: "/news" },
 ];
 
 const isActive = (pathname: string, href: string) =>
@@ -134,7 +134,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
         </nav>
         <Link
           className="site-header__contact site-header__desktop-contact"
-          href="#"
+          href="/contact"
         >
           문의하기
         </Link>
@@ -185,7 +185,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
           ))}
           <li>
             <LinkButton
-              href={"#"}
+              href="/contact"
               className="site-header__contact"
               onClick={() => setMenuOpen(false)}
             >

@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import PageHero from "../_components/commons/hero/PageHero";
 import ContactCta from "../_components/commons/cta/ContactCta";
-import SolutionOverviewSection from "../_components/solutions/SolutionOverviewSection";
-import SolutionServicesSection, {
-  SolutionServicesFallback,
-} from "../_components/solutions/SolutionServicesSection";
-
-const description =
-  "인프라 설계부터 운영과 조달,인재 육성에 이르기까지 단절 없는 End-to-End 서비스 가치를 창출합니다.";
+import SolutionAXSection from "../_components/solutions/SolutionAXSection";
+import SolutionLearningSection from "../_components/solutions/SolutionLearningSection";
+import {
+  axInfra,
+  learningService,
+  solutionsPage,
+} from "../_content/solutions";
 
 export const metadata: Metadata = {
-  title: "솔루션",
-  description,
+  title: solutionsPage.title,
+  description: solutionsPage.description,
 };
 
 export default function SolutionsPage() {
   return (
     <main>
-      <PageHero title="솔루션" description={description} />
-      <SolutionOverviewSection />
-      <Suspense fallback={<SolutionServicesFallback />}>
-        <SolutionServicesSection />
-      </Suspense>
+      <PageHero
+        title={solutionsPage.title}
+        description={solutionsPage.description}
+      />
+      <SolutionAXSection content={axInfra} />
+      <SolutionLearningSection content={learningService} />
       <ContactCta />
     </main>
   );

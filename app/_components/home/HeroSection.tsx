@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { renderText } from "../../_lib/content/renderText";
+import type { HomeHeroContent } from "../../_content/home";
 import BorderedButton from "../commons/buttons/BorderedButton";
 
-const HeroSection = () => {
+type HeroSectionProps = { content: HomeHeroContent };
+
+const HeroSection = ({ content }: HeroSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -91,17 +95,13 @@ const HeroSection = () => {
         <div className="hero__overlay" aria-hidden="true" />
         <div className="hero__content">
           <h2 id="hero-slogan" className="hero__title">
-            Innovation Together,
-            <br />
-            Creating Waves
+            {renderText(content.title)}
           </h2>
           <p className="hero__description">
-            AX Infra와 Learning Service를 연결해 기술 도입부터
-            <br />
-            운영, 인재 육성까지 이어지는 서비스를 제공합니다.
+            {renderText(content.description)}
           </p>
-          <BorderedButton href="/solutions">
-            솔루션 바로보기
+          <BorderedButton href={content.cta.href}>
+            {content.cta.label}
             <span className="bordered-button__arrow" aria-hidden="true">
               →
             </span>

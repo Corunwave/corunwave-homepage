@@ -1,3 +1,4 @@
+import { contactCta } from "../../../_content/site";
 import LinkButton from "../buttons/LinkButton";
 import ScrollReveal from "../reveal/ScrollReveal";
 
@@ -8,8 +9,8 @@ type ContactCtaProps = {
 
 /* Shared contact CTA (preview .solution-contact; Figma 847:27590 / 847:28691). Server component; surface matches the header/hero tone. */
 const ContactCta = ({
-  title = "비즈니스 환경에 맞는 서비스 구성을 제안합니다.",
-  href = "#",
+  title = contactCta.title,
+  href = contactCta.href,
 }: ContactCtaProps) => {
   return (
     <section className="contact-cta" aria-labelledby="contact-cta-title">
@@ -27,7 +28,7 @@ const ContactCta = ({
             className="contact-cta__button"
             data-reveal-item
           >
-            문의하기
+            {contactCta.buttonLabel}
           </LinkButton>
         </div>
       </ScrollReveal>

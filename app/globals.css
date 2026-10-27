@@ -30,6 +30,27 @@
     rgb(15 23 41 / 55%)
   );
 
+  /* Contact page (preview .contact-view; hero is the shared .page-hero) */
+  --contact-inner-max: 1248px;
+  --contact-input-height: 48px;
+  --contact-textarea-height: 100px;
+  --contact-submit-min-width: 144px;
+  --contact-checkbox-size: 20px;
+  --contact-scroll-margin: 100px;
+  /* Every field reserves one error line, so showing an error never shifts the form. */
+  --contact-error-slot: calc(
+    var(--spacing-4) + var(--text-contact-error--line-height)
+  );
+  --contact-graphic-overlay: linear-gradient(
+    180deg,
+    rgb(15 23 41 / 8%),
+    rgb(15 23 41 / 0%) 60%,
+    rgb(15 23 41 / 28%)
+  );
+  --color-contact-placeholder: #64748b;
+  --color-contact-input-hover: #8ba1be;
+  --color-contact-input-invalid-surface: #fffafa;
+
   /* CEO message */
   --ceo-inner-max: 1248px;
   --ceo-letter-max: 840px;
@@ -402,8 +423,12 @@
   --spacing-space-40: var(--spacing-40);
   --spacing-48: 48px;
   --spacing-space-48: var(--spacing-48);
+  --spacing-56: 56px;
+  --spacing-space-56: var(--spacing-56);
   --spacing-64: 64px;
   --spacing-space-64: var(--spacing-64);
+  --spacing-80: 80px;
+  --spacing-space-80: var(--spacing-80);
   --spacing-96: 96px;
   --spacing-space-96: var(--spacing-96);
 
@@ -602,6 +627,32 @@
   --text-news-notice-title-mobile--line-height: 2rem;
   --text-news-notice-title-mobile--font-weight: 700;
   --text-news-notice-title-mobile--letter-spacing: -0.02em;
+
+  /* Contact page typography (hero is PageHero) */
+  --text-contact-label: 0.875rem;
+  --text-contact-label--line-height: 1.25rem;
+  --text-contact-label--font-weight: 500;
+  --text-contact-label--letter-spacing: 0;
+
+  --text-contact-input: 1rem;
+  --text-contact-input--line-height: 1.5rem;
+  --text-contact-input--font-weight: 400;
+  --text-contact-input--letter-spacing: 0;
+
+  --text-contact-consent: 0.875rem;
+  --text-contact-consent--line-height: 1.5rem;
+  --text-contact-consent--font-weight: 400;
+  --text-contact-consent--letter-spacing: 0;
+
+  --text-contact-error: 0.8125rem;
+  --text-contact-error--line-height: 1.25rem;
+  --text-contact-error--font-weight: 400;
+  --text-contact-error--letter-spacing: 0;
+
+  --text-contact-submit: 1rem;
+  --text-contact-submit--line-height: 1.5rem;
+  --text-contact-submit--font-weight: 700;
+  --text-contact-submit--letter-spacing: 0;
 
   /* CEO message typography (letter body desktop reuses --text-section-description-desktop) */
   --text-ceo-title-desktop: 2.25rem;
@@ -1910,6 +1961,226 @@ body {
   .news-notice__description {
     font-size: var(--text-legal-body-mobile);
     line-height: var(--text-legal-body-mobile--line-height);
+  }
+}
+
+/* Contact — 문의하기 (preview .contact-view / assets/contact/contact.css).
+ * Hero is the shared PageHero; the preview's wave panel beside the form is a stock photo (Unsplash).
+ */
+.contact-section {
+  padding: var(--spacing-96) 0 var(--spacing-80);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  overflow-anchor: none;
+}
+
+.contact-layout {
+  width: min(
+    var(--contact-inner-max),
+    calc(100% - var(--section-gutter-desktop) * 2)
+  );
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-40);
+  align-items: stretch;
+}
+
+.contact-graphic {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-24);
+  background: var(--color-brand-navy);
+}
+
+/* Portrait photo (empty meeting room, no people): keep the table and window view centered as the column height changes. */
+.contact-graphic__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contact-graphic::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: var(--contact-graphic-overlay);
+}
+
+.contact-form {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin: 0;
+}
+
+.contact-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+  padding-bottom: var(--contact-error-slot);
+}
+
+.contact-label {
+  font-size: var(--text-contact-label);
+  line-height: var(--text-contact-label--line-height);
+  font-weight: var(--text-contact-label--font-weight);
+  letter-spacing: var(--text-contact-label--letter-spacing);
+}
+
+.contact-required {
+  color: var(--color-status-error);
+}
+
+.contact-input {
+  display: block;
+  width: 100%;
+  height: var(--contact-input-height);
+  min-width: 0;
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-12);
+  color: var(--color-text-primary);
+  background: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: var(--text-contact-input);
+  line-height: var(--text-contact-input--line-height);
+  font-weight: var(--text-contact-input--font-weight);
+  letter-spacing: var(--text-contact-input--letter-spacing);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  scroll-margin-top: var(--contact-scroll-margin);
+}
+
+.contact-input::placeholder {
+  color: var(--color-contact-placeholder);
+  opacity: 1;
+}
+
+.contact-input:hover {
+  border-color: var(--color-contact-input-hover);
+}
+
+.contact-input:focus-visible {
+  outline: 2px solid var(--color-action-primary);
+  outline-offset: 2px;
+}
+
+.contact-input--textarea {
+  height: var(--contact-textarea-height);
+  min-height: var(--contact-textarea-height);
+  resize: vertical;
+}
+
+.contact-input[aria-invalid="true"] {
+  border-color: var(--color-status-error);
+  background: var(--color-contact-input-invalid-surface);
+}
+
+.contact-error {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--color-status-error);
+  font-size: var(--text-contact-error);
+  line-height: var(--text-contact-error--line-height);
+  font-weight: var(--text-contact-error--font-weight);
+  letter-spacing: var(--text-contact-error--letter-spacing);
+}
+
+.contact-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-10);
+  font-size: var(--text-contact-consent);
+  line-height: var(--text-contact-consent--line-height);
+  font-weight: var(--text-contact-consent--font-weight);
+  letter-spacing: var(--text-contact-consent--letter-spacing);
+  word-break: keep-all;
+  cursor: pointer;
+}
+
+.contact-consent input {
+  flex: none;
+  width: var(--contact-checkbox-size);
+  height: var(--contact-checkbox-size);
+  margin: 2px 0;
+  accent-color: var(--color-action-primary);
+  scroll-margin-top: var(--contact-scroll-margin);
+}
+
+.contact-consent a {
+  color: var(--color-text-primary);
+  text-underline-offset: 3px;
+}
+
+.contact-consent a:hover {
+  color: var(--color-action-primary);
+}
+
+.contact-submit {
+  align-self: flex-start;
+  min-width: var(--contact-submit-min-width);
+  height: var(--contact-input-height);
+  padding: 0 var(--spacing-28);
+  border: 0;
+  border-radius: var(--radius-999);
+  color: var(--color-white);
+  background: var(--color-action-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--text-contact-submit);
+  line-height: var(--text-contact-submit--line-height);
+  font-weight: var(--text-contact-submit--font-weight);
+  letter-spacing: var(--text-contact-submit--letter-spacing);
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  background: var(--color-action-primary-hover);
+}
+
+.contact-submit:active {
+  background: var(--color-action-primary-pressed);
+}
+
+.contact-submit:focus-visible {
+  outline: var(--spacing-4) solid var(--color-focus-ring);
+  outline-offset: var(--spacing-4);
+}
+
+/* Preview keeps the desktop two-column layout on tablet; only the gutter narrows. */
+@media (width <= 1024px) {
+  .contact-layout {
+    width: min(var(--contact-inner-max), calc(100% - var(--spacing-64)));
+  }
+}
+
+@media (width <= 760px) {
+  .contact-section {
+    padding: var(--spacing-64) 0 var(--spacing-56);
+  }
+  .contact-layout {
+    display: block;
+    width: calc(100% - var(--spacing-32));
+  }
+  .contact-graphic {
+    display: none;
+  }
+  .contact-submit {
+    width: 100%;
   }
 }
 

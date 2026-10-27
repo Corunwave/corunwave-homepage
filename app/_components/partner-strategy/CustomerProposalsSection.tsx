@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import Image from "next/image";
 import type {
@@ -13,16 +13,46 @@ type CustomerId = CustomerProposalContent["id"];
 type CustomerProposalsSectionProps = { content: CustomerProposalsContent };
 
 /* Customer proposals "고객 유형별 제안" (preview .partner-customers; Figma 876:28790 / 876:29988, states 876:30096).
- * Tab state is local (no URL sync); tabs follow the WAI-ARIA tablist pattern with roving tabIndex. */
+ * Tab state is local (no URL sync); tabs follow the WAI-ARIA tablist pattern with roving tabIndex.
+ * A single glass indicator slides under the active tab: JS only writes its position/width as CSS
+ * variables; the spring travel and the landing squash (re-triggered via data-pulse) live in globals.css. */
 const CustomerProposalsSection = ({
   content,
 }: CustomerProposalsSectionProps) => {
   const [activeId, setActiveId] = useState<CustomerId>(
     content.proposals[0].id,
   );
+  const [moves, setMoves] = useState(0);
+  const tablistRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndex = content.proposals.findIndex(({ id }) => id === activeId);
+
+  useLayoutEffect(() => {
+    const tablist = tablistRef.current;
+    const tab = tabRefs.current[activeIndex];
+    if (!tablist || !tab) return;
+
+    const place = () => {
+      tablist.style.setProperty("--partner-tab-x", `${tab.offsetLeft}px`);
+      tablist.style.setProperty("--partner-tab-width", `${tab.offsetWidth}px`);
+    };
+    place();
+    // First placement must not animate; enable transitions on the next frame.
+    const frame = requestAnimationFrame(() => {
+      tablist.dataset.indicatorReady = "true";
+    });
+
+    const observer = new ResizeObserver(place);
+    observer.observe(tablist);
+    observer.observe(tab);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [activeIndex]);
 
   const select = (index: number) => {
+    if (index !== activeIndex) setMoves((count) => count + 1);
     setActiveId(content.proposals[index].id);
     const tab = tabRefs.current[index];
     tab?.focus();
@@ -58,10 +88,16 @@ const CustomerProposalsSection = ({
         </h2>
 
         <div
+          ref={tablistRef}
           className="partner-tabs"
           role="tablist"
           aria-labelledby="partner-customers-title"
         >
+          <span
+            className="partner-tabs__indicator"
+            aria-hidden="true"
+            data-pulse={moves === 0 ? undefined : moves % 2}
+          />
           {content.proposals.map(({ id, label }, index) => (
             <button
               key={id}
@@ -93,6 +129,7 @@ const CustomerProposalsSection = ({
               aria-labelledby={`partner-tab-${id}`}
               tabIndex={0}
               hidden={id !== activeId}
+              data-animate={moves > 0 || undefined}
             >
               <div
                 className={`partner-customer-intro partner-customer-intro--${id}`}

@@ -1,22 +1,20 @@
 import type { Metadata } from "next";
 import ContactCta from "../_components/commons/cta/ContactCta";
 import PageHero from "../_components/commons/hero/PageHero";
-import CollaborationProcessSection from "../_components/partner-strategy/CollaborationProcessSection";
 import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
 import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
-import PartnerFieldsSection from "../_components/partner-strategy/PartnerFieldsSection";
 import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
 import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
-import UniversityProposalSection from "../_components/partner-strategy/UniversityProposalSection";
+import ProposalSection from "../_components/partner-strategy/ProposalSection";
+import ToBeStrategySection from "../_components/partner-strategy/ToBeStrategySection";
 import {
-  collaborationProcess,
   cooperationModels,
   customerProposals,
-  partnerFields,
   partnerLogos,
   partnerStrategyPage,
   partnershipBenefits,
-  universityProposal,
+  proposal,
+  toBeStrategy,
 } from "../_content/partner-strategy";
 
 export const metadata: Metadata = {
@@ -37,13 +35,13 @@ export default function PartnerStrategyPage() {
       <PageHero
         title={partnerStrategyPage.title}
         description={partnerStrategyPage.description}
+        descriptionSize="compact"
       />
-      <PartnerFieldsSection content={partnerFields} />
       <CooperationModelsSection content={cooperationModels} />
-      <CustomerProposalsSection content={customerProposals} />
-      <CollaborationProcessSection content={collaborationProcess} />
+      <ToBeStrategySection content={toBeStrategy} />
       <PartnershipBenefitsSection content={partnershipBenefits} />
-      <UniversityProposalSection content={universityProposal} />
+      <CustomerProposalsSection content={customerProposals} />
+      <ProposalSection content={proposal} />
       <PartnerLogosSection content={partnerLogos} />
       <ContactCta />
     </main>

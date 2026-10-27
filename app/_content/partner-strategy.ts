@@ -1,3 +1,5 @@
+import { contactCta } from "./site";
+
 export type PartnerStrategyPageContent = {
   title: string;
   description: string;
@@ -5,27 +7,24 @@ export type PartnerStrategyPageContent = {
   openGraphTitle: string;
 };
 
-export type PartnerFieldContent = {
-  id: "learning" | "infra" | "operations";
-  title: string;
-  image: string;
-  items: readonly string[];
-};
+export type CooperationStepTexts = readonly [string, string, string, string];
 
-export type PartnerFieldsContent = {
-  title: string;
-  fields: readonly PartnerFieldContent[];
-};
-
-export type CooperationModelContent = {
-  title: string;
-  image: string;
-  description: string;
+export type CooperationRoleContent = {
+  id: "corunwave" | "sales" | "ax-infra" | "learning";
+  /** Shown as the role title; the corunwave row uses it as the logo alt. */
+  name: string;
+  subName?: string;
+  accent: "logo" | "primary" | "cyan" | "lavender";
+  /** Same order as `stages`. "\n" is a desktop line break. */
+  steps: CooperationStepTexts;
 };
 
 export type CooperationModelsContent = {
   title: string;
-  models: readonly CooperationModelContent[];
+  /** "\n" is a desktop line break. */
+  description: string;
+  stages: CooperationStepTexts;
+  roles: readonly CooperationRoleContent[];
 };
 
 export type CustomerProposalContent = {
@@ -41,35 +40,67 @@ export type CustomerProposalsContent = {
   proposals: readonly CustomerProposalContent[];
 };
 
-export type ProcessStageContent = {
-  name: string;
-  /** Same order as `roleNames`. */
-  roles: readonly [string, string, string, string];
-};
-
-export type CollaborationProcessContent = {
+export type PartnershipBenefitContent = {
+  id: "scale" | "operation" | "integration" | "resource";
   title: string;
-  flowLabel: string;
-  roleNames: readonly [string, string, string, string];
-  stages: readonly ProcessStageContent[];
+  /** "\n" is a line break kept from Figma. */
+  subtitle: string;
+  bullets: readonly [string, string];
+  /** Temporary Unsplash stock photo exported from Figma. */
+  image: string;
 };
 
 export type PartnershipBenefitsContent = {
   title: string;
-  benefits: readonly { title: string; english: string }[];
-  strategyHeading: string;
-  strategies: readonly {
-    term: string;
-    title: string;
-    description: string;
-  }[];
+  benefits: readonly PartnershipBenefitContent[];
 };
 
-export type UniversityProposalContent = {
-  label: string;
+export type ToBeStageContent = {
+  id: "short" | "mid" | "long";
+  term: string;
   title: string;
-  link: { label: string; href: string };
+  /** "\n" is a desktop line break. */
   description: string;
+};
+
+export type ToBeStrategyContent = {
+  title: string;
+  stages: readonly [ToBeStageContent, ToBeStageContent, ToBeStageContent];
+};
+
+export type ProposalBrandContent = {
+  description: string;
+  /** Logo alt text. */
+  name: string;
+  logo: {
+    src: string;
+    /** Intrinsic size, so next/image keeps the file's aspect ratio. */
+    width: number;
+    height: number;
+  };
+};
+
+export type ProposalCardContent = {
+  id: "university" | "enterprise";
+  /** Accent-colored first line of the card title. */
+  audience: string;
+  title: string;
+  lead: string;
+  body: string;
+  download: {
+    label: string;
+    ariaLabel: string;
+    /** Omitted until the portfolio is ready: the control renders as an inert button. */
+    href?: string;
+    fileName?: string;
+  };
+};
+
+export type ProposalContent = {
+  title: string;
+  brands: readonly [ProposalBrandContent, ProposalBrandContent];
+  cards: readonly [ProposalCardContent, ProposalCardContent];
+  contact: { label: string; href: string };
 };
 
 export type PartnerLogoContent = {
@@ -94,7 +125,7 @@ export type PartnerLogosContent = {
 export const partnerStrategyPage: PartnerStrategyPageContent = {
   title: "파트너 전략",
   description:
-    "코런웨이브는 각 분야의 Specialist들이 자신의 전문성을 가장 가치있게 발휘할 수 있는 솔루션 허브를 목표로 협업을 제안합니다.",
+    "코런웨이브는 각 분야의 전문가들이 자신의 전문성을 가장 가치있게 발휘할 수 있는 솔루션 허브를 목표로 협업합니다.\n파트너의 독립적 전문성을 존중하며 파트너십을 통해 기술적 한계를 넘고 인적 성장을 통해 비즈니스 연속성을 실현하는 전략적 동반자입니다.",
   keywords: [
     "코런웨이브",
     "파트너 전략",
@@ -107,73 +138,58 @@ export const partnerStrategyPage: PartnerStrategyPageContent = {
   openGraphTitle: "파트너 전략 · 코런웨이브",
 };
 
-export const partnerFields: PartnerFieldsContent = {
-  title: "함께 찾는 파트너",
-  fields: [
-  {
-    id: "learning",
-    title: "Learning Service",
-    image: "/images/partner/photos/learning.jpg",
-    items: [
-      "기술영역별 전문 강사",
-      "L&D 전략 및 성과 컨설팅 전문가",
-      "교수설계 및 AI 콘텐츠 개발 전문가",
-      "도메인 전문가 네트워크",
-      "에듀테크 및 학습플랫폼 전문가",
-      "Learning Sales 전문가",
-    ],
-  },
-  {
-    id: "infra",
-    title: "AX Infra",
-    image: "/images/partner/photos/infra.jpg",
-    items: [
-      "AI컴퓨팅 및 가속기 전문가",
-      "네트워킹 전문가",
-      "지능형 스토리지 및 데이터 레이크 전문가",
-      "Zero-Trust 보안 및 거버넌스 전문가",
-      "AIOps 및 그린IT 운영 전문가",
-      "시스템 아키텍처 전문가",
-      "Infra Sales 전문가",
-    ],
-  },
-  {
-    id: "operations",
-    title: "BPO & ITO",
-    image: "/images/partner/photos/operations.jpg",
-    items: [
-      "하이브리드 클라우드 및 인프라 운영전문가",
-      "SW 및 AI개발 전문가",
-      "프로세스 자동화 및 DX컨설턴트",
-      "통합서비스 데스크 및 ITSM 전문가",
-      "서비스 거버넌스 및 리스크 관리 전문가",
-    ],
-  },
-],
-};
-
 export const cooperationModels: CooperationModelsContent = {
   title: "우리가 제안하는 협력모델",
-  models: [
-  {
-    title: "The Orchestrator",
-    image: "/images/partner/orchestrator-soft.png",
-    description:
-      "글로벌 IT 교육 및 인프라 기획 역량을 바탕으로 프로젝트 전체를 설계하고 조율합니다.",
-  },
-  {
-    title: "The Specialist",
-    image: "/images/partner/specialist-soft.png",
-    description:
-      "파트너 여러분은 자신의 핵심 역량(영업, 강의, 콘텐츠 개발, 인프라 구축 등)에만 집중하십시오.",
-  },
-  {
-    title: "Win-Win Growth",
-    image: "/images/partner/growth-soft.png",
-    description:
-      "코런웨이브가 확보한 서비스를 통해 파트너의 전문성이 시장에 안정적으로 공급되도록 지원합니다.",
-  },
-],
+  description:
+    "코런웨이브는 각 분야 전문가를 모십니다.\n투명한 협업 절차에 따라 새로운 비즈니스 가치를 창출하고 함께 성장할 수 있는 협력모델을 제안합니다.",
+  stages: ["기회 발굴", "전략 및 제안", "구축 및 수행", "성과 공유"],
+  roles: [
+    {
+      id: "corunwave",
+      name: "코런웨이브",
+      accent: "logo",
+      steps: [
+        "사업 타당성 검토 및\n제안 컨소시엄 구성",
+        "제안서 준비 리딩,\nTCO 분석 및 비즈니스 모델링",
+        "프로젝트 리딩, 운영 행정,\n품질 보증(QA), 학습자 관리",
+        "투명한 프로젝트 성과 평가,\n공유 및 레퍼런스 공동 자산화",
+      ],
+    },
+    {
+      id: "sales",
+      name: "Sales 파트너",
+      subName: "(Infra 및 Learning 영역)",
+      accent: "primary",
+      steps: [
+        "네트워크 활용 고객발굴 및 확보(Infra 및 Learning 서비스 영역)",
+        "고객사 핵심 이해관계자 분석 및 의사결정 지원",
+        "프로젝트 진척 관리 모니터링 및 고객 소통",
+        "고객 만족도 관리 및\n추가 사업 기회 확보",
+      ],
+    },
+    {
+      id: "ax-infra",
+      name: "AX Infra 파트너",
+      accent: "cyan",
+      steps: [
+        "기술 트렌드 기반 인프라 도입\n니즈 파악 및 공유",
+        "H/W·S/W 사이징 및\n하드웨어 / AI솔루션\n아키텍처 설계",
+        "인프라 구축 및 기술 지원",
+        "기술 고도화 제안 및\n유지보수 파이프라인 확보",
+      ],
+    },
+    {
+      id: "learning",
+      name: "Learning 파트너",
+      accent: "lavender",
+      steps: [
+        "기술 트렌드 기반 고객 대상별\n인재 육성 니즈 파악 및 공유",
+        "커리큘럼 기획, 설계 및 영역별\n전문가 매칭",
+        "강의 구성 및 콘텐츠 제작,\n성과평가 지표",
+        "성과 분석 및 교육 데이터\n기반 차기 교육 로드맵 제안",
+      ],
+    },
+  ],
 };
 
 export const customerProposals: CustomerProposalsContent = {
@@ -226,92 +242,132 @@ export const customerProposals: CustomerProposalsContent = {
 ],
 };
 
-export const collaborationProcess: CollaborationProcessContent = {
-  title: "협업 프로세스",
-  flowLabel: "협업 프로세스 단계",
-  roleNames: [
-    "코런웨이브",
-    "Sales 파트너",
-    "AX Infra 파트너",
-    "Learning 파트너",
-  ],
-  stages: [
-  {
-    name: "기회발굴",
-    roles: [
-      "사업 타당성 검토 및 컨소시엄 구성",
-      "네트워크 활용 고객발굴 및 확보",
-      "인프라 도입 니즈 및 기술 트렌드 정보 공유",
-      "기업 교육 트렌드 및 인재 육성 니즈 공유",
-    ],
-  },
-  {
-    name: "전략 및 제안",
-    roles: [
-      "제안서 총괄 작성, TCO 분석 및 비즈니스 모델링",
-      "고객사 핵심 이해관계자 분석 및 의사결정 지원",
-      "H/W·S/W 사이징, 하드웨어/AI솔루션 아키텍처 설계",
-      "커리큘럼 설계, SME(전문가) 매칭",
-    ],
-  },
-  {
-    name: "구축 및 수행",
-    roles: [
-      "전체 PM, 운영 행정, 품질 보증(QA)",
-      "프로젝트 진척 관리 보조 및 고객 소통 창구",
-      "인프라 설치, 클라우드 마이그레이션, 기술 지원",
-      "강의 진행, 콘텐츠 제작, 학습자 관리(LXM)",
-    ],
-  },
-  {
-    name: "성과 공유",
-    roles: [
-      "투명한 성과 공유체계정산 및 수익 배분, 공동 레퍼런스 자산화 리포트",
-      "고객 만족도 관리 및 차기 사업 기회 확보",
-      "기술 고도화 제안 및 유지보수 파이프라인 확보",
-      "성과 분석 데이터 기반 차기 교육 로드맵 제안",
-    ],
-  },
-],
-};
-
 export const partnershipBenefits: PartnershipBenefitsContent = {
   title: "파트너십 기대효과",
   benefits: [
-  { title: "비즈니스 규모의 확장", english: "Scalability & Reliability" },
-  { title: "운영 탁월성 확보", english: "Operational Excellence" },
-  { title: "통합 솔루션의 완성", english: "Value Integration" },
-  { title: "전략적 자원 최적화", english: "Resource Efficiency" },
-],
-  strategyHeading: "파트너십 성공을 위한 To-be 전략",
-  strategies: [
-  {
-    term: "short-term",
-    title: "레퍼런스 공유 및 공동 수주",
-    description:
-      "파트너사의 기존 레퍼런스를 코런웨이브의 기획력으로 재포장하여 신규 시장을 공동 개척합니다.",
-  },
-  {
-    term: "mid-term",
-    title: "서비스 표준화 및 패키징",
-    description:
-      "개별 프로젝트 단위의 협업을 넘어 공동 브랜드 상품을 개발하여 시장 지배력을 높입니다.",
-  },
-  {
-    term: "long-term",
-    title: "플랫폼 생태계 완성",
-    description:
-      "협업 파트너들이 자발적으로 기회를 제안하고 성과를 나누는 선순환 구조를 완성합니다.",
-  },
-],
+    {
+      id: "scale",
+      title: "비즈니스 규모의 확장",
+      subtitle:
+        "단절 없는 인프라와 검증된 러닝 솔루션의 결합으로 시장 지배력을 전방위로 확장합니다",
+      bullets: [
+        "파트너십을 통해 인프라 구축부터 인재 역량 강화까지 커버리지 영역을 즉시 확장합니다.",
+        "신규 시장 진입 장벽을 낮추고 신속한 시장 침투로 양사의 비즈니스 스케일업을 가속화합니다.",
+      ],
+      image: "/images/partner/benefits/scale.jpg",
+    },
+    {
+      id: "operation",
+      title: "운영 탁월성 확보",
+      subtitle:
+        "표준화된 AX 인프라와 리딩 커리큘럼으로 운영 공백 없는 완벽한 실행력을 구현합니다",
+      bullets: [
+        "축적된 AX 인프라 운영 노하우와 커스텀 학습 프로세스를 결합하여 운영 리스크를 최소화합니다.",
+        "리소스 투입 대비 최상의 실행 속도와 안정적인 품질을 동시에 확보합니다.",
+      ],
+      image: "/images/partner/benefits/operation.jpg",
+    },
+    {
+      id: "integration",
+      title: "통합 솔루션의 완성",
+      subtitle:
+        "인프라 구성부터 기술역량까지 단 하나의 패키지로 완결되는\nAX Transformation을 제공합니다",
+      bullets: [
+        "하드웨어·소프트웨어 인프라 구성부터 실무 적용을 위한 AX 학습 체계까지 원스톱(One-stop)으로 제공합니다.",
+        "고객에게 파편화되지 않은 최고의 통합 사용자 경험(UX)과 명확한 ROI를 제시합니다",
+      ],
+      image: "/images/partner/benefits/integration.jpg",
+    },
+    {
+      id: "resource",
+      title: "전략적 자원 최적화",
+      subtitle:
+        "핵심 역량 집중과 시너지 창출로 투자 효율성과 비즈니스 경쟁력을 극대화합니다",
+      bullets: [
+        "각 사의 독보적인 강점에 집중함으로써 중복 투자와 기술 개발 시간을 획기적으로 줄입니다.",
+        "최적화된 자원 배분으로 더 높은 시장 경쟁력과 지속 가능한 성장 동력을 확보합니다.",
+      ],
+      image: "/images/partner/benefits/resource.jpg",
+    },
+  ],
 };
 
-export const universityProposal: UniversityProposalContent = {
-  label: "협력 제안",
-  title: "대학 맞춤형\nAI Platform",
-  link: { label: "문의하기", href: "#" },
-  description:
-    "AX 인프라 및 Leaning 기업 “코런웨이브(CORUNWAVE)”가 국산 서버, AI컴퓨팅 솔루션 기업인 “엑세스랩(XSLAB)”과 손잡고 대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.",
+export const toBeStrategy: ToBeStrategyContent = {
+  title: "파트너십 성공을 위한 To-be 전략",
+  stages: [
+    {
+      id: "short",
+      term: "short-term",
+      title: "레퍼런스 공유 및 공동 수주",
+      description:
+        "파트너의 기존 레퍼런스를\n코런웨이브의 기획력으로 재구성하여\n신규 시장을 공동 개척합니다.",
+    },
+    {
+      id: "mid",
+      term: "mid-term",
+      title: "서비스 표준화 및 패키징",
+      description:
+        "개별 프로젝트 단위의 협업을 넘어\n공동의 서비스를 개발하여\n시장 지배력을 높입니다.",
+    },
+    {
+      id: "long",
+      term: "long-term",
+      title: "비즈니스 생태계 완성",
+      description:
+        "협업 파트너와 비즈니스 목표를 설정하고\n공동의 사업 제안 및 성과를 나누는\n선순환 구조를 완성합니다.",
+    },
+  ],
+};
+
+export const proposal: ProposalContent = {
+  title: "협력 제안",
+  brands: [
+    {
+      description: "AX 인프라 및 Learning 기업",
+      name: "코런웨이브 CORUNWAVE",
+      logo: {
+        src: "/images/logos/corunwave-ko-en-color.png",
+        width: 2496,
+        height: 832,
+      },
+    },
+    {
+      description: "국산 Arm 서버·AI 컴퓨팅 솔루션 기업",
+      name: "엑세스랩 XSLAB",
+      logo: {
+        src: "/images/partner/logos/xslab-color.png",
+        width: 1781,
+        height: 303,
+      },
+    },
+  ],
+  cards: [
+    {
+      id: "university",
+      audience: "대학 맞춤형",
+      title: "AX Platform",
+      lead: "대학 AI 교육 및 연구 인프라 혁신을 위한 최선의 선택",
+      body: "대학 교육 및 연구에 최적화된 저전력, 고성능 AI통합솔루션을 제안합니다.",
+      download: {
+        label: "포트폴리오 다운로드",
+        ariaLabel: "대학 맞춤형 AX Platform 포트폴리오 다운로드",
+        // TODO: link the portfolio file (AI Infra Solution_UNIV_CRW_2026.pptx).
+        href: "#",
+      },
+    },
+    {
+      id: "enterprise",
+      audience: "기업 및 공공 맞춤형",
+      title: "AX Platform",
+      lead: "AX 변화를 위한 시작, 인프라 혁신을 위한 최선의 선택",
+      body: "AX 업무에 최적화된 저전력·고성능 AI 통합솔루션을 제안합니다.",
+      download: {
+        label: "포트폴리오 다운로드",
+        ariaLabel: "기업 및 공공 맞춤형 AX Platform 포트폴리오 다운로드",
+      },
+    },
+  ],
+  contact: { label: "문의하기", href: contactCta.href },
 };
 
 export const partnerLogos: PartnerLogosContent = {

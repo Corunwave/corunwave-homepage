@@ -983,23 +983,23 @@
   --text-partner-coop-stage-mobile--font-weight: 700;
   --text-partner-coop-stage-mobile--letter-spacing: 0;
 
-  --text-partner-coop-role-desktop: 1rem;
-  --text-partner-coop-role-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-desktop: 1.2rem;
+  --text-partner-coop-role-desktop--line-height: 1.8rem;
   --text-partner-coop-role-desktop--font-weight: 700;
   --text-partner-coop-role-desktop--letter-spacing: 0;
 
-  --text-partner-coop-role-mobile: 1.125rem;
-  --text-partner-coop-role-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-mobile: 1.35rem;
+  --text-partner-coop-role-mobile--line-height: 1.95rem;
   --text-partner-coop-role-mobile--font-weight: 700;
   --text-partner-coop-role-mobile--letter-spacing: 0;
 
-  --text-partner-coop-role-sub-desktop: 0.75rem;
-  --text-partner-coop-role-sub-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-sub-desktop: 0.9rem;
+  --text-partner-coop-role-sub-desktop--line-height: 1.8rem;
   --text-partner-coop-role-sub-desktop--font-weight: 700;
   --text-partner-coop-role-sub-desktop--letter-spacing: 0;
 
-  --text-partner-coop-role-sub-mobile: 0.8125rem;
-  --text-partner-coop-role-sub-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-sub-mobile: 0.975rem;
+  --text-partner-coop-role-sub-mobile--line-height: 1.95rem;
   --text-partner-coop-role-sub-mobile--font-weight: 700;
   --text-partner-coop-role-sub-mobile--letter-spacing: 0;
 
@@ -4786,7 +4786,7 @@ body {
 
 .partner-coop__role-name {
   display: block;
-  max-width: 158px;
+  max-width: 180px;
 }
 
 .partner-coop__role-sub {
@@ -4795,12 +4795,6 @@ body {
   line-height: var(--text-partner-coop-role-sub-desktop--line-height);
   font-weight: var(--text-partner-coop-role-sub-desktop--font-weight);
   letter-spacing: var(--text-partner-coop-role-sub-desktop--letter-spacing);
-}
-
-.partner-coop__logo {
-  display: block;
-  width: 152px;
-  height: auto;
 }
 
 .partner-coop__steps {
@@ -4934,9 +4928,6 @@ body {
     line-height: var(--text-partner-coop-role-sub-mobile--line-height);
     font-weight: var(--text-partner-coop-role-sub-mobile--font-weight);
     letter-spacing: var(--text-partner-coop-role-sub-mobile--letter-spacing);
-  }
-  .partner-coop__logo {
-    width: 132px;
   }
   .partner-coop__steps {
     display: flex;

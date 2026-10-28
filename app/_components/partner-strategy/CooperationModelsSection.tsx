@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { CooperationModelsContent } from "../../_content/partner-strategy";
 import ScrollReveal from "../commons/reveal/ScrollReveal";
 
@@ -40,25 +39,12 @@ const CooperationModelsSection = ({
                 data-reveal-item
               >
                 <h3 className="partner-coop__role-title">
-                  {accent === "logo" ? (
-                    <Image
-                      className="partner-coop__logo"
-                      src="/images/logos/corunwave-ko-en-color.png"
-                      alt={name}
-                      width={2496}
-                      height={832}
-                      sizes="152px"
-                    />
-                  ) : (
-                    <span className="partner-coop__role-name">
-                      {name}
-                      {subName ? (
-                        <span className="partner-coop__role-sub">
-                          {subName}
-                        </span>
-                      ) : null}
-                    </span>
-                  )}
+                  <span className="partner-coop__role-name">
+                    {name}
+                    {subName ? (
+                      <span className="partner-coop__role-sub">{subName}</span>
+                    ) : null}
+                  </span>
                 </h3>
                 <dl className="partner-coop__steps">
                   {content.stages.map((stage, index) => (

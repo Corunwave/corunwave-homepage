@@ -3549,7 +3549,7 @@ body {
   justify-content: center;
   margin: 0;
   padding: var(--spacing-20);
-  border: var(--ax-flow-border-width) solid var(--color-brand-navy);
+  border: var(--ax-flow-border-width) solid var(--color-brand-primary);
   border-radius: var(--radius-12);
   background: var(--color-white);
   color: var(--color-brand-navy);
@@ -4223,7 +4223,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: var(--spacing-20);
-  border: var(--ax-flow-border-width) solid var(--color-brand-navy);
+  border: var(--ax-flow-border-width) solid var(--color-brand-primary);
   border-radius: var(--radius-12);
   background: var(--color-white);
   color: var(--color-brand-navy);

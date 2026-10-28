@@ -230,6 +230,8 @@
   --ax-map-domain-width: 160px;
   --ax-map-internal-width: 248px;
   --color-ax-line: #e5e8ec;
+  /* Outer frame shared by the AX Infra map and the Learning table. */
+  --solution-frame-border-width: 1.5px;
   --color-ax-surface-active: #f7f9fc;
 
   /* Learning Service & BPO: white section like AX Infra. Card accents reuse the sky / blue / violet theme colors. */
@@ -263,7 +265,16 @@
   --partner-coop-role-col: 200px;
   --partner-coop-head-height: 76px;
   --partner-coop-row-height: 148px;
-  --partner-coop-accent: linear-gradient(90deg, #0d6ee5, #7ac9ff);
+  /* Stage header: the bottom line deepens step by step (light to dark blue); chevrons sit between the stages. */
+  --partner-coop-stage-line-width: 4px;
+  --partner-coop-stage-1: #7ac9ff;
+  --partner-coop-stage-2: #3b92ee;
+  --partner-coop-stage-3: var(--color-brand-primary);
+  --partner-coop-stage-4: #0b55b0;
+  --partner-coop-stage-chevron-size: 16px;
+  --partner-coop-stage-chevron-width: 4px;
+  /* Role column: tinted cell. */
+  --partner-coop-role-surface: var(--color-surface-subtle);
 
   --color-partner-glow-violet: #e7e3ff77;
   --color-partner-glow-cyan: #cceeff77;
@@ -980,23 +991,23 @@
   --text-partner-coop-stage-mobile--font-weight: 700;
   --text-partner-coop-stage-mobile--letter-spacing: 0;
 
-  --text-partner-coop-role-desktop: 1rem;
-  --text-partner-coop-role-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-desktop: 1.2rem;
+  --text-partner-coop-role-desktop--line-height: 1.8rem;
   --text-partner-coop-role-desktop--font-weight: 700;
   --text-partner-coop-role-desktop--letter-spacing: 0;
 
-  --text-partner-coop-role-mobile: 1.125rem;
-  --text-partner-coop-role-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-mobile: 1.35rem;
+  --text-partner-coop-role-mobile--line-height: 1.95rem;
   --text-partner-coop-role-mobile--font-weight: 700;
   --text-partner-coop-role-mobile--letter-spacing: 0;
 
-  --text-partner-coop-role-sub-desktop: 0.75rem;
-  --text-partner-coop-role-sub-desktop--line-height: 1.5rem;
+  --text-partner-coop-role-sub-desktop: 0.9rem;
+  --text-partner-coop-role-sub-desktop--line-height: 1.8rem;
   --text-partner-coop-role-sub-desktop--font-weight: 700;
   --text-partner-coop-role-sub-desktop--letter-spacing: 0;
 
-  --text-partner-coop-role-sub-mobile: 0.8125rem;
-  --text-partner-coop-role-sub-mobile--line-height: 1.625rem;
+  --text-partner-coop-role-sub-mobile: 0.975rem;
+  --text-partner-coop-role-sub-mobile--line-height: 1.95rem;
   --text-partner-coop-role-sub-mobile--font-weight: 700;
   --text-partner-coop-role-sub-mobile--letter-spacing: 0;
 
@@ -1151,10 +1162,15 @@ body {
   --header-height-desktop-scrolled: 72px;
   --header-height-mobile: 72px;
   --header-height-mobile-scrolled: 64px;
-  --header-logo-width-desktop: 88px;
-  --header-logo-height-desktop: 42px;
-  --header-logo-width-mobile: 72px;
-  --header-logo-height-mobile: 34px;
+  --header-logo-width-desktop: 65px;
+  --header-logo-height-desktop: 30px;
+  --header-logo-width-mobile: 52px;
+  --header-logo-height-mobile: 24px;
+  --header-wordmark-width-desktop: 96px;
+  --header-wordmark-height-desktop: 32px;
+  --header-wordmark-width-mobile: 78px;
+  --header-wordmark-height-mobile: 26px;
+  --header-logo-gap: var(--spacing-12);
   --header-contact-width: var(--spacing-96);
   --header-contact-height: 40px;
   --header-toggle-size: 44px;
@@ -1212,9 +1228,22 @@ body {
   border-radius: var(--radius-12);
 }
 .site-header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--header-logo-gap);
+}
+.site-header__symbol,
+.site-header__wordmark {
   position: relative;
+  flex-shrink: 0;
+}
+.site-header__symbol {
   width: var(--header-logo-width-desktop);
   height: var(--header-logo-height-desktop);
+}
+.site-header__wordmark {
+  width: var(--header-wordmark-width-desktop);
+  height: var(--header-wordmark-height-desktop);
 }
 
 .site-header__logo img {
@@ -1317,9 +1346,13 @@ body {
     justify-content: space-between;
     padding-inline: var(--spacing-20);
   }
-  .site-header__logo {
+  .site-header__symbol {
     width: var(--header-logo-width-mobile);
     height: var(--header-logo-height-mobile);
+  }
+  .site-header__wordmark {
+    width: var(--header-wordmark-width-mobile);
+    height: var(--header-wordmark-height-mobile);
   }
   .site-header__desktop,
   .site-header__desktop-contact {
@@ -3515,16 +3548,15 @@ body {
   justify-content: center;
   margin: 0;
   padding: var(--spacing-20);
-  border: 1px solid var(--color-ax-line);
   border-radius: var(--radius-12);
-  background: var(--color-white);
+  background: var(--color-surface-subtle);
   color: var(--color-brand-navy);
   font-family: var(--font-family-body);
   font-size: var(--text-ax-flow);
   line-height: var(--text-ax-flow--line-height);
   font-weight: var(--text-ax-flow--font-weight);
   letter-spacing: var(--text-ax-flow--letter-spacing);
-  text-align: center;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: normal;
 }
@@ -3552,6 +3584,9 @@ body {
     minmax(0, 1fr);
   align-items: start;
   gap: var(--spacing-16);
+  padding: var(--spacing-24);
+  border: var(--solution-frame-border-width) solid var(--color-brand-primary);
+  border-radius: var(--radius-20);
 }
 
 .ax-map__group {
@@ -3605,7 +3640,7 @@ body {
 .ax-map__ito {
   grid-area: 3 / 1 / 4 / -1;
   padding: var(--spacing-16);
-  border: 1.5px dashed var(--color-brand-primary);
+  border: 1.5px dashed var(--color-border);
   border-radius: var(--radius-20);
 }
 
@@ -3995,6 +4030,9 @@ body {
     align-items: stretch;
     gap: var(--spacing-16);
   }
+  .ax-map {
+    padding: var(--spacing-12);
+  }
   .ax-env,
   .ax-card--compact {
     width: 100%;
@@ -4139,7 +4177,7 @@ body {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--spacing-16);
-  align-items: start;
+  align-items: stretch;
 }
 
 /* The ">" sits beside the trend cards only, so it is exactly as tall as the four cards (the title is above it). */
@@ -4147,6 +4185,7 @@ body {
   display: grid;
   grid-template-columns: var(--learning-market-width) var(--solutions-chevron-width);
   column-gap: var(--spacing-16);
+  grid-template-rows: auto minmax(0, 1fr);
   row-gap: var(--spacing-20);
   min-width: 0;
 }
@@ -4168,7 +4207,8 @@ body {
 }
 
 .learning-trends {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-12);
   margin: 0;
   padding: 0;
@@ -4176,17 +4216,20 @@ body {
 }
 
 .learning-trend {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
   padding: var(--spacing-20);
-  border: 1px solid var(--color-ax-line);
   border-radius: var(--radius-12);
-  background: var(--color-white);
+  background: var(--color-surface-subtle);
   color: var(--color-brand-navy);
   font-family: var(--font-family-body);
   font-size: var(--text-learning-trend-desktop);
   line-height: var(--text-learning-trend-desktop--line-height);
   font-weight: var(--text-learning-trend-desktop--font-weight);
   letter-spacing: var(--text-learning-trend-desktop--letter-spacing);
-  text-align: center;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -4227,6 +4270,9 @@ body {
   display: grid;
   gap: var(--spacing-12);
   min-width: 0;
+  padding: var(--spacing-16);
+  border: var(--solution-frame-border-width) solid var(--color-brand-primary);
+  border-radius: var(--radius-24);
 }
 
 .learning-table__head,
@@ -4252,6 +4298,7 @@ body {
   line-height: var(--text-ax-label--line-height);
   font-weight: var(--text-ax-label--font-weight);
   letter-spacing: var(--text-ax-label--letter-spacing);
+  text-align: center;
 }
 
 .learning-row {
@@ -4265,6 +4312,24 @@ body {
   margin: 0;
   font-family: var(--font-family-body);
   word-break: keep-all;
+}
+
+/* Desktop cells follow the centered header row; centered text drops the bullet markers and their indent.
+ * The extension box (운영 sub-items) stays left-aligned with its markers. */
+.learning-row__stage,
+.learning-row__value,
+.learning-row__system {
+  text-align: center;
+}
+
+.learning-row__system .bullet-list__item,
+.learning-row__system .bullet-list__sub-item {
+  padding-left: 0;
+}
+
+.learning-row__system .bullet-list__item::before,
+.learning-row__system .bullet-list__sub-item::before {
+  content: none;
 }
 
 .learning-row__stage {
@@ -4285,6 +4350,23 @@ body {
 
 .learning-row__system {
   min-width: 0;
+}
+
+/* '운영' row: the stage cell spans two lines; below the first line the value + system columns merge into one tinted box. */
+.learning-row--extended {
+  row-gap: var(--spacing-16);
+}
+
+.learning-row--extended .learning-row__stage {
+  grid-row: 1 / 3;
+}
+
+.learning-row__extension {
+  grid-column: 2 / -1;
+  min-width: 0;
+  padding: var(--spacing-16) var(--spacing-20);
+  border-radius: var(--radius-12);
+  background: var(--color-surface-subtle);
 }
 
 /* Typography of the bullet lists in the table cells and the detail accordions (structure: .bullet-list). */
@@ -4354,15 +4436,18 @@ body {
   }
   .learning-market {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
     row-gap: var(--spacing-16);
   }
   .learning-trends {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--spacing-8);
   }
   .learning-trend {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
     min-height: var(--learning-trend-min-height-mobile);
     padding: var(--spacing-16);
@@ -4389,6 +4474,9 @@ body {
     );
     clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
   }
+  .learning-table {
+    padding: var(--spacing-12);
+  }
   .learning-table__head {
     display: block;
     padding: var(--spacing-16);
@@ -4413,6 +4501,29 @@ body {
   }
   .learning-row__system {
     grid-column: 1 / -1;
+  }
+  /* Stacked mobile cells read left to right, with their bullet markers. */
+  .learning-row__stage,
+  .learning-row__value,
+  .learning-row__system {
+    text-align: left;
+  }
+  .learning-row__system .bullet-list__item,
+  .learning-row__system .bullet-list__sub-item {
+    padding-left: var(--spacing-16);
+  }
+  .learning-row__system .bullet-list__item::before {
+    content: "•";
+  }
+  .learning-row__system .bullet-list__sub-item::before {
+    content: "–";
+  }
+  .learning-row--extended .learning-row__stage {
+    grid-row: auto;
+  }
+  .learning-row__extension {
+    grid-column: 1 / -1;
+    padding: var(--spacing-16);
   }
   .learning-bullets,
   .learning-process {
@@ -4625,34 +4736,56 @@ body {
 }
 
 .partner-coop__head {
-  position: relative;
   display: grid;
   grid-template-columns: var(--partner-coop-role-col) repeat(4, minmax(0, 1fr));
-  height: calc(var(--partner-coop-head-height) + 4px);
-  padding-bottom: 4px;
-}
-
-.partner-coop__head::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: var(--partner-coop-role-col);
-  height: 4px;
-  background: var(--partner-coop-accent);
+  height: var(--partner-coop-head-height);
 }
 
 .partner-coop__stage {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-inline: var(--spacing-8);
+  border-bottom: var(--partner-coop-stage-line-width) solid
+    var(--partner-coop-stage-color);
   color: var(--color-brand-navy);
   font-size: var(--text-partner-coop-stage-desktop);
   line-height: var(--text-partner-coop-stage-desktop--line-height);
   font-weight: var(--text-partner-coop-stage-desktop--font-weight);
   letter-spacing: var(--text-partner-coop-stage-desktop--letter-spacing);
   text-align: center;
+}
+
+/* Right-pointing chevron on the boundary after every stage but the last. */
+.partner-coop__stage:nth-child(n + 2):nth-child(-n + 4)::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--partner-coop-stage-line-width) / 2);
+  right: 0;
+  width: var(--partner-coop-stage-chevron-size);
+  height: var(--partner-coop-stage-chevron-size);
+  border-top: var(--partner-coop-stage-chevron-width) solid
+    var(--color-brand-primary);
+  border-right: var(--partner-coop-stage-chevron-width) solid
+    var(--color-brand-primary);
+  transform: translate(50%, -50%) rotate(45deg);
+}
+
+.partner-coop__stage:nth-child(2) {
+  --partner-coop-stage-color: var(--partner-coop-stage-1);
+}
+
+.partner-coop__stage:nth-child(3) {
+  --partner-coop-stage-color: var(--partner-coop-stage-2);
+}
+
+.partner-coop__stage:nth-child(4) {
+  --partner-coop-stage-color: var(--partner-coop-stage-3);
+}
+
+.partner-coop__stage:nth-child(5) {
+  --partner-coop-stage-color: var(--partner-coop-stage-4);
 }
 
 .partner-coop__role {
@@ -4671,6 +4804,7 @@ body {
   justify-content: center;
   gap: 10px;
   margin: 0;
+  background: var(--partner-coop-role-surface);
   color: var(--color-brand-navy);
   font-size: var(--text-partner-coop-role-desktop);
   line-height: var(--text-partner-coop-role-desktop--line-height);
@@ -4681,7 +4815,7 @@ body {
 
 .partner-coop__role-name {
   display: block;
-  max-width: 158px;
+  max-width: 180px;
 }
 
 .partner-coop__role-sub {
@@ -4690,12 +4824,6 @@ body {
   line-height: var(--text-partner-coop-role-sub-desktop--line-height);
   font-weight: var(--text-partner-coop-role-sub-desktop--font-weight);
   letter-spacing: var(--text-partner-coop-role-sub-desktop--letter-spacing);
-}
-
-.partner-coop__logo {
-  display: block;
-  width: 152px;
-  height: auto;
 }
 
 .partner-coop__steps {
@@ -4813,7 +4941,7 @@ body {
   }
   .partner-coop__role-title {
     height: 56px;
-    padding-bottom: var(--spacing-16);
+    padding-block: var(--spacing-16);
     box-sizing: content-box;
     border-bottom: 1px solid var(--color-border);
     font-size: var(--text-partner-coop-role-mobile);
@@ -4829,9 +4957,6 @@ body {
     line-height: var(--text-partner-coop-role-sub-mobile--line-height);
     font-weight: var(--text-partner-coop-role-sub-mobile--font-weight);
     letter-spacing: var(--text-partner-coop-role-sub-mobile--letter-spacing);
-  }
-  .partner-coop__logo {
-    width: 132px;
   }
   .partner-coop__steps {
     display: flex;

@@ -102,21 +102,40 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
           aria-label="코런웨이브 홈"
           onClick={() => setMenuOpen(false)}
         >
-          <Image
-            className="site-header__logo-white"
-            src="/images/logos/corunwave-symbol-white.png"
-            alt=""
-            width={1432}
-            height={660}
-            priority
-          />
-          <Image
-            className="site-header__logo-color"
-            src="/images/logos/corunwave-symbol-color.svg"
-            alt=""
-            width={1432}
-            height={660}
-          />
+          <span className="site-header__symbol">
+            <Image
+              className="site-header__logo-white"
+              src="/images/logos/corunwave-symbol-white.png"
+              alt=""
+              width={1432}
+              height={660}
+              priority
+            />
+            <Image
+              className="site-header__logo-color"
+              src="/images/logos/corunwave-symbol-color.svg"
+              alt=""
+              width={1432}
+              height={660}
+            />
+          </span>
+          <span className="site-header__wordmark">
+            <Image
+              className="site-header__logo-white"
+              src="/images/logos/corunwave-ko-en-white.png"
+              alt=""
+              width={2496}
+              height={832}
+              priority
+            />
+            <Image
+              className="site-header__logo-color"
+              src="/images/logos/corunwave-ko-en-mono.png"
+              alt=""
+              width={2496}
+              height={832}
+            />
+          </span>
         </Link>
         <nav className="site-header__desktop" aria-label="주 내비게이션">
           <ul>

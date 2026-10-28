@@ -38,25 +38,6 @@ export default function Footer() {
             <span>사업자등록번호</span> {content.businessNumber}
           </li>
         </ul>
-
-        {/* Add links when the corresponding pages are available. */}
-        <nav className="site-footer__navigation" aria-label={content.navigationLabel}>
-          <ul>
-            {content.navigation.map(({ label, href }) => (
-              <li key={label}>
-                <Link href={href}>
-                  {href === "#" ? (
-                    <span aria-disabled="true" title="페이지 준비 중">
-                      {label}
-                    </span>
-                  ) : (
-                    label
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
       <div className="site-footer__bottom">

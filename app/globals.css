@@ -4214,7 +4214,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: var(--spacing-20);
-  border: 1px solid var(--color-ax-line);
+  border: var(--ax-flow-border-width) solid var(--color-brand-navy);
   border-radius: var(--radius-12);
   background: var(--color-white);
   color: var(--color-brand-navy);

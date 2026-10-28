@@ -3551,7 +3551,7 @@ body {
   padding: var(--spacing-20);
   border: var(--ax-flow-border-width) solid var(--color-brand-primary);
   border-radius: var(--radius-12);
-  background: var(--color-white);
+  background: var(--color-solution-head);
   color: var(--color-brand-navy);
   font-family: var(--font-family-body);
   font-size: var(--text-ax-flow);
@@ -4225,7 +4225,7 @@ body {
   padding: var(--spacing-20);
   border: var(--ax-flow-border-width) solid var(--color-brand-primary);
   border-radius: var(--radius-12);
-  background: var(--color-white);
+  background: var(--color-solution-head);
   color: var(--color-brand-navy);
   font-family: var(--font-family-body);
   font-size: var(--text-learning-trend-desktop);

@@ -405,6 +405,8 @@ export type LearningStageRow = {
   stage: string;
   value: string;
   system: readonly BulletItem[];
+  /** Separate box below the row (value + system columns merged); the stage cell spans both lines. */
+  extension?: readonly BulletItem[];
 };
 
 export type LearningDetail = {
@@ -484,6 +486,8 @@ export const learningService: LearningServiceContent = {
         {
           text: "데이터 기반의 통합 운영 위탁(BPO)을 통해 교육의 품질을 관리하고 성과 창출",
         },
+      ],
+      extension: [
         {
           text: "Learning BPO",
           children: [

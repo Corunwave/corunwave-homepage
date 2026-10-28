@@ -68,8 +68,12 @@ const SolutionLearningSection = ({ content }: SolutionLearningSectionProps) => (
               </span>
             ))}
           </div>
-          {content.rows.map(({ stage, value, system }) => (
-            <div key={stage} className="learning-row" role="row">
+          {content.rows.map(({ stage, value, system, extension }) => (
+            <div
+              key={stage}
+              className={`learning-row${extension ? " learning-row--extended" : ""}`}
+              role="row"
+            >
               <p className="learning-row__stage" role="cell">
                 {stage}
               </p>
@@ -79,6 +83,11 @@ const SolutionLearningSection = ({ content }: SolutionLearningSectionProps) => (
               <div className="learning-row__system" role="cell">
                 <BulletList className="learning-bullets" items={system} />
               </div>
+              {extension && (
+                <div className="learning-row__extension" role="cell">
+                  <BulletList className="learning-bullets" items={extension} />
+                </div>
+              )}
             </div>
           ))}
         </div>

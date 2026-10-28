@@ -230,7 +230,7 @@
   --ax-map-domain-width: 160px;
   --ax-map-internal-width: 248px;
   --color-ax-line: #e5e8ec;
-  --ax-flow-border-width: 2px;
+  --ax-flow-border-width: var(--solution-frame-border-width);
   /* Outer frame shared by the AX Infra map and the Learning table. */
   --solution-frame-border-width: 1.5px;
   --color-ax-surface-active: #f7f9fc;

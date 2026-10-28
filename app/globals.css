@@ -272,8 +272,8 @@
   --partner-coop-stage-2: #3b92ee;
   --partner-coop-stage-3: var(--color-brand-primary);
   --partner-coop-stage-4: #0b55b0;
-  --partner-coop-stage-chevron-size: 10px;
-  --partner-coop-stage-chevron-width: 2px;
+  --partner-coop-stage-chevron-size: 16px;
+  --partner-coop-stage-chevron-width: 4px;
   /* Role column: tinted cell. */
   --partner-coop-role-surface: var(--color-surface-subtle);
 

@@ -267,6 +267,13 @@
   --partner-coop-head-height: 76px;
   --partner-coop-row-height: 148px;
   --partner-coop-accent: linear-gradient(90deg, #0d6ee5, #7ac9ff);
+  /* Role column: tinted cell with a left accent bar in each role's color. */
+  --partner-coop-role-bar-width: 4px;
+  --partner-coop-role-surface: var(--color-surface-subtle);
+  --partner-coop-role-bar-logo: var(--color-brand-navy);
+  --partner-coop-role-bar-primary: var(--color-brand-primary);
+  --partner-coop-role-bar-cyan: var(--color-brand-cyan);
+  --partner-coop-role-bar-lavender: var(--color-partner-lavender);
 
   --color-partner-glow-violet: #e7e3ff77;
   --color-partner-glow-cyan: #cceeff77;
@@ -4776,12 +4783,31 @@ body {
   justify-content: center;
   gap: 10px;
   margin: 0;
+  border-left: var(--partner-coop-role-bar-width) solid
+    var(--partner-coop-role-bar, var(--color-brand-primary));
+  background: var(--partner-coop-role-surface);
   color: var(--color-brand-navy);
   font-size: var(--text-partner-coop-role-desktop);
   line-height: var(--text-partner-coop-role-desktop--line-height);
   font-weight: var(--text-partner-coop-role-desktop--font-weight);
   letter-spacing: var(--text-partner-coop-role-desktop--letter-spacing);
   text-align: center;
+}
+
+.partner-coop__role--logo {
+  --partner-coop-role-bar: var(--partner-coop-role-bar-logo);
+}
+
+.partner-coop__role--primary {
+  --partner-coop-role-bar: var(--partner-coop-role-bar-primary);
+}
+
+.partner-coop__role--cyan {
+  --partner-coop-role-bar: var(--partner-coop-role-bar-cyan);
+}
+
+.partner-coop__role--lavender {
+  --partner-coop-role-bar: var(--partner-coop-role-bar-lavender);
 }
 
 .partner-coop__role-name {
@@ -4912,7 +4938,7 @@ body {
   }
   .partner-coop__role-title {
     height: 56px;
-    padding-bottom: var(--spacing-16);
+    padding-block: var(--spacing-16);
     box-sizing: content-box;
     border-bottom: 1px solid var(--color-border);
     font-size: var(--text-partner-coop-role-mobile);

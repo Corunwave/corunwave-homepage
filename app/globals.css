@@ -266,16 +266,14 @@
   --partner-coop-role-col: 200px;
   --partner-coop-head-height: 76px;
   --partner-coop-row-height: 148px;
-  /* Stage header: flat cells whose tint and bottom line deepen step by step (light to dark blue). */
+  /* Stage header: the bottom line deepens step by step (light to dark blue); chevrons sit between the stages. */
   --partner-coop-stage-line-width: 4px;
   --partner-coop-stage-1: #7ac9ff;
   --partner-coop-stage-2: #3b92ee;
   --partner-coop-stage-3: var(--color-brand-primary);
   --partner-coop-stage-4: #0b55b0;
-  --partner-coop-stage-tint-1: 10%;
-  --partner-coop-stage-tint-2: 16%;
-  --partner-coop-stage-tint-3: 22%;
-  --partner-coop-stage-tint-4: 28%;
+  --partner-coop-stage-chevron-size: 10px;
+  --partner-coop-stage-chevron-width: 2px;
   /* Role column: tinted cell. */
   --partner-coop-role-surface: var(--color-surface-subtle);
 
@@ -4747,17 +4745,13 @@ body {
 }
 
 .partner-coop__stage {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding-inline: var(--spacing-8);
   border-bottom: var(--partner-coop-stage-line-width) solid
     var(--partner-coop-stage-color);
-  background: color-mix(
-    in srgb,
-    var(--partner-coop-stage-color) var(--partner-coop-stage-tint),
-    var(--color-white)
-  );
   color: var(--color-brand-navy);
   font-size: var(--text-partner-coop-stage-desktop);
   line-height: var(--text-partner-coop-stage-desktop--line-height);
@@ -4766,24 +4760,35 @@ body {
   text-align: center;
 }
 
+/* Right-pointing chevron on the boundary after every stage but the last. */
+.partner-coop__stage:nth-child(n + 2):nth-child(-n + 4)::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - var(--partner-coop-stage-line-width) / 2);
+  right: 0;
+  width: var(--partner-coop-stage-chevron-size);
+  height: var(--partner-coop-stage-chevron-size);
+  border-top: var(--partner-coop-stage-chevron-width) solid
+    var(--color-brand-primary);
+  border-right: var(--partner-coop-stage-chevron-width) solid
+    var(--color-brand-primary);
+  transform: translate(50%, -50%) rotate(45deg);
+}
+
 .partner-coop__stage:nth-child(2) {
   --partner-coop-stage-color: var(--partner-coop-stage-1);
-  --partner-coop-stage-tint: var(--partner-coop-stage-tint-1);
 }
 
 .partner-coop__stage:nth-child(3) {
   --partner-coop-stage-color: var(--partner-coop-stage-2);
-  --partner-coop-stage-tint: var(--partner-coop-stage-tint-2);
 }
 
 .partner-coop__stage:nth-child(4) {
   --partner-coop-stage-color: var(--partner-coop-stage-3);
-  --partner-coop-stage-tint: var(--partner-coop-stage-tint-3);
 }
 
 .partner-coop__stage:nth-child(5) {
   --partner-coop-stage-color: var(--partner-coop-stage-4);
-  --partner-coop-stage-tint: var(--partner-coop-stage-tint-4);
 }
 
 .partner-coop__role {

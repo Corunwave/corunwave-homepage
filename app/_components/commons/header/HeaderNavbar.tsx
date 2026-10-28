@@ -130,7 +130,7 @@ const HeaderNavbar: FC<HeaderNavbarProps> = ({
             />
             <Image
               className="site-header__logo-color"
-              src="/images/logos/corunwave-ko-en-color.png"
+              src="/images/logos/corunwave-ko-en-mono.png"
               alt=""
               width={2496}
               height={832}

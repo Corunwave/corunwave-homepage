@@ -266,7 +266,13 @@
   --partner-coop-role-col: 200px;
   --partner-coop-head-height: 76px;
   --partner-coop-row-height: 148px;
-  --partner-coop-accent: linear-gradient(90deg, #0d6ee5, #7ac9ff);
+  /* Stage header: arrow-shaped chips that step from dark to light blue. */
+  --partner-coop-stage-arrow: 20px;
+  --partner-coop-stage-gap: 4px;
+  --partner-coop-stage-1: #0b55b0;
+  --partner-coop-stage-2: var(--color-brand-primary);
+  --partner-coop-stage-3: #2a86ee;
+  --partner-coop-stage-4: #3b92ee;
   /* Role column: tinted cell. */
   --partner-coop-role-surface: var(--color-surface-subtle);
 
@@ -4732,34 +4738,47 @@ body {
 }
 
 .partner-coop__head {
-  position: relative;
   display: grid;
   grid-template-columns: var(--partner-coop-role-col) repeat(4, minmax(0, 1fr));
-  height: calc(var(--partner-coop-head-height) + 4px);
-  padding-bottom: 4px;
-}
-
-.partner-coop__head::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: var(--partner-coop-role-col);
-  height: 4px;
-  background: var(--partner-coop-accent);
+  height: var(--partner-coop-head-height);
 }
 
 .partner-coop__stage {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline: var(--spacing-8);
-  color: var(--color-brand-navy);
+  padding-inline: var(--partner-coop-stage-arrow);
+  background: var(--partner-coop-stage-1);
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--partner-coop-stage-arrow)) 0,
+    100% 50%,
+    calc(100% - var(--partner-coop-stage-arrow)) 100%,
+    0 100%
+  );
+  color: var(--color-white);
   font-size: var(--text-partner-coop-stage-desktop);
   line-height: var(--text-partner-coop-stage-desktop--line-height);
   font-weight: var(--text-partner-coop-stage-desktop--font-weight);
   letter-spacing: var(--text-partner-coop-stage-desktop--letter-spacing);
   text-align: center;
+}
+
+/* Each chip after the first tucks its flat left edge behind the previous chip's point. */
+.partner-coop__stage:nth-child(n + 3) {
+  margin-left: calc(var(--partner-coop-stage-arrow) * -1 + var(--partner-coop-stage-gap));
+}
+
+.partner-coop__stage:nth-child(3) {
+  background: var(--partner-coop-stage-2);
+}
+
+.partner-coop__stage:nth-child(4) {
+  background: var(--partner-coop-stage-3);
+}
+
+.partner-coop__stage:nth-child(5) {
+  background: var(--partner-coop-stage-4);
 }
 
 .partner-coop__role {

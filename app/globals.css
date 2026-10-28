@@ -4308,21 +4308,21 @@ body {
   word-break: keep-all;
 }
 
-/* Desktop cells follow the centered header row; centered text drops the bullet markers and their indent. */
+/* Desktop cells follow the centered header row; centered text drops the bullet markers and their indent.
+ * The extension box (운영 sub-items) stays left-aligned with its markers. */
 .learning-row__stage,
 .learning-row__value,
-.learning-row__system,
-.learning-row__extension {
+.learning-row__system {
   text-align: center;
 }
 
-.learning-row .bullet-list__item,
-.learning-row .bullet-list__sub-item {
+.learning-row__system .bullet-list__item,
+.learning-row__system .bullet-list__sub-item {
   padding-left: 0;
 }
 
-.learning-row .bullet-list__item::before,
-.learning-row .bullet-list__sub-item::before {
+.learning-row__system .bullet-list__item::before,
+.learning-row__system .bullet-list__sub-item::before {
   content: none;
 }
 
@@ -4499,18 +4499,17 @@ body {
   /* Stacked mobile cells read left to right, with their bullet markers. */
   .learning-row__stage,
   .learning-row__value,
-  .learning-row__system,
-  .learning-row__extension {
+  .learning-row__system {
     text-align: left;
   }
-  .learning-row .bullet-list__item,
-  .learning-row .bullet-list__sub-item {
+  .learning-row__system .bullet-list__item,
+  .learning-row__system .bullet-list__sub-item {
     padding-left: var(--spacing-16);
   }
-  .learning-row .bullet-list__item::before {
+  .learning-row__system .bullet-list__item::before {
     content: "•";
   }
-  .learning-row .bullet-list__sub-item::before {
+  .learning-row__system .bullet-list__sub-item::before {
     content: "–";
   }
   .learning-row--extended .learning-row__stage {

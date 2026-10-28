@@ -1154,10 +1154,10 @@ body {
   --header-height-desktop-scrolled: 72px;
   --header-height-mobile: 72px;
   --header-height-mobile-scrolled: 64px;
-  --header-logo-width-desktop: 88px;
-  --header-logo-height-desktop: 42px;
-  --header-logo-width-mobile: 72px;
-  --header-logo-height-mobile: 34px;
+  --header-logo-width-desktop: 65px;
+  --header-logo-height-desktop: 30px;
+  --header-logo-width-mobile: 52px;
+  --header-logo-height-mobile: 24px;
   --header-wordmark-width-desktop: 96px;
   --header-wordmark-height-desktop: 32px;
   --header-wordmark-width-mobile: 78px;

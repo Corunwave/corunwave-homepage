@@ -266,13 +266,16 @@
   --partner-coop-role-col: 200px;
   --partner-coop-head-height: 76px;
   --partner-coop-row-height: 148px;
-  /* Stage header: arrow-shaped chips that step from dark to light blue. */
-  --partner-coop-stage-arrow: 20px;
-  --partner-coop-stage-gap: 4px;
-  --partner-coop-stage-1: #0b55b0;
-  --partner-coop-stage-2: var(--color-brand-primary);
-  --partner-coop-stage-3: #2a86ee;
-  --partner-coop-stage-4: #3b92ee;
+  /* Stage header: flat cells whose tint and bottom line deepen step by step (light to dark blue). */
+  --partner-coop-stage-line-width: 4px;
+  --partner-coop-stage-1: #7ac9ff;
+  --partner-coop-stage-2: #3b92ee;
+  --partner-coop-stage-3: var(--color-brand-primary);
+  --partner-coop-stage-4: #0b55b0;
+  --partner-coop-stage-tint-1: 10%;
+  --partner-coop-stage-tint-2: 16%;
+  --partner-coop-stage-tint-3: 22%;
+  --partner-coop-stage-tint-4: 28%;
   /* Role column: tinted cell. */
   --partner-coop-role-surface: var(--color-surface-subtle);
 
@@ -4747,16 +4750,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-inline: var(--partner-coop-stage-arrow);
-  background: var(--partner-coop-stage-1);
-  clip-path: polygon(
-    0 0,
-    calc(100% - var(--partner-coop-stage-arrow)) 0,
-    100% 50%,
-    calc(100% - var(--partner-coop-stage-arrow)) 100%,
-    0 100%
+  padding-inline: var(--spacing-8);
+  border-bottom: var(--partner-coop-stage-line-width) solid
+    var(--partner-coop-stage-color);
+  background: color-mix(
+    in srgb,
+    var(--partner-coop-stage-color) var(--partner-coop-stage-tint),
+    var(--color-white)
   );
-  color: var(--color-white);
+  color: var(--color-brand-navy);
   font-size: var(--text-partner-coop-stage-desktop);
   line-height: var(--text-partner-coop-stage-desktop--line-height);
   font-weight: var(--text-partner-coop-stage-desktop--font-weight);
@@ -4764,21 +4766,24 @@ body {
   text-align: center;
 }
 
-/* Each chip after the first tucks its flat left edge behind the previous chip's point. */
-.partner-coop__stage:nth-child(n + 3) {
-  margin-left: calc(var(--partner-coop-stage-arrow) * -1 + var(--partner-coop-stage-gap));
+.partner-coop__stage:nth-child(2) {
+  --partner-coop-stage-color: var(--partner-coop-stage-1);
+  --partner-coop-stage-tint: var(--partner-coop-stage-tint-1);
 }
 
 .partner-coop__stage:nth-child(3) {
-  background: var(--partner-coop-stage-2);
+  --partner-coop-stage-color: var(--partner-coop-stage-2);
+  --partner-coop-stage-tint: var(--partner-coop-stage-tint-2);
 }
 
 .partner-coop__stage:nth-child(4) {
-  background: var(--partner-coop-stage-3);
+  --partner-coop-stage-color: var(--partner-coop-stage-3);
+  --partner-coop-stage-tint: var(--partner-coop-stage-tint-3);
 }
 
 .partner-coop__stage:nth-child(5) {
-  background: var(--partner-coop-stage-4);
+  --partner-coop-stage-color: var(--partner-coop-stage-4);
+  --partner-coop-stage-tint: var(--partner-coop-stage-tint-4);
 }
 
 .partner-coop__role {

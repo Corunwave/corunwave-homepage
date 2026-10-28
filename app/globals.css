@@ -4170,7 +4170,7 @@ body {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: var(--spacing-16);
-  align-items: start;
+  align-items: stretch;
 }
 
 /* The ">" sits beside the trend cards only, so it is exactly as tall as the four cards (the title is above it). */
@@ -4178,6 +4178,7 @@ body {
   display: grid;
   grid-template-columns: var(--learning-market-width) var(--solutions-chevron-width);
   column-gap: var(--spacing-16);
+  grid-template-rows: auto minmax(0, 1fr);
   row-gap: var(--spacing-20);
   min-width: 0;
 }
@@ -4199,7 +4200,8 @@ body {
 }
 
 .learning-trends {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-12);
   margin: 0;
   padding: 0;
@@ -4207,6 +4209,10 @@ body {
 }
 
 .learning-trend {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  justify-content: center;
   padding: var(--spacing-20);
   border: 1px solid var(--color-ax-line);
   border-radius: var(--radius-12);
@@ -4217,7 +4223,7 @@ body {
   line-height: var(--text-learning-trend-desktop--line-height);
   font-weight: var(--text-learning-trend-desktop--font-weight);
   letter-spacing: var(--text-learning-trend-desktop--letter-spacing);
-  text-align: center;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -4258,6 +4264,9 @@ body {
   display: grid;
   gap: var(--spacing-12);
   min-width: 0;
+  padding: var(--spacing-16);
+  border: var(--solution-frame-border-width) solid var(--color-brand-primary);
+  border-radius: var(--radius-24);
 }
 
 .learning-table__head,
@@ -4283,6 +4292,7 @@ body {
   line-height: var(--text-ax-label--line-height);
   font-weight: var(--text-ax-label--font-weight);
   letter-spacing: var(--text-ax-label--letter-spacing);
+  text-align: center;
 }
 
 .learning-row {
@@ -4316,6 +4326,23 @@ body {
 
 .learning-row__system {
   min-width: 0;
+}
+
+/* '운영' row: the stage cell spans two lines; below the first line the value + system columns merge into one tinted box. */
+.learning-row--extended {
+  row-gap: var(--spacing-16);
+}
+
+.learning-row--extended .learning-row__stage {
+  grid-row: 1 / 3;
+}
+
+.learning-row__extension {
+  grid-column: 2 / -1;
+  min-width: 0;
+  padding: var(--spacing-16) var(--spacing-20);
+  border-radius: var(--radius-12);
+  background: var(--color-surface-subtle);
 }
 
 /* Typography of the bullet lists in the table cells and the detail accordions (structure: .bullet-list). */
@@ -4385,15 +4412,18 @@ body {
   }
   .learning-market {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
     row-gap: var(--spacing-16);
   }
   .learning-trends {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--spacing-8);
   }
   .learning-trend {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
     min-height: var(--learning-trend-min-height-mobile);
     padding: var(--spacing-16);
@@ -4420,6 +4450,9 @@ body {
     );
     clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 40%, 50% 100%, 0 40%);
   }
+  .learning-table {
+    padding: var(--spacing-12);
+  }
   .learning-table__head {
     display: block;
     padding: var(--spacing-16);
@@ -4444,6 +4477,13 @@ body {
   }
   .learning-row__system {
     grid-column: 1 / -1;
+  }
+  .learning-row--extended .learning-row__stage {
+    grid-row: auto;
+  }
+  .learning-row__extension {
+    grid-column: 1 / -1;
+    padding: var(--spacing-16);
   }
   .learning-bullets,
   .learning-process {

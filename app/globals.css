@@ -4308,6 +4308,24 @@ body {
   word-break: keep-all;
 }
 
+/* Desktop cells follow the centered header row; centered text drops the bullet markers and their indent. */
+.learning-row__stage,
+.learning-row__value,
+.learning-row__system,
+.learning-row__extension {
+  text-align: center;
+}
+
+.learning-row .bullet-list__item,
+.learning-row .bullet-list__sub-item {
+  padding-left: 0;
+}
+
+.learning-row .bullet-list__item::before,
+.learning-row .bullet-list__sub-item::before {
+  content: none;
+}
+
 .learning-row__stage {
   color: var(--color-brand-primary);
   font-size: var(--text-learning-stage-desktop);
@@ -4477,6 +4495,23 @@ body {
   }
   .learning-row__system {
     grid-column: 1 / -1;
+  }
+  /* Stacked mobile cells read left to right, with their bullet markers. */
+  .learning-row__stage,
+  .learning-row__value,
+  .learning-row__system,
+  .learning-row__extension {
+    text-align: left;
+  }
+  .learning-row .bullet-list__item,
+  .learning-row .bullet-list__sub-item {
+    padding-left: var(--spacing-16);
+  }
+  .learning-row .bullet-list__item::before {
+    content: "•";
+  }
+  .learning-row .bullet-list__sub-item::before {
+    content: "–";
   }
   .learning-row--extended .learning-row__stage {
     grid-row: auto;

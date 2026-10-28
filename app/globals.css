@@ -230,6 +230,9 @@
   --ax-map-domain-width: 160px;
   --ax-map-internal-width: 248px;
   --color-ax-line: #e5e8ec;
+  --ax-flow-border-width: 2px;
+  /* Outer frame shared by the AX Infra map and the Learning table. */
+  --solution-frame-border-width: 1.5px;
   --color-ax-surface-active: #f7f9fc;
 
   /* Learning Service & BPO: white section like AX Infra. Card accents reuse the sky / blue / violet theme colors. */
@@ -3537,7 +3540,7 @@ body {
   justify-content: center;
   margin: 0;
   padding: var(--spacing-20);
-  border: 1px solid var(--color-ax-line);
+  border: var(--ax-flow-border-width) solid var(--color-brand-navy);
   border-radius: var(--radius-12);
   background: var(--color-white);
   color: var(--color-brand-navy);
@@ -3546,7 +3549,7 @@ body {
   line-height: var(--text-ax-flow--line-height);
   font-weight: var(--text-ax-flow--font-weight);
   letter-spacing: var(--text-ax-flow--letter-spacing);
-  text-align: center;
+  text-align: left;
   word-break: keep-all;
   overflow-wrap: normal;
 }
@@ -3574,6 +3577,9 @@ body {
     minmax(0, 1fr);
   align-items: start;
   gap: var(--spacing-16);
+  padding: var(--spacing-24);
+  border: var(--solution-frame-border-width) solid var(--color-brand-primary);
+  border-radius: var(--radius-20);
 }
 
 .ax-map__group {
@@ -3627,7 +3633,7 @@ body {
 .ax-map__ito {
   grid-area: 3 / 1 / 4 / -1;
   padding: var(--spacing-16);
-  border: 1.5px dashed var(--color-brand-primary);
+  border: 1.5px dashed var(--color-border);
   border-radius: var(--radius-20);
 }
 
@@ -4016,6 +4022,9 @@ body {
     flex-direction: column;
     align-items: stretch;
     gap: var(--spacing-16);
+  }
+  .ax-map {
+    padding: var(--spacing-12);
   }
   .ax-env,
   .ax-card--compact {

@@ -151,8 +151,8 @@ export const cooperationModels: CooperationModelsContent = {
       steps: [
         "사업 타당성 검토 및\n제안 컨소시엄 구성",
         "제안서 준비 리딩,\nTCO 분석 및 비즈니스 모델링",
-        "프로젝트 리딩, 운영 행정,\n품질 보증(QA), 학습자 관리",
-        "투명한 프로젝트 성과 평가,\n공유 및 레퍼런스 공동 자산화",
+        "프로젝트 리딩, 운영 행정,\n품질 보증(QA),<mbr> 학습자 관리",
+        "투명한 프로젝트 성과 평가,\n공유 및 레퍼런스<mbr> 공동 자산화",
       ],
     },
     {
@@ -161,7 +161,7 @@ export const cooperationModels: CooperationModelsContent = {
       subName: "(Infra 및 Learning 영역)",
       accent: "primary",
       steps: [
-        "네트워크 활용 고객발굴 및 확보(Infra 및 Learning 서비스 영역)",
+        "네트워크 활용 고객발굴 및 확보<mbr>(Infra 및 Learning 서비스 영역)",
         "고객사 핵심 이해관계자 분석 및 의사결정 지원",
         "프로젝트 진척 관리 모니터링 및 고객 소통",
         "고객 만족도 관리 및\n추가 사업 기회 확보",

@@ -44,7 +44,11 @@ const openDetail = (id: AxServiceId) => {
 /* Map card body: optional highlighted quote, then bullet groups (parallel groups sit side by side, each in a container). */
 const AxMapBody = ({ map }: { map: AxMap }) => (
   <>
-    {map.quote && <p className="ax-card__quote">{map.quote}</p>}
+    {map.quote && (
+      <p className="ax-card__quote">
+        {renderText(map.quote, { breakClassName: "ax-card__quote-break" })}
+      </p>
+    )}
     <div
       className={`ax-card__groups${map.parallel ? " ax-card__groups--parallel" : ""}`}
     >

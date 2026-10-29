@@ -993,6 +993,9 @@
   --text-partner-coop-stage-mobile--font-weight: 700;
   --text-partner-coop-stage-mobile--letter-spacing: 0;
 
+  --text-partner-coop-stage-phone: 1.125rem;
+  --text-partner-coop-stage-phone--line-height: 1.75rem;
+
   --text-partner-coop-role-desktop: 1.2rem;
   --text-partner-coop-role-desktop--line-height: 1.8rem;
   --text-partner-coop-role-desktop--font-weight: 700;
@@ -1777,6 +1780,10 @@ body {
   letter-spacing: var(--text-page-hero-title-desktop--letter-spacing);
 }
 
+.page-hero__line {
+  display: block;
+}
+
 .page-hero__description {
   margin: 0;
   font-family: var(--font-family-body);
@@ -1796,10 +1803,23 @@ body {
 }
 
 @media (width <= 760px) {
+  /* Mobile: the hero grows with long copy instead of pushing the title past the top edge. */
+  .page-hero {
+    display: flex;
+    align-items: flex-end;
+    height: auto;
+    min-height: var(--page-hero-height);
+    padding: var(--spacing-48) 0 var(--page-hero-content-bottom-mobile);
+  }
   .page-hero__content {
-    bottom: var(--page-hero-content-bottom-mobile);
+    position: static;
     width: calc(100% - var(--spacing-32));
+    margin-inline: auto;
+    transform: none;
     gap: var(--spacing-16);
+  }
+  .page-hero__line + .page-hero__line {
+    margin-top: var(--spacing-12);
   }
   .page-hero__title {
     font-size: var(--text-page-hero-title-mobile);
@@ -3950,6 +3970,17 @@ body {
   overflow-wrap: break-word;
 }
 
+/* The quote only breaks after the comma on mobile; wider layouts keep it on one line. */
+.ax-card__quote-break {
+  display: none;
+}
+
+@media (width <= 760px) {
+  .ax-card__quote-break {
+    display: inline;
+  }
+}
+
 /* Parallel groups sit side by side, each in its own container; the grid stretches both to the taller one. */
 .ax-card__groups--parallel {
   display: grid;
@@ -4511,9 +4542,10 @@ body {
   .learning-table__head > span:not(:last-child) {
     display: none;
   }
+  /* Stacked card: stage as the title, key value as its subtitle, then the system description below a divider. */
   .learning-row {
-    grid-template-columns: 60px minmax(0, 1fr);
-    gap: var(--spacing-12);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-4);
     align-items: start;
     padding: var(--spacing-20);
   }
@@ -4528,6 +4560,9 @@ body {
   }
   .learning-row__system {
     grid-column: 1 / -1;
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-12);
+    border-top: 1px solid var(--color-ax-line);
   }
   /* Stacked mobile cells read left to right, with their bullet markers. */
   .learning-row__stage,
@@ -4605,6 +4640,10 @@ body {
   letter-spacing: var(--text-solution-cta-title-desktop--letter-spacing);
   word-break: keep-all;
   overflow-wrap: normal;
+}
+
+.contact-cta__keep {
+  white-space: nowrap;
 }
 
 .contact-cta__button {
@@ -4688,12 +4727,13 @@ body {
   .contact-cta__inner {
     width: calc(100% - var(--spacing-48) * 2);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: var(--spacing-20);
   }
   .contact-cta__title {
     flex: none;
+    text-align: center;
     font-size: var(--text-solution-cta-title-mobile);
     line-height: var(--text-solution-cta-title-mobile--line-height);
     font-weight: var(--text-solution-cta-title-mobile--font-weight);
@@ -4877,6 +4917,10 @@ body {
   white-space: nowrap;
 }
 
+.partner-coop__mobile-break {
+  display: none;
+}
+
 .partner-coop__step-text {
   width: 100%;
   margin: 0;
@@ -5019,6 +5063,16 @@ body {
 @media (width <= 760px) {
   .partner-inner {
     width: calc(100% - var(--spacing-32));
+  }
+  .partner-coop__step-label {
+    font-size: var(--text-partner-coop-stage-phone);
+    line-height: var(--text-partner-coop-stage-phone--line-height);
+  }
+  .partner-coop__step-text {
+    text-align: center;
+  }
+  .partner-coop__mobile-break {
+    display: inline;
   }
 }
 
@@ -5575,6 +5629,26 @@ body {
     line-height: var(--text-partner-offering-mobile--line-height);
     font-weight: var(--text-partner-offering-mobile--font-weight);
     letter-spacing: var(--text-partner-offering-mobile--letter-spacing);
+  }
+}
+
+/* ≤760px: the four tabs form a 2x2 grid so the row never scrolls; the indicator follows both axes. */
+@media (width <= 760px) {
+  .partner-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+  .partner-tabs__indicator {
+    top: 0;
+    bottom: auto;
+    height: var(--partner-tab-height, 0);
+    translate: var(--partner-tab-x, 0) var(--partner-tab-y, 0);
+  }
+  .partner-tab {
+    padding: 14px var(--spacing-4);
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -6526,6 +6600,11 @@ body {
   font-size: var(--text-solutions-title-desktop);
   line-height: var(--text-solutions-title-desktop--line-height);
   letter-spacing: 0;
+  word-break: keep-all;
+}
+
+.solutions-title__keep {
+  white-space: nowrap;
 }
 
 .solutions-description {
@@ -6741,6 +6820,15 @@ body {
   line-height: var(--text-solution-service-toggle--line-height);
 }
 
+.solution-card__meta-arrow,
+.solution-card[data-active="true"] .solution-card__meta-plus {
+  display: none;
+}
+
+.solution-card[data-active="true"] .solution-card__meta-arrow {
+  display: inline;
+}
+
 .solution-card__summary {
   align-self: stretch;
   margin-top: auto;
@@ -6886,6 +6974,7 @@ body {
   .solutions-process__stage {
     position: relative;
     padding: var(--spacing-20) var(--spacing-24) 56px;
+    text-align: center;
   }
   .solutions-process__stage:last-child {
     padding-bottom: var(--spacing-20);
@@ -6913,6 +7002,7 @@ body {
   }
   .solutions-process__stage h3 {
     width: fit-content;
+    margin-inline: auto;
     margin-bottom: var(--spacing-12);
     padding: var(--spacing-4) var(--spacing-16);
     border-radius: var(--radius-999);
@@ -6955,6 +7045,10 @@ body {
   .solutions-inner {
     width: calc(100% - var(--spacing-48));
   }
+  .solutions-header {
+    justify-items: center;
+    text-align: center;
+  }
   .solutions-title {
     font-size: var(--text-solutions-title-mobile);
     line-height: var(--text-solutions-title-mobile--line-height);
@@ -6982,8 +7076,23 @@ body {
   .solution-card__meta {
     left: var(--spacing-24);
   }
+  /* Mobile: cards stay expanded and only show the diagonal arrow; a tap navigates directly. */
+  .solution-card__meta-plus,
+  .solution-card[data-active="true"] .solution-card__meta-plus {
+    display: none;
+  }
+  .solution-card__meta-arrow {
+    display: inline;
+  }
+  .solution-card__panel {
+    max-height: none;
+    margin-top: var(--spacing-12);
+    opacity: 1;
+  }
   .solution-card__content {
     min-height: var(--solution-card-min-height-mobile);
+    /* Reserve room for the absolutely placed arrow so an expanded card never runs under it. */
+    padding-top: var(--spacing-64);
   }
   .solution-card__title {
     font-size: var(--text-solution-card-title-mobile);

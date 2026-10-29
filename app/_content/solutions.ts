@@ -346,7 +346,7 @@ export const axInfra: AxInfraContent = {
     ito: {
       map: {
         title: "ITO (전략적 IT 아웃소싱)",
-        quote: "“채용 Risk Zero, 준비된 핵심 IT 인재를 즉시 가동”",
+        quote: "“채용 Risk Zero, \n준비된 핵심 IT 인재를 즉시 가동”",
         parallel: true,
         groups: [
           {

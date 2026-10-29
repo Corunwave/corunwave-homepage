@@ -585,6 +585,8 @@
   /* Legal pages (privacy policy / service terms) */
   --legal-copy-max-width: 840px;
   --legal-clause-scroll-margin: 100px;
+  --color-legal-table-border: #8a8f98;
+  --color-legal-table-header-bg: #f2f3f5;
 
   --text-legal-title-desktop: 2.25rem;
   --text-legal-title-desktop--line-height: 3rem;
@@ -1884,6 +1886,31 @@ body {
 
 .legal-clause__body {
   margin: 0;
+  white-space: pre-line;
+}
+
+/* Formal document-style table (no radius, no tint): used for the business info appendix. */
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 2px solid var(--color-text-primary);
+}
+
+.legal-table th,
+.legal-table td {
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--color-legal-table-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-table th {
+  width: 28%;
+  background: var(--color-legal-table-header-bg);
+  font-weight: 600;
+}
+
+.legal-table td {
   white-space: pre-line;
 }
 

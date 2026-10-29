@@ -24,7 +24,11 @@ const PageHero = ({
               : "page-hero__description"
           }
         >
-          {description}
+          {description.split("\n").map((line) => (
+            <span key={line} className="page-hero__line">
+              {line}
+            </span>
+          ))}
         </p>
       </div>
     </section>

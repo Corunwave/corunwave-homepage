@@ -1,7 +1,17 @@
+import { Fragment } from "react";
 import type { CooperationModelsContent } from "../../_content/partner-strategy";
 import ScrollReveal from "../commons/reveal/ScrollReveal";
 
 type CooperationModelsSectionProps = { content: CooperationModelsContent };
+
+/* `<mbr>` marks a line break that only applies on phones (the ≤1024px layout ignores authored `\n`). */
+const renderStep = (text: string) =>
+  text.split("<mbr>").map((part, index) => (
+    <Fragment key={index}>
+      {index > 0 && <br className="partner-coop__mobile-break" />}
+      {part}
+    </Fragment>
+  ));
 
 /* Cooperation models "우리가 제안하는 협력모델" (Figma 876:28713 / 876:29907; preview not referenced).
  * Server component (ScrollReveal only marks the role rows for the top-to-bottom entry): one markup, a role × stage matrix on desktop and stacked role cards at ≤1024px. */
@@ -51,7 +61,7 @@ const CooperationModelsSection = ({
                     <div key={stage} className="partner-coop__step">
                       <dt className="partner-coop__step-label">{stage}</dt>
                       <dd className="partner-coop__step-text">
-                        {steps[index]}
+                        {renderStep(steps[index])}
                       </dd>
                     </div>
                   ))}

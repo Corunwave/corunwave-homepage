@@ -993,6 +993,9 @@
   --text-partner-coop-stage-mobile--font-weight: 700;
   --text-partner-coop-stage-mobile--letter-spacing: 0;
 
+  --text-partner-coop-stage-phone: 1.125rem;
+  --text-partner-coop-stage-phone--line-height: 1.75rem;
+
   --text-partner-coop-role-desktop: 1.2rem;
   --text-partner-coop-role-desktop--line-height: 1.8rem;
   --text-partner-coop-role-desktop--font-weight: 700;
@@ -1777,6 +1780,10 @@ body {
   letter-spacing: var(--text-page-hero-title-desktop--letter-spacing);
 }
 
+.page-hero__line {
+  display: block;
+}
+
 .page-hero__description {
   margin: 0;
   font-family: var(--font-family-body);
@@ -1796,10 +1803,23 @@ body {
 }
 
 @media (width <= 760px) {
+  /* Mobile: the hero grows with long copy instead of pushing the title past the top edge. */
+  .page-hero {
+    display: flex;
+    align-items: flex-end;
+    height: auto;
+    min-height: var(--page-hero-height);
+    padding: var(--spacing-48) 0 var(--page-hero-content-bottom-mobile);
+  }
   .page-hero__content {
-    bottom: var(--page-hero-content-bottom-mobile);
+    position: static;
     width: calc(100% - var(--spacing-32));
+    margin-inline: auto;
+    transform: none;
     gap: var(--spacing-16);
+  }
+  .page-hero__line + .page-hero__line {
+    margin-top: var(--spacing-12);
   }
   .page-hero__title {
     font-size: var(--text-page-hero-title-mobile);
@@ -4897,6 +4917,10 @@ body {
   white-space: nowrap;
 }
 
+.partner-coop__mobile-break {
+  display: none;
+}
+
 .partner-coop__step-text {
   width: 100%;
   margin: 0;
@@ -5039,6 +5063,16 @@ body {
 @media (width <= 760px) {
   .partner-inner {
     width: calc(100% - var(--spacing-32));
+  }
+  .partner-coop__step-label {
+    font-size: var(--text-partner-coop-stage-phone);
+    line-height: var(--text-partner-coop-stage-phone--line-height);
+  }
+  .partner-coop__step-text {
+    text-align: center;
+  }
+  .partner-coop__mobile-break {
+    display: inline;
   }
 }
 
@@ -5595,6 +5629,26 @@ body {
     line-height: var(--text-partner-offering-mobile--line-height);
     font-weight: var(--text-partner-offering-mobile--font-weight);
     letter-spacing: var(--text-partner-offering-mobile--letter-spacing);
+  }
+}
+
+/* ≤760px: the four tabs form a 2x2 grid so the row never scrolls; the indicator follows both axes. */
+@media (width <= 760px) {
+  .partner-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+  .partner-tabs__indicator {
+    top: 0;
+    bottom: auto;
+    height: var(--partner-tab-height, 0);
+    translate: var(--partner-tab-x, 0) var(--partner-tab-y, 0);
+  }
+  .partner-tab {
+    padding: 14px var(--spacing-4);
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 

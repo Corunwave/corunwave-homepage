@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { renderText } from "../../_lib/content/renderText";
 import type {
@@ -81,16 +81,6 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
     if (!isMobile()) setActiveId(null);
   };
 
-  /* Mobile: the first tap expands the card, a tap on the expanded card navigates. */
-  const handleClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-    id: SolutionId,
-  ) => {
-    if (!isMobile() || activeId === id) return;
-    event.preventDefault();
-    setActiveId(id);
-  };
-
   return (
     <section
       id="solutions"
@@ -100,7 +90,9 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
       <div className="solutions-inner">
         <header ref={headerRef} className="solutions-header">
           <h2 id="solutions-title" className="solutions-title">
-            {content.title}
+            {renderText(content.title, {
+              keepClassName: "solutions-title__keep",
+            })}
           </h2>
           <p className="solutions-description">
             {content.description}
@@ -181,11 +173,11 @@ const SolutionsSection = ({ content }: SolutionsSectionProps) => {
                 onMouseLeave={handleLeave}
                 onFocus={() => handleEnter(id)}
                 onBlur={handleLeave}
-                onClick={(event) => handleClick(event, id)}
               >
                 <span className="solution-card__content">
                   <span className="solution-card__meta" aria-hidden="true">
-                    {active ? "↗" : "+"}
+                    <span className="solution-card__meta-plus">+</span>
+                    <span className="solution-card__meta-arrow">↗</span>
                   </span>
                   <span className="solution-card__summary">
                     <span className="solution-card__title">

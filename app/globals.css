@@ -6526,6 +6526,11 @@ body {
   font-size: var(--text-solutions-title-desktop);
   line-height: var(--text-solutions-title-desktop--line-height);
   letter-spacing: 0;
+  word-break: keep-all;
+}
+
+.solutions-title__keep {
+  white-space: nowrap;
 }
 
 .solutions-description {
@@ -6741,6 +6746,15 @@ body {
   line-height: var(--text-solution-service-toggle--line-height);
 }
 
+.solution-card__meta-arrow,
+.solution-card[data-active="true"] .solution-card__meta-plus {
+  display: none;
+}
+
+.solution-card[data-active="true"] .solution-card__meta-arrow {
+  display: inline;
+}
+
 .solution-card__summary {
   align-self: stretch;
   margin-top: auto;
@@ -6886,6 +6900,7 @@ body {
   .solutions-process__stage {
     position: relative;
     padding: var(--spacing-20) var(--spacing-24) 56px;
+    text-align: center;
   }
   .solutions-process__stage:last-child {
     padding-bottom: var(--spacing-20);
@@ -6913,6 +6928,7 @@ body {
   }
   .solutions-process__stage h3 {
     width: fit-content;
+    margin-inline: auto;
     margin-bottom: var(--spacing-12);
     padding: var(--spacing-4) var(--spacing-16);
     border-radius: var(--radius-999);
@@ -6955,6 +6971,10 @@ body {
   .solutions-inner {
     width: calc(100% - var(--spacing-48));
   }
+  .solutions-header {
+    justify-items: center;
+    text-align: center;
+  }
   .solutions-title {
     font-size: var(--text-solutions-title-mobile);
     line-height: var(--text-solutions-title-mobile--line-height);
@@ -6982,8 +7002,23 @@ body {
   .solution-card__meta {
     left: var(--spacing-24);
   }
+  /* Mobile: cards stay expanded and only show the diagonal arrow; a tap navigates directly. */
+  .solution-card__meta-plus,
+  .solution-card[data-active="true"] .solution-card__meta-plus {
+    display: none;
+  }
+  .solution-card__meta-arrow {
+    display: inline;
+  }
+  .solution-card__panel {
+    max-height: none;
+    margin-top: var(--spacing-12);
+    opacity: 1;
+  }
   .solution-card__content {
     min-height: var(--solution-card-min-height-mobile);
+    /* Reserve room for the absolutely placed arrow so an expanded card never runs under it. */
+    padding-top: var(--spacing-64);
   }
   .solution-card__title {
     font-size: var(--text-solution-card-title-mobile);

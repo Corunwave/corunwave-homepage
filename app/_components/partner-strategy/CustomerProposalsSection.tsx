@@ -35,6 +35,8 @@ const CustomerProposalsSection = ({
     const place = () => {
       tablist.style.setProperty("--partner-tab-x", `${tab.offsetLeft}px`);
       tablist.style.setProperty("--partner-tab-width", `${tab.offsetWidth}px`);
+      tablist.style.setProperty("--partner-tab-y", `${tab.offsetTop}px`);
+      tablist.style.setProperty("--partner-tab-height", `${tab.offsetHeight}px`);
     };
     place();
     // First placement must not animate; enable transitions on the next frame.

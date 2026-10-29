@@ -8,7 +8,7 @@ import {
   privacyPolicyPage,
 } from "../_content/legal/privacyPolicy";
 
-const { title, description, effectiveDate } = privacyPolicyPage;
+const { title, description, effectiveDate, extraMeta } = privacyPolicyPage;
 
 export const metadata: Metadata = {
   title,
@@ -29,6 +29,7 @@ export default function PrivacyPolicyPage() {
         title={title}
         effectiveDate={effectiveDate}
         intro={privacyPolicyIntro}
+        extraMeta={extraMeta}
         clauses={privacyPolicyClauses}
       />
     </main>

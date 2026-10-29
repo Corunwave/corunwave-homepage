@@ -166,7 +166,7 @@ const LEARNING_LABEL = "Learning Service\u00a0&<wbr> BPO";
 const LEARNING_TRACK_LABEL = "Learning Service\u00a0&\nBPO";
 
 export const solutions: SolutionsContent = {
-  title: "통합 End-to-End 서비스",
+  title: "통합 [[End-to-End]] 서비스",
   description:
     "AX Infra와 Learning Service를 하나의 과정으로 연결해 기술 운영과 조직의 역량 개발을 함께 지원합니다.",
   processLabel: "통합 End-to-End 서비스 단계",

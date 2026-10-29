@@ -41,13 +41,13 @@ export const siteFooter: SiteFooterContent = {
   legal: [
     { label: "이용약관", href: "/service-term" },
     { label: "개인정보처리방침", href: "/privacy-policy" },
-    { label: "이메일무단수집거부", href: "#" },
+    { label: "이메일무단수집거부", href: "/email-collection-refusal" },
   ],
   copyright: "© Corunwave COMPANY. 2026 ALL RIGHTS RESERVED",
 };
 
 export const contactCta: ContactCtaContent = {
-  title: "비즈니스 환경에 맞는 서비스 구성을 제안합니다.",
+  title: "[[비즈니스 환경에 맞는]] [[서비스 구성을 제안합니다.]]",
   buttonLabel: "문의하기",
   href: "/contact",
 };

@@ -8,7 +8,7 @@ import {
   serviceTermPage,
 } from "../_content/legal/serviceTerm";
 
-const { title, description, effectiveDate } = serviceTermPage;
+const { title, description, effectiveDate, extraMeta } = serviceTermPage;
 
 export const metadata: Metadata = {
   title,
@@ -29,6 +29,7 @@ export default function ServiceTermPage() {
         title={title}
         effectiveDate={effectiveDate}
         intro={serviceTermIntro}
+        extraMeta={extraMeta}
         clauses={serviceTermClauses}
       />
     </main>

@@ -47,7 +47,7 @@ export const siteFooter: SiteFooterContent = {
 };
 
 export const contactCta: ContactCtaContent = {
-  title: "비즈니스 환경에 맞는 서비스 구성을 제안합니다.",
+  title: "[[비즈니스 환경에 맞는]] [[서비스 구성을 제안합니다.]]",
   buttonLabel: "문의하기",
   href: "/contact",
 };

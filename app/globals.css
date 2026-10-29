@@ -3950,6 +3950,17 @@ body {
   overflow-wrap: break-word;
 }
 
+/* The quote only breaks after the comma on mobile; wider layouts keep it on one line. */
+.ax-card__quote-break {
+  display: none;
+}
+
+@media (width <= 760px) {
+  .ax-card__quote-break {
+    display: inline;
+  }
+}
+
 /* Parallel groups sit side by side, each in its own container; the grid stretches both to the taller one. */
 .ax-card__groups--parallel {
   display: grid;
@@ -4511,9 +4522,10 @@ body {
   .learning-table__head > span:not(:last-child) {
     display: none;
   }
+  /* Stacked card: stage as the title, key value as its subtitle, then the system description below a divider. */
   .learning-row {
-    grid-template-columns: 60px minmax(0, 1fr);
-    gap: var(--spacing-12);
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-4);
     align-items: start;
     padding: var(--spacing-20);
   }
@@ -4528,6 +4540,9 @@ body {
   }
   .learning-row__system {
     grid-column: 1 / -1;
+    margin-top: var(--spacing-12);
+    padding-top: var(--spacing-12);
+    border-top: 1px solid var(--color-ax-line);
   }
   /* Stacked mobile cells read left to right, with their bullet markers. */
   .learning-row__stage,
@@ -4605,6 +4620,10 @@ body {
   letter-spacing: var(--text-solution-cta-title-desktop--letter-spacing);
   word-break: keep-all;
   overflow-wrap: normal;
+}
+
+.contact-cta__keep {
+  white-space: nowrap;
 }
 
 .contact-cta__button {
@@ -4688,12 +4707,13 @@ body {
   .contact-cta__inner {
     width: calc(100% - var(--spacing-48) * 2);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: var(--spacing-20);
   }
   .contact-cta__title {
     flex: none;
+    text-align: center;
     font-size: var(--text-solution-cta-title-mobile);
     line-height: var(--text-solution-cta-title-mobile--line-height);
     font-weight: var(--text-solution-cta-title-mobile--font-weight);

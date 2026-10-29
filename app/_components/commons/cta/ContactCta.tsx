@@ -1,4 +1,5 @@
 import { contactCta } from "../../../_content/site";
+import { renderText } from "../../../_lib/content/renderText";
 import LinkButton from "../buttons/LinkButton";
 import ScrollReveal from "../reveal/ScrollReveal";
 
@@ -21,7 +22,7 @@ const ContactCta = ({
             className="contact-cta__title"
             data-reveal-item
           >
-            {title}
+            {renderText(title, { keepClassName: "contact-cta__keep" })}
           </h2>
           <LinkButton
             href={href}

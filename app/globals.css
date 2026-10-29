@@ -1888,6 +1888,7 @@ body {
 
 .legal-section__intro {
   margin: 0 0 var(--spacing-48);
+  white-space: pre-line;
 }
 
 .legal-clause {

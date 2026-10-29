@@ -41,7 +41,7 @@ export const siteFooter: SiteFooterContent = {
   legal: [
     { label: "이용약관", href: "/service-term" },
     { label: "개인정보처리방침", href: "/privacy-policy" },
-    { label: "이메일무단수집거부", href: "#" },
+    { label: "이메일무단수집거부", href: "/email-collection-refusal" },
   ],
   copyright: "© Corunwave COMPANY. 2026 ALL RIGHTS RESERVED",
 };

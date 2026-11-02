@@ -55,6 +55,24 @@ export const contactCta: ContactCtaContent = {
 const DOCUMENTS_BASE_URL =
   "https://jkeichkllrvtlegxskkl.supabase.co/storage/v1/object/public/corunwave-hompage-docs";
 
-/* Supabase answers `?download` with Content-Disposition: attachment, so the file saves without leaving the page. */
-export const documentUrl = (fileName: string) =>
-  `${DOCUMENTS_BASE_URL}/${fileName}?download=${fileName}`;
+/*
+ * Supabase answers `?download` with Content-Disposition: attachment, so the file saves without leaving the page.
+ * The bucket only accepts ASCII object names; the Korean save name travels in the query instead.
+ */
+const documentUrl = (fileName: string, downloadName: string) =>
+  `${DOCUMENTS_BASE_URL}/${fileName}?download=${encodeURIComponent(downloadName)}`;
+
+export const documents = {
+  companyProfile: documentUrl(
+    "corunwave_company_profile.pdf",
+    "코런웨이브_회사소개서.pdf",
+  ),
+  universityPortfolio: documentUrl(
+    "AXInfra_univ_ver2.pdf",
+    "코런웨이브_AX인프라_대학맞춤형_포트폴리오.pdf",
+  ),
+  enterprisePortfolio: documentUrl(
+    "AXInfra_enterprise_ver2.pdf",
+    "코런웨이브_AX인프라_기업공공맞춤형_포트폴리오.pdf",
+  ),
+} as const;

@@ -1,4 +1,4 @@
-import { contactCta, documentUrl } from "./site";
+import { contactCta, documents } from "./site";
 
 export type PartnerStrategyPageContent = {
   title: string;
@@ -351,7 +351,7 @@ export const proposal: ProposalContent = {
       download: {
         label: "포트폴리오 다운로드",
         ariaLabel: "대학 맞춤형 AX Platform 포트폴리오 다운로드",
-        href: documentUrl("AXInfra_univ_ver2.pdf"),
+        href: documents.universityPortfolio,
       },
     },
     {
@@ -363,7 +363,7 @@ export const proposal: ProposalContent = {
       download: {
         label: "포트폴리오 다운로드",
         ariaLabel: "기업 및 공공 맞춤형 AX Platform 포트폴리오 다운로드",
-        href: documentUrl("AXInfra_enterprise_ver2.pdf"),
+        href: documents.enterprisePortfolio,
       },
     },
   ],

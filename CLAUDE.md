@@ -69,6 +69,10 @@ public/
 
 The `_components` folder is Next.js's convention for a private folder (underscore prefix) that is excluded from routing. New shared components belong under `app/_components/commons/<group>/`.
 
+### Backend / API
+
+Server logic lives in `backend/<domain>/` as clean architecture (`domain` → `application` → `infrastructure`, wired in a `*Container.ts`), exposed through thin Route Handlers under `app/api/`. The browser side calls them through `app/_lib/api/` (axios) and a hook in `app/_hooks/`. No ORM; Supabase via `supabase-js`. **When creating or wiring any API, use the `api-implement` skill** (`.claude/skills/api-implement/SKILL.md`); the contact form (`backend/contact/`, `app/api/contact/route.ts`) is the reference implementation.
+
 ### Header behavior (`HeaderNavbar`)
 
 `HeaderNavbar` is a client component with two coordinated behaviors driven by CSS variables read from `:root`:

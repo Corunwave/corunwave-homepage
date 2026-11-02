@@ -2242,6 +2242,33 @@ body {
   outline-offset: var(--spacing-4);
 }
 
+.contact-submit:disabled {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+/* Honeypot: off-screen, not display:none, so naive bots still fill it. */
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-status {
+  margin: var(--spacing-8) 0 0;
+  font-size: var(--text-contact-consent);
+  line-height: var(--text-contact-consent--line-height);
+  font-weight: var(--text-contact-consent--font-weight);
+  word-break: keep-all;
+  color: var(--color-text-primary);
+}
+
+.contact-status[data-state="error"] {
+  color: var(--color-status-error);
+}
+
 /* Preview keeps the desktop two-column layout on tablet; only the gutter narrows. */
 @media (width <= 1024px) {
   .contact-layout {

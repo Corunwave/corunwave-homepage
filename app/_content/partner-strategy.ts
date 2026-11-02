@@ -1,4 +1,4 @@
-import { contactCta } from "./site";
+import { contactCta, documentUrl } from "./site";
 
 export type PartnerStrategyPageContent = {
   title: string;
@@ -351,8 +351,7 @@ export const proposal: ProposalContent = {
       download: {
         label: "포트폴리오 다운로드",
         ariaLabel: "대학 맞춤형 AX Platform 포트폴리오 다운로드",
-        // TODO: link the portfolio file (AI Infra Solution_UNIV_CRW_2026.pptx).
-        href: "#",
+        href: documentUrl("AXInfra_univ_ver2.pdf"),
       },
     },
     {

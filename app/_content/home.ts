@@ -133,8 +133,12 @@ export const downloads: DownloadsContent = {
       label: "회사소개서 PDF 다운로드",
     },
     {
-      href: "/downloads/corunwave-portfolio.pdf",
-      label: "포트폴리오 PDF 다운로드",
+      href: documentUrl("AXInfra_univ_ver2.pdf"),
+      label: "대학 맞춤형 포트폴리오 PDF 다운로드",
+    },
+    {
+      href: documentUrl("AXInfra_enterprise_ver2.pdf"),
+      label: "기업·공공 맞춤형 포트폴리오 PDF 다운로드",
     },
   ],
 };

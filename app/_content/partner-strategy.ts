@@ -363,6 +363,7 @@ export const proposal: ProposalContent = {
       download: {
         label: "포트폴리오 다운로드",
         ariaLabel: "기업 및 공공 맞춤형 AX Platform 포트폴리오 다운로드",
+        href: documentUrl("AXInfra_enterprise_ver2.pdf"),
       },
     },
   ],

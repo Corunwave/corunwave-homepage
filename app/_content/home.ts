@@ -1,3 +1,5 @@
+import { documentUrl } from "./site";
+
 export type HomeHeroContent = {
   title: string;
   description: string;
@@ -127,7 +129,7 @@ export const downloads: DownloadsContent = {
   description: "회사소개서와 포트폴리오를 PDF로 다운로드할 수 있습니다.",
   items: [
     {
-      href: "/downloads/corunwave-company-profile.pdf",
+      href: documentUrl("corunwave_company_profile.pdf"),
       label: "회사소개서 PDF 다운로드",
     },
     {

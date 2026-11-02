@@ -51,3 +51,10 @@ export const contactCta: ContactCtaContent = {
   buttonLabel: "문의하기",
   href: "/contact",
 };
+
+const DOCUMENTS_BASE_URL =
+  "https://jkeichkllrvtlegxskkl.supabase.co/storage/v1/object/public/corunwave-hompage-docs";
+
+/* Supabase answers `?download` with Content-Disposition: attachment, so the file saves without leaving the page. */
+export const documentUrl = (fileName: string) =>
+  `${DOCUMENTS_BASE_URL}/${fileName}?download=${fileName}`;

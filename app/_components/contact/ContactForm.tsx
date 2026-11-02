@@ -2,9 +2,17 @@
 
 import Link from "next/link";
 import { useRef, useState, type FormEvent } from "react";
+import { useSubmitContactInquiry } from "@/app/_hooks/useSubmitContactInquiry";
+import {
+  validateInquiry,
+  validateInquiryField,
+  type InquiryErrors,
+  type InquiryField,
+  type InquiryInput,
+} from "@/backend/contact/domain/entity/contactInquiryRules";
 
 type RequiredField = "name" | "company" | "email" | "phone" | "consent";
-type Errors = Partial<Record<RequiredField, string>>;
+type Errors = InquiryErrors;
 
 const TEXT_FIELDS = [
   {
@@ -43,71 +51,72 @@ const REQUIRED_FIELDS: readonly RequiredField[] = [
   "consent",
 ];
 
-const PREPARING_MESSAGE = "문의하기 기능은 준비 중입니다.";
+const SUCCESS_MESSAGE =
+  "문의가 접수되었습니다. 3 영업일 이내로 회신드리겠습니다.";
+const FAILURE_MESSAGE =
+  "문의 접수에 실패했습니다. 잠시 후 다시 시도해주세요.";
 
 const isRequiredField = (name: string): name is RequiredField =>
   (REQUIRED_FIELDS as readonly string[]).includes(name);
 
-/* Same rules and copy as the preview's assets/contact/contact-form.js. */
-const validateField = (field: HTMLInputElement) => {
-  if (field.type === "checkbox")
-    return field.checked ? "" : "개인정보 수집 및 이용에 동의해주세요.";
-  const value = field.value.trim();
-  if (!value) return "이 입력칸을 작성해주세요";
-  if (field.type === "email" && field.validity.typeMismatch)
-    return "이메일 형식을 확인해주세요.";
-  if (field.type === "tel") {
-    const digits = value.replace(/\D/g, "");
-    if (
-      !/^\+?[0-9\s-]+$/.test(value) ||
-      digits.length < 7 ||
-      digits.length > 15
-    )
-      return "전화번호 형식을 확인해주세요.";
-  }
-  return "";
+const readInquiry = (form: HTMLFormElement): InquiryInput => {
+  const data = new FormData(form);
+  const text = (key: string) => String(data.get(key) ?? "").trim();
+  return {
+    name: text("name"),
+    company: text("company"),
+    email: text("email"),
+    phone: text("phone"),
+    message: text("message"),
+    consent: data.get("consent") === "on",
+  };
 };
 
-/* Contact form "고객문의" (preview #contact-form). Client component: validation runs after the first submit; a valid submit logs the values and alerts that sending is not ready. */
+/* Contact form "고객문의" (preview #contact-form). Client component: validation runs after the first submit; a valid submit POSTs to /api/contact. */
 const ContactForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [attempted, setAttempted] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const { status, submit } = useSubmitContactInquiry();
 
-  const fieldOf = (name: RequiredField) =>
+  const fieldOf = (name: InquiryField) =>
     formRef.current?.elements.namedItem(name) as HTMLInputElement | null;
 
   const revalidate = (target: EventTarget) => {
     if (!attempted || !(target instanceof HTMLInputElement)) return;
-    if (!isRequiredField(target.name)) return;
+    if (!isRequiredField(target.name) || !formRef.current) return;
     const name = target.name;
-    setErrors((current) => ({ ...current, [name]: validateField(target) }));
+    const error = validateInquiryField(name, readInquiry(formRef.current));
+    setErrors((current) => ({ ...current, [name]: error }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (status === "sending") return;
+    const form = event.currentTarget;
     setAttempted(true);
-    const nextErrors: Errors = {};
-    for (const name of REQUIRED_FIELDS) {
-      const field = fieldOf(name);
-      if (field) nextErrors[name] = validateField(field);
-    }
+    const inquiry = readInquiry(form);
+    const nextErrors = validateInquiry(inquiry);
     setErrors(nextErrors);
-    const firstInvalid = REQUIRED_FIELDS.find((name) => nextErrors[name]);
+    const firstInvalid = (
+      ["name", "company", "email", "phone", "message", "consent"] as const
+    ).find((name) => nextErrors[name]);
     if (firstInvalid) {
       fieldOf(firstInvalid)?.focus();
       return;
     }
-    const data = new FormData(event.currentTarget);
-    console.log("[contact] submit", {
-      name: data.get("name"),
-      company: data.get("company"),
-      email: data.get("email"),
-      phone: data.get("phone"),
-      message: data.get("message"),
-      consent: data.get("consent") === "on",
+
+    const result = await submit({
+      ...inquiry,
+      website: String(new FormData(form).get("website") ?? ""),
     });
-    alert(PREPARING_MESSAGE);
+    if (result.ok) {
+      form.reset();
+      setAttempted(false);
+      setErrors({});
+    } else if (result.fieldErrors) {
+      setErrors(result.fieldErrors);
+    }
   };
 
   return (
@@ -158,6 +167,25 @@ const ContactForm = () => {
           id="contact-message"
           name="message"
           placeholder="구체적인 문의 내용을 자유롭게 작성하는 공간입니다."
+          aria-invalid={attempted ? Boolean(errors.message) : undefined}
+          aria-describedby="contact-message-error"
+        />
+        <p
+          className="contact-error"
+          id="contact-message-error"
+          hidden={!errors.message}
+        >
+          {errors.message}
+        </p>
+      </div>
+      <div className="contact-honeypot" aria-hidden="true">
+        <label htmlFor="contact-website">웹사이트</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
         />
       </div>
       <div className="contact-field">
@@ -189,9 +217,21 @@ const ContactForm = () => {
           {errors.consent}
         </p>
       </div>
-      <button className="contact-submit" type="submit">
-        문의하기
+      <button
+        className="contact-submit"
+        type="submit"
+        disabled={status === "sending"}
+      >
+        {status === "sending" ? "전송 중…" : "문의하기"}
       </button>
+      <p
+        className="contact-status"
+        data-state={status === "failed" ? "error" : "success"}
+        role="status"
+        hidden={status !== "done" && status !== "failed"}
+      >
+        {status === "done" ? SUCCESS_MESSAGE : FAILURE_MESSAGE}
+      </p>
     </form>
   );
 };

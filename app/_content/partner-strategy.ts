@@ -201,18 +201,18 @@ export const customerProposals: CustomerProposalsContent = {
     description:
       "정책 목표와 운영 환경을 반영한 AI 인프라와 디지털 인재 양성을 함께 제안합니다.",
     image: "/images/partner/public.png",
-    offerings: ["국가 DX 전략 사업", "AI 인프라 구축", "디지털 인재 양성 사업"],
+    offerings: ["국가 AX 전략 사업", "AI 인프라 구축", "디지털 인재 양성 사업"],
   },
   {
     id: "enterprise",
     label: "대기업/중견기업",
     description:
-      "전사 DX와 AI 활용을 위해 인프라 변화와 직무별 역량 개발을 같은 로드맵에서 추진합니다.",
+      "전사 AX와 AI 활용을 위해 인프라 변화와 직무별 역량 개발을 같은 로드맵에서 추진합니다.",
     image: "/images/partner/enterprise.png",
     offerings: [
-      "전사 DX 전환 컨설팅",
+      "전사 AX 전환 컨설팅",
       "프라이빗 클라우드 구축",
-      "임직원 맞춤형 DX 교육",
+      "임직원 맞춤형 AX 교육",
     ],
   },
   {
@@ -235,7 +235,7 @@ export const customerProposals: CustomerProposalsContent = {
     image: "/images/partner/university.png",
     offerings: [
       "연구용 AI 인프라(HPC) 구축",
-      "재학생 DX 실무 역량 강화 교육",
+      "재학생 AX 실무 역량 강화 교육",
       "산학 연계 캡스톤 프로젝트",
     ],
   },

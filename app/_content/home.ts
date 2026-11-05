@@ -61,13 +61,13 @@ export const proposalTargets: ProposalTargetsContent = {
       tags: "#대기업 #중견기업",
       title: "AX Infra &\nIT Outsourcing",
       description:
-        "전사 DX 전환 컨설팅 · 프라이빗 클라우드 구축 · 임직원 맞춤형 DX 교육",
+        "전사 AX 전환 컨설팅 · 프라이빗 클라우드 구축 · 임직원 맞춤형 AX 교육",
     },
     {
       modifier: "public",
       tags: "#공공 #정부기관",
       title: "AI 인프라 구축·\n디지털 인재 양성",
-      description: "국가 DX 전략 사업 · AI 인프라 구축 · 디지털 인재 양성 사업",
+      description: "국가 AX 전략 사업 · AI 인프라 구축 · 디지털 인재 양성 사업",
     },
     {
       modifier: "university",

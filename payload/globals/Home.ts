@@ -1,14 +1,15 @@
 import type { GlobalConfig } from "payload";
 import { isCeoOrEditor } from "../access/roles";
-import { fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
+import { fittedTableName, fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
 import { CMS_TAGS } from "../hooks/revalidate";
-import { revalidateOnChange } from "../lib/globalHooks";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
 
 export const Home: GlobalConfig = {
   slug: "home",
   label: "홈",
   admin: { group: "페이지", description: `홈페이지 본문입니다. ${TEXT_HINT}` },
   access: { read: () => true, update: isCeoOrEditor },
+  versions: globalVersions,
   hooks: revalidateOnChange(CMS_TAGS.home),
   fields: [
     {
@@ -91,6 +92,7 @@ export const Home: GlobalConfig = {
                   name: "stages",
                   label: "단계",
                   type: "array",
+                  dbName: fittedTableName("stages"),
                   labels: { singular: "단계", plural: "단계" },
                   fields: [
                     textField("name", "단계 이름"),

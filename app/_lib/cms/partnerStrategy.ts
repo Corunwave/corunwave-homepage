@@ -18,6 +18,7 @@ import {
   type ToBeStrategyContent,
 } from "@/app/_content/partner-strategy";
 import { getCms } from "./getCms";
+import { isDraftMode } from "./draft";
 import { getDocumentLinks } from "./documents";
 import { getSiteSettings } from "./site";
 import { mergeById, normalize } from "./normalize";
@@ -45,10 +46,10 @@ type RawPartnerStrategy = {
 };
 
 const getPartnerStrategyBase = unstable_cache(
-  async () => {
+  async (draft: boolean) => {
     const payload = await getCms();
     // 로고 이미지의 주소가 필요하므로 업로드 관계를 한 단계 펼친다.
-    const doc = normalize<RawPartnerStrategy>(await payload.findGlobal({ slug: "partner-strategy", depth: 1 }));
+    const doc = normalize<RawPartnerStrategy>(await payload.findGlobal({ slug: "partner-strategy", depth: 1, draft }));
 
     const logos: PartnerLogosContent["logos"] = (doc.partnerLogos?.logos ?? []).flatMap((logo, index) => {
       const url = typeof logo.image === "object" && logo.image ? logo.image.url : undefined;
@@ -95,7 +96,7 @@ const getPartnerStrategyBase = unstable_cache(
 
 export async function getPartnerStrategyContent() {
   const [base, links, { contactCta }] = await Promise.all([
-    getPartnerStrategyBase(),
+    getPartnerStrategyBase(await isDraftMode()),
     getDocumentLinks(),
     getSiteSettings(),
   ]);

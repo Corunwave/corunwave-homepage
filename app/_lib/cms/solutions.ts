@@ -12,6 +12,7 @@ import {
   type SolutionsPageContent,
 } from "@/app/_content/solutions";
 import { getCms } from "./getCms";
+import { isDraftMode } from "./draft";
 import { normalize } from "./normalize";
 
 type RawSolutions = {
@@ -22,10 +23,10 @@ type RawSolutions = {
   learningService?: LearningServiceContent;
 };
 
-export const getSolutionsContent = unstable_cache(
-  async () => {
+const getSolutionsBase = unstable_cache(
+  async (draft: boolean) => {
     const payload = await getCms();
-    const doc = normalize<RawSolutions>(await payload.findGlobal({ slug: "solutions", depth: 0 }));
+    const doc = normalize<RawSolutions>(await payload.findGlobal({ slug: "solutions", depth: 0, draft }));
 
     const services = { ...fixedAxInfra.services };
     for (const { id, map, detail } of doc.axInfra?.services ?? []) {
@@ -48,3 +49,5 @@ export const getSolutionsContent = unstable_cache(
   ["cms-solutions"],
   { tags: [CMS_TAGS.solutions] },
 );
+
+export const getSolutionsContent = async () => getSolutionsBase(await isDraftMode());

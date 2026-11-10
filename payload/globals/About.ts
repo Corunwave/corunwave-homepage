@@ -1,14 +1,15 @@
 import type { GlobalConfig } from "payload";
 import { isCeoOrEditor } from "../access/roles";
 import { CMS_TAGS } from "../hooks/revalidate";
-import { revalidateOnChange } from "../lib/globalHooks";
-import { fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
+import { fittedTableName, fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
 
 export const About: GlobalConfig = {
   slug: "about",
   label: "회사소개",
   admin: { group: "페이지", description: `회사소개 페이지 본문입니다. ${TEXT_HINT}` },
   access: { read: () => true, update: isCeoOrEditor },
+  versions: globalVersions,
   hooks: revalidateOnChange(CMS_TAGS.about),
   fields: [
     {
@@ -53,6 +54,7 @@ export const About: GlobalConfig = {
                   name: "titleLines",
                   label: "제목(줄 단위)",
                   type: "array",
+                  dbName: fittedTableName("titleLines"),
                   labels: { singular: "줄", plural: "줄" },
                   admin: { description: "한 줄에 들어갈 구절들입니다. 구절 안에서는 줄이 바뀌지 않습니다." },
                   fields: [linesField("phrases", "구절", { minRows: 1 })],
@@ -66,6 +68,7 @@ export const About: GlobalConfig = {
                   name: "values",
                   label: "핵심 가치",
                   type: "array",
+                  dbName: fittedTableName("values"),
                   labels: { singular: "가치", plural: "가치" },
                   fields: [textField("title", "제목"), textareaField("body", "내용")],
                 },

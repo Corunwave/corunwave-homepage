@@ -1,14 +1,15 @@
 import type { GlobalConfig } from "payload";
 import { isCeoOrEditor } from "../access/roles";
 import { CMS_TAGS } from "../hooks/revalidate";
-import { revalidateOnChange } from "../lib/globalHooks";
-import { fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
+import { fittedTableName, fixedRowsField, linesField, TEXT_HINT, textareaField, textField } from "../lib/fields";
 
 export const PartnerStrategy: GlobalConfig = {
   slug: "partner-strategy",
   label: "파트너 전략",
   admin: { group: "페이지", description: `파트너 전략 페이지 본문입니다. ${TEXT_HINT}` },
   access: { read: () => true, update: isCeoOrEditor },
+  versions: globalVersions,
   hooks: revalidateOnChange(CMS_TAGS.partnerStrategy),
   fields: [
     {
@@ -157,6 +158,7 @@ export const PartnerStrategy: GlobalConfig = {
                   name: "brands",
                   label: "브랜드",
                   type: "array",
+                  dbName: fittedTableName("brands"),
                   labels: { singular: "브랜드", plural: "브랜드" },
                   minRows: 2,
                   maxRows: 2,
@@ -214,6 +216,7 @@ export const PartnerStrategy: GlobalConfig = {
                   name: "logos",
                   label: "로고",
                   type: "array",
+                  dbName: fittedTableName("logos"),
                   labels: { singular: "로고", plural: "로고" },
                   admin: { description: "위아래로 끌어 순서를 바꿀 수 있습니다." },
                   fields: [

@@ -18,6 +18,7 @@ import { PartnerStrategy } from "./payload/globals/PartnerStrategy";
 import { SiteSettings } from "./payload/globals/SiteSettings";
 import { Solutions } from "./payload/globals/Solutions";
 import { Typography } from "./payload/globals/Typography";
+import { PREVIEW_PATHS } from "./payload/lib/previewPaths";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -56,6 +57,21 @@ export default buildConfig({
       graphics: {
         Logo: "/payload/components/AdminLogo#AdminLogo",
         Icon: "/payload/components/AdminIcon#AdminIcon",
+      },
+    },
+    // 편집 화면 옆 분할 미리보기. 사이트의 draft mode 진입 라우트(/next/preview)를 iframe으로 연다.
+    livePreview: {
+      globals: Object.keys(PREVIEW_PATHS),
+      breakpoints: [
+        { label: "데스크톱", name: "desktop", width: 1440, height: 900 },
+        { label: "태블릿", name: "tablet", width: 1024, height: 1366 },
+        { label: "모바일", name: "mobile", width: 375, height: 812 },
+      ],
+      url: ({ globalConfig, req }) => {
+        const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
+        const proto = req.headers.get("x-forwarded-proto") ?? (host?.startsWith("localhost") ? "http" : "https");
+        const path = PREVIEW_PATHS[globalConfig?.slug ?? ""] ?? "/";
+        return `${proto}://${host}/next/preview?path=${encodeURIComponent(path)}`;
       },
     },
     importMap: { baseDir: path.resolve(dirname) },

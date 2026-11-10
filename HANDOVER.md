@@ -104,7 +104,7 @@ Vercel 프로젝트 설정(Production/Preview)과 로컬 `.env.local`에 필요�
 | `public/images`, `public/fonts` | 이미지·폰트 (약 35MB) | 이미지는 CMS/스토리지로, 폰트는 코드에 유지 |
 | `next.config.ts` | `cacheComponents`, `partialPrefetching` 활성화 | CMS 데이터 fetch 시 캐시 재검증(revalidate) 전략을 이 설정에 맞춰 설계 |
 
-CMS 후보와 무관하게 정해야 할 것: 편집 권한 주체, 미리보기/승인 흐름, 수정 후 반영 방식(재배포 vs 온디맨드 재검증), 이미지 호스팅 위치.
+CMS 후보와 무관하게 정해야 할 것: 편집 권한 주체, 미리보기/승인 흐름(미리보기·초안/발행은 구현됨, 승인 단계는 없음 — CLAUDE.md의 CMS 절 참고), 수정 후 반영 방식(재배포 vs 온디맨드 재검증), 이미지 호스팅 위치.
 
 ## 9. 이전 체크리스트
 

@@ -14,6 +14,7 @@ import {
   type CoreChallengesContent,
 } from "@/app/_content/about";
 import { getCms } from "./getCms";
+import { isDraftMode } from "./draft";
 import { mergeById, normalize } from "./normalize";
 
 type RawAbout = {
@@ -26,10 +27,10 @@ type RawAbout = {
   companyValues?: CompanyValuesContent;
 };
 
-export const getAboutContent = unstable_cache(
-  async () => {
+const getAboutBase = unstable_cache(
+  async (draft: boolean) => {
     const payload = await getCms();
-    const doc = normalize<RawAbout>(await payload.findGlobal({ slug: "about", depth: 0 }));
+    const doc = normalize<RawAbout>(await payload.findGlobal({ slug: "about", depth: 0, draft }));
 
     const businessDirection: BusinessDirectionContent = {
       ...fixedBusinessDirection,
@@ -57,3 +58,5 @@ export const getAboutContent = unstable_cache(
   ["cms-about"],
   { tags: [CMS_TAGS.about] },
 );
+
+export const getAboutContent = async () => getAboutBase(await isDraftMode());

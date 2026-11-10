@@ -3,6 +3,7 @@ import { unstable_cache } from "next/cache";
 import { CMS_TAGS } from "@/payload/hooks/revalidate";
 import type { ContactCtaContent, SiteFooterContent } from "@/app/_content/site";
 import { getCms } from "./getCms";
+import { isDraftMode } from "./draft";
 
 type CmsLink = { label: string; href: string };
 
@@ -24,10 +25,10 @@ type SiteSettingsDoc = {
 const toLinks = (links: CmsLink[] | undefined) =>
   (links ?? []).map(({ label, href }) => ({ label, href }));
 
-export const getSiteSettings = unstable_cache(
-  async (): Promise<{ footer: SiteFooterContent; contactCta: ContactCtaContent }> => {
+const getSiteSettingsBase = unstable_cache(
+  async (draft: boolean): Promise<{ footer: SiteFooterContent; contactCta: ContactCtaContent }> => {
     const payload = await getCms();
-    const doc = (await payload.findGlobal({ slug: "site-settings", depth: 0 })) as SiteSettingsDoc;
+    const doc = (await payload.findGlobal({ slug: "site-settings", depth: 0, draft })) as SiteSettingsDoc;
     const company = doc.company ?? {};
 
     return {
@@ -56,3 +57,5 @@ export const getSiteSettings = unstable_cache(
   ["cms-site-settings"],
   { tags: [CMS_TAGS.site] },
 );
+
+export const getSiteSettings = async () => getSiteSettingsBase(await isDraftMode());

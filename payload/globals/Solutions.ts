@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
 import { isCeoOrEditor } from "../access/roles";
 import { CMS_TAGS } from "../hooks/revalidate";
-import { revalidateOnChange } from "../lib/globalHooks";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
 import {
   bulletsField,
   fixedRowsField,
@@ -9,6 +9,7 @@ import {
   TEXT_HINT,
   textareaField,
   textField,
+  fittedTableName,
 } from "../lib/fields";
 
 const AX_SERVICES = [
@@ -27,6 +28,7 @@ export const Solutions: GlobalConfig = {
   label: "솔루션",
   admin: { group: "페이지", description: `솔루션 페이지 본문입니다. ${TEXT_HINT}` },
   access: { read: () => true, update: isCeoOrEditor },
+  versions: globalVersions,
   hooks: revalidateOnChange(CMS_TAGS.solutions),
   fields: [
     {
@@ -85,6 +87,7 @@ export const Solutions: GlobalConfig = {
                           name: "groups",
                           label: "묶음",
                           type: "array",
+                          dbName: fittedTableName("groups"),
                           labels: { singular: "묶음", plural: "묶음" },
                           fields: [
                             textField("heading", "묶음 제목(선택)", { required: false }),
@@ -130,6 +133,7 @@ export const Solutions: GlobalConfig = {
                   name: "rows",
                   label: "서비스 체계 표",
                   type: "array",
+                  dbName: fittedTableName("rows"),
                   labels: { singular: "단계", plural: "단계" },
                   fields: [
                     textField("stage", "단계"),
@@ -151,6 +155,7 @@ export const Solutions: GlobalConfig = {
                   name: "details",
                   label: "상세 안내",
                   type: "array",
+                  dbName: fittedTableName("details"),
                   labels: { singular: "안내", plural: "안내" },
                   fields: [textField("title", "제목"), bulletsField("body", "내용")],
                 },

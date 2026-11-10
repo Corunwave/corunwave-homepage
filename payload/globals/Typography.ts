@@ -1,7 +1,7 @@
 import type { GlobalConfig } from "payload";
 import { isCeo } from "../access/roles";
 import { CMS_TAGS } from "../hooks/revalidate";
-import { revalidateOnChange } from "../lib/globalHooks";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
 
 // 값 목록은 app/_lib/cms/typography.ts, app/globals.css의 [data-*] 규칙과 맞춰야 한다.
 export const FONT_SCALES = ["0.9", "1", "1.1", "1.2"] as const;
@@ -13,9 +13,10 @@ export const Typography: GlobalConfig = {
   label: "글꼴·글자 크기",
   admin: {
     group: "사이트",
-    description: "홈페이지 전체의 글자 크기와 글꼴을 바꿉니다. 저장하면 모든 페이지에 바로 적용됩니다. 바꾼 뒤에는 모바일 화면도 꼭 확인하세요.",
+    description: "홈페이지 전체의 글자 크기와 글꼴을 바꿉니다. 미리보기로 확인한 뒤 '발행'하면 모든 페이지에 적용됩니다. 바꾼 뒤에는 모바일 화면도 꼭 확인하세요.",
   },
   access: { read: () => true, update: isCeo },
+  versions: globalVersions,
   hooks: revalidateOnChange(CMS_TAGS.typography),
   fields: [
     {

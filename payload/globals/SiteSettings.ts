@@ -1,6 +1,7 @@
 import type { GlobalConfig } from "payload";
 import { hasRole, isCeoOrEditor } from "../access/roles";
-import { CMS_TAGS, revalidateCms } from "../hooks/revalidate";
+import { CMS_TAGS } from "../hooks/revalidate";
+import { globalVersions, revalidateOnChange } from "../lib/globalHooks";
 
 const linkFields = [
   { name: "label", label: "표시 이름", type: "text" as const, required: true },
@@ -15,14 +16,8 @@ export const SiteSettings: GlobalConfig = {
     read: () => true,
     update: isCeoOrEditor,
   },
-  hooks: {
-    afterChange: [
-      ({ doc }) => {
-        revalidateCms(CMS_TAGS.site)();
-        return doc;
-      },
-    ],
-  },
+  versions: globalVersions,
+  hooks: revalidateOnChange(CMS_TAGS.site),
   fields: [
     {
       type: "group",

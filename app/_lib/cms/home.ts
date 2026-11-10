@@ -15,6 +15,7 @@ import {
   type SolutionsContent,
 } from "@/app/_content/home";
 import { getCms } from "./getCms";
+import { isDraftMode } from "./draft";
 import { mergeById, normalize } from "./normalize";
 import { getDownloadItems } from "./documents";
 
@@ -29,9 +30,9 @@ type RawHome = {
 };
 
 const getHomeBase = unstable_cache(
-  async () => {
+  async (draft: boolean) => {
     const payload = await getCms();
-    const doc = normalize<RawHome>(await payload.findGlobal({ slug: "home", depth: 0 }));
+    const doc = normalize<RawHome>(await payload.findGlobal({ slug: "home", depth: 0, draft }));
 
     const proposalTargets: ProposalTargetsContent = {
       ...fixedProposalTargets,
@@ -61,6 +62,6 @@ const getHomeBase = unstable_cache(
 );
 
 export async function getHomeContent() {
-  const [base, items] = await Promise.all([getHomeBase(), getDownloadItems()]);
+  const [base, items] = await Promise.all([getHomeBase(await isDraftMode()), getDownloadItems()]);
   return { ...base, downloads: { ...base.downloads, items } satisfies DownloadsContent };
 }

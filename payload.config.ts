@@ -38,6 +38,26 @@ const publicFile = (prefix: string) => ({
 export default buildConfig({
   admin: {
     user: Users.slug,
+    // 사이트와 같은 파비콘(app/icon.png, app/favicon.ico, app/apple-icon.png)을 관리자에도 쓴다.
+    meta: {
+      titleSuffix: " - 코런웨이브 홈페이지 관리자모드",
+      description: "코런웨이브 홈페이지 콘텐츠를 관리하는 관리자 화면입니다.",
+      openGraph: {
+        siteName: "코런웨이브 홈페이지 관리자모드",
+        description: "코런웨이브 홈페이지 콘텐츠를 관리하는 관리자 화면입니다.",
+      },
+      icons: [
+        { rel: "icon", url: "/favicon.ico", sizes: "any" },
+        { rel: "icon", url: "/icon.png", type: "image/png" },
+        { rel: "apple-touch-icon", url: "/apple-icon.png" },
+      ],
+    },
+    components: {
+      graphics: {
+        Logo: "/payload/components/AdminLogo#AdminLogo",
+        Icon: "/payload/components/AdminIcon#AdminIcon",
+      },
+    },
     importMap: { baseDir: path.resolve(dirname) },
   },
   collections: [Users, ContactInquiries, News, Media, Documents, LegalDocuments],

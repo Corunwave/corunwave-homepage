@@ -1,36 +1,23 @@
-import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
-import LegalDocument from "../_components/commons/legal/LegalDocument";
-import PageHero from "../_components/commons/hero/PageHero";
-import {
-  privacyPolicyClauses,
-  privacyPolicyIntro,
-  privacyPolicyPage,
-} from "../_content/legal/privacyPolicy";
+import LegalDocument from "@/app/_components/commons/legal/LegalDocument";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import { legalMetadata, requireLegalPage } from "@/app/_lib/cms/legal";
 
-const { title, description, effectiveDate, extraMeta } = privacyPolicyPage;
+export const generateMetadata = () => legalMetadata("privacy-policy");
 
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    ...sharedOpenGraph,
-    title: `${title} · 코런웨이브`,
-    description,
-  },
-};
+export default async function LegalPage() {
+  const { title, heading, description, effectiveDate, extraMeta, intro, clauses } =
+    await requireLegalPage("privacy-policy");
 
-export default function PrivacyPolicyPage() {
   return (
     <main>
       <PageHero title={title} description={description} />
       <LegalDocument
         idPrefix="privacy"
-        title={title}
+        title={heading}
         effectiveDate={effectiveDate}
-        intro={privacyPolicyIntro}
+        intro={intro}
         extraMeta={extraMeta}
-        clauses={privacyPolicyClauses}
+        clauses={clauses}
       />
     </main>
   );

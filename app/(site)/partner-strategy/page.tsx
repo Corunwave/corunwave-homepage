@@ -1,42 +1,43 @@
 import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
-import ContactCta from "../_components/commons/cta/ContactCta";
-import PageHero from "../_components/commons/hero/PageHero";
-import CooperationModelsSection from "../_components/partner-strategy/CooperationModelsSection";
-import CustomerProposalsSection from "../_components/partner-strategy/CustomerProposalsSection";
-import PartnerLogosSection from "../_components/partner-strategy/PartnerLogosSection";
-import PartnershipBenefitsSection from "../_components/partner-strategy/PartnershipBenefitsSection";
-import ProposalSection from "../_components/partner-strategy/ProposalSection";
-import ToBeStrategySection from "../_components/partner-strategy/ToBeStrategySection";
-import {
-  cooperationModels,
-  customerProposals,
-  partnerLogos,
-  partnerStrategyPage,
-  partnershipBenefits,
-  proposal,
-  toBeStrategy,
-} from "../_content/partner-strategy";
+import { sharedOpenGraph } from "@/app/_lib/metadata";
+import ContactCta from "@/app/_components/commons/cta/ContactCta";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import CooperationModelsSection from "@/app/_components/partner-strategy/CooperationModelsSection";
+import CustomerProposalsSection from "@/app/_components/partner-strategy/CustomerProposalsSection";
+import PartnerLogosSection from "@/app/_components/partner-strategy/PartnerLogosSection";
+import PartnershipBenefitsSection from "@/app/_components/partner-strategy/PartnershipBenefitsSection";
+import ProposalSection from "@/app/_components/partner-strategy/ProposalSection";
+import ToBeStrategySection from "@/app/_components/partner-strategy/ToBeStrategySection";
+import { getPartnerStrategyContent } from "@/app/_lib/cms/partnerStrategy";
 
-export const metadata: Metadata = {
-  title: partnerStrategyPage.title,
-  description: partnerStrategyPage.description,
-  keywords: [...partnerStrategyPage.keywords],
-  openGraph: {
-    ...sharedOpenGraph,
-    title: partnerStrategyPage.openGraphTitle,
-    description: partnerStrategyPage.description,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { page } = await getPartnerStrategyContent();
+  return {
+    title: page.title,
+    description: page.description,
+    keywords: [...page.keywords],
+    openGraph: {
+      ...sharedOpenGraph,
+      title: page.openGraphTitle,
+      description: page.description,
+    },
+  };
+}
 
-export default function PartnerStrategyPage() {
+export default async function PartnerStrategyPage() {
+  const {
+    page,
+    cooperationModels,
+    toBeStrategy,
+    partnershipBenefits,
+    customerProposals,
+    proposal,
+    partnerLogos,
+  } = await getPartnerStrategyContent();
+
   return (
     <main>
-      <PageHero
-        title={partnerStrategyPage.title}
-        description={partnerStrategyPage.description}
-        descriptionSize="compact"
-      />
+      <PageHero title={page.title} description={page.description} descriptionSize="compact" />
       <CooperationModelsSection content={cooperationModels} />
       <ToBeStrategySection content={toBeStrategy} />
       <PartnershipBenefitsSection content={partnershipBenefits} />

@@ -1,20 +1,16 @@
-import HeroSection from "./_components/home/HeroSection";
-import ProposalTargetsSection from "./_components/home/ProposalTargetsSection";
-import SolutionsSection from "./_components/home/SolutionsSection";
-import ServiceValueSection from "./_components/home/ServiceValueSection";
-import DownloadsSection from "./_components/home/DownloadsSection";
-import {
-  downloads,
-  homeHero,
-  proposalTargets,
-  serviceValues,
-  solutions,
-} from "./_content/home";
+import HeroSection from "@/app/_components/home/HeroSection";
+import ProposalTargetsSection from "@/app/_components/home/ProposalTargetsSection";
+import SolutionsSection from "@/app/_components/home/SolutionsSection";
+import ServiceValueSection from "@/app/_components/home/ServiceValueSection";
+import DownloadsSection from "@/app/_components/home/DownloadsSection";
+import { getHomeContent } from "@/app/_lib/cms/home";
 
-export default function Home() {
+export default async function Home() {
+  const { hero, proposalTargets, solutions, serviceValues, downloads } = await getHomeContent();
+
   return (
     <>
-      <HeroSection content={homeHero} />
+      <HeroSection content={hero} />
       <ProposalTargetsSection content={proposalTargets} />
       <SolutionsSection content={solutions} />
       <ServiceValueSection content={serviceValues} />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
-import PageHero from "../_components/commons/hero/PageHero";
+import { sharedOpenGraph } from "@/app/_lib/metadata";
+import PageHero from "@/app/_components/commons/hero/PageHero";
 
 const title = "소식";
 const description = "코런웨이브의 새로운 소식을 확인해보세요.";

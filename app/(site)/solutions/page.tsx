@@ -1,26 +1,21 @@
 import type { Metadata } from "next";
-import PageHero from "../_components/commons/hero/PageHero";
-import ContactCta from "../_components/commons/cta/ContactCta";
-import SolutionAXSection from "../_components/solutions/SolutionAXSection";
-import SolutionLearningSection from "../_components/solutions/SolutionLearningSection";
-import {
-  axInfra,
-  learningService,
-  solutionsPage,
-} from "../_content/solutions";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import ContactCta from "@/app/_components/commons/cta/ContactCta";
+import SolutionAXSection from "@/app/_components/solutions/SolutionAXSection";
+import SolutionLearningSection from "@/app/_components/solutions/SolutionLearningSection";
+import { getSolutionsContent } from "@/app/_lib/cms/solutions";
 
-export const metadata: Metadata = {
-  title: solutionsPage.title,
-  description: solutionsPage.description,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { page } = await getSolutionsContent();
+  return { title: page.title, description: page.description };
+}
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const { page, axInfra, learningService } = await getSolutionsContent();
+
   return (
     <main>
-      <PageHero
-        title={solutionsPage.title}
-        description={solutionsPage.description}
-      />
+      <PageHero title={page.title} description={page.description} />
       <SolutionAXSection content={axInfra} />
       <SolutionLearningSection content={learningService} />
       <ContactCta />

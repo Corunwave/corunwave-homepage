@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
+import { sharedOpenGraph } from "@/app/_lib/metadata";
 import Image from "next/image";
-import PageHero from "../_components/commons/hero/PageHero";
-import ContactForm from "../_components/contact/ContactForm";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import ContactForm from "@/app/_components/contact/ContactForm";
 
 const title = "문의하기";
 const lead = "비즈니스 환경에 맞는 서비스 구성을 제안해 드립니다.";

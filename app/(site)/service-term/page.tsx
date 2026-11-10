@@ -1,36 +1,23 @@
-import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
-import LegalDocument from "../_components/commons/legal/LegalDocument";
-import PageHero from "../_components/commons/hero/PageHero";
-import {
-  serviceTermClauses,
-  serviceTermIntro,
-  serviceTermPage,
-} from "../_content/legal/serviceTerm";
+import LegalDocument from "@/app/_components/commons/legal/LegalDocument";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import { legalMetadata, requireLegalPage } from "@/app/_lib/cms/legal";
 
-const { title, description, effectiveDate, extraMeta } = serviceTermPage;
+export const generateMetadata = () => legalMetadata("service-term");
 
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    ...sharedOpenGraph,
-    title: `${title} · 코런웨이브`,
-    description,
-  },
-};
+export default async function LegalPage() {
+  const { title, heading, description, effectiveDate, extraMeta, intro, clauses } =
+    await requireLegalPage("service-term");
 
-export default function ServiceTermPage() {
   return (
     <main>
       <PageHero title={title} description={description} />
       <LegalDocument
         idPrefix="terms"
-        title={title}
+        title={heading}
         effectiveDate={effectiveDate}
-        intro={serviceTermIntro}
+        intro={intro}
         extraMeta={extraMeta}
-        clauses={serviceTermClauses}
+        clauses={clauses}
       />
     </main>
   );

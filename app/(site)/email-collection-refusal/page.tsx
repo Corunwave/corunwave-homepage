@@ -1,27 +1,13 @@
-import type { Metadata } from "next";
-import { sharedOpenGraph } from "../_lib/metadata";
-import LegalDocument from "../_components/commons/legal/LegalDocument";
-import PageHero from "../_components/commons/hero/PageHero";
-import {
-  emailCollectionRefusalClauses,
-  emailCollectionRefusalIntro,
-  emailCollectionRefusalPage,
-} from "../_content/legal/emailCollectionRefusal";
+import LegalDocument from "@/app/_components/commons/legal/LegalDocument";
+import PageHero from "@/app/_components/commons/hero/PageHero";
+import { legalMetadata, requireLegalPage } from "@/app/_lib/cms/legal";
 
-const { title, heading, description, effectiveDate } =
-  emailCollectionRefusalPage;
+export const generateMetadata = () => legalMetadata("email-collection-refusal");
 
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    ...sharedOpenGraph,
-    title: `${title} · 코런웨이브`,
-    description,
-  },
-};
+export default async function LegalPage() {
+  const { title, heading, description, effectiveDate, extraMeta, intro, clauses } =
+    await requireLegalPage("email-collection-refusal");
 
-export default function EmailCollectionRefusalPage() {
   return (
     <main>
       <PageHero title={title} description={description} />
@@ -29,8 +15,9 @@ export default function EmailCollectionRefusalPage() {
         idPrefix="email-refusal"
         title={heading}
         effectiveDate={effectiveDate}
-        intro={emailCollectionRefusalIntro}
-        clauses={emailCollectionRefusalClauses}
+        intro={intro}
+        extraMeta={extraMeta}
+        clauses={clauses}
       />
     </main>
   );

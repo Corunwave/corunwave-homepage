@@ -1,9 +1,10 @@
 import "server-only";
-import { createSupabaseAdmin } from "@/backend/shared/infrastructure/supabaseAdmin";
+import config from "@payload-config";
+import { getPayload } from "payload";
 import { NotifyContactInquiryUseCase } from "./application/usecase/NotifyContactInquiryUseCase";
 import { SubmitContactInquiryUseCase } from "./application/usecase/SubmitContactInquiryUseCase";
 import { ResendContactInquiryNotifier } from "./infrastructure/notifier/ResendContactInquiryNotifier";
-import { SupabaseContactInquiryRepository } from "./infrastructure/repository/SupabaseContactInquiryRepository";
+import { PayloadContactInquiryRepository } from "./infrastructure/repository/PayloadContactInquiryRepository";
 
 const requireEnv = (key: string) => {
   const value = process.env[key];
@@ -12,7 +13,7 @@ const requireEnv = (key: string) => {
 };
 
 const createRepository = () =>
-  new SupabaseContactInquiryRepository(createSupabaseAdmin);
+  new PayloadContactInquiryRepository(() => getPayload({ config }));
 
 /* Composition root: the only place that knows which concrete classes back the interfaces. */
 export const createSubmitContactInquiryUseCase = () =>

@@ -45,3 +45,6 @@ next-env.d.ts
 
 # keep the committed env template
 !.env.example
+
+# bundled seed script output
+scripts/.build/

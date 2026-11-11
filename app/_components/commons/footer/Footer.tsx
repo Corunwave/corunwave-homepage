@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { siteFooter as content } from "../../../_content/site";
+import { getSiteSettings } from "@/app/_lib/cms/site";
 
-export default function Footer() {
+export default async function Footer() {
+  const { footer: content } = await getSiteSettings();
+
   return (
     <footer className="site-footer">
       <div className="site-footer__contents">

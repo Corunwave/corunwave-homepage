@@ -1161,6 +1161,35 @@ body {
   font-family: var(--font-family-body);
 }
 
+/* Admin > 글꼴·글자 크기 (layout sets data-font-scale / data-body-font / data-heading-font on <html>).
+ * Every font-size and line-height token is in rem, so scaling the root size scales all text together.
+ */
+html {
+  font-size: calc(100% * var(--font-scale, 1));
+}
+
+html[data-font-scale="0.9"] {
+  --font-scale: 0.9;
+}
+
+html[data-font-scale="1.1"] {
+  --font-scale: 1.1;
+}
+
+html[data-font-scale="1.2"] {
+  --font-scale: 1.2;
+}
+
+html[data-body-font="a2z"] {
+  --font-family-body: var(--font-a2z-regular), sans-serif;
+}
+
+html[data-heading-font="pretendard"] {
+  --font-family-emphasis: var(--font-pretendard), sans-serif;
+  --font-family-slogan: var(--font-pretendard), sans-serif;
+  --font-family-heading: var(--font-pretendard), sans-serif;
+}
+
 /* Shared responsive header: dimensions and interaction surfaces. */
 :root {
   --header-height-desktop: var(--spacing-96);

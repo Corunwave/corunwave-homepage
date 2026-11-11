@@ -1,4 +1,4 @@
-import { contactCta } from "../../../_content/site";
+import { getSiteSettings } from "@/app/_lib/cms/site";
 import { renderText } from "../../../_lib/content/renderText";
 import LinkButton from "../buttons/LinkButton";
 import ScrollReveal from "../reveal/ScrollReveal";
@@ -9,10 +9,9 @@ type ContactCtaProps = {
 };
 
 /* Shared contact CTA (preview .solution-contact; Figma 847:27590 / 847:28691). Server component; surface matches the header/hero tone. */
-const ContactCta = ({
-  title = contactCta.title,
-  href = contactCta.href,
-}: ContactCtaProps) => {
+const ContactCta = async ({ title, href }: ContactCtaProps) => {
+  const { contactCta } = await getSiteSettings();
+
   return (
     <section className="contact-cta" aria-labelledby="contact-cta-title">
       <ScrollReveal>
@@ -22,10 +21,10 @@ const ContactCta = ({
             className="contact-cta__title"
             data-reveal-item
           >
-            {renderText(title, { keepClassName: "contact-cta__keep" })}
+            {renderText(title ?? contactCta.title, { keepClassName: "contact-cta__keep" })}
           </h2>
           <LinkButton
-            href={href}
+            href={href ?? contactCta.href}
             className="contact-cta__button"
             data-reveal-item
           >

@@ -4,11 +4,13 @@ import { CMS_TAGS } from "@/payload/hooks/revalidate";
 import {
   downloads as fixedDownloads,
   homeHero as fixedHero,
+  homeNews as fixedNews,
   proposalTargets as fixedProposalTargets,
   serviceValues as fixedServiceValues,
   solutions as fixedSolutions,
   type DownloadsContent,
   type HomeHeroContent,
+  type HomeNewsContent,
   type ProposalCardContent,
   type ProposalTargetsContent,
   type ServiceValuesContent,
@@ -27,6 +29,7 @@ type RawHome = {
   solutions?: SolutionsContent;
   serviceValues?: ServiceValuesContent;
   downloads?: Omit<DownloadsContent, "items">;
+  news?: Partial<HomeNewsContent>;
 };
 
 const getHomeBase = unstable_cache(
@@ -55,6 +58,7 @@ const getHomeBase = unstable_cache(
       solutions: { ...fixedSolutions, ...doc.solutions } as SolutionsContent,
       serviceValues,
       downloads: { ...fixedDownloads, ...doc.downloads },
+      news: { ...fixedNews, ...doc.news } satisfies HomeNewsContent,
     };
   },
   ["cms-home"],

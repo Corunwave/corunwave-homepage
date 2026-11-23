@@ -142,6 +142,26 @@ export const Home: GlobalConfig = {
           ],
         },
         {
+          label: "소식",
+          fields: [
+            {
+              name: "news",
+              label: "소식",
+              type: "group",
+              admin: { description: "카드는 '소식' 메뉴에서 게시한 최신 글 5개가 자동으로 채워집니다. 게시된 소식이 없으면 이 영역은 표시되지 않습니다." },
+              fields: [
+                {
+                  name: "enabled",
+                  label: "홈에 소식 영역 표시",
+                  type: "checkbox",
+                  defaultValue: true,
+                },
+                textField("title", "제목", { required: false, admin: { description: "비워두면 기본 문구가 표시됩니다." } }),
+              ],
+            },
+          ],
+        },
+        {
           label: "자료 다운로드",
           fields: [
             {

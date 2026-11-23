@@ -44,6 +44,11 @@ export type DownloadsContent = {
   items: readonly { href: string; label: string }[];
 };
 
+export type HomeNewsContent = {
+  enabled: boolean;
+  title: string;
+};
+
 export const homeHero: HomeHeroContent = {
   title: "Innovation Together,\nCreating Waves",
   description:
@@ -227,4 +232,9 @@ export const solutions: SolutionsContent = {
       ],
     },
   ],
+};
+
+export const homeNews: HomeNewsContent = {
+  enabled: true,
+  title: "코런웨이브의 최신 소식과 업계 뉴스를 확인해보세요.",
 };

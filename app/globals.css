@@ -2561,6 +2561,210 @@ a.news-neighbor:hover .news-neighbor__title {
   }
 }
 
+/* Home — 소식 carousel (preview .news-section / .news-track; cards are shared .news-card). */
+.home-news {
+  --home-news-gap: var(--spacing-20);
+  --home-news-slide: calc((100% - 2 * var(--home-news-gap)) / 3);
+  padding: var(--spacing-96) 0;
+  background: var(--color-news-section-bg);
+}
+
+.home-news__inner {
+  width: min(var(--news-inner-max-width), calc(100% - var(--section-gutter-desktop) * 2));
+  margin-inline: auto;
+}
+
+.home-news__header {
+  margin-bottom: var(--spacing-48);
+  text-align: center;
+}
+
+.home-news__title {
+  max-width: 1100px;
+  margin: 0 auto;
+  color: var(--color-brand-navy);
+  font-family: var(--font-family-heading);
+  font-size: 3rem;
+  line-height: 3.75rem;
+  letter-spacing: -0.04em;
+  word-break: keep-all;
+}
+
+.home-news__viewport {
+  overflow: hidden;
+  padding-bottom: var(--spacing-32);
+  margin-bottom: calc(var(--spacing-32) * -1);
+}
+
+.home-news__track {
+  display: flex;
+  gap: var(--home-news-gap);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.home-news__slide {
+  display: flex;
+  flex: 0 0 var(--home-news-slide);
+  min-width: 0;
+}
+
+.home-news__slide > .news-card {
+  flex: 1;
+}
+
+.home-news__track[data-index="1"] {
+  transform: translateX(calc(-1 * (var(--home-news-slide) + var(--home-news-gap))));
+}
+
+.home-news__track[data-index="2"] {
+  transform: translateX(calc(-2 * (var(--home-news-slide) + var(--home-news-gap))));
+}
+
+.home-news__track[data-index="3"] {
+  transform: translateX(calc(-3 * (var(--home-news-slide) + var(--home-news-gap))));
+}
+
+.home-news__track[data-index="4"] {
+  transform: translateX(calc(-4 * (var(--home-news-slide) + var(--home-news-gap))));
+}
+
+.home-news__track[data-index="5"] {
+  transform: translateX(calc(-5 * (var(--home-news-slide) + var(--home-news-gap))));
+}
+
+.home-news__more {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  min-height: var(--spacing-96);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-24);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.home-news__more:hover,
+.home-news__more:focus-visible {
+  border-color: var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.home-news__more-circle {
+  display: grid;
+  place-items: center;
+  width: var(--spacing-64);
+  height: var(--spacing-64);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-999);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.home-news__more-label {
+  border-bottom: 1px dashed currentColor;
+  font-size: var(--text-news-card-date);
+}
+
+.home-news__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-10);
+  margin-top: var(--spacing-48);
+}
+
+.home-news__control {
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-999);
+  background: var(--color-white);
+  color: var(--color-brand-navy);
+  font-size: 1.375rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.home-news__control:hover:not(:disabled),
+.home-news__control:focus-visible:not(:disabled) {
+  border-color: var(--color-action-primary);
+  background: var(--color-action-primary);
+  color: var(--color-text-on-dark);
+}
+
+.home-news__control:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.home-news[data-reveal="pending"] .home-news__slide {
+  opacity: 0;
+  transform: translateY(var(--spacing-24));
+}
+
+.home-news[data-reveal="visible"] .home-news__slide {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 520ms ease,
+    transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-news[data-reveal="visible"] .home-news__slide:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.home-news[data-reveal="visible"] .home-news__slide:nth-child(3) {
+  transition-delay: 160ms;
+}
+
+@media (width <= 1024px) {
+  .home-news {
+    padding: var(--spacing-80) 0;
+  }
+  .home-news__inner {
+    width: calc(100% - var(--spacing-64));
+  }
+  .home-news__title {
+    font-size: 2.25rem;
+    line-height: 2.875rem;
+  }
+}
+
+@media (width <= 760px) {
+  .home-news {
+    --home-news-gap: var(--spacing-12);
+    --home-news-slide: 100%;
+    padding: var(--spacing-64) 0;
+  }
+  .home-news__inner {
+    width: calc(100% - var(--section-gutter-mobile) * 2);
+  }
+  .home-news__header {
+    margin-bottom: var(--spacing-32);
+    text-align: left;
+  }
+  .home-news__title {
+    font-size: 2rem;
+    line-height: 2.625rem;
+  }
+  .home-news__more {
+    min-height: var(--spacing-96);
+  }
+  .home-news__controls {
+    margin-top: var(--spacing-24);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-news__track {
+    transition: none;
+  }
+}
+
 /* Contact — 문의하기 (preview .contact-view / assets/contact/contact.css).
  * Hero is the shared PageHero; the preview's wave panel beside the form is a stock photo (Unsplash).
  */

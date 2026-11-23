@@ -87,7 +87,7 @@ export default buildConfig({
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },
   db: postgresAdapter({
     schemaName: "payload",
-    // Supabase 풀러(session 모드)는 클라이언트 15개가 한도다. 서버리스는 인스턴스마다 풀이 생기므로 작게 잡고 유휴 연결을 빨리 반납한다.
+    // Supabase 풀러는 session 모드(5432)면 클라이언트 15개가 한도라 서버리스에선 transaction 모드(6543)를 쓴다. 인스턴스마다 풀이 생기므로 작게 잡고 유휴 연결을 빨리 반납한다.
     pool: {
       connectionString: process.env.DATABASE_URL || "",
       max: Number(process.env.DATABASE_POOL_MAX) || 3,

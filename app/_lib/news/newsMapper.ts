@@ -11,6 +11,14 @@ import {
 /* Payload 문서를 화면용 타입으로 바꾸는 순수 함수. 서버 로더와 브라우저 API가 함께 쓴다. */
 export type MediaDoc = { id: number | string; url?: string | null; alt?: string | null };
 
+export type AttachmentDoc = {
+  id: number | string;
+  filename?: string | null;
+  downloadName?: string | null;
+  url?: string | null;
+  filesize?: number | null;
+};
+
 export type NewsDoc = {
   id: number;
   title: string;
@@ -22,6 +30,7 @@ export type NewsDoc = {
   updatedAt: string;
   _status?: "draft" | "published";
   slug?: string | null;
+  attachments?: (AttachmentDoc | number | string)[] | null;
 };
 
 export type PayloadList = {

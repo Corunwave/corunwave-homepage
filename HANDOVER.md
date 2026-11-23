@@ -100,7 +100,7 @@ Vercel 프로젝트 설정(Production/Preview)과 로컬 `.env.local`에 필요�
 | `app/_content/partner-strategy.ts` | 파트너 전략, 로고 | 로고 이미지 자산 관리 |
 | `app/_content/site.ts` | 푸터, 문의 CTA, **PDF 링크** | PDF는 Supabase Storage URL 직접 참조 → CMS 업로드로 대체 시 파일명(ASCII 제한)·다운로드명 규칙 유지 |
 | `app/_content/legal/` | 개인정보처리방침·이용약관 | 법적 문서는 버전/시행일 관리 필요 |
-| `app/news/page.tsx` | 뉴스 | 현재 목록 구조 확인 후 동적 라우트(`/news/[slug]`) 추가 필요 |
+| `app/(site)/news/` | 소식 | 목록(`/news`)과 상세(`/news/[slug]`) 구현됨. 홈 소식 섹션은 홈 글로벌 '소식' 탭에서 표시 여부 제어 |
 | `public/images`, `public/fonts` | 이미지·폰트 (약 35MB) | 이미지는 CMS/스토리지로, 폰트는 코드에 유지 |
 | `next.config.ts` | `cacheComponents`, `partialPrefetching` 활성화 | CMS 데이터 fetch 시 캐시 재검증(revalidate) 전략을 이 설정에 맞춰 설계 |
 

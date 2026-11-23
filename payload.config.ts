@@ -8,6 +8,7 @@ import { ko } from "@payloadcms/translations/languages/ko";
 import sharp from "sharp";
 import { ContactInquiries } from "./payload/collections/ContactInquiries";
 import { Documents } from "./payload/collections/Documents";
+import { NewsAttachments } from "./payload/collections/NewsAttachments";
 import { LegalDocuments } from "./payload/collections/LegalDocuments";
 import { News } from "./payload/collections/News";
 import { Media } from "./payload/collections/Media";
@@ -62,21 +63,27 @@ export default buildConfig({
     // 편집 화면 옆 분할 미리보기. 사이트의 draft mode 진입 라우트(/next/preview)를 iframe으로 연다.
     livePreview: {
       globals: Object.keys(PREVIEW_PATHS),
+      collections: ["news"],
       breakpoints: [
         { label: "데스크톱", name: "desktop", width: 1440, height: 900 },
         { label: "태블릿", name: "tablet", width: 1024, height: 1366 },
         { label: "모바일", name: "mobile", width: 375, height: 812 },
       ],
-      url: ({ globalConfig, req }) => {
+      url: ({ collectionConfig, data, globalConfig, req }) => {
         const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
         const proto = req.headers.get("x-forwarded-proto") ?? (host?.startsWith("localhost") ? "http" : "https");
-        const path = PREVIEW_PATHS[globalConfig?.slug ?? ""] ?? "/";
+        const path =
+          collectionConfig?.slug === "news"
+            ? data?.slug
+              ? `/news/${data.slug}`
+              : "/news"
+            : (PREVIEW_PATHS[globalConfig?.slug ?? ""] ?? "/");
         return `${proto}://${host}/next/preview?path=${encodeURIComponent(path)}`;
       },
     },
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Users, ContactInquiries, News, Media, Documents, LegalDocuments],
+  collections: [Users, ContactInquiries, News, NewsAttachments, Media, Documents, LegalDocuments],
   globals: [SiteSettings, Typography, Home, About, Solutions, PartnerStrategy],
   editor: lexicalEditor(),
   i18n: {
@@ -100,6 +107,7 @@ export default buildConfig({
       collections: {
         media: publicFile("media"),
         documents: publicFile("documents"),
+        "news-attachments": publicFile("news-attachments"),
       },
       bucket: s3Bucket,
       config: {

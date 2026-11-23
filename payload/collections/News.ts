@@ -94,6 +94,14 @@ export const News: CollectionConfig = {
     },
     { name: "content", label: "본문", type: "richText", editor: newsEditor, required: true },
     {
+      name: "attachments",
+      label: "첨부파일",
+      type: "upload",
+      relationTo: "news-attachments",
+      hasMany: true,
+      admin: { description: "소식 상세 하단에 내려받기 목록으로 표시됩니다. PDF·한글·Office·ZIP." },
+    },
+    {
       name: "tag",
       label: "태그",
       type: "select",

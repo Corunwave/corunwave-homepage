@@ -2,7 +2,7 @@ import type { Access, CollectionConfig, Where } from "payload";
 import { hasRole, isCeoOrEditor } from "../access/roles";
 import { CMS_TAGS, revalidateCms } from "../hooks/revalidate";
 import { newsEditor } from "../lib/editors";
-import { extractContentImages } from "../lib/newsContent";
+import { extractContentImages, extractPlainText } from "../lib/newsContent";
 import { slugify } from "../lib/slugify";
 
 // 로그인한 대표·에디터는 초안까지 모두 보고, 그 밖에는 "게시됨 + 게시 시각이 지난 글"만 본다.
@@ -18,6 +18,8 @@ const readNews: Access = ({ req: { user } }) => {
   return visible;
 };
 
+const NEWS_SUMMARY_LENGTH = 120;
+
 export const News: CollectionConfig = {
   slug: "news",
   labels: { singular: "소식", plural: "소식" },
@@ -25,7 +27,7 @@ export const News: CollectionConfig = {
     group: "소식",
     useAsTitle: "title",
     defaultColumns: ["title", "tag", "_status", "publishedAt", "updatedAt"],
-    listSearchableFields: ["title", "summary", "slug"],
+    listSearchableFields: ["title", "slug"],
     hidden: ({ user }) => !hasRole(user, "ceo", "editor"),
     description: "소식 게시글입니다. '임시저장'은 공개되지 않고, '게시'하면 아래 게시 시각부터 공개됩니다.",
   },
@@ -66,7 +68,14 @@ export const News: CollectionConfig = {
       name: "summary",
       label: "요약",
       type: "textarea",
-      admin: { description: "목록과 공유 미리보기에 쓰이는 한두 문장입니다." },
+      admin: { hidden: true },
+      hooks: {
+        // 직접 쓰지 않는다. 저장할 때마다 본문 앞부분으로 채워 목록 카드와 공유 미리보기에 쓴다.
+        beforeChange: [
+          ({ value, siblingData }) =>
+            siblingData.content ? extractPlainText(siblingData.content, NEWS_SUMMARY_LENGTH) : value,
+        ],
+      },
     },
     {
       name: "thumbnail",
@@ -91,7 +100,6 @@ export const News: CollectionConfig = {
       required: true,
       options: [
         { label: "사내소식", value: "internal" },
-        { label: "사외소식", value: "external" },
         { label: "기술소식", value: "tech" },
       ],
       admin: { position: "sidebar" },
@@ -122,17 +130,6 @@ export const News: CollectionConfig = {
       unique: true,
       index: true,
       admin: { position: "sidebar", description: "소식 상세 주소에 쓰입니다. 비워두면 제목으로 자동 생성됩니다." },
-    },
-    {
-      name: "seo",
-      label: "검색·공유 설정(선택)",
-      type: "group",
-      admin: { description: "비워두면 제목, 요약, 대표 이미지를 사용합니다." },
-      fields: [
-        { name: "metaTitle", label: "검색 제목", type: "text" },
-        { name: "metaDescription", label: "검색 설명", type: "textarea" },
-        { name: "ogImage", label: "공유 이미지", type: "upload", relationTo: "media" },
-      ],
     },
   ],
 };

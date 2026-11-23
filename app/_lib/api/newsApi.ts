@@ -23,7 +23,7 @@ type NewsDoc = {
   publishedAt?: string | null;
   updatedAt: string;
   _status?: "draft" | "published";
-  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
+  slug?: string | null;
 };
 
 type PayloadList = {
@@ -35,6 +35,7 @@ type PayloadList = {
 
 export type NewsListItem = {
   id: number;
+  slug: string;
   title: string;
   summary: string | null;
   tag: NewsTag;
@@ -70,6 +71,7 @@ export type NewsPayload = {
 /* 썸네일이 비어 있으면(본문에도 이미지가 없을 때) placeholder를 쓴다. */
 const toItem = (doc: NewsDoc): NewsListItem => ({
   id: doc.id,
+  slug: doc.slug ?? String(doc.id),
   title: doc.title,
   summary: doc.summary ?? null,
   tag: doc.tag,

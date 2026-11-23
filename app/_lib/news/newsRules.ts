@@ -3,7 +3,6 @@ export const NEWS_TITLE_MAX = 50;
 
 export const NEWS_TAGS = [
   { value: "internal", label: "사내소식" },
-  { value: "external", label: "사외소식" },
   { value: "tech", label: "기술소식" },
 ] as const;
 
@@ -11,7 +10,6 @@ export type NewsTag = (typeof NEWS_TAGS)[number]["value"];
 
 export const NEWS_TAG_LABEL: Record<NewsTag, string> = {
   internal: "사내소식",
-  external: "사외소식",
   tech: "기술소식",
 };
 

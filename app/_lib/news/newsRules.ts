@@ -14,3 +14,9 @@ export const NEWS_TAG_LABEL: Record<NewsTag, string> = {
 };
 
 export const NEWS_PLACEHOLDER_IMAGE = "/images/news-placeholder.svg";
+
+/* 목록 한 페이지 개수(데스크탑 3열 x 4행). 태블릿·모바일 무한 스크롤도 같은 단위로 불러온다. */
+export const NEWS_PAGE_SIZE = 12;
+
+export const isNewsTag = (value: unknown): value is NewsTag =>
+  NEWS_TAGS.some((tag) => tag.value === value);

@@ -7,6 +7,7 @@ import "@/app/globals.css";
 import HeaderNavbar from "@/app/_components/commons/header/HeaderNavbar";
 import Footer from "@/app/_components/commons/footer/Footer";
 import { getTypography } from "@/app/_lib/cms/typography";
+import QueryProvider from "@/app/_components/commons/providers/QueryProvider";
 import RefreshOnSave from "@/app/_components/commons/preview/RefreshOnSave";
 
 const geistMono = Geist_Mono({
@@ -45,9 +46,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         {isPreview && <RefreshOnSave />}
-        <HeaderNavbar />
-        {children}
-        <Footer />
+        <QueryProvider>
+          <HeaderNavbar />
+          {children}
+          <Footer />
+        </QueryProvider>
       </body>
     </html>
   );

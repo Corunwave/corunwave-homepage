@@ -22,7 +22,7 @@
     "@payloadcms/ui": "^3.92.1",
     "axios": "^1.21.0",
     "graphql": "^16.14.2",
-    "next": "16.4.2",
+    "next": "16.4.6",
     "payload": "^3.92.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",

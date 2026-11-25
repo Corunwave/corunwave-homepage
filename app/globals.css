@@ -636,7 +636,7 @@
   /* News — list/cards (preview .news-*) */
   --news-inner-max-width: 1248px;
   --color-news-section-bg: #f7fbff;
-  --color-news-tag: #5d4aa7;
+  --color-news-tag: var(--color-brand-primary);
   --color-news-date: #8a96a8;
   --shadow-news-card: 0 18px 48px rgb(15 23 41 / 10%);
   --shadow-news-card-hover: 0 28px 60px rgb(15 23 41 / 16%);
